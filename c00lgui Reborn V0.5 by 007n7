@@ -206,20 +206,6 @@ Title.Text = "c00lgui Reborn V0.5 by 007n7"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.TextSize = 24
 
-left.Name = "LeftButton"
-left.Parent = Frame
-left.BackgroundColor3 = Color3.new(0, 0, 0)
-left.BorderColor3 = Color3.new(1, 0, 0)
-left.BorderSizePixel = 3
-left.Position = UDim2.new(0, 0, 0, 40)
-left.Size = UDim2.new(0.5, 0, 0, 40)
-left.ZIndex = 2
-left.Font = Enum.Font.SourceSans
-left.FontSize = Enum.FontSize.Size48
-left.Text = "<"
-left.TextColor3 = Color3.new(1, 1, 1)
-left.TextSize = 48
-
 right.Name = "RightButton"
 right.Parent = Frame
 right.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -233,6 +219,24 @@ right.FontSize = Enum.FontSize.Size48
 right.Text = ">"
 right.TextColor3 = Color3.new(1, 1, 1)
 right.TextSize = 48
+right.MouseButton1Click:Connect(function()
+if page1.Visible == true then
+		page1.Visible = false
+		page5.Visible = true
+	elseif page2.Visible == true then
+		page2.Visible = false
+		page1.Visible = true
+	elseif page3.Visible == true then
+	    page3.Visible = false
+		page2.Visible = true
+	elseif page4.Visible == true then
+		page4.Visible = false
+		page3.Visible = true
+	elseif page5.Visible == true then
+		page5.Visible = false
+		page4.Visible = true
+	end	
+end)
 
 left.Name = "LeftButton"
 left.Parent = Frame
@@ -247,43 +251,23 @@ left.FontSize = Enum.FontSize.Size48
 left.Text = "<"
 left.TextColor3 = Color3.new(1, 1, 1)
 left.TextSize = 48
-
 left.MouseButton1Click:Connect(function()
-	if Page1.Visible then
-		Page1.Visible = false
-		Page5.Visible = true
-	elseif Page2.Visible then
-		Page2.Visible = false
-		Page1.Visible = true
-	elseif Page3.Visible then
-		Page3.Visible = false
-		Page2.Visible = true
-	elseif Page4.Visible then
-		Page4.Visible = false
-		Page3.Visible = true
-	elseif Page5.Visible then
-		Page5.Visible = false
-		Page4.Visible = true
-	end
-end)
-
-right.MouseButton1Click:Connect(function()
-	if Page1.Visible then
-		Page1.Visible = false
-		Page2.Visible = true
-	elseif Page2.Visible then
-		Page2.Visible = false
-		Page3.Visible = true
-	elseif Page3.Visible then
-		Page3.Visible = false
-		Page4.Visible = true
-	elseif Page4.Visible then
-		Page4.Visible = false
-		Page5.Visible = true
-	elseif Page5.Visible then
-		Page5.Visible = false
-		Page1.Visible = true
-	end
+if page1.Visible == true then
+		page1.Visible = false
+		page5.Visible = true
+	elseif page2.Visible == true then
+		page2.Visible = false
+		page1.Visible = true
+	elseif page3.Visible == true then
+	    page3.Visible = false
+		page2.Visible = true
+	elseif page4.Visible == true then
+		page4.Visible = false
+		page3.Visible = true
+	elseif page5.Visible == true then
+		page5.Visible = false
+		page4.Visible = true
+	end	
 end)
 
 Settings.Name = "Settings"
