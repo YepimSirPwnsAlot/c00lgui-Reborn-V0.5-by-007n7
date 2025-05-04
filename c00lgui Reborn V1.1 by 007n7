@@ -206,68 +206,67 @@ Title.Text = "c00lgui Reborn V0.5 by 007n7"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.TextSize = 24
 
-right.Name = "<"
+right.Name = "RightButton"
 right.Parent = Frame
 right.BackgroundColor3 = Color3.new(0, 0, 0)
 right.BorderColor3 = Color3.new(1, 0, 0)
 right.BorderSizePixel = 3
-right.Position = UDim2.new(0, 0, 0, 40)
-right.Size = UDim2.new(0.5, 0, 0, 40)
+right.Position = UDim2.new(0.5, 3, 0, 40)
+right.Size = UDim2.new(0.5, -3, 0, 40)
 right.ZIndex = 2
 right.Font = Enum.Font.SourceSans
 right.FontSize = Enum.FontSize.Size48
-right.Text = "<"
+right.Text = ">"
 right.TextColor3 = Color3.new(1, 1, 1)
 right.TextSize = 48
 right.MouseButton1Click:Connect(function()
-	if Page1.Visible == true then
-		Page1.Visible = false
-		Page5.Visible = true
-	elseif Page2.Visible == true then
-		Page2.Visible = false
-		Page1.Visible = true
-	elseif Page3.Visible == true then
-		Page3.Visible = false
-		Page2.Visible = true
-	elseif Page4.Visible == true then
-		Page4.Visible = false
-		Page3.Visible = true
-	elseif Page5.Visible == true then
-		Page5.Visible = false
-		Page4.Visible = true
-	end	
+if script.Parent.Parent.Page3.Visible == true then
+	    script.Parent.Parent.Page3.Visible = false
+        script.Parent.Parent.Page4.Visible = false
+	    script.Parent.Parent.Page5.Visible = false
+    elseif script.Parent.Parent.Page4.Visible == true then
+	    script.Parent.Parent.Page2.Visible = false
+	    script.Parent.Parent.Page1.Visible = true
+	    script.Parent.Parent.Page3.Visible = false
+	    script.Parent.Parent.Page4.Visible = false
+	    script.Parent.Parent.Page5.Visible = false
+    elseif script.Parent.Parent.Page5.Visible == true then
+	    script.Parent.Parent.Page3.Visible = false
+	    script.Parent.Parent.Page4.Visible = false
+	    script.Parent.Parent.Page5.Visible = false
+	    script.Parent.Parent.Page6.Visible = false
+    end
 end)
 
-left.Name = ">"
+left.Name = "LeftButton"
 left.Parent = Frame
 left.BackgroundColor3 = Color3.new(0, 0, 0)
 left.BorderColor3 = Color3.new(1, 0, 0)
 left.BorderSizePixel = 3
-left.Position = UDim2.new(0.5, 3, 0, 40)
-left.Size = UDim2.new(0.5, -3, 0, 40)
+left.Position = UDim2.new(0, 0, 0, 40)
+left.Size = UDim2.new(0.5, 0, 0, 40)
 left.ZIndex = 2
 left.Font = Enum.Font.SourceSans
 left.FontSize = Enum.FontSize.Size48
-left.Text = ">"
+left.Text = "<"
 left.TextColor3 = Color3.new(1, 1, 1)
 left.TextSize = 48
-left.MouseButton1Click:Connect(function()
-	if Page1.Visible == true then
-		Page1.Visible = false
-		Page5.Visible = true
-	elseif Page2.Visible == true then
-		Page2.Visible = false
-		Page1.Visible = true
-	elseif Page3.Visible == true then
-		Page3.Visible = false
-		Page2.Visible = true
-	elseif Page4.Visible == true then
-		Page4.Visible = false
-		Page3.Visible = true
-	elseif Page5.Visible == true then
-		Page5.Visible = false
-		Page4.Visible = true
-	end	
+if script.Parent.Parent.Page3.Visible == true then
+	    script.Parent.Parent.Page3.Visible = false
+        script.Parent.Parent.Page4.Visible = false
+	    script.Parent.Parent.Page5.Visible = false
+    elseif script.Parent.Parent.Page4.Visible == true then
+	    script.Parent.Parent.Page2.Visible = false
+	    script.Parent.Parent.Page1.Visible = true
+	    script.Parent.Parent.Page3.Visible = false
+	    script.Parent.Parent.Page4.Visible = false
+	    script.Parent.Parent.Page5.Visible = false
+    elseif script.Parent.Parent.Page5.Visible == true then
+	    script.Parent.Parent.Page3.Visible = false
+	    script.Parent.Parent.Page4.Visible = false
+	    script.Parent.Parent.Page5.Visible = false
+	    script.Parent.Parent.Page6.Visible = false
+    end
 end)
 
 Settings.Name = "Settings"
