@@ -6,6 +6,8 @@
 local c00kkiddgui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local Title = Instance.new("TextLabel")
+local right = Instance.new("TextButton")
+local left = Instance.new("TextButton")
 local Settings = Instance.new("Frame")
 local SettingsButton = Instance.new("TextButton")
 local Title_2 = Instance.new("TextLabel")
@@ -172,8 +174,6 @@ local DualDarkhearts = Instance.new("TextButton")
 local DualVenomshanks = Instance.new("TextButton")
 local GhostfireSword = Instance.new("TextButton")
 local Hyperbike = Instance.new("TextButton")
-local right = Instance.new("TextButton")
-local left = Instance.new("TextButton")
 local End = Instance.new("Frame")
 local Text = Instance.new("TextLabel")
 local PageLabel_7 = Instance.new("TextLabel")
@@ -205,6 +205,70 @@ Title.Font = Enum.Font.SourceSans
 Title.Text = "c00lgui Reborn V0.5 by 007n7"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.TextSize = 24
+
+right.Name = "<"
+right.Parent = Frame
+right.BackgroundColor3 = Color3.new(0, 0, 0)
+right.BorderColor3 = Color3.new(1, 0, 0)
+right.BorderSizePixel = 3
+right.Position = UDim2.new(0, 0, 0, 40)
+right.Size = UDim2.new(0.5, 0, 0, 40)
+right.ZIndex = 2
+right.Font = Enum.Font.SourceSans
+right.FontSize = Enum.FontSize.Size48
+right.Text = "<"
+right.TextColor3 = Color3.new(1, 1, 1)
+right.TextSize = 48
+right.MouseButton1Click:Connect(function()
+	if Page1.Visible == true then
+		Page1.Visible = false
+		Page5.Visible = true
+	elseif Page2.Visible == true then
+		Page2.Visible = false
+		Page1.Visible = true
+	elseif Page3.Visible == true then
+		Page3.Visible = false
+		Page2.Visible = true
+	elseif Page4.Visible == true then
+		Page4.Visible = false
+		Page3.Visible = true
+	elseif Page5.Visible == true then
+		Page5.Visible = false
+		Page4.Visible = true
+	end	
+end)
+
+left.Name = ">"
+left.Parent = Frame
+left.BackgroundColor3 = Color3.new(0, 0, 0)
+left.BorderColor3 = Color3.new(1, 0, 0)
+left.BorderSizePixel = 3
+left.Position = UDim2.new(0.5, 3, 0, 40)
+left.Size = UDim2.new(0.5, -3, 0, 40)
+left.ZIndex = 2
+left.Font = Enum.Font.SourceSans
+left.FontSize = Enum.FontSize.Size48
+left.Text = ">"
+left.TextColor3 = Color3.new(1, 1, 1)
+left.TextSize = 48
+left.MouseButton1Click:Connect(function()
+	if Page1.Visible == true then
+		Page1.Visible = false
+		Page5.Visible = true
+	elseif Page2.Visible == true then
+		Page2.Visible = false
+		Page1.Visible = true
+	elseif Page3.Visible == true then
+		Page3.Visible = false
+		Page2.Visible = true
+	elseif Page4.Visible == true then
+		Page4.Visible = false
+		Page3.Visible = true
+	elseif Page5.Visible == true then
+		Page5.Visible = false
+		Page4.Visible = true
+	end	
+end)
 
 Settings.Name = "Settings"
 Settings.Parent = Frame
@@ -2977,54 +3041,6 @@ Hyperbike.TextSize = 14
 Hyperbike.TextWrapped = true
 Hyperbike.MouseButton1Click:Connect(function()
 Frame.Settings.Pge1["Custom Gear ID"].TextBox.Text = 130113061
-end)
-
-right.Name = "<"
-right.Parent = Frame
-right.BackgroundColor3 = Color3.new(0, 0, 0)
-right.BorderColor3 = Color3.new(1, 0, 0)
-right.BorderSizePixel = 3
-right.Position = UDim2.new(0, 0, 0, 40)
-right.Size = UDim2.new(0.5, 0, 0, 40)
-right.ZIndex = 2
-right.Font = Enum.Font.SourceSans
-right.FontSize = Enum.FontSize.Size48
-right.Text = "<"
-right.TextColor3 = Color3.new(1, 1, 1)
-right.TextSize = 48
-right.MouseButton1Click:Connect(function()
-if Page1_2.Visible == true then
-Page1_2.Visible = false
-Page2_2.Visible = true else
-if Page2_2.Visible == true then
-Page2_2.Visible = false
-Page1_2.Visible = true
-end
-end	
-end)
-
-left.Name = ">"
-left.Parent = Frame
-left.BackgroundColor3 = Color3.new(0, 0, 0)
-left.BorderColor3 = Color3.new(1, 0, 0)
-left.BorderSizePixel = 3
-left.Position = UDim2.new(0.5, 3, 0, 40)
-left.Size = UDim2.new(0.5, -3, 0, 40)
-left.ZIndex = 2
-left.Font = Enum.Font.SourceSans
-left.FontSize = Enum.FontSize.Size48
-left.Text = ">"
-left.TextColor3 = Color3.new(1, 1, 1)
-left.TextSize = 48
-left.MouseButton1Click:Connect(function()
-if Page1_2.Visible == true then
-Page1_2.Visible = false
-Page2_2.Visible = true else
-if Page2_2.Visible == true then
-Page2_2.Visible = false
-Page1_2.Visible = true
-end
-end	
 end)
 
 End.Name = "End"
