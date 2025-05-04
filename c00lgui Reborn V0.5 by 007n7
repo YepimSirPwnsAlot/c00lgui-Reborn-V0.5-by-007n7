@@ -1,5 +1,5 @@
 --== Thanks For Usin Ma Script Broski ==--
-Version = 0.5
+--== Script Remade By SirPwnsAlot ==--
 
 --Instances and objects:
 
@@ -3360,8 +3360,8 @@ CloseOpen.Text = "Close"
 end	
 end)
 
-loadmsg = Instance.new("Message")
-loadmsg.Parent = game.Workspace
-loadmsg.Text = ("c00lgui Reborn V"..Version.." has loaded.")
-wait(3)
-loadmsg:Remove()
+local m = Instance.new("Message")
+m.Parent = workspace
+m.Text = "c00lgui Reborn V0.5 has loaded"
+task.wait(3)
+m:Destroy()
