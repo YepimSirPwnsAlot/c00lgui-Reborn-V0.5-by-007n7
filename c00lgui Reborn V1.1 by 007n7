@@ -277,12 +277,13 @@ TextButton_3.TextColor3 = Color3.new(1, 1, 1)
 TextButton_3.TextSize = 48
 TextButton_3.MouseButton1Click:Connect(function()
 if Pge1.Visible == true then
-	    pge1.Visible = false
-	    Pge2.Visible = true
-    elseif Pge2.Visible == true then
-	    Pge2.Visible = false
-	    Pge1.Visible = true
-	end	
+Pge1.Visible = false
+Pge2.Visible = true else
+if Pge2.Visible == true then
+Pge2.Visible = false
+Pge1.Visible = true
+end
+end	
 end)
 
 TextButton_4.Name = ">"
@@ -299,12 +300,13 @@ TextButton_4.TextColor3 = Color3.new(1, 1, 1)
 TextButton_4.TextSize = 48
 TextButton_4.MouseButton1Click:Connect(function()
 if Pge1.Visible == true then
-	    pge1.Visible = false
-	    Pge2.Visible = true
-    elseif Pge2.Visible == true then
-	    Pge2.Visible = false
-	    Pge1.Visible = true
-	end	
+Pge1.Visible = false
+Pge2.Visible = true else
+if Pge2.Visible == true then
+Pge2.Visible = false
+Pge1.Visible = true
+end
+end	
 end)
 
 Pge1.Name = "Pge1"
@@ -2990,24 +2992,15 @@ right.FontSize = Enum.FontSize.Size48
 right.Text = "<"
 right.TextColor3 = Color3.new(1, 1, 1)
 right.TextSize = 48
-
 right.MouseButton1Click:Connect(function()
-    if Page1.Visible then
-        Page1.Visible = false
-        Page5.Visible = true
-    elseif Page2.Visible then
-        Page2.Visible = false
-        Page1.Visible = true
-    elseif Page3.Visible then
-        Page3.Visible = false
-        Page2.Visible = true
-    elseif Page4.Visible then
-        Page4.Visible = false
-        Page3.Visible = true
-    elseif Page5.Visible then
-        Page5.Visible = false
-        Page4.Visible = true
-    end
+if Page1_2.Visible == true then
+Page1_2.Visible = false
+Page2_2.Visible = true else
+if Page2_2.Visible == true then
+Page2_2.Visible = false
+Page1_2.Visible = true
+end
+end	
 end)
 
 left.Name = ">"
@@ -3023,24 +3016,15 @@ left.FontSize = Enum.FontSize.Size48
 left.Text = ">"
 left.TextColor3 = Color3.new(1, 1, 1)
 left.TextSize = 48
-
 left.MouseButton1Click:Connect(function()
-    if Page1.Visible then
-        Page1.Visible = false
-        Page5.Visible = true
-    elseif Page2.Visible then
-        Page2.Visible = false
-        Page1.Visible = true
-    elseif Page3.Visible then
-        Page3.Visible = false
-        Page2.Visible = true
-    elseif Page4.Visible then
-        Page4.Visible = false
-        Page3.Visible = true
-    elseif Page5.Visible then
-        Page5.Visible = false
-        Page4.Visible = true
-    end
+if Page1_2.Visible == true then
+Page1_2.Visible = false
+Page2_2.Visible = true else
+if Page2_2.Visible == true then
+Page2_2.Visible = false
+Page1_2.Visible = true
+end
+end	
 end)
 
 End.Name = "End"
