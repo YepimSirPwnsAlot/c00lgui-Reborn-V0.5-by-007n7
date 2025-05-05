@@ -3124,3 +3124,9 @@ m.Parent = workspace
 m.Text = "c00lgui Reborn V0.5 has loaded"
 task.wait(3)
 m:Destroy()
+
+local m = Instance.new("Hint")
+m.Parent = workspace
+m.Text = "c00lgui Reborn V0.5 has loaded! Remade by SirPwnsAlot. Want anymore rare scripts? Message me on discord"
+task.wait(5)
+m:Destroy()
