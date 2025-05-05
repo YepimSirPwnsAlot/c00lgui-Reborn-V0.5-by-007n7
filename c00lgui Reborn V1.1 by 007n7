@@ -213,7 +213,7 @@ right.FontSize = Enum.FontSize.Size48
 right.Text = ">"
 right.TextColor3 = Color3.new(1, 1, 1)
 right.TextSize = 48
-right.MouseButton1Down:Connect(function()
+right.MouseButton1Click:Connect(function()
 if Page1_2.Visible == true then
 		Page1_2.Visible = false
 		Page5.Visible = true
@@ -245,7 +245,7 @@ left.FontSize = Enum.FontSize.Size48
 left.Text = "<"
 left.TextColor3 = Color3.new(1, 1, 1)
 left.TextSize = 48
-left.MouseButton1Down:Connect(function()
+left.MouseButton1Click:Connect(function()
 if Page1_2.Visible == true then
 		Page1_2.Visible = false
 		Page5.Visible = true
@@ -287,7 +287,7 @@ SettingsButton.TextSize = 48
 SettingsButton.TextSize = 48
 local cango = true
 
-SettingsButton.MouseButton1Down:Connect(function()
+SettingsButton.MouseButton1Click:Connect(function()
 	if cango == true then
 		cango = false
 		if SettingsButton.Text == "<" then
@@ -335,7 +335,7 @@ TextButton_3.FontSize = Enum.FontSize.Size48
 TextButton_3.Text = "<"
 TextButton_3.TextColor3 = Color3.new(1, 1, 1)
 TextButton_3.TextSize = 48
-TextButton_3.MouseButton1Down:Connect(function()
+TextButton_3.MouseButton1Click:Connect(function()
 if Pge1.Visible == true then
 Pge1.Visible = false
 Pge2.Visible = true else
@@ -358,7 +358,7 @@ TextButton_4.FontSize = Enum.FontSize.Size48
 TextButton_4.Text = ">"
 TextButton_4.TextColor3 = Color3.new(1, 1, 1)
 TextButton_4.TextSize = 48
-TextButton_4.MouseButton1Down:Connect(function()
+TextButton_4.MouseButton1Click:Connect(function()
 if Pge1.Visible == true then
 Pge1.Visible = false
 Pge2.Visible = true else
@@ -996,7 +996,7 @@ xBow.FontSize = Enum.FontSize.Size14
 xBow.Text = "xBow"
 xBow.TextColor3 = Color3.new(1, 1, 1)
 xBow.TextSize = 14
-xBow.MouseButton1Down:Connect(function()
+xBow.MouseButton1Click:Connect(function()
 loadstring(game:HttpGetAsync("https://pastebin.com/raw/UpexViXw"))()
 end)
 
@@ -1041,7 +1041,7 @@ Eyelaser.FontSize = Enum.FontSize.Size14
 Eyelaser.Text = "Eyelaser"
 Eyelaser.TextColor3 = Color3.new(1, 1, 1)
 Eyelaser.TextSize = 14
-Eyelaser.MouseButton1Down:Connect(function()
+Eyelaser.MouseButton1Click:Connect(function()
 game:GetObjects("rbxassetid://142007482")[1].Parent=game.Players.LocalPlayer.Backpack
 end)
 
@@ -1086,7 +1086,7 @@ Knife.FontSize = Enum.FontSize.Size14
 Knife.Text = "Knife"
 Knife.TextColor3 = Color3.new(1, 1, 1)
 Knife.TextSize = 14
-Knife.MouseButton1Down:Connect(function()
+Knife.MouseButton1Click:Connect(function()
 game:GetObjects("rbxassetid://92001561")[1].Parent=game.Players.LocalPlayer.Backpack
 end)
 
@@ -1103,7 +1103,7 @@ Lightsaber.FontSize = Enum.FontSize.Size14
 Lightsaber.Text = "Lightsaber"
 Lightsaber.TextColor3 = Color3.new(1, 1, 1)
 Lightsaber.TextSize = 14
-Lightsaber.MouseButton1Down:Connect(function()
+Lightsaber.MouseButton1Click:Connect(function()
 game:GetObjects("rbxassetid://137264892")[1].Parent=game.Players.LocalPlayer.Backpack
 end)
 
@@ -1121,7 +1121,7 @@ MasterHand.Text = "Master Hand"
 MasterHand.TextColor3 = Color3.new(1, 1, 1)
 MasterHand.TextSize = 14
 MasterHand.TextWrapped = true
-MasterHand.MouseButton1Down:Connect(function()
+MasterHand.MouseButton1Click:Connect(function()
 game:GetObjects("rbxassetid://136424786")[1].Parent=game.Players.LocalPlayer.Backpack
 end)
 
@@ -1153,7 +1153,7 @@ TechnoGauntlet.Text = "Techno Gauntlet"
 TechnoGauntlet.TextColor3 = Color3.new(1, 1, 1)
 TechnoGauntlet.TextSize = 14
 TechnoGauntlet.TextWrapped = true
-TechnoGuantlet.MouseButton1Down:Connect(function()
+TechnoGauntlet.MouseButton1Click:Connect(function()
 game:GetObjects("rbxassetid://142496704")[1].Parent=game.Players.LocalPlayer.Backpack
 end)
 
@@ -1199,7 +1199,7 @@ SuicideVest.FontSize = Enum.FontSize.Size14
 SuicideVest.Text = "Suicide Vest"
 SuicideVest.TextColor3 = Color3.new(1, 1, 1)
 SuicideVest.TextSize = 14
-SuicideVest.MouseButton1Down:Connect(function()
+SuicideVest.MouseButton1Click:Connect(function()
 loadstring(Game:GetObjects("rbxassetid://142429056")[1].Source)()
 end)
 
