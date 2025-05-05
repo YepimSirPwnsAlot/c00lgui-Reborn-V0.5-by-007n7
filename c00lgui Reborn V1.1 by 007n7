@@ -1596,11 +1596,6 @@ KillAll.FontSize = Enum.FontSize.Size14
 KillAll.Text = "Kill All"
 KillAll.TextColor3 = Color3.new(1, 1, 1)
 KillAll.TextSize = 14
-KillAll.MouseButton1Click:Connect(function()
-for i,v in pairs(game.Players:GetChildren()) do
-v.Character:BreakJoints()
-end
-end)
 
 KickAll.Name = "Kick All"
 KickAll.Parent = ServerDestruction
@@ -1616,10 +1611,6 @@ KickAll.Text = "Kick All"
 KickAll.TextColor3 = Color3.new(1, 1, 1)
 KickAll.TextSize = 14
 KickAll.TextWrapped = true
-KickAll.MouseButton1Click:Connect(function()
-for i,v in pairs(game.Players:GetChildren()) do
-v:Remove()
-end)
 
 Intimidation.Name = "Intimidation"
 Intimidation.Parent = ServerDestruction
