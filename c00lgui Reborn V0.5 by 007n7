@@ -1,14 +1,28 @@
+--[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+--Fe
+local RE = game.ReplicatedStorage.RemoteEvent
+
+local function Input(input, gpe)
+    if IsKeyDown() then
+      CoreOn = false
+      RE:FireServer(CoreOn)
+   end
+end
+-- Objects
+
 local c00kkiddgui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local Title = Instance.new("TextLabel")
-local right = Instance.new("TextButton")
-local left = Instance.new("TextButton")
+local TextButton = Instance.new("TextButton")
+local TextButton_2 = Instance.new("TextButton")
 local Settings = Instance.new("Frame")
 local SettingsButton = Instance.new("TextButton")
 local Title_2 = Instance.new("TextLabel")
 local TextButton_3 = Instance.new("TextButton")
 local TextButton_4 = Instance.new("TextButton")
-local Pge1 = Instance.new("Frame")
+local Page1 = Instance.new("Frame")
 local SkyboxDecalID = Instance.new("Frame")
 local Title_3 = Instance.new("TextLabel")
 local TextBox = Instance.new("TextBox")
@@ -36,7 +50,7 @@ local Title_10 = Instance.new("TextLabel")
 local TextBox_6 = Instance.new("TextBox")
 local Save = Instance.new("TextButton")
 local Load = Instance.new("TextButton")
-local Pge2 = Instance.new("Frame")
+local Page2 = Instance.new("Frame")
 local BillboardGuiColor = Instance.new("Frame")
 local Title_11 = Instance.new("TextLabel")
 local TextBox2 = Instance.new("TextBox")
@@ -196,24 +210,24 @@ Title.Size = UDim2.new(1, 0, 0, 40)
 Title.ZIndex = 2
 Title.Font = Enum.Font.SourceSans
 Title.FontSize = Enum.FontSize.Size24
-Title.Text = "c00lgui Reborn V0.5 by 007n7"
+Title.Text = "c00lgui Reborn V1.1 by 007n7"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.TextSize = 24
 
-right.Name = "RightButton"
-right.Parent = Frame
-right.BackgroundColor3 = Color3.new(0, 0, 0)
-right.BorderColor3 = Color3.new(1, 0, 0)
-right.BorderSizePixel = 3
-right.Position = UDim2.new(0.5, 3, 0, 40)
-right.Size = UDim2.new(0.5, -3, 0, 40)
-right.ZIndex = 2
-right.Font = Enum.Font.SourceSans
-right.FontSize = Enum.FontSize.Size48
-right.Text = ">"
-right.TextColor3 = Color3.new(1, 1, 1)
-right.TextSize = 48
-right.MouseButton1Down:Connect(function()
+TextButton.Name = "<"
+TextButton.Parent = Frame
+TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton.BorderColor3 = Color3.new(1, 0, 0)
+TextButton.BorderSizePixel = 3
+TextButton.Position = UDim2.new(0, 0, 0, 40)
+TextButton.Size = UDim2.new(0.5, 0, 0, 40)
+TextButton.ZIndex = 2
+TextButton.Font = Enum.Font.SourceSans
+TextButton.FontSize = Enum.FontSize.Size48
+TextButton.Text = "<"
+TextButton.TextColor3 = Color3.new(1, 1, 1)
+TextButton.TextSize = 48
+TextButton.MouseButton1Click:Connect(function()
 if Page1_2.Visible == true then
 		Page1_2.Visible = false
 		Page5.Visible = true
@@ -232,20 +246,20 @@ if Page1_2.Visible == true then
 	end	
 end)
 
-left.Name = "LeftButton"
-left.Parent = Frame
-left.BackgroundColor3 = Color3.new(0, 0, 0)
-left.BorderColor3 = Color3.new(1, 0, 0)
-left.BorderSizePixel = 3
-left.Position = UDim2.new(0, 0, 0, 40)
-left.Size = UDim2.new(0.5, 0, 0, 40)
-left.ZIndex = 2
-left.Font = Enum.Font.SourceSans
-left.FontSize = Enum.FontSize.Size48
-left.Text = "<"
-left.TextColor3 = Color3.new(1, 1, 1)
-left.TextSize = 48
-left.MouseButton1Down:Connect(function()
+TextButton_2.Name = ">"
+TextButton_2.Parent = Frame
+TextButton_2.BackgroundColor3 = Color3.new(0, 0, 0)
+TextButton_2.BorderColor3 = Color3.new(1, 0, 0)
+TextButton_2.BorderSizePixel = 3
+TextButton_2.Position = UDim2.new(0.5, 3, 0, 40)
+TextButton_2.Size = UDim2.new(0.5, -3, 0, 40)
+TextButton_2.ZIndex = 2
+TextButton_2.Font = Enum.Font.SourceSans
+TextButton_2.FontSize = Enum.FontSize.Size48
+TextButton_2.Text = ">"
+TextButton_2.TextColor3 = Color3.new(1, 1, 1)
+TextButton_2.TextSize = 48
+TextButton.MouseButton1Click:Connect(function()
 if Page1_2.Visible == true then
 		Page1_2.Visible = false
 		Page5.Visible = true
@@ -284,10 +298,9 @@ SettingsButton.FontSize = Enum.FontSize.Size48
 SettingsButton.Text = "<"
 SettingsButton.TextColor3 = Color3.new(1, 1, 1)
 SettingsButton.TextSize = 48
-SettingsButton.TextSize = 48
 local cango = true
 
-SettingsButton.MouseButton1Down:Connect(function()
+SettingsButton.MouseButton1Click:Connect(function()
 	if cango == true then
 		cango = false
 		if SettingsButton.Text == "<" then
@@ -335,16 +348,6 @@ TextButton_3.FontSize = Enum.FontSize.Size48
 TextButton_3.Text = "<"
 TextButton_3.TextColor3 = Color3.new(1, 1, 1)
 TextButton_3.TextSize = 48
-TextButton_3.MouseButton1Down:Connect(function()
-if Pge1.Visible == true then
-Pge1.Visible = false
-Pge2.Visible = true else
-if Pge2.Visible == true then
-Pge2.Visible = false
-Pge1.Visible = true
-end
-end	
-end)
 
 TextButton_4.Name = ">"
 TextButton_4.Parent = Settings
@@ -358,27 +361,17 @@ TextButton_4.FontSize = Enum.FontSize.Size48
 TextButton_4.Text = ">"
 TextButton_4.TextColor3 = Color3.new(1, 1, 1)
 TextButton_4.TextSize = 48
-TextButton_4.MouseButton1Down:Connect(function()
-if Pge1.Visible == true then
-Pge1.Visible = false
-Pge2.Visible = true else
-if Pge2.Visible == true then
-Pge2.Visible = false
-Pge1.Visible = true
-end
-end	
-end)
 
-Pge1.Name = "Pge1"
-Pge1.Parent = Settings
-Pge1.BackgroundColor3 = Color3.new(0, 0, 0)
-Pge1.BorderColor3 = Color3.new(1, 0, 0)
-Pge1.BorderSizePixel = 3
-Pge1.Position = UDim2.new(0, 0, 0, 83)
-Pge1.Size = UDim2.new(1, 0, 1, -83)
+Page1.Name = "Page1"
+Page1.Parent = Settings
+Page1.BackgroundColor3 = Color3.new(0, 0, 0)
+Page1.BorderColor3 = Color3.new(1, 0, 0)
+Page1.BorderSizePixel = 3
+Page1.Position = UDim2.new(0, 0, 0, 83)
+Page1.Size = UDim2.new(1, 0, 1, -83)
 
 SkyboxDecalID.Name = "Skybox/Decal ID"
-SkyboxDecalID.Parent = Pge1
+SkyboxDecalID.Parent = Page1
 SkyboxDecalID.BackgroundColor3 = Color3.new(0, 0, 0)
 SkyboxDecalID.BorderColor3 = Color3.new(1, 0, 0)
 SkyboxDecalID.BorderSizePixel = 3
@@ -410,7 +403,7 @@ TextBox.TextColor3 = Color3.new(1, 1, 1)
 TextBox.TextSize = 14
 
 PlaceID.Name = "Place ID"
-PlaceID.Parent = Pge1
+PlaceID.Parent = Page1
 PlaceID.BackgroundColor3 = Color3.new(0, 0, 0)
 PlaceID.BorderColor3 = Color3.new(1, 0, 0)
 PlaceID.BorderSizePixel = 3
@@ -443,7 +436,7 @@ TextBox_2.TextColor3 = Color3.new(1, 1, 1)
 TextBox_2.TextSize = 14
 
 MusicID.Name = "Music ID"
-MusicID.Parent = Pge1
+MusicID.Parent = Page1
 MusicID.BackgroundColor3 = Color3.new(0, 0, 0)
 MusicID.BorderColor3 = Color3.new(1, 0, 0)
 MusicID.BorderSizePixel = 3
@@ -476,7 +469,7 @@ TextBox_3.TextColor3 = Color3.new(1, 1, 1)
 TextBox_3.TextSize = 14
 
 MusicPitch.Name = "Music Pitch"
-MusicPitch.Parent = Pge1
+MusicPitch.Parent = Page1
 MusicPitch.BackgroundColor3 = Color3.new(0, 0, 0)
 MusicPitch.BorderColor3 = Color3.new(1, 0, 0)
 MusicPitch.BorderSizePixel = 3
@@ -509,7 +502,7 @@ TextBox_4.TextColor3 = Color3.new(1, 1, 1)
 TextBox_4.TextSize = 14
 
 God.Name = "God"
-God.Parent = Pge1
+God.Parent = Page1
 God.BackgroundColor3 = Color3.new(0, 0, 0)
 God.BorderColor3 = Color3.new(1, 0, 0)
 God.BorderSizePixel = 3
@@ -542,7 +535,7 @@ TextButton_5.TextColor3 = Color3.new(1, 1, 1)
 TextButton_5.TextSize = 14
 
 Invisibility.Name = "Invisibility"
-Invisibility.Parent = Pge1
+Invisibility.Parent = Page1
 Invisibility.BackgroundColor3 = Color3.new(0, 0, 0)
 Invisibility.BorderColor3 = Color3.new(1, 0, 0)
 Invisibility.BorderSizePixel = 3
@@ -575,7 +568,7 @@ TextButton_6.TextColor3 = Color3.new(1, 1, 1)
 TextButton_6.TextSize = 14
 
 CustomGearID.Name = "Custom Gear ID"
-CustomGearID.Parent = Pge1
+CustomGearID.Parent = Page1
 CustomGearID.BackgroundColor3 = Color3.new(0, 0, 0)
 CustomGearID.BorderColor3 = Color3.new(1, 0, 0)
 CustomGearID.BorderSizePixel = 3
@@ -608,7 +601,7 @@ TextBox_5.TextColor3 = Color3.new(1, 1, 1)
 TextBox_5.TextSize = 14
 
 PageLabel.Name = "PageLabel"
-PageLabel.Parent = Pge1
+PageLabel.Parent = Page1
 PageLabel.BackgroundColor3 = Color3.new(0, 0, 0)
 PageLabel.BorderColor3 = Color3.new(1, 0, 0)
 PageLabel.BorderSizePixel = 3
@@ -684,17 +677,17 @@ Load.Text = "Load IDs"
 Load.TextColor3 = Color3.new(1, 1, 1)
 Load.TextSize = 18
 
-Pge2.Name = "Pge2"
-Pge2.Parent = Settings
-Pge2.BackgroundColor3 = Color3.new(0, 0, 0)
-Pge2.BorderColor3 = Color3.new(1, 0, 0)
-Pge2.BorderSizePixel = 3
-Pge2.Position = UDim2.new(0, 0, 0, 83)
-Pge2.Size = UDim2.new(1, 0, 1, -83)
-Pge2.Visible = false
+Page2.Name = "Page2"
+Page2.Parent = Settings
+Page2.BackgroundColor3 = Color3.new(0, 0, 0)
+Page2.BorderColor3 = Color3.new(1, 0, 0)
+Page2.BorderSizePixel = 3
+Page2.Position = UDim2.new(0, 0, 0, 83)
+Page2.Size = UDim2.new(1, 0, 1, -83)
+Page2.Visible = false
 
 BillboardGuiColor.Name = "Billboard Gui Color"
-BillboardGuiColor.Parent = Pge2
+BillboardGuiColor.Parent = Page2
 BillboardGuiColor.BackgroundColor3 = Color3.new(0, 0, 0)
 BillboardGuiColor.BorderColor3 = Color3.new(1, 0, 0)
 BillboardGuiColor.BorderSizePixel = 3
@@ -753,7 +746,7 @@ TextBox3.TextColor3 = Color3.new(1, 1, 1)
 TextBox3.TextSize = 14
 
 PageLabel_2.Name = "PageLabel"
-PageLabel_2.Parent = Pge2
+PageLabel_2.Parent = Page2
 PageLabel_2.BackgroundColor3 = Color3.new(0, 0, 0)
 PageLabel_2.BorderColor3 = Color3.new(1, 0, 0)
 PageLabel_2.BorderSizePixel = 3
@@ -767,7 +760,7 @@ PageLabel_2.TextSize = 18
 PageLabel_2.TextWrapped = true
 
 AntiRobloxianRange.Name = "Anti Robloxian Range"
-AntiRobloxianRange.Parent = Pge2
+AntiRobloxianRange.Parent = Page2
 AntiRobloxianRange.BackgroundColor3 = Color3.new(0, 0, 0)
 AntiRobloxianRange.BorderColor3 = Color3.new(1, 0, 0)
 AntiRobloxianRange.BorderSizePixel = 3
@@ -801,7 +794,7 @@ TextBox1_2.TextColor3 = Color3.new(1, 1, 1)
 TextBox1_2.TextSize = 14
 
 ChatSpamText.Name = "Chat Spam Text"
-ChatSpamText.Parent = Pge2
+ChatSpamText.Parent = Page2
 ChatSpamText.BackgroundColor3 = Color3.new(0, 0, 0)
 ChatSpamText.BorderColor3 = Color3.new(1, 0, 0)
 ChatSpamText.BorderSizePixel = 3
@@ -834,7 +827,7 @@ TextBox_7.TextColor3 = Color3.new(1, 1, 1)
 TextBox_7.TextSize = 14
 
 LeaderstatName.Name = "Leaderstat Name"
-LeaderstatName.Parent = Pge2
+LeaderstatName.Parent = Page2
 LeaderstatName.BackgroundColor3 = Color3.new(0, 0, 0)
 LeaderstatName.BorderColor3 = Color3.new(1, 0, 0)
 LeaderstatName.BorderSizePixel = 3
@@ -867,7 +860,7 @@ TextBox_8.TextColor3 = Color3.new(1, 1, 1)
 TextBox_8.TextSize = 14
 
 LeaderstatAmount.Name = "Leaderstat Amount"
-LeaderstatAmount.Parent = Pge2
+LeaderstatAmount.Parent = Page2
 LeaderstatAmount.BackgroundColor3 = Color3.new(0, 0, 0)
 LeaderstatAmount.BorderColor3 = Color3.new(1, 0, 0)
 LeaderstatAmount.BorderSizePixel = 3
@@ -900,7 +893,7 @@ TextBox_9.TextColor3 = Color3.new(1, 1, 1)
 TextBox_9.TextSize = 14
 
 WalkspeedAmount.Name = "Walkspeed Amount"
-WalkspeedAmount.Parent = Pge2
+WalkspeedAmount.Parent = Page2
 WalkspeedAmount.BackgroundColor3 = Color3.new(0, 0, 0)
 WalkspeedAmount.BorderColor3 = Color3.new(1, 0, 0)
 WalkspeedAmount.BorderSizePixel = 3
@@ -933,7 +926,7 @@ TextBox_10.TextColor3 = Color3.new(1, 1, 1)
 TextBox_10.TextSize = 14
 
 NameBox.Name = "NameBox"
-NameBox.Parent = Pge2
+NameBox.Parent = Page2
 NameBox.BackgroundColor3 = Color3.new(0, 0, 0)
 NameBox.BorderColor3 = Color3.new(1, 0, 0)
 NameBox.BorderSizePixel = 3
@@ -996,9 +989,6 @@ xBow.FontSize = Enum.FontSize.Size14
 xBow.Text = "xBow"
 xBow.TextColor3 = Color3.new(1, 1, 1)
 xBow.TextSize = 14
-xBow.MouseButton1Down:Connect(function()
-loadstring(game:HttpGetAsync("https://pastebin.com/raw/UpexViXw"))()
-end)
 
 Title_18.Name = "Title"
 Title_18.Parent = WeaponScripts
@@ -1041,9 +1031,6 @@ Eyelaser.FontSize = Enum.FontSize.Size14
 Eyelaser.Text = "Eyelaser"
 Eyelaser.TextColor3 = Color3.new(1, 1, 1)
 Eyelaser.TextSize = 14
-Eyelaser.MouseButton1Down:Connect(function()
-game:GetObjects("rbxassetid://142007482")[1].Parent=game.Players.LocalPlayer.Backpack
-end)
 
 Wand.Name = "Wand"
 Wand.Parent = WeaponScripts
@@ -1086,9 +1073,6 @@ Knife.FontSize = Enum.FontSize.Size14
 Knife.Text = "Knife"
 Knife.TextColor3 = Color3.new(1, 1, 1)
 Knife.TextSize = 14
-Knife.MouseButton1Down:Connect(function()
-game:GetObjects("rbxassetid://92001561")[1].Parent=game.Players.LocalPlayer.Backpack
-end)
 
 Lightsaber.Name = "Lightsaber"
 Lightsaber.Parent = WeaponScripts
@@ -1103,9 +1087,6 @@ Lightsaber.FontSize = Enum.FontSize.Size14
 Lightsaber.Text = "Lightsaber"
 Lightsaber.TextColor3 = Color3.new(1, 1, 1)
 Lightsaber.TextSize = 14
-Lightsaber.MouseButton1Down:Connect(function()
-game:GetObjects("rbxassetid://137264892")[1].Parent=game.Players.LocalPlayer.Backpack
-end)
 
 MasterHand.Name = "Master Hand"
 MasterHand.Parent = WeaponScripts
@@ -1121,9 +1102,6 @@ MasterHand.Text = "Master Hand"
 MasterHand.TextColor3 = Color3.new(1, 1, 1)
 MasterHand.TextSize = 14
 MasterHand.TextWrapped = true
-MasterHand.MouseButton1Down:Connect(function()
-game:GetObjects("rbxassetid://136424786")[1].Parent=game.Players.LocalPlayer.Backpack
-end)
 
 Staff.Name = "Staff"
 Staff.Parent = WeaponScripts
@@ -1153,9 +1131,6 @@ TechnoGauntlet.Text = "Techno Gauntlet"
 TechnoGauntlet.TextColor3 = Color3.new(1, 1, 1)
 TechnoGauntlet.TextSize = 14
 TechnoGauntlet.TextWrapped = true
-TechnoGuantlet.MouseButton1Down:Connect(function()
-game:GetObjects("rbxassetid://142496704")[1].Parent=game.Players.LocalPlayer.Backpack
-end)
 
 Plane.Name = "Plane"
 Plane.Parent = WeaponScripts
@@ -1199,9 +1174,6 @@ SuicideVest.FontSize = Enum.FontSize.Size14
 SuicideVest.Text = "Suicide Vest"
 SuicideVest.TextColor3 = Color3.new(1, 1, 1)
 SuicideVest.TextSize = 14
-SuicideVest.MouseButton1Down:Connect(function()
-loadstring(Game:GetObjects("rbxassetid://142429056")[1].Source)()
-end)
 
 Lance.Name = "Lance"
 Lance.Parent = WeaponScripts
@@ -2533,9 +2505,3 @@ CloseOpen.FontSize = Enum.FontSize.Size18
 CloseOpen.Text = "Close"
 CloseOpen.TextColor3 = Color3.new(1, 1, 1)
 CloseOpen.TextSize = 18
-
-local Msg = Instance.new("Message")
-Msg.Parent = Workspace
-Msg.Text = "c00lgui Reborn V0.5 has loaded."
-task.wait(3)
-Msg:Destroy
