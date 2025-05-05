@@ -206,6 +206,20 @@ Title.Text = "c00lgui Reborn V0.5 by 007n7"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.TextSize = 24
 
+left.Name = "LeftButton"
+left.Parent = Frame
+left.BackgroundColor3 = Color3.new(0, 0, 0)
+left.BorderColor3 = Color3.new(1, 0, 0)
+left.BorderSizePixel = 3
+left.Position = UDim2.new(0, 0, 0, 40)
+left.Size = UDim2.new(0.5, 0, 0, 40)
+left.ZIndex = 2
+left.Font = Enum.Font.SourceSans
+left.FontSize = Enum.FontSize.Size48
+left.Text = "<"
+left.TextColor3 = Color3.new(1, 1, 1)
+left.TextSize = 48
+
 right.Name = "RightButton"
 right.Parent = Frame
 right.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -220,22 +234,22 @@ right.Text = ">"
 right.TextColor3 = Color3.new(1, 1, 1)
 right.TextSize = 48
 right.MouseButton1Click:Connect(function()
-if script.Parent.Parent.Page3.Visible == true then
-	    script.Parent.Parent.Page3.Visible = false
-        script.Parent.Parent.Page4.Visible = false
-	    script.Parent.Parent.Page5.Visible = false
-    elseif script.Parent.Parent.Page4.Visible == true then
-	    script.Parent.Parent.Page2.Visible = false
-	    script.Parent.Parent.Page1.Visible = true
-	    script.Parent.Parent.Page3.Visible = false
-	    script.Parent.Parent.Page4.Visible = false
-	    script.Parent.Parent.Page5.Visible = false
-    elseif script.Parent.Parent.Page5.Visible == true then
-	    script.Parent.Parent.Page3.Visible = false
-	    script.Parent.Parent.Page4.Visible = false
-	    script.Parent.Parent.Page5.Visible = false
-	    script.Parent.Parent.Page6.Visible = false
-    end
+	if Page1.Visible then
+		Page1.Visible = false
+		Page2.Visible = true
+	elseif Page2.Visible then
+		Page2.Visible = false
+		Page3.Visible = true
+	elseif Page3.Visible then
+		Page3.Visible = false
+		Page4.Visible = true
+	elseif Page4.Visible then
+		Page4.Visible = false
+		Page5.Visible = true
+	elseif Page5.Visible then
+		Page5.Visible = false
+		Page1.Visible = true
+	end
 end)
 
 left.Name = "LeftButton"
@@ -251,22 +265,23 @@ left.FontSize = Enum.FontSize.Size48
 left.Text = "<"
 left.TextColor3 = Color3.new(1, 1, 1)
 left.TextSize = 48
-if script.Parent.Parent.Page3.Visible == true then
-	    script.Parent.Parent.Page3.Visible = false
-        script.Parent.Parent.Page4.Visible = false
-	    script.Parent.Parent.Page5.Visible = false
-    elseif script.Parent.Parent.Page4.Visible == true then
-	    script.Parent.Parent.Page2.Visible = false
-	    script.Parent.Parent.Page1.Visible = true
-	    script.Parent.Parent.Page3.Visible = false
-	    script.Parent.Parent.Page4.Visible = false
-	    script.Parent.Parent.Page5.Visible = false
-    elseif script.Parent.Parent.Page5.Visible == true then
-	    script.Parent.Parent.Page3.Visible = false
-	    script.Parent.Parent.Page4.Visible = false
-	    script.Parent.Parent.Page5.Visible = false
-	    script.Parent.Parent.Page6.Visible = false
-    end
+left.MouseButton1Click:Connect(function()
+	if Page1.Visible then
+		Page1.Visible = false
+		Page5.Visible = true
+	elseif Page2.Visible then
+		Page2.Visible = false
+		Page1.Visible = true
+	elseif Page3.Visible then
+		Page3.Visible = false
+		Page2.Visible = true
+	elseif Page4.Visible then
+		Page4.Visible = false
+		Page3.Visible = true
+	elseif Page5.Visible then
+		Page5.Visible = false
+		Page4.Visible = true
+	end
 end)
 
 Settings.Name = "Settings"
@@ -543,6 +558,17 @@ TextButton_5.FontSize = Enum.FontSize.Size14
 TextButton_5.Text = "Off"
 TextButton_5.TextColor3 = Color3.new(1, 1, 1)
 TextButton_5.TextSize = 14
+TextButton_5.MouseButton1Click:Connect(function()
+if TextButton_5.Text == "Off" then
+	game.Players.LocalPlayer.Character.Humanoid.MaxHealth = math.huge
+	game.Players.LocalPlayer.Character.Humanoid.Health = math.huge
+	TextButton_5.Text = "On"
+	else
+	game.Players.LocalPlayer.Character.Humanoid.MaxHealth = 100
+	game.Players.LocalPlayer.Character.Humanoid.Health = 100
+	TextButton_5.Text = "Off"
+end
+end)
 
 Invisibility.Name = "Invisibility"
 Invisibility.Parent = Pge1
@@ -576,6 +602,27 @@ TextButton_6.FontSize = Enum.FontSize.Size14
 TextButton_6.Text = "Off"
 TextButton_6.TextColor3 = Color3.new(1, 1, 1)
 TextButton_6.TextSize = 14
+TextButton_6.MouseButton1Click:Connect(function()
+if TextButton_6.Text == "Off" then
+game.Players.LocalPlayer.Character.Head.Transparency = 1
+game.Players.LocalPlayer.Character.Head.face.Transparency = 1
+game.Players.LocalPlayer.Character.Torso.Transparency = 1
+game.Players.LocalPlayer.Character["Right Arm"].Transparency = 1
+game.Players.LocalPlayer.Character["Left Arm"].Transparency = 1
+game.Players.LocalPlayer.Character["Right Leg"].Transparency = 1
+game.Players.LocalPlayer.Character["Left Leg"].Transparency = 1
+TextButton_6.Text = "On"
+else
+game.Players.LocalPlayer.Character.Head.Transparency = 0
+game.Players.LocalPlayer.Character.Head.face.Transparency = 0
+game.Players.LocalPlayer.Character.Torso.Transparency = 0
+game.Players.LocalPlayer.Character["Right Arm"].Transparency = 0
+game.Players.LocalPlayer.Character["Left Arm"].Transparency = 0
+game.Players.LocalPlayer.Character["Right Leg"].Transparency = 0
+game.Players.LocalPlayer.Character["Left Leg"].Transparency = 0
+TextButton_6.Text = "Off"
+end
+end)
 
 CustomGearID.Name = "Custom Gear ID"
 CustomGearID.Parent = Pge1
@@ -3108,4 +3155,10 @@ local m = Instance.new("Message")
 m.Parent = workspace
 m.Text = "c00lgui Reborn V0.5 has loaded"
 task.wait(3)
+m:Destroy()
+
+local m = Instance.new("Hint")
+m.Parent = workspace
+m.Text = "c00lgui Reborn V0.5 has loaded! Remade by SirPwnsAlot. Want anymore rare scripts? Message me on discord"
+task.wait(5)
 m:Destroy()
