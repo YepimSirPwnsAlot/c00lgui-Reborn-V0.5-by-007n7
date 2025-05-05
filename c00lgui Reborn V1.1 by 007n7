@@ -1,9 +1,4 @@
---== Thanks For Usin Ma Script Broski ==--
---== Script Remade By SirPwnsAlot ==--
-
---Instances and objects:
-
-local funiservertrollgui = Instance.new("ScreenGui")
+local c00kkiddgui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local Title = Instance.new("TextLabel")
 local right = Instance.new("TextButton")
@@ -81,7 +76,7 @@ local Staff = Instance.new("TextButton")
 local TechnoGauntlet = Instance.new("TextButton")
 local Plane = Instance.new("TextButton")
 local Snowball = Instance.new("TextButton")
-local SVest = Instance.new("TextButton")
+local SuicideVest = Instance.new("TextButton")
 local Lance = Instance.new("TextButton")
 local GearTools = Instance.new("Frame")
 local CustomGear = Instance.new("TextButton")
@@ -181,12 +176,10 @@ local CloseOpen = Instance.new("TextButton")
 
 -- Properties
 
-funiservertrollgui.Name = "funiservertrollgui"
-funiservertrollgui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-funiservertrollgui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-funiservertrollgui.ResetOnSpawn = true
+c00kkiddgui.Name = "c00kkidd gui"
+c00kkiddgui.Parent = game.Workspace
 
-Frame.Parent = funiservertrollgui
+Frame.Parent = c00kkiddgui
 Frame.BackgroundColor3 = Color3.new(0, 0, 0)
 Frame.BorderColor3 = Color3.new(1, 0, 0)
 Frame.BorderSizePixel = 3
@@ -202,6 +195,7 @@ Title.BorderSizePixel = 3
 Title.Size = UDim2.new(1, 0, 0, 40)
 Title.ZIndex = 2
 Title.Font = Enum.Font.SourceSans
+Title.FontSize = Enum.FontSize.Size24
 Title.Text = "c00lgui Reborn V0.5 by 007n7"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.TextSize = 24
@@ -219,7 +213,7 @@ right.FontSize = Enum.FontSize.Size48
 right.Text = ">"
 right.TextColor3 = Color3.new(1, 1, 1)
 right.TextSize = 48
-right.MouseButton1Click:Connect(function()
+right.MouseButton1Down:Connect(function()
 if Page1_2.Visible == true then
 		Page1_2.Visible = false
 		Page5.Visible = true
@@ -251,7 +245,7 @@ left.FontSize = Enum.FontSize.Size48
 left.Text = "<"
 left.TextColor3 = Color3.new(1, 1, 1)
 left.TextSize = 48
-left.MouseButton1Click:Connect(function()
+left.MouseButton1Down:Connect(function()
 if Page1_2.Visible == true then
 		Page1_2.Visible = false
 		Page5.Visible = true
@@ -290,9 +284,10 @@ SettingsButton.FontSize = Enum.FontSize.Size48
 SettingsButton.Text = "<"
 SettingsButton.TextColor3 = Color3.new(1, 1, 1)
 SettingsButton.TextSize = 48
+SettingsButton.TextSize = 48
 local cango = true
 
-SettingsButton.MouseButton1Click:Connect(function()
+SettingsButton.MouseButton1Down:Connect(function()
 	if cango == true then
 		cango = false
 		if SettingsButton.Text == "<" then
@@ -315,6 +310,7 @@ SettingsButton.MouseButton1Click:Connect(function()
 		cango = true
 	end
 end)
+
 Title_2.Name = "Title"
 Title_2.Parent = Settings
 Title_2.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -339,7 +335,7 @@ TextButton_3.FontSize = Enum.FontSize.Size48
 TextButton_3.Text = "<"
 TextButton_3.TextColor3 = Color3.new(1, 1, 1)
 TextButton_3.TextSize = 48
-TextButton_3.MouseButton1Click:Connect(function()
+TextButton_3.MouseButton1Down:Connect(function()
 if Pge1.Visible == true then
 Pge1.Visible = false
 Pge2.Visible = true else
@@ -362,7 +358,7 @@ TextButton_4.FontSize = Enum.FontSize.Size48
 TextButton_4.Text = ">"
 TextButton_4.TextColor3 = Color3.new(1, 1, 1)
 TextButton_4.TextSize = 48
-TextButton_4.MouseButton1Click:Connect(function()
+TextButton_4.MouseButton1Down:Connect(function()
 if Pge1.Visible == true then
 Pge1.Visible = false
 Pge2.Visible = true else
@@ -626,7 +622,7 @@ PageLabel.TextSize = 18
 PageLabel.TextWrapped = true
 
 BillboardGuiText.Name = "Billboard Gui Text"
-BillboardGuiText.Parent = Pge1
+BillboardGuiText.Parent = Page1
 BillboardGuiText.BackgroundColor3 = Color3.new(0, 0, 0)
 BillboardGuiText.BorderColor3 = Color3.new(1, 0, 0)
 BillboardGuiText.BorderSizePixel = 3
@@ -1000,6 +996,9 @@ xBow.FontSize = Enum.FontSize.Size14
 xBow.Text = "xBow"
 xBow.TextColor3 = Color3.new(1, 1, 1)
 xBow.TextSize = 14
+xBow.MouseButton1Down:Connect(function()
+loadstring(game:HttpGetAsync("https://pastebin.com/raw/UpexViXw"))()
+end)
 
 Title_18.Name = "Title"
 Title_18.Parent = WeaponScripts
@@ -1042,7 +1041,7 @@ Eyelaser.FontSize = Enum.FontSize.Size14
 Eyelaser.Text = "Eyelaser"
 Eyelaser.TextColor3 = Color3.new(1, 1, 1)
 Eyelaser.TextSize = 14
-Eyelaser.MouseButton1Click:Connect(function()
+Eyelaser.MouseButton1Down:Connect(function()
 game:GetObjects("rbxassetid://142007482")[1].Parent=game.Players.LocalPlayer.Backpack
 end)
 
@@ -1087,7 +1086,7 @@ Knife.FontSize = Enum.FontSize.Size14
 Knife.Text = "Knife"
 Knife.TextColor3 = Color3.new(1, 1, 1)
 Knife.TextSize = 14
-Knife.MouseButton1Click:Connect(function()
+Knife.MouseButton1Down:Connect(function()
 game:GetObjects("rbxassetid://92001561")[1].Parent=game.Players.LocalPlayer.Backpack
 end)
 
@@ -1104,7 +1103,7 @@ Lightsaber.FontSize = Enum.FontSize.Size14
 Lightsaber.Text = "Lightsaber"
 Lightsaber.TextColor3 = Color3.new(1, 1, 1)
 Lightsaber.TextSize = 14
-Lightsaber.MouseButton1Click:Connect(function()
+Lightsaber.MouseButton1Down:Connect(function()
 game:GetObjects("rbxassetid://137264892")[1].Parent=game.Players.LocalPlayer.Backpack
 end)
 
@@ -1122,7 +1121,7 @@ MasterHand.Text = "Master Hand"
 MasterHand.TextColor3 = Color3.new(1, 1, 1)
 MasterHand.TextSize = 14
 MasterHand.TextWrapped = true
-MasterHand.MouseButton1Click:Connect(function()
+MasterHand.MouseButton1Down:Connect(function()
 game:GetObjects("rbxassetid://136424786")[1].Parent=game.Players.LocalPlayer.Backpack
 end)
 
@@ -1139,9 +1138,6 @@ Staff.FontSize = Enum.FontSize.Size14
 Staff.Text = "Staff"
 Staff.TextColor3 = Color3.new(1, 1, 1)
 Staff.TextSize = 14
-Staff.MouseButton1Click:Connect(function()
-game:GetObjects("rbxassetid://149941868")[1].Parent=game.Players.LocalPlayer.Backpack
-end)
 
 TechnoGauntlet.Name = "Techno Gauntlet"
 TechnoGauntlet.Parent = WeaponScripts
@@ -1157,7 +1153,7 @@ TechnoGauntlet.Text = "Techno Gauntlet"
 TechnoGauntlet.TextColor3 = Color3.new(1, 1, 1)
 TechnoGauntlet.TextSize = 14
 TechnoGauntlet.TextWrapped = true
-TechnoGauntlet.MouseButton1Click:Connect(function()
+TechnoGuantlet.MouseButton1Down:Connect(function()
 game:GetObjects("rbxassetid://142496704")[1].Parent=game.Players.LocalPlayer.Backpack
 end)
 
@@ -1190,20 +1186,20 @@ Snowball.TextColor3 = Color3.new(1, 1, 1)
 Snowball.TextSize = 14
 Snowball.TextWrapped = true
 
-SVest.Name = "SVest"
-SVest.Parent = WeaponScripts
-SVest.BackgroundColor3 = Color3.new(0, 0, 0)
-SVest.BorderColor3 = Color3.new(1, 0, 0)
-SVest.BorderSizePixel = 3
-SVest.Position = UDim2.new(0, 0, 0, 231)
-SVest.Size = UDim2.new(0.5, 0, 0, 30)
-SVest.ZIndex = 2
-SVest.Font = Enum.Font.SourceSans
-SVest.FontSize = Enum.FontSize.Size14
-SVest.Text = "Suicide Vest"
-SVest.TextColor3 = Color3.new(1, 1, 1)
-SVest.TextSize = 14
-SVest.MouseButton1Click:Connect(function()
+SuicideVest.Name = "Suicide Vest"
+SuicideVest.Parent = WeaponScripts
+SuicideVest.BackgroundColor3 = Color3.new(0, 0, 0)
+SuicideVest.BorderColor3 = Color3.new(1, 0, 0)
+SuicideVest.BorderSizePixel = 3
+SuicideVest.Position = UDim2.new(0, 0, 0, 231)
+SuicideVest.Size = UDim2.new(0.5, 0, 0, 30)
+SuicideVest.ZIndex = 2
+SuicideVest.Font = Enum.Font.SourceSans
+SuicideVest.FontSize = Enum.FontSize.Size14
+SuicideVest.Text = "Suicide Vest"
+SuicideVest.TextColor3 = Color3.new(1, 1, 1)
+SuicideVest.TextSize = 14
+SuicideVest.MouseButton1Down:Connect(function()
 loadstring(Game:GetObjects("rbxassetid://142429056")[1].Source)()
 end)
 
@@ -1221,9 +1217,6 @@ Lance.Text = "Lance"
 Lance.TextColor3 = Color3.new(1, 1, 1)
 Lance.TextSize = 14
 Lance.TextWrapped = true
-Lance.MouseButton1Click:Connect(function()
-print("is a lost cause")
-end)
 
 GearTools.Name = "Gear/Tools"
 GearTools.Parent = Page2_2
@@ -1290,9 +1283,6 @@ ToolStealer.FontSize = Enum.FontSize.Size14
 ToolStealer.Text = "Tool Stealer"
 ToolStealer.TextColor3 = Color3.new(1, 1, 1)
 ToolStealer.TextSize = 14
-ToolStealer.MouseButton1Click:Connect(function()
-loadstring(game:GetObjects("rbxassetid://96727044")[1].Source)()
-end)
 
 InsertTool.Name = "Insert Tool"
 InsertTool.Parent = GearTools
@@ -1308,9 +1298,6 @@ InsertTool.Text = "Insert Tool"
 InsertTool.TextColor3 = Color3.new(1, 1, 1)
 InsertTool.TextSize = 14
 InsertTool.TextWrapped = true
-InsertTool.MouseButton1Click:Connect(function()
-game:GetObjects("rbxassetid://73504704")[1].Parent=game.Players.LocalPlayer.Backpack
-end)
 
 Minigun.Name = "Minigun"
 Minigun.Parent = GearTools
@@ -1326,9 +1313,6 @@ Minigun.Text = "Minigun"
 Minigun.TextColor3 = Color3.new(1, 1, 1)
 Minigun.TextSize = 14
 Minigun.TextWrapped = true
-Minigun.MouseButton1Click:Connect(function()
-game:GetObjects("rbxassetid://140634024")[1].Parent=game.Players.LocalPlayer.Backpack
-end)
 
 LaserRifle.Name = "Laser Rifle"
 LaserRifle.Parent = GearTools
@@ -1344,9 +1328,6 @@ LaserRifle.Text = "Laser Rifle"
 LaserRifle.TextColor3 = Color3.new(1, 1, 1)
 LaserRifle.TextSize = 14
 LaserRifle.TextWrapped = true
-LaserRifle.MouseButton1Click:Connect(function()
-game:GetObjects("rbxassetid://140411727")[1].Parent=game.Players.LocalPlayer.Backpack
-end)
 
 DrawTool.Name = "Draw Tool"
 DrawTool.Parent = GearTools
@@ -1362,9 +1343,6 @@ DrawTool.Text = "Draw Tool"
 DrawTool.TextColor3 = Color3.new(1, 1, 1)
 DrawTool.TextSize = 14
 DrawTool.TextWrapped = true
-DrawTool.MouseButton1Click:Connect(function()
-loadstring(game:GetObjects("rbxassetid://96727044")[1].Source)()
-end)
 
 PageLabel_3.Name = "PageLabel"
 PageLabel_3.Parent = Page2_2
@@ -1411,9 +1389,6 @@ Flood.FontSize = Enum.FontSize.Size14
 Flood.Text = "Flood"
 Flood.TextColor3 = Color3.new(1, 1, 1)
 Flood.TextSize = 14
-Flood.MouseButton1Click:Connect(function()
-Game.Workspace.Terrain:SetCells(Region3int16.new(Vector3int16.new(-100,-100,-100), Vector3int16.new(100,100,100)), 17, "Solid", "X")
-end)
 
 Title_20.Name = "Title"
 Title_20.Parent = ServerDestruction
@@ -1484,19 +1459,6 @@ SetSkybox.FontSize = Enum.FontSize.Size14
 SetSkybox.Text = "Set Skybox"
 SetSkybox.TextColor3 = Color3.new(1, 1, 1)
 SetSkybox.TextSize = 14
-SetSkybox.MouseButton1Click:Connect(function()
-local s = Instance.new("Sky")
-s.Name = "Sky"
-s.Parent = game.Lighting
-local skyboxID = 158118263
-s.SkyboxBk = "http://www.roblox.com/asset/?id="..skyboxID
-s.SkyboxDn = "http://www.roblox.com/asset/?id="..skyboxID
-s.SkyboxFt = "http://www.roblox.com/asset/?id="..skyboxID
-s.SkyboxLf = "http://www.roblox.com/asset/?id="..skyboxID
-s.SkyboxRt = "http://www.roblox.com/asset/?id="..skyboxID
-s.SkyboxUp = "http://www.roblox.com/asset/?id="..skyboxID
-game.Lighting.TimeOfDay = 12	
-end)
 
 DecalSpam.Name = "Decal Spam"
 DecalSpam.Parent = ServerDestruction
@@ -1511,45 +1473,6 @@ DecalSpam.FontSize = Enum.FontSize.Size14
 DecalSpam.Text = "Decal Spam"
 DecalSpam.TextColor3 = Color3.new(1, 1, 1)
 DecalSpam.TextSize = 14
-DecalSpam.MouseButton1Click:Connect(function()
-decalID = 158118263
-function exPro(root)
-for _, v in pairs(root:GetChildren()) do
-if v:IsA("Decal") and v.Texture ~= "http://www.roblox.com/asset/?id="..decalID then
-v.Parent = nil
-elseif v:IsA("BasePart") then
-v.Material = "Plastic"
-v.Transparency = 0
-local One = Instance.new("Decal", v)
-local Two = Instance.new("Decal", v)
-local Three = Instance.new("Decal", v)
-local Four = Instance.new("Decal", v)
-local Five = Instance.new("Decal", v)
-local Six = Instance.new("Decal", v)
-One.Texture = "http://www.roblox.com/asset/?id="..decalID
-Two.Texture = "http://www.roblox.com/asset/?id="..decalID
-Three.Texture = "http://www.roblox.com/asset/?id="..decalID
-Four.Texture = "http://www.roblox.com/asset/?id="..decalID
-Five.Texture = "http://www.roblox.com/asset/?id="..decalID
-Six.Texture = "http://www.roblox.com/asset/?id="..decalID
-One.Face = "Front"
-Two.Face = "Back"
-Three.Face = "Right"
-Four.Face = "Left"
-Five.Face = "Top"
-Six.Face = "Bottom"
-end
-exPro(v)
-end
-end
-function asdf(root)
-for _, v in pairs(root:GetChildren()) do
-asdf(v)
-end
-end
-exPro(game.Workspace)
-asdf(game.Workspace)
-end)
 
 ForceTeleport.Name = "Force Teleport"
 ForceTeleport.Parent = ServerDestruction
@@ -1579,9 +1502,6 @@ ClearWorkspace.Text = "Clear Workspace"
 ClearWorkspace.TextColor3 = Color3.new(1, 1, 1)
 ClearWorkspace.TextSize = 14
 ClearWorkspace.TextWrapped = true
-ClearWorkspace.MouseButton1Click:Connect(function()
-game.Workspace:ClearAllChildren()
-end)
 
 KillAll.Name = "Kill All"
 KillAll.Parent = ServerDestruction
@@ -1626,9 +1546,6 @@ Intimidation.Text = "Intimidation"
 Intimidation.TextColor3 = Color3.new(1, 1, 1)
 Intimidation.TextSize = 14
 Intimidation.TextWrapped = true
-Intimidation.MouseButton1Click:Connect(function()
-    print("I dont feel like rescripting this")
-end)
 
 CreateBaseplate.Name = "Create Baseplate"
 CreateBaseplate.Parent = ServerDestruction
@@ -1644,16 +1561,6 @@ CreateBaseplate.Text = "Create Baseplate"
 CreateBaseplate.TextColor3 = Color3.new(1, 1, 1)
 CreateBaseplate.TextSize = 14
 CreateBaseplate.TextWrapped = true
-CreateBaseplate.MouseButton1Click:Connect(function()
-local pt = Instance.new("Part")
-pt.BrickColor = BrickColor.new("Silver")
-pt.Anchored = true
-pt.CanCollide = true
-pt.BottomSurface = "Weld"
-pt.Parent = workspace
-pt.Name = (math.random(1,1000000))
-pt.Size = Vector3.new(1000, 1, 1000)
-end)
 
 AdminCommandsGuis.Name = "Admin Commands/Guis"
 AdminCommandsGuis.Parent = Page1_2
@@ -1750,77 +1657,6 @@ KillGui.Text = "Kill Gui"
 KillGui.TextColor3 = Color3.new(1, 1, 1)
 KillGui.TextSize = 14
 KillGui.TextWrapped = true
-KillGui.MouseButton1Click:Connect(function()
-
-wait(3)
-
-whoownit = game.Players.LocalPlayer
-gui = Instance.new("ScreenGui")
-gui.Parent = whoownit.PlayerGui
-gui.Name = "Kill"
-
-pos = 135
-pos2 = 10
-pos3 = 0
-
-enabled = false
-
-button = Instance.new("TextButton")
-button.Parent = gui
-button.Size = UDim2.new(0, 100, 0, 30)
-button.Position = UDim2.new(0, 8, 0, pos)
-button.Text = "Kill"
-button.MouseButton1Click:connect(function()
-if enabled == false then 
-enabled = true
-local a = game.Players:GetChildren()
-red = 0
-green = 0.5
-blue = 0
-for i=1, #a do
-wait()
-pos2 = pos2 + 23
-if pos2 >= 450 then
-pos3 = pos3 + 103
-pos2 = 33
-end
-if green <= 0.9 then
-green = green + 0.46
-elseif green >= 0.9 then
-green = green - 0.46
-end
-local bu = Instance.new("TextButton")
-bu.Parent = button
-bu.Size = UDim2.new(0, 100, 0, 20)
-bu.Position = UDim2.new(0, pos3, 0, pos2)
-bu.Text = a[i].Name
-bu.BackgroundTransparency = 1
-bu.TextTransparency = 1
-bu.BackgroundColor3 = Color3.new(red,green,blue)
-coroutine.resume(coroutine.create(function()
-for i=1, 3 do
-wait()
-bu.BackgroundTransparency = bu.BackgroundTransparency - 0.34
-bu.TextTransparency = bu.BackgroundTransparency
-end
-end))
-bu.MouseButton1Down:connect(function()
-local play = game.Players:findFirstChild(bu.Text)
-if play ~= nil then
-play.Character.Head:Remove()
-bu.Text = "Killed!"
-wait(2)
-bu.Text = a[i].Name
-end
-end)
-end
-elseif enabled == true then
-enabled = false
-pos2 = 10
-pos3 = 0
-end
-end)
-end)
 
 SilentExecutor.Name = "Silent Executor"
 SilentExecutor.Parent = AdminCommandsGuis
@@ -1836,9 +1672,6 @@ SilentExecutor.Text = "Silent Executor"
 SilentExecutor.TextColor3 = Color3.new(1, 1, 1)
 SilentExecutor.TextSize = 14
 SilentExecutor.TextWrapped = true
-SilentExecutor.MouseButton1Click:Connect(function()
-loadstring(game:GetObjects("rbxassetid://138660278")[1].Source)()
-end)
 
 Nilizer.Name = "Nilizer"
 Nilizer.Parent = AdminCommandsGuis
@@ -1854,9 +1687,6 @@ Nilizer.Text = "Nilizer"
 Nilizer.TextColor3 = Color3.new(1, 1, 1)
 Nilizer.TextSize = 14
 Nilizer.TextWrapped = true
-Nilizer.MouseButton1Click:Connect(function()
-game:GetObjects("rbxassetid://142125914")[1].Parent=game.Players.LocalPlayer.Backpack
-end)
 
 RemsoAdmin.Name = "Remso Admin"
 RemsoAdmin.Parent = AdminCommandsGuis
@@ -1872,9 +1702,6 @@ RemsoAdmin.Text = "Remso Admin"
 RemsoAdmin.TextColor3 = Color3.new(1, 1, 1)
 RemsoAdmin.TextSize = 14
 RemsoAdmin.TextWrapped = true
-RemsoAdmin.MouseButton1Click:Connect(function()
-str_srce = "143944387" loadstring(game:GetObjects("rbxassetid://"..str_srce)[1].Source)()
-end)
 
 XAdmin.Name = "X Admin"
 XAdmin.Parent = AdminCommandsGuis
@@ -1890,9 +1717,6 @@ XAdmin.Text = "X Admin"
 XAdmin.TextColor3 = Color3.new(1, 1, 1)
 XAdmin.TextSize = 14
 XAdmin.TextWrapped = true
-XAdmin.MouseButton1Click:Connect(function()
-game:GetObjects("rbxassetid://149943200")[1].Parent=game.Players.LocalPlayer.Backpack
-end)
 
 LagGui.Name = "Lag Gui"
 LagGui.Parent = AdminCommandsGuis
@@ -1908,95 +1732,6 @@ LagGui.Text = "Lag Gui"
 LagGui.TextColor3 = Color3.new(1, 1, 1)
 LagGui.TextSize = 14
 LagGui.TextWrapped = true
-LagGui.MouseButton1Click:Connect(function()
-whoownit = game.Players.LocalPlayer
-gui = Instance.new("ScreenGui")
-gui.Parent = whoownit.PlayerGui
-gui.Name = "Lag"
-
-pos = 135
-pos2 = 10
-pos3 = 0
-
-enabled = false
-
-button = Instance.new("TextButton")
-button.Parent = gui
-button.Size = UDim2.new(0, 100, 0, 30)
-button.Position = UDim2.new(0, 8, 0, pos)
-button.Text = "Lag"
-button.MouseButton1Click:connect(function()
-if enabled == false then 
-enabled = true
-local a = game.Players:GetChildren()
-red = 0
-green = 0.5
-blue = 0
-for i=1, #a do
-wait()
-pos2 = pos2 + 23
-if pos2 >= 450 then
-pos3 = pos3 + 103
-pos2 = 33
-end
-if green <= 0.9 then
-green = green + 0.46
-elseif green >= 0.9 then
-green = green - 0.46
-end
-local bu = Instance.new("TextButton")
-bu.Parent = button
-bu.Size = UDim2.new(0, 100, 0, 20)
-bu.Position = UDim2.new(0, pos3, 0, pos2)
-bu.Text = a[i].Name
-bu.BackgroundTransparency = 1
-bu.TextTransparency = 1
-bu.BackgroundColor3 = Color3.new(red,green,blue)
-coroutine.resume(coroutine.create(function()
-for i=1, 3 do
-wait()
-bu.BackgroundTransparency = bu.BackgroundTransparency - 0.34
-bu.TextTransparency = bu.BackgroundTransparency
-end
-end))
-bu.MouseButton1Down:connect(function()
-local play = game.Players:findFirstChild(bu.Text)
-if play ~= nil then
-for i=1,3600 do
-Instance.new("HopperBin",play.Backpack).Name = "f       u     c   k u"
-end
-wait()
-for i=1,3600 do
-Instance.new("HopperBin",play.Backpack).Name = "f       u     c   k u"
-end
-wait()
-for i=1,3600 do
-Instance.new("HopperBin",play.Backpack).Name = "f       u     c   k u"
-end
-wait()
-for i=1,13000 do
-Instance.new("HopperBin",play.Backpack).Name = "f       u     c   k u"
-end
-wait()
-for i=1,3600 do
-Instance.new("HopperBin",play.Backpack).Name = "fuck u"
-end
-bu.Text = "Lagged!"
-end
-end)
-end
-elseif enabled == true then
-enabled = false
-pos2 = 10
-pos3 = 0
-local o = button:GetChildren()
-for i=1, #o do
-wait()
-o[i]:remove()
-end
-end
-end)
-end)
 
 GlobalMessageGui.Name = "Global Message Gui"
 GlobalMessageGui.Parent = AdminCommandsGuis
@@ -2012,23 +1747,6 @@ GlobalMessageGui.Text = "Global Message Gui"
 GlobalMessageGui.TextColor3 = Color3.new(1, 1, 1)
 GlobalMessageGui.TextSize = 14
 GlobalMessageGui.TextWrapped = true
-GlobalMessageGui.MouseButton1Click:Connect(function()
-gui = Instance.new("ScreenGui",game.Players.LocalPlayer.PlayerGui)
-box = Instance.new("TextBox",gui)
-box.Size = UDim2.new(0,100,0,100)
-msg = Instance.new("TextButton",gui)
-msg.Size = UDim2.new(0,100,0,50)
-msg.Position = UDim2.new(.5,0,0,0)
-msg.MouseButton1Click:connect(function()
-for _,v in pairs(game.Players:GetChildren()) do
-game:service'Chat':Chat(v.Character.Head,box.Text,Enum.ChatColor.Blue)
-wait()
-game:service'Chat':Chat(v.Character.Head,box.Text,Enum.ChatColor.Red)
-wait()
-game:service'Chat':Chat(v.Character.Head,box.Text,Enum.ChatColor.Green)
-end
-end)
-end)
 
 QuickscopeGui.Name = "Quickscope Gui"
 QuickscopeGui.Parent = AdminCommandsGuis
@@ -2203,9 +1921,6 @@ ElectroSp00k.FontSize = Enum.FontSize.Size14
 ElectroSp00k.Text = "Electro Sp00k"
 ElectroSp00k.TextColor3 = Color3.new(1, 1, 1)
 ElectroSp00k.TextSize = 14
-ElectroSp00k.MouseButton1Click:Connect(function()
-Frame.Settings.Page1["Music ID"].TextBox.Text = 142930454
-end)
 
 Wonga.Name = "Wonga"
 Wonga.Parent = PresetMusicIDs
@@ -2220,9 +1935,6 @@ Wonga.FontSize = Enum.FontSize.Size14
 Wonga.Text = "Wonga"
 Wonga.TextColor3 = Color3.new(1, 1, 1)
 Wonga.TextSize = 14
-Wonga.MouseButton1Click:Connect(function()
-Frame.Settings.Page1["Music ID"].TextBox.Text = 147909316
-end)
 
 ChopSuey.Name = "Chop Suey"
 ChopSuey.Parent = PresetMusicIDs
@@ -2237,9 +1949,6 @@ ChopSuey.FontSize = Enum.FontSize.Size14
 ChopSuey.Text = "Chop Suey"
 ChopSuey.TextColor3 = Color3.new(1, 1, 1)
 ChopSuey.TextSize = 14
-ChopSuey.MouseButton1Click:Connect(function()
-Frame.Settings.Page1["Music ID"].TextBox.Text = 147407900
-end)
 
 Scream.Name = "Scream"
 Scream.Parent = PresetMusicIDs
@@ -2254,9 +1963,6 @@ Scream.FontSize = Enum.FontSize.Size14
 Scream.Text = "Scream"
 Scream.TextColor3 = Color3.new(1, 1, 1)
 Scream.TextSize = 14
-Scream.MouseButton1Click:Connect(function()
-Frame.Settings.Page1["Music ID"].TextBox.Text = 138097458
-end)
 
 PageLabel_5.Name = "PageLabel"
 PageLabel_5.Parent = Page4
@@ -2303,29 +2009,6 @@ BillboardGui.FontSize = Enum.FontSize.Size14
 BillboardGui.Text = "Billboard Gui"
 BillboardGui.TextColor3 = Color3.new(1, 1, 1)
 BillboardGui.TextSize = 14
-BillboardGui.MouseButton1Click:Connect(function()
-if game.Players.LocalPlayer.Character.Head:FindFirstChild("BillboardGui") then
-game.Players.LocalPlayer.Character.Head:FindFirstChild("BillboardGui"):Remove()	
-end
-plr = game.Players.LocalPlayer.Name
-y = Instance.new("BillboardGui")
-y.Size = UDim2.new(0,100,0,150)
-y.StudsOffset = Vector3.new(0,1,0)
-y.Parent = game.Players[plr].Character.Head
-y.Adornee = game.Players[plr].Character.Head
-f = Instance.new("TextLabel")
-f.Parent = y
-f.BackgroundTransparency = 1
-f.Position = UDim2.new(0,0,0,-50)
-f.Size = UDim2.new(0,100,0,100)
-f.Font = "Arial"
-f.FontSize = "Size48"
-f.Text = Frame.Settings.Pge1["Billboard Gui Text"].TextBox.Text
-f.TextStrokeColor3 = Color3.new(0,0,0)
-f.TextColor3 = Color3.new(Frame.Settings.Pge2["Billboard Gui Color"].TextBox1.Text/255,Frame.Settings.Pge2["Billboard Gui Color"].TextBox2.Text/255,Frame.Settings.Pge2["Billboard Gui Color"].TextBox3.Text/255)
-f.TextStrokeTransparency = 0
-f.TextYAlignment = "Bottom"
-end)
 
 Title_24.Name = "Title"
 Title_24.Parent = LocalPlayer
@@ -2354,17 +2037,6 @@ ChangeName.FontSize = Enum.FontSize.Size14
 ChangeName.Text = "Change Name"
 ChangeName.TextColor3 = Color3.new(1, 1, 1)
 ChangeName.TextSize = 14
-ChangeName.MouseButton1Click:Connect(function()
-local You = game.Players.LocalPlayer.Name
-local head = workspace[You].Head:Clone()
-local model = Instance.new("Model",workspace)
-local humanoid = Instance.new("Humanoid",model)
-head.Parent = model
-model.Name = Frame.Settings.Pge2["NameBox"].TextBox.Text
-humanoid.MaxHealth = 0 
-local w = Instance.new("Weld",model)
-w.Part0,w.Part1 = workspace[You].Head,head	
-end)
 
 DiscoCharacter.Name = "Disco Character"
 DiscoCharacter.Parent = LocalPlayer
@@ -2380,18 +2052,6 @@ DiscoCharacter.Text = "Disco Character"
 DiscoCharacter.TextColor3 = Color3.new(1, 1, 1)
 DiscoCharacter.TextSize = 14
 DiscoCharacter.TextWrapped = true
-DiscoCharacter.MouseButton1Click:Connect(function()
-presets = {"Bright red","Bright yellow","Bright orange","Bright violet","Bright blue","Bright bluish green","Bright green"}
-while true do
-wait(0.5)
-ye = game.Workspace[game.Players.LocalPlayer.Name]:GetChildren()
-for i,v in pairs(ye) do
-if v.className == "Part" then
-v.BrickColor = BrickColor.new(presets[math.random(1,#presets)])
-end
-end
-end
-end)
 
 ChickenArms.Name = "Chicken Arms"
 ChickenArms.Parent = LocalPlayer
@@ -2406,13 +2066,7 @@ ChickenArms.FontSize = Enum.FontSize.Size14
 ChickenArms.Text = "Chicken Arms"
 ChickenArms.TextColor3 = Color3.new(1, 1, 1)
 ChickenArms.TextSize = 14
-ChickenArms.MouseButton1Click:Connect(function()
-local Chicken = game.Players.LocalPlayer.Name
-game.Workspace[Chicken].Torso["Left Shoulder"].C0 = CFrame.new(-1.5, 0.5, 0) * CFrame.fromEulerAnglesXYZ(0,math.pi/2,0) * CFrame.fromEulerAnglesXYZ(math.pi/2, 0, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0)
-game.Workspace[Chicken].Torso["Left Shoulder"].C1 = CFrame.new(0, 0.5, 0)
-game.Workspace[Chicken].Torso["Right Shoulder"].C0 = CFrame.new(1.5, 0.5, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0) * CFrame.fromEulerAnglesXYZ(math.pi/2, 0, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0)
-game.Workspace[Chicken].Torso["Right Shoulder"].C1 = CFrame.new(0, 0.5, 0)
-end)
+
 DominusGhost.Name = "Dominus Ghost"
 DominusGhost.Parent = LocalPlayer
 DominusGhost.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -2427,45 +2081,6 @@ DominusGhost.Text = "Dominus Ghost"
 DominusGhost.TextColor3 = Color3.new(1, 1, 1)
 DominusGhost.TextSize = 14
 DominusGhost.TextWrapped = true
-DominusGhost.MouseButton1Click:Connect(function()
-function nob(who,tra,hat)
-c=who.Character
-pcall(function()u=c["Body Colors"]
-u.HeadColor=BrickColor.new("Black")
-u.LeftLegColor=BrickColor.new("Black")
-u.RightLegolor=BrickColor.new("Black")
-u.LeftArmColor=BrickColor.new("Black")
-u.TorsoColor=BrickColor.new("Black")
-u.RightArmColor=BrickColor.new("Black")
-end)
-pcall(function()c.Shirt:Destroy() c.Pants:Destroy() end)
-for i,v in pairs(c:GetChildren()) do
-if v:IsA("BasePart") then
-v.Transparency=tra
-if v.Name=="HumanoidRootPart" or v.Name=="Head" then
-v.Transparency=1
-end
-wait()
-v.BrickColor=BrickColor.new("Black")
-elseif v:IsA("Hat") then
-v:Destroy()
-end
-end
-xx=game:service("InsertService"):LoadAsset(hat)
-xy=game:service("InsertService"):LoadAsset(47433)["LinkedSword"]
-xy.Parent=who.Backpack
-for a,hat in pairs(xx:children()) do
-hat.Parent=c
-end
-xx:Destroy()
-h=who.Character.Humanoid
-h.MaxHealth=50000
-wait(1.5)
-h.Health=50000
-h.WalkSpeed=32
-end
-nob(game.Players.LocalPlayer,0.6,21070012)
-end)
 
 AntiRobloxian.Name = "Anti-Robloxian"
 AntiRobloxian.Parent = LocalPlayer
@@ -2477,27 +2092,10 @@ AntiRobloxian.Size = UDim2.new(0.5, -3, 0, 30)
 AntiRobloxian.ZIndex = 2
 AntiRobloxian.Font = Enum.Font.SourceSans
 AntiRobloxian.FontSize = Enum.FontSize.Size14
-AntiRobloxian.Text = "Anti-Robloxian"
+AntiRobloxian.Text = "Anti Robloxian"
 AntiRobloxian.TextColor3 = Color3.new(1, 1, 1)
 AntiRobloxian.TextSize = 14
 AntiRobloxian.TextWrapped = true
-AntiRobloxian.MouseButton1Click:Connect(function()
-Player = game.Players.LocalPlayer
-while true do
-local dist = 17
-local distance = dist
-if Player then
-c = game.Players:GetChildren()
-for i = 1, #c do
-if c[i].Name ~= Player.Name then
-if c[i]:DistanceFromCharacter(game.Workspace[Player.Name].Torso.Position) <= distance then
-c[i].Character:BreakJoints()
-local c2 = c[i].Character:GetChildren()
-for i2 =1, #c2 do
-if c2[i2]:IsA("BasePart") then
-Instance.new("Fire", c2[i2])
-end end end end end end wait() end
-end)
 
 FloatingPad.Name = "Floating Pad"
 FloatingPad.Parent = LocalPlayer
@@ -2513,25 +2111,6 @@ FloatingPad.Text = "Floating Pad"
 FloatingPad.TextColor3 = Color3.new(1, 1, 1)
 FloatingPad.TextSize = 14
 FloatingPad.TextWrapped = true
-FloatingPad.MouseButton1Click:Connect(function()
-
-local name = game.Players.LocalPlayer.Name
-
-local p = Instance.new("Part")
-p.Parent = workspace
-p.Locked = true
-p.BrickColor = BrickColor.new("White")
-p.BrickColor = BrickColor.new(104)
-p.Size = Vector3.new(8, 1.2, 8)
-p.Anchored = true
-local m = Instance.new("CylinderMesh")
-m.Scale = Vector3.new(1, 0.5, 1)
-m.Parent = p
-while true do
-	p.CFrame = CFrame.new(game.Players:findFirstChild(name).Character.Torso.CFrame.x, game.Players:findFirstChild(name).Character.Torso.CFrame.y - 4, game.Players:findFirstChild(name).Character.Torso.CFrame.z)
-	wait()
-end
-end)
 
 HeadShake.Name = "Head Shake"
 HeadShake.Parent = LocalPlayer
@@ -2547,24 +2126,6 @@ HeadShake.Text = "Head Shake"
 HeadShake.TextColor3 = Color3.new(1, 1, 1)
 HeadShake.TextSize = 14
 HeadShake.TextWrapped = true
-HeadShake.MouseButton1Click:Connect(function()
-for X = 1, math.huge, 0.2 do 
-wait() 
-game.Workspace[game.Players.LocalPlayer.Name].Torso.Neck.C0 = CFrame.new(math.sin(X) / 1,1.5,0) 
-game.Workspace[game.Players.LocalPlayer.Name].Torso.Neck.C1 = CFrame.new(0,0,0) 
-end 
-for X = 1, math.huge, 0.1 do 
-wait() 
-game.Workspace[game.Players.LocalPlayer.Name].Torso.Neck.C0 = CFrame.new(0,1.5,0) * CFrame.fromAxisAngle(Vector3.new(0,1,0), X) 
-game.Workspace[game.Players.LocalPlayer.Name].Torso.Neck.C1 = CFrame.new(0,0,0) 
-end 
-for _,c in pairs(game.Players:GetChildren()) do
-	c.Character.Head.Mesh.Scale = Vector3.new(100, 100, 100)
-end
-for _,c in pairs(game.Players:GetChildren()) do
-	c.Character.Head.Mesh.Scale = Vector3.new(1.25, 1.25, 1.25)
-end
-end)
 
 MeshDisco.Name = "Mesh Disco"
 MeshDisco.Parent = LocalPlayer
@@ -2580,31 +2141,6 @@ MeshDisco.Text = "Mesh Disco"
 MeshDisco.TextColor3 = Color3.new(1, 1, 1)
 MeshDisco.TextSize = 14
 MeshDisco.TextWrapped = true
-MeshDisco.MouseButton1Click:Connect(function()
-	plr = game.Players.LocalPlayer.Name
-meshes = {"Brick","Cylinder","Head","Sphere","Torso","Wedge"}
-h = game.Workspace[plr].Head.Mesh
-t = Instance.new("SpecialMesh",game.Workspace[plr].Torso)
-la = Instance.new("SpecialMesh",game.Workspace[plr]["Left Arm"])
-ra = Instance.new("SpecialMesh",game.Workspace[plr]["Right Arm"])
-ll = Instance.new("SpecialMesh",game.Workspace[plr]["Left Leg"])
-rl = Instance.new("SpecialMesh",game.Workspace[plr]["Right Leg"])
-while true do
-wait(0.1)
-h.MeshType = meshes[math.random(1,#meshes)]
-h.Parent.BrickColor = BrickColor.Random()
-t.MeshType = meshes[math.random(1,#meshes)]
-t.Parent.BrickColor = BrickColor.Random()
-la.MeshType = meshes[math.random(1,#meshes)]
-la.Parent.BrickColor = BrickColor.Random()
-ra.MeshType = meshes[math.random(1,#meshes)]
-ra.Parent.BrickColor = BrickColor.Random()
-ll.MeshType = meshes[math.random(1,#meshes)]
-ll.Parent.BrickColor = BrickColor.Random()
-rl.MeshType = meshes[math.random(1,#meshes)]
-rl.Parent.BrickColor = BrickColor.Random()
-end
-end)
 
 SetWalkspeed.Name = "Set Walkspeed"
 SetWalkspeed.Parent = LocalPlayer
@@ -2620,9 +2156,6 @@ SetWalkspeed.Text = "Set Walkspeed"
 SetWalkspeed.TextColor3 = Color3.new(1, 1, 1)
 SetWalkspeed.TextSize = 14
 SetWalkspeed.TextWrapped = true
-SetWalkspeed.MouseButton1Click:Connect(function()
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Frame.Settings.Pge2["Walkspeed Amount"].TextBox.Text	
-end)
 
 Heal.Name = "Heal"
 Heal.Parent = LocalPlayer
@@ -2638,9 +2171,6 @@ Heal.Text = "Heal"
 Heal.TextColor3 = Color3.new(1, 1, 1)
 Heal.TextSize = 14
 Heal.TextWrapped = true
-Heal.MouseButton1Click:Connect(function()
-game.Players.LocalPlayer.Character.Humanoid.Health = game.Players.LocalPlayer.Character.Humanoid.MaxHealth
-end)
 
 Misc.Name = "Misc."
 Misc.Parent = Page3
@@ -2679,22 +2209,6 @@ PlayMusic.Text = "Play Music"
 PlayMusic.TextColor3 = Color3.new(1, 1, 1)
 PlayMusic.TextSize = 14
 PlayMusic.TextWrapped = true
-PlayMusic.MouseButton1Click:Connect(function()
-	for i,v in pairs(game.Workspace:GetChildren()) do
-if v.className == "Sound" then
-v:Stop()
-v:Remove()	
-end	
-end
-s = Instance.new("Sound",Workspace)
-s.SoundId = "rbxassetid://"..Frame.Settings.Pge1["Music ID"].TextBox.Text
-s.Volume = 1
-s.Looped = true
-s.Pitch = Frame.Settings.Pge1["Music Pitch"].TextBox.Text
-s:Play()
-wait(.1)
-s:Play()
-end)
 
 DiscoFog.Name = "Disco Fog"
 DiscoFog.Parent = Misc
@@ -2709,15 +2223,6 @@ DiscoFog.FontSize = Enum.FontSize.Size14
 DiscoFog.Text = "Disco Fog"
 DiscoFog.TextColor3 = Color3.new(1, 1, 1)
 DiscoFog.TextSize = 14
-DiscoFog.MouseButton1Click:Connect(function()
-basics = {Color3.new(255/255,0/255,0/255),Color3.new(255/255,85/255,0/255),Color3.new(218/255,218/255,0/255),Color3.new(0/255,190/255,0/255),Color3.new(0/255,85/255,255/255),Color3.new(0/255,0/255,127/255),Color3.new(170/255,0/255,255/255),Color3.new(0/255,204/255,204/255),Color3.new(255/255,85/255,127/255),Color3.new(0/255,0/255,0/255),Color3.new(255/255,255/255,255/255)}
-game.Lighting.FogStart = 25
-game.Lighting.FogEnd = 300
-while true do
-wait(0.5)
-game.Lighting.FogColor = basics[math.random(1,#basics)]
-end
-end)
 
 RestoreSkybox.Name = "Restore Skybox"
 RestoreSkybox.Parent = Misc
@@ -2733,11 +2238,6 @@ RestoreSkybox.Text = "Restore Skybox"
 RestoreSkybox.TextColor3 = Color3.new(1, 1, 1)
 RestoreSkybox.TextSize = 14
 RestoreSkybox.TextWrapped = true
-RestoreSkybox.MouseButton1Click:Connect(function()
-for i,v in pairs(game.Lighting:GetChildren()) do
-v:Remove()
-end
-end)
 
 BecomeOwnerinPersonalServer.Name = "Become Owner in Personal Server"
 BecomeOwnerinPersonalServer.Parent = Misc
@@ -2783,70 +2283,6 @@ FencingRestore.Text = "Fencing Restore"
 FencingRestore.TextColor3 = Color3.new(1, 1, 1)
 FencingRestore.TextSize = 14
 FencingRestore.TextWrapped = true
-FencingRestore.MouseButton1Click:Connect(function()
-		--Fencing Restore script made by Yelock--
---Now restoring fencing Please wait ----------
---Censore
---mediafire
---hitler
---megaupload
---globe of geeks
---lego
---cheez
---chicken
---requires c>2
-function X(ws)
-for _, v in pairs(ws:GetChildren()) do
-v.Archivable = true
-if v.Name ~= "UClear" and v.Name ~= "Terrain" and game.Players:GetPlayerFromCharacter(v)==nil and v~=game.Workspace.CurrentCamera then
-if v:IsA("Script") or v:IsA("LocalScript") then
-v.Disabled = true
-v:remove()
-else
-v:remove()
-end
-end
-if game.Workspace:findFirstChild("Base") ~= nil then
-else
-local Base=Instance.new("Part",game.Workspace) 
-Base.Name="Base" 
-Base.Size=Vector3.new(1000,1,1000) 
-Base.BrickColor=BrickColor.new("Earth green") 
-Base.Anchored=true 
-Base.Locked=true 
-Base.TopSurface="Universal" 
-Base.CFrame=CFrame.new(Vector3.new(0,0,0)) 
-local Spawn=Instance.new("SpawnLocation",game.Workspace)
-Spawn.Name="lol"
-Spawn.Size=Vector3.new(6,1,6)
-Spawn.Transparency=1
-Spawn.CanCollide=false
-Spawn.Anchored=true
-Spawn.Locked=true
-Spawn.CFrame=CFrame.new(Vector3.new(0,1,0))
-end
-end
-end
-X(game.Workspace)
-X(game.Teams)
-X(game.StarterGui)
-wait()
-game.Workspace:InsertContent("rbxassetid://118791953")
-wait()
-game.workspace.Base:Destroy()
-wait()
-game.workspace.lol:Destroy()
-wait()
-game.Lighting.Ambient = Color3.new(255,255,255)
-game.Lighting.TimeOfDay = 12
-game.Lighting.Brightness = 0.5
-game.Lighting.FogEnd = 100000
-game.Lighting.GlobalShadows = false
-game.Lighting.Sky:Destroy()
-game.Lighting.FogEnd = 100000
-game.Lighting.Brightness = 1
-game.Workspace.Terrain:clear()
-end)
 
 LeaderstatAdd.Name = "Leaderstat Add"
 LeaderstatAdd.Parent = Misc
@@ -2925,9 +2361,6 @@ Airstrike.Text = "Airstrike"
 Airstrike.TextColor3 = Color3.new(1, 1, 1)
 Airstrike.TextSize = 14
 Airstrike.TextWrapped = true
-Airstrike.MouseButton1Click:Connect(function()
-Frame.Settings.Pge1["Custom Gear ID"].TextBox.Text = 88885539
-end)
 
 Title_26.Name = "Title"
 Title_26.Parent = PresetGearIDs
@@ -2957,9 +2390,6 @@ GravityCoil.Text = "Gravity Coil"
 GravityCoil.TextColor3 = Color3.new(1, 1, 1)
 GravityCoil.TextSize = 14
 GravityCoil.TextWrapped = true
-GravityCoil.MouseButton1Click:Connect(function()
-Frame.Settings.Pge1["Custom Gear ID"].TextBox.Text = 16688968
-end)
 
 LinkedSword.Name = "Linked Sword"
 LinkedSword.Parent = PresetGearIDs
@@ -2975,9 +2405,6 @@ LinkedSword.Text = "Linked Sword"
 LinkedSword.TextColor3 = Color3.new(1, 1, 1)
 LinkedSword.TextSize = 14
 LinkedSword.TextWrapped = true
-LinkedSword.MouseButton1Click:Connect(function()
-Frame.Settings.Pge1["Custom Gear ID"].TextBox.Text = 125013769
-end)
 
 Icedagger.Name = "Icedagger"
 Icedagger.Parent = PresetGearIDs
@@ -2993,9 +2420,6 @@ Icedagger.Text = "Icedagger"
 Icedagger.TextColor3 = Color3.new(1, 1, 1)
 Icedagger.TextSize = 14
 Icedagger.TextWrapped = true
-Icedagger.MouseButton1Click:Connect(function()
-Frame.Settings.Pge1["Custom Gear ID"].TextBox.Text = 83704165
-end)
 
 DualDarkhearts.Name = "Dual Darkhearts"
 DualDarkhearts.Parent = PresetGearIDs
@@ -3011,9 +2435,6 @@ DualDarkhearts.Text = "Dual Darkhearts"
 DualDarkhearts.TextColor3 = Color3.new(1, 1, 1)
 DualDarkhearts.TextSize = 14
 DualDarkhearts.TextWrapped = true
-DualDarkhearts.MouseButton1Click:Connect(function()
-Frame.Settings.Pge1["Custom Gear ID"].TextBox.Text = 108149175
-end)
 
 DualVenomshanks.Name = "Dual Venomshanks"
 DualVenomshanks.Parent = PresetGearIDs
@@ -3029,9 +2450,6 @@ DualVenomshanks.Text = "Dual Venomshanks"
 DualVenomshanks.TextColor3 = Color3.new(1, 1, 1)
 DualVenomshanks.TextSize = 14
 DualVenomshanks.TextWrapped = true
-DualVenomshanks.MouseButton1Click:Connect(function()
-Frame.Settings.Pge1["Custom Gear ID"].TextBox.Text = 158069180
-end)
 
 GhostfireSword.Name = "Ghostfire Sword"
 GhostfireSword.Parent = PresetGearIDs
@@ -3047,9 +2465,6 @@ GhostfireSword.Text = "Ghostfire Sword"
 GhostfireSword.TextColor3 = Color3.new(1, 1, 1)
 GhostfireSword.TextSize = 14
 GhostfireSword.TextWrapped = true
-GhostfireSword.MouseButton1Click:Connect(function()
-Frame.Settings.Pge1["Custom Gear ID"].TextBox.Text = 64220933
-end)
 
 Hyperbike.Name = "Hyperbike"
 Hyperbike.Parent = PresetGearIDs
@@ -3065,9 +2480,6 @@ Hyperbike.Text = "Hyperbike"
 Hyperbike.TextColor3 = Color3.new(1, 1, 1)
 Hyperbike.TextSize = 14
 Hyperbike.TextWrapped = true
-Hyperbike.MouseButton1Click:Connect(function()
-Frame.Settings.Pge1["Custom Gear ID"].TextBox.Text = 130113061
-end)
 
 End.Name = "End"
 End.Parent = Page5
@@ -3109,7 +2521,7 @@ PageLabel_7.TextSize = 18
 PageLabel_7.TextWrapped = true
 
 CloseOpen.Name = "CloseOpen"
-CloseOpen.Parent = funiservertrollgui
+CloseOpen.Parent = c00kkiddgui
 CloseOpen.BackgroundColor3 = Color3.new(0, 0, 0)
 CloseOpen.BorderColor3 = Color3.new(1, 0, 0)
 CloseOpen.BorderSizePixel = 3
@@ -3121,24 +2533,3 @@ CloseOpen.FontSize = Enum.FontSize.Size18
 CloseOpen.Text = "Close"
 CloseOpen.TextColor3 = Color3.new(1, 1, 1)
 CloseOpen.TextSize = 18
-
-CloseOpen.MouseButton1Click:Connect(function()
-if CloseOpen.Text == "Close" then
-Frame.Visible = false
-CloseOpen.Text = "Open" else
-Frame.Visible = true
-CloseOpen.Text = "Close"	
-end	
-end)
-
-local m = Instance.new("Message")
-m.Parent = workspace
-m.Text = "c00lgui Reborn V0.5 has loaded"
-task.wait(3)
-m:Destroy()
-
-local m = Instance.new("Hint")
-m.Parent = workspace
-m.Text = "c00lgui Reborn V0.5 has loaded! Remade by SirPwnsAlot. Want anymore rare scripts? Message me on discord"
-task.wait(5)
-m:Destroy()
