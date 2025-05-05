@@ -1636,14 +1636,6 @@ StamperTools.Text = "Stamper Tools"
 StamperTools.TextColor3 = Color3.new(1, 1, 1)
 StamperTools.TextSize = 14
 StamperTools.TextWrapped = true
-StamperTools.MouseButton1Click:Connect(function()
-x = game:GetService("InsertService"):LoadAsset(73089166) x.Parent = game.Workspace x:makeJoints() x:MoveTo(game.Players[playername100].Character.Head.Position)
-x = game:GetService("InsertService"):LoadAsset(73089204) x.Parent = game.Workspace x:makeJoints() x:MoveTo(game.Players[playername100].Character.Head.Position)
-x = game:GetService("InsertService"):LoadAsset(73089190) x.Parent = game.Workspace x:makeJoints() x:MoveTo(game.Players[playername100].Character.Head.Position)
-x = game:GetService("InsertService"):LoadAsset(58880579) x.Parent = game.Workspace x:makeJoints() x:MoveTo(game.Players[playername100].Character.Head.Position)
-x = game:GetService("InsertService"):LoadAsset(60791062) x.Parent = game.Workspace x:makeJoints() x:MoveTo(game.Players[playername100].Character.Head.Position)
-x = game:GetService("InsertService"):LoadAsset(73089239) x.Parent = game.Workspace x:makeJoints() x:MoveTo(game.Players[playername100].Character.Head.Position)
-end)
 
 ToolStealer.Name = "Tool Stealer"
 ToolStealer.Parent = GearTools
@@ -1810,15 +1802,6 @@ ApocTroll.FontSize = Enum.FontSize.Size14
 ApocTroll.Text = "Apoc Troll"
 ApocTroll.TextColor3 = Color3.new(1, 1, 1)
 ApocTroll.TextSize = 14
-ApocTroll.MouseButton1Click:Connect(function()
-ds = CFrame.new(game.Players.LocalPlayer.Character.Head.Position)
-wait()
-for i,v in pairs(game.Players:GetChildren()) do
-if v.Name == game.Players.LocalPlayer.Name then
-else
-v.Character.Torso.CFrame = ds * CFrame.new(math.random(0,50),0,math.random(0,50))
-v.Character:BreakJoints()
-end)
 
 UnanchorAll.Name = "Unanchor All"
 UnanchorAll.Parent = ServerDestruction
@@ -1964,17 +1947,6 @@ ForceTeleport.FontSize = Enum.FontSize.Size14
 ForceTeleport.Text = "Force Teleport"
 ForceTeleport.TextColor3 = Color3.new(1, 1, 1)
 ForceTeleport.TextSize = 14
-ForceTeleport.MouseButton1Click:Connect(function()
-local placeID = frame.Settings.Page1["Place ID"].TextBox.Text
-local hax = [[for i,v in pairs(game.Players:GetChildren()) do
-game:GetService'TeleportService':Teleport(]]..placeID..[[,v.Character)
-end
-]]
-local x = workspace["Kohl's Admin Commands V2"].ScriptBase
-x.Code.Value = hax
-wait()
-x.Disabled = false
-end)
 
 ClearWorkspace.Name = "Clear Workspace"
 ClearWorkspace.Parent = ServerDestruction
@@ -2065,7 +2037,7 @@ CreateBaseplate.Text = "Create Baseplate"
 CreateBaseplate.TextColor3 = Color3.new(1, 1, 1)
 CreateBaseplate.TextSize = 14
 CreateBaseplate.TextWrapped = true
-CreateBaseplate.MouseButton1Click:Connect(function()
+Createbaseplate.MouseButton1Click:Connect(function()
 local pt = Instance.new("Part")
 pt.BrickColor = BrickColor.new("Silver")
 pt.Anchored = true
@@ -2098,9 +2070,6 @@ iOrb.FontSize = Enum.FontSize.Size14
 iOrb.Text = "iOrb"
 iOrb.TextColor3 = Color3.new(1, 1, 1)
 iOrb.TextSize = 14
-i0rb.MouseButton1Click:Connect(function()
-
-end)
 
 Title_21.Name = "Title"
 Title_21.Parent = AdminCommandsGuis
