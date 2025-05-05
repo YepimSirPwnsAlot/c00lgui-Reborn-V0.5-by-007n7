@@ -1,15 +1,4 @@
---[[
-	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
-]]
---Fe
-local RE = game.ReplicatedStorage.RemoteEvent
 
-local function Input(input, gpe)
-    if IsKeyDown() then
-      CoreOn = false
-      RE:FireServer(CoreOn)
-   end
-end
 -- Objects
 
 local c00kkiddgui = Instance.new("ScreenGui")
