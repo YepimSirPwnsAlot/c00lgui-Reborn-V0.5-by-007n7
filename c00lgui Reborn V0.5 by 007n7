@@ -1028,6 +1028,3130 @@ Drage.FontSize = Enum.FontSize.Size14
 Drage.Text = "Drage"
 Drage.TextColor3 = Color3.new(1, 1, 1)
 Drage.TextSize = 14
+Drage.MouseButton1Click:Connect(function()
+--[[ put your name where it says yourname -ulti55 ]]
+Plrs = game:GetService("Players")
+
+
+
+me = Plrs.LocalPlayer
+
+char = me.Character
+
+
+
+Modelname = "xWep"
+
+Toolname = "Drage"
+
+Able = true
+
+Selected = false
+
+Deb = true
+
+Hurt = false
+
+CritMultiplier = 1.6
+
+ComboOn = false
+
+AbleToBreak = false
+
+CounterKey = false
+
+Attack = 1
+
+AddDamage = 0
+
+AddDamageX = 1
+
+AddShield = 0
+
+Dmgs = {Smash = {"Smash", 25, 2, 3, false}, Slash = {"Slash", 18, 1, 3, false}, SideSlash = {"SideSlash", 18, 1, 3, false},
+
+DoubleSlash = {"Double Slash", 20, 1, 2, false}, Spin = {"Spin Slash", 30, 2, 5, true, 30}, Boom = {"Boom", 60, 6, 6, true, 50, 16},
+
+RageMode = {"RAGE", 8, 1.35, 1, 50}, Counter = {"Counter", 25, 1, 1, true, 15}, RageSlash = {"Rage Slash", 40, 3, 7, true, 30}}
+
+RageMode = false
+
+Mode = Dmgs.Slash
+
+AbleAll = true
+
+necko = CFrame.new(0, 1, 0, -1, -0, -0, 0, 0, 1, 0, 1, 0) 
+
+Aim = false
+
+
+
+LineColor = "White"
+
+EffectColor3 = "Bright red"
+
+EffectColor2 = "White"
+
+EffectColor = "Pastel Blue"
+
+MainColor = "Navy blue"
+
+BladeColor = "Pastel Blue"
+
+
+
+BlockBars = {}
+
+
+
+MaxRage = 100
+
+Rage = MaxRage
+
+
+
+CritChance = 5 --Percent
+
+
+
+for _, v in pairs(char:children()) do
+
+	if v.Name == "Block" then v:remove() end
+
+end
+
+
+
+BlockRealPowa = 4
+
+
+
+Block = Instance.new("BoolValue")
+
+Block.Name = "Block"
+
+Block.Value = false
+
+BlockPower = Instance.new("IntValue")
+
+BlockPower.Name = "BlockPower"
+
+BlockPower.Value = BlockRealPowa
+
+BlockPower.Parent = Block
+
+Block.Parent = char
+
+
+
+CA = CFrame.Angles
+
+CN = CFrame.new
+
+MR = math.rad
+
+MP = math.pi
+
+MD = math.deg
+
+MH = math.huge
+
+MRA = math.random
+
+
+
+EffPos = CFrame.new(0, 0.5, 0)
+
+
+
+Sounds = {
+
+	Equip = {"rbxasset://sounds//unsheath.wav", 0.7, 0.6},
+
+	Hit = {"http://www.roblox.com/asset/?id=2801263", 0.9, 0.6},
+
+	Block = {"", 1, 0.5},
+
+	Slash = {"rbxasset://sounds//swordslash.wav", 2, 0.8},
+
+	SmashHit = {"rbxasset://sounds\\metal.ogg", 1.5, 0.8},
+
+	Jump = {"rbxasset://sounds/swoosh.wav", 1, 1},
+
+	Boom = {"http://www.roblox.com/asset?id=1369158", 1.2, 1},
+
+	SmashBoom = {"http://www.roblox.com/asset/?id=2760979", 0.25, 1},
+
+	Jump2 = {"http://www.roblox.com/asset/?id=2101148", 2, 1},
+
+	GoRage = {"http://www.roblox.com/asset/?id=2767090", 1, 1},
+
+	Shout = {"http://www.roblox.com/asset/?id=2676305", 1.1, 0.8},
+
+	RageOff = {"http://www.roblox.com/asset/?id=3264793", 1.6, 0.6},
+
+}
+
+
+
+Add = {
+
+	Sphere = function(P)
+
+		local m = Instance.new("SpecialMesh",P)
+
+		m.MeshType = "Sphere"
+
+		return m
+
+	end,
+
+	BP = function(P)
+
+		local bp = Instance.new("BodyPosition",P)
+
+		bp.maxForce = Vector3.new(MH, MH, MH)
+
+		bp.P = 14000
+
+		return bp
+
+	end,
+
+	BG = function(P)
+
+		local bg = Instance.new("BodyGyro",P)
+
+		bg.maxTorque = Vector3.new(MH, MH, MH)
+
+		bg.P = 14000
+
+		return bg
+
+	end,
+
+	Mesh = function(P, ID, x, y, z)
+
+		local m = Instance.new("SpecialMesh")
+
+		m.MeshId = ID
+
+		m.Scale = Vector3.new(x, y, z)
+
+		m.Parent = P
+
+		return m
+
+	end,
+
+	Head = function(P)
+
+		local s = Instance.new("SpecialMesh")
+
+		s.MeshType = "Head"
+
+		s.Parent = P
+
+		return s
+
+	end,
+
+	Sound = function(P, ID, vol, pitch)
+
+		local s = Instance.new("Sound")
+
+		s.SoundId = ID
+
+		s.Volume = vol
+
+		s.Pitch = pitch
+
+		s.Parent = P
+
+		return s
+
+	end
+
+}
+
+
+
+function RC(Pos, Dir, Max, Ignore)
+
+	return workspace:FindPartOnRay(Ray.new(Pos, Dir.unit * (Max or 999)), Ignore)
+
+end
+
+
+
+function RayC(Start, En, MaxDist, Ignore)
+
+	return RC(Start, (En - Start), MaxDist, Ignore)
+
+end
+
+
+
+function Notime(func, tim)
+
+	coroutine.resume(coroutine.create(function()
+
+		if tim then
+
+			wait(tim)
+
+		end
+
+		func()
+
+	end))
+
+end
+
+
+
+function waitChild(parent, name)
+
+	local child = parent:findFirstChild(name)
+
+	if child then return child end
+
+	while true do
+
+		child = parent.ChildAdded:wait()
+
+		if child.Name == name then return child end
+
+	end
+
+end
+
+
+
+function ComputePos(pos1, pos2)
+
+	local pos3 = Vector3.new(pos2.x, pos1.y, pos2.z)
+
+	return CFrame.new(pos1, pos3)
+
+end
+
+
+
+function Part(Parent, Anchor, Collide, Tran, Ref, Color, X, Y, Z, Break)
+
+	local p = Instance.new("Part")
+
+	p.formFactor = "Custom"
+
+	p.Anchored = Anchor
+
+	p.CanCollide = Collide
+
+	p.Transparency = Tran
+
+	p.Reflectance = Ref
+
+	p.BrickColor = BrickColor.new(Color)
+
+	p.TopSurface = 0
+
+	p.BottomSurface = 0
+
+	p.Size = Vector3.new(X, Y, Z)
+
+	if Break then
+
+		p:BreakJoints()
+
+	else p:MakeJoints() end
+
+	p.Parent = Parent
+
+	p.Locked = true
+
+	return p
+
+end
+
+
+
+function Weld(p0, p1, x, y, z, a, b, c)
+
+	local w = Instance.new("Weld")
+
+	w.Parent = p0
+
+	w.Part0 = p0
+
+	w.Part1 = p1
+
+	w.C1 = CN(x,y,z) * CA(a,b,c)
+
+	return w
+
+end
+
+
+
+torso = char.Torso
+
+neck = torso.Neck
+
+hum = char.Humanoid
+
+Rarm = char["Right Arm"]
+
+Larm = char["Left Arm"]
+
+Rleg = char["Right Leg"]
+
+Lleg = char["Left Leg"]
+
+
+
+hc = Instance.new("Humanoid")
+
+hc.Health = 0
+
+hc.MaxHealth = 0
+
+
+
+function getHumanoid(c)
+
+	local h = nil
+
+	for i,v in pairs(c:children()) do
+
+		if v:IsA("Humanoid") and c ~= char then
+
+			if v.Health > 0 then
+
+				h = v
+
+			end
+
+		end
+
+	end
+
+	return h
+
+end
+
+
+
+function getCharacters(where, pos, dist)
+
+	local chars = {}
+
+	for _, v in pairs(where:children()) do
+
+		local hum = getHumanoid(v)
+
+		local tors = v:findFirstChild("Torso")
+
+		if tors ~= nil and hum ~= nil then
+
+			local anypart = nil
+
+			for _,k in pairs(v:children()) do
+
+				if k:IsA("BasePart") then
+
+					if (k.Position - pos).magnitude <= dist then
+
+						anypart = k
+
+						break
+
+					end
+
+				end
+
+			end
+
+			if anypart then
+
+				table.insert(chars, {v, tors, hum})
+
+			end
+
+		end
+
+	end
+
+	return chars
+
+end
+
+
+
+function PlaySound(id, pitch, vol)
+
+	local s = Add.Sound(nil, id, vol, pitch)
+
+	if pitch ~= nil then
+
+		if tonumber(pitch) then
+
+			s.Pitch = tonumber(pitch)
+
+		end
+
+	end
+
+	if vol ~= nil then
+
+		if tonumber(vol) then
+
+			s.Volume = tonumber(vol)
+
+		end
+
+	end
+
+	s.Parent = torso
+
+	s.PlayOnRemove = true
+
+	Notime(function()
+
+		wait()
+
+		s:remove()
+
+	end)
+
+end
+
+
+
+function playz(sound)
+
+	PlaySound(sound[1], sound[2], sound[3])
+
+end
+
+
+
+PlrGui = waitChild(me, "PlayerGui")
+
+
+
+for _, v in pairs(char:children()) do if v.Name == Modelname then v:remove() end end 
+
+for _, v in pairs(PlrGui:children()) do
+
+	if v.Name == "HealthGUI" or v.Name == "MyGui" then
+
+		v:remove()
+
+	end
+
+end
+
+
+
+function EditGui(obj, parent, size, position, bgcolor, bordercolor, transparency, text, textcolor, auto)
+
+	obj.Size = size
+
+	obj.Position = position
+
+	obj.BackgroundColor3 = bgcolor
+
+	obj.BorderColor3 = bordercolor
+
+	obj.BackgroundTransparency = transparency
+
+	if obj:IsA("TextLabel") or obj:IsA("TextButton") then
+
+		obj.Text = text
+
+		obj.TextColor3 = textcolor
+
+	end
+
+	if obj:IsA("ImageButton") or obj:IsA("TextButton") then
+
+		obj.AutoButtonColor = auto
+
+		obj.MouseButton1Down:connect(function()
+
+			RemoveOptions()
+
+		end)
+
+	end
+
+	obj.Parent = parent
+
+end
+
+
+
+C3 = Color3.new
+
+UD = UDim2.new
+
+
+
+Sc = Instance.new("ScreenGui", PlrGui)
+
+Sc.Name = "MyGui"
+
+
+
+Fr = Instance.new("Frame")
+
+EditGui(Fr, Sc, UD(0, 60, 0, 250), UD(1, -70, 0.5, -125), C3(0.1, 0.2, 0.5), C3(), 0)
+
+
+
+HealthBack = Instance.new("Frame")
+
+EditGui(HealthBack, Fr, UD(0, 25, 1, -20), UD(0, 3, 0, 10), C3(0.2, 0, 0), C3(), 0)
+
+
+
+RageBack = Instance.new("Frame")
+
+EditGui(RageBack, Fr, UD(0, 25, 1, -20), UD(1, -27, 0, 10), C3(0.2, 0, 0), C3(), 0)
+
+
+
+local hp = hum.Health/hum.MaxHealth
+
+if hp > 1 then hp = 1 elseif hp < 0 then hp = 0 end
+
+
+
+HealthBar = Instance.new("ImageLabel")
+
+EditGui(HealthBar, HealthBack, UD(1, 0, hp, 0), UD(0, 0, 0, 0), C3(0.1, 0.65, 0), C3(), 0)
+
+HealthBar.Image = "http://www.roblox.com/asset/?id=50051953"
+
+
+
+RageBar = Instance.new("ImageLabel")
+
+EditGui(RageBar, RageBack, UD(1, 0, Rage/MaxRage, 0), UD(0, 0, 0, 0), C3(1, 0.6, 0.15), C3(), 0)
+
+RageBar.Image = "http://www.roblox.com/asset/?id=50051953"
+
+
+
+RageAmount = Instance.new("TextLabel")
+
+EditGui(RageAmount, RageBack, UD(1, 0, 0, 0), UD(0, 0, 0, 0), C3(1, 0.6, 0.15), C3(), 0, Rage, C3(1,1,1))
+
+RageAmount.TextYAlignment = "Top"
+
+
+
+AimButton = Instance.new("TextButton")
+
+EditGui(AimButton, Fr, UD(1, 0, 0, 35), UD(0, 0, 1, 0), C3(0.9, 0.2, 0.3), C3(), 0, "AIM: OFF", C3(), true)
+
+AimButton.TextWrap = true
+
+AimButton.Font = "ArialBold"
+
+AimButton.FontSize = "Size14"
+
+AimButton.MouseButton1Down:connect(function()
+
+	if Aim then
+
+		Aim = false
+
+		AimButton.Text = "AIM: OFF"
+
+		AimButton.BackgroundColor3 = C3(0.9, 0.2, 0.3)
+
+	else
+
+		Aim = true
+
+		AimButton.Text = "AIM: ON"
+
+		AimButton.BackgroundColor3 = C3(0.3, 0.85, 0.1)
+
+	end
+
+end)
+
+
+
+for i = 1, BlockRealPowa do
+
+	local gui = Instance.new("ImageLabel")
+
+	EditGui(gui, Fr, UD(0, 16, 0, 16), UD(0, -18, 0.5, 20*(i-1)-((BlockRealPowa*20)/2)), C3(), C3(), 1)
+
+	gui.Image = "http://www.roblox.com/asset/?id=48908046"
+
+	table.insert(BlockBars, gui)
+
+end
+
+
+
+BlockPower.Changed:connect(function()
+
+	for _, v in pairs(BlockBars) do
+
+		v.Image = ""
+
+	end
+
+	for i = 1, BlockPower.Value do
+
+		local gui = BlockBars[i]
+
+		if gui then
+
+			gui.Image = "http://www.roblox.com/asset/?id=48908046"
+
+		end
+
+	end
+
+end)
+
+
+
+Mo = Instance.new("Model")
+
+Mo.Name = Modelname
+
+
+
+RABrick = Part(Mo, false, false, 1, 0, "White", 0.1, 0.1, 0.1, true)
+
+LABrick = Part(Mo, false, false, 1, 0, "White", 0.1, 0.1, 0.1, true)
+
+RLBrick = Part(Mo, false, false, 1, 0, "White", 0.1, 0.1, 0.1, true)
+
+LLBrick = Part(Mo, false, false, 1, 0, "White", 0.1, 0.1, 0.1, true)
+
+
+
+RABW = Weld(torso, RABrick, -1.5, -0.5, 0, 0, 0, 0)
+
+LABW = Weld(torso, LABrick, 1.5, -0.5, 0, 0, 0, 0)
+
+RLBW = Weld(torso, RLBrick, -0.5, 1.2, 0, 0, 0, 0)
+
+LLBW = Weld(torso, LLBrick, 0.5, 1.2, 0, 0, 0, 0)
+
+
+
+RAW = Weld(RABrick, nil, 0, 0.5, 0, 0, 0, 0)
+
+LAW = Weld(LABrick, nil, 0, 0.5, 0, 0, 0, 0)
+
+RLW = Weld(RLBrick, nil, 0, 0.8, 0, 0, 0, 0)
+
+LLW = Weld(LLBrick, nil, 0, 0.8, 0, 0, 0, 0)
+
+
+
+HB = Part(Mo, false, false, 1, 0, "White", 0.1, 0.1, 0.1, true)
+
+HBW = Weld(Rarm, HB, 0, 0, 1, MP/2, 0, 0)
+
+HW = Weld(HB, nil, 0, 0, 0, 0, 0, 0)
+
+
+
+SW = Weld(Larm, nil, -0.5, 0, 0.3, MP/2, 0, 0)
+
+
+
+TH = Weld(torso, nil, 0, 2.5, 0, MR(145), 0, 0)
+
+TH.C0 = CN(0, -0.3, 0.75) * CA(0, MP/2, 0)
+
+
+
+Weapon = Instance.new("Model")
+
+Weapon.Name = "Weapon"
+
+
+
+Handle = Part(Weapon, false, false, 0, 0, MainColor, 0.4, 1.8, 0.4)
+
+Add.Head(Handle)
+
+
+
+Tip1 = Part(Weapon, false, false, 0, 0, "Deep blue", 0.45, 1.2, 0.45)
+
+Add.Head(Tip1)
+
+Weld(Handle, Tip1, 0, 0, 0, 0, 0, 0)
+
+
+
+Tip2 = Part(Weapon, false, false, 0, 0, "Bright blue", 0.5, 0.5, 0.5)
+
+Weld(Handle, Tip2, 0, 0.9, 0, 0, 0, 0)
+
+Add.Mesh(Tip2, "http://www.roblox.com/asset/?id=9756362", 0.75, 0.5, 0.75)
+
+
+
+Tip3 = Part(Weapon, false, false, 0, 0, "Deep blue", 0.7, 0.3, 1.2)
+
+Weld(Handle, Tip3, 0, -0.9, 0, 0, 0, 0)
+
+Add.Mesh(Tip3, "http://www.roblox.com/asset/?id=9756362", 0.7, 0.35, 1.35)
+
+
+
+Tip4 = Part(Weapon, false, false, 0, 0, "Deep blue", 0.6, 0.2, 1.8)
+
+Weld(Handle, Tip4, 0, -0.9, 0, 0, 0, 0)
+
+
+
+Tip5 = Part(Weapon, false, false, 0, 0, "Bright blue", 0.6, 0.6, 0.3)
+
+Weld(Tip4, Tip5, 0, -0.4, -0.85, MR(-15), 0, 0)
+
+
+
+Tip6 = Part(Weapon, false, false, 0, 0, "Bright blue", 0.6, 0.6, 0.3)
+
+Weld(Tip4, Tip6, 0, -0.4, 0.85, MR(15), 0, 0)
+
+
+
+Blades = {}
+
+
+
+for i = 0, 180, 180 do
+
+	for x = -20, 20, 40 do
+
+		local lol = i-90
+
+		local lol2 = math.abs(lol/480)
+
+		local lol3 = x/90
+
+		local Blade1 = Part(Weapon, false, false, 0, 0.3, BladeColor, 0.2, 3.5, 0.6)
+
+		Instance.new("BlockMesh",Blade1).Scale = Vector3.new(0.2, 1, 0.99)
+
+		local w = Weld(Tip4, Blade1, lol2, 0, -lol3, 0, 0, 0)
+
+		w.C0 = CN(0, 1.7, 0) * CA(0, MR(i+x), 0)
+
+		table.insert(Blades, Blade1)
+
+	end
+
+end
+
+
+
+Tip7 = Part(Weapon, false, false, 0, 0.3, BladeColor, 0.3, 1.3, 0.7)
+
+Add.Mesh(Tip7, "http://www.roblox.com/asset/?id=9756362", 0.31, 1.4, 0.8)
+
+Weld(Tip4, Tip7, 0, -3.45, 0, 0, 0, 0)
+
+
+
+table.insert(Blades, Tip7)
+
+
+
+TH.Part1 = Handle
+
+
+
+Shield = Instance.new("Model")
+
+Shield.Name = "Shield"
+
+
+
+SHandle = Part(Weapon, false, false, 0, 0, "Really black", 0.2, 0.9, 0.4)
+
+SW.Part1 = SHandle
+
+
+
+for i = 65, 115, 25 do
+
+	local STip1 = Part(Weapon, false, false, 0, 0, "Really black", 0.2, 0.5, 0.4)
+
+	local w = Weld(SHandle, STip1, 0.8, 0, 0, 0, 0, 0)
+
+	w.C0 = CN(-0.5, 0.2, 0) * CA(0, 0, MR(i))
+
+end
+
+
+
+for i = -65, -115, -25 do
+
+	local STip1 = Part(Weapon, false, false, 0, 0, "Really black", 0.2, 0.5, 0.4)
+
+	local w = Weld(SHandle, STip1, 0.8, 0, 0, 0, 0, 0)
+
+	w.C0 = CN(-0.5, -0.2, 0) * CA(0, 0, MR(i))
+
+end
+
+
+
+SHandle2 = Part(Weapon, false, false, 0, 0, "Really black", 0.2, 0.9, 0.4)
+
+Weld(SHandle, SHandle2, 1, 0, 0, 0, 0, 0)
+
+
+
+ShieldMain = Part(Weapon, false, false, 0, 0, "Medium grey", 0.3, 3.5, 1.1)
+
+ShieldW = Weld(SHandle2, ShieldMain, 0, 0, 0, 0, 0, 0)
+
+ShieldW.C0 = CN(0, -0.2, 0) * CA(0, MR(-5), 0)
+
+
+
+STip1 = Part(Weapon, false, false, 0, 0, "Navy blue", 0.35, 0.4, 1.15)
+
+Weld(ShieldMain, STip1, 0, -1.75, 0, 0, 0, 0)
+
+
+
+STip2 = Part(Weapon, false, false, 0, 0, "Navy blue", 0.35, 0.4, 1.15)
+
+Weld(ShieldMain, STip2, 0, 1.75, 0, 0, 0, 0)
+
+
+
+for i = -15, 15, 30 do
+
+	local ShieldPlate = Part(Weapon, false, false, 0, 0, "Medium grey", 0.3, 3.5, 1.1)
+
+	local w = Weld(ShieldMain, ShieldPlate, 3.5, 0, 0, 0, 0, 0)
+
+	w.C0 = CN(3.5, 0, 0) * CA(0, math.rad(i), 0)
+
+	for x = -1.75, 1.75, 1.75*2 do
+
+		local STip3 = Part(Weapon, false, false, 0, 0, "Navy blue", 0.35, 0.4, 1.15)
+
+		Weld(ShieldPlate, STip3, 0, x, 0, 0, 0, 0)
+
+	end
+
+	local i2 = i/40
+
+	local STip3 = Part(Weapon, false, false, 0, 0, "Navy blue", 0.35, 3.9, 0.4)
+
+	Weld(ShieldPlate, STip3, 0, 0, -i2, 0, 0, 0)
+
+end
+
+
+
+Weapon.Parent = Mo
+
+Shield.Parent = Mo
+
+
+
+Mo.Parent = char
+
+
+
+function ShowDamage(Dmg, Par, Crit, block)
+
+	local Pos = Par.CFrame * CN(0, 2.5, 0)
+
+	local M = Instance.new("Model")
+
+	local Loldmg = Dmg
+
+	if Loldmg < 0 then
+
+		Loldmg = 0
+
+	end
+
+	if tostring(Loldmg):sub(1,1) == "-" then
+
+		Loldmg = tostring(Loldmg):sub(2)
+
+	end
+
+	M.Name = Loldmg
+
+	local Col = "Bright red"
+
+	if Crit then Col = "Bright yellow" elseif block then Col = "Bright blue" end
+
+	local P = Part(M, false, false, 0, 0, Col, 0.8, 0.3, 0.8, true)
+
+	P.CFrame = CN(Par.Position)
+
+	P.Name = "Head"
+
+	local BP = Add.BP(P)
+
+	BP.position = Pos.p
+
+	BP.maxForce = Vector3.new(math.huge, math.huge, math.huge)
+
+	BP.P = 11000
+
+	Add.BG(P)
+
+	local H = hc:clone()
+
+	H.Parent = M
+
+	H.MaxHealth = 0
+
+	H.Health = 0
+
+	M.Parent = workspace
+
+	Notime(function()
+
+		wait(1.5)
+
+		M:remove()
+
+	end)
+
+end
+
+
+
+function Damage(P, Hum, dmg, crit, block)
+
+	if Hum then
+
+		if Hum.Health > 0 then
+
+			local Damg = dmg
+
+			if crit then
+
+				Damg = dmg*CritMultiplier
+
+			end
+
+			Damg = math.ceil(((Damg+AddDamage)*AddDamageX)-0.5)
+
+			Hum.Health = Hum.Health - Damg
+
+			ShowDamage(Damg, P, crit, block)
+
+		end
+
+	end
+
+end
+
+
+
+function ShieldDamage(mode, blockval, blockpowerval, crit)
+
+	if blockval and blockpowerval then
+
+		local ShieldDmg = mode[3]+AddShield
+
+		if crit then
+
+			ShieldDmg = mode[4]+AddShield
+
+		end
+
+		if blockpowerval then
+
+			blockpowerval.Value = blockpowerval.Value - ShieldDmg
+
+			if blockpowerval.Value < 1 then
+
+				blockval.Value = false
+
+			end
+
+		end
+
+	end
+
+end
+
+
+
+function getBlock(c)
+
+	local block, blockpow = nil
+
+	local blockin = false
+
+	for _,v in pairs(c:children()) do
+
+		if v.Name == "Block" and v:IsA("BoolValue") then
+
+			block = v
+
+			blockin = v.Value
+
+			local bp = v:findFirstChild("BlockPower")
+
+			if bp then
+
+				blockpow = bp
+
+			end
+
+		end
+
+	end
+
+	return block, blockpow, blockin
+
+end
+
+
+
+function TouchDamage(hit)
+
+	local Hum = getHumanoid(hit.Parent)
+
+	if Hum and Deb and Hurt then
+
+		Deb = false
+
+		local Crit = false
+
+		local BlockVal, BlockPowaVal, Blawk = getBlock(Hum.Parent)
+
+		local BlockPowa = 0
+
+		local blocksound = Sounds.SmashHit
+
+		if math.random(1,100/CritChance) == 1 then
+
+			Crit = true
+
+		end
+
+		local Damg = math.random(Mode[2]/3, Mode[2])
+
+		if Blawk then
+
+			Damg = 0
+
+			ShieldDamage(Mode, BlockVal, BlockPowaVal, Crit)
+
+			if BlockPowaVal then
+
+				if BlockPowaVal.Value < 1 then
+
+					blocksound = Sounds.Equip
+
+				end
+
+			end
+
+		end
+
+		if Mode[5] == false and RageMode == false and Blawk == false then
+
+			Rage = Rage + math.ceil(Damg*0.75-0.5)
+
+		end
+
+		if Blawk then
+
+			PlaySound(blocksound[1], blocksound[2]-0.15, blocksound[3])
+
+		else
+
+			PlaySound(Sounds.Hit[1], Sounds.Hit[2], Sounds.Hit[3])
+
+		end
+
+		Damage(hit, Hum, Damg, Crit, Blawk)
+
+		if Mode == Dmgs.Spin then
+
+			Notime(function()
+
+				wait(0.35)
+
+				Deb = true
+
+			end)
+
+		end
+
+	end
+
+end
+
+
+
+for _, v in pairs(Blades) do
+
+	v.Touched:connect(TouchDamage)
+
+end
+
+
+
+if script.Parent.className ~= "HopperBin" then
+
+	H = Instance.new("HopperBin", me.Backpack)
+
+	H.Name = Toolname
+
+	script.Parent = H
+
+end
+
+
+
+Bin = script.Parent
+
+
+
+EffectOn = false
+
+
+
+function StartEffect(color)
+
+	EffectOn = true
+
+	local lastPoint = Tip7.CFrame * EffPos.p
+
+	Notime(function()
+
+		while EffectOn do
+
+			wait()
+
+			local pos = Tip7.CFrame * EffPos.p
+
+			local magn = (lastPoint - pos).magnitude
+
+			local col = LineColor
+
+			if color and col ~= EffectColor3 then
+
+				col = color
+
+			end
+
+			local p = Part(workspace, true, false, 0.1, 0, col, 0.3, 1, 0.3, true)
+
+			local mesh = Add.Head(p)
+
+			mesh.Scale = Vector3.new(1, magn+0.1, 1)
+
+			p.CFrame = CN(lastPoint, pos) * CA(-MP/2, 0, 0) * CN(0, magn/2+0.05, 0)
+
+			lastPoint = pos
+
+			Notime(function()
+
+				wait(0.05)
+
+				for i = 0, 1, 0.12 do
+
+					p.Transparency = 0.1+0.9*i
+
+					mesh.Scale = Vector3.new(1-1*i, magn+0.1-0.1*i, 1-1*i)
+
+					wait()
+
+				end
+
+				p:remove()
+
+			end)
+
+		end
+
+	end)
+
+end
+
+
+
+function EndEffect()
+
+	EffectOn = false
+
+end
+
+
+
+function Detach()
+
+	RAW.Part1 = nil
+
+	LAW.Part1 = nil
+
+	RLW.Part1 = nil
+
+	LLW.Part1 = nil
+
+	RAW.C0 = CN()
+
+	LAW.C0 = CN()
+
+	RLW.C0 = CN()
+
+	LLW.C0 = CN()
+
+end
+
+
+
+function Normalize()
+
+	RAW.C0 = CA(MR(40), MR(50), 0)
+
+	LAW.C0 = CA(MR(20), MR(-20), MR(-20))
+
+	HW.C0 = CA(0, 0, 0)
+
+	neck.C0 = necko
+
+end
+
+
+
+SelectAnim = function()
+
+	RAW.Part1 = Rarm
+
+	HW.Part1 = nil
+
+	TH.Part1 = Handle
+
+	for i = 0.1, 1, 0.14 do
+
+		RAW.C0 = CA(MR(220*i), MR(-30*i), MR(-35*i)) * CN(0.4*i, 0, 0)
+
+		neck.C0 = necko * CA(MR(-10*i), 0, MR(-60*i))
+
+		wait()
+
+	end
+
+	PlaySound(Sounds.Equip[1], Sounds.Equip[2], Sounds.Equip[3])
+
+	HW.C0 = CN(0.4, 0, 0) * CA(MR(-60), MR(10), MR(100))
+
+	HW.Part1 = Handle
+
+	TH.Part1 = nil
+
+	LAW.Part1 = Larm
+
+	for i = 0.09, 1, 0.11 do
+
+		RAW.C0 = CA(MR(220-70*i), MR(-30+25*i), MR(-35+70*i)) * CN(0.4-0.4*i, 0, 0)
+
+		HW.C0 = CN(0.4-0.4*i, 0, 0) * CA(MR(-60+40*i), MR(10-10*i), MR(100-40*i))
+
+		LAW.C0 = CA(MR(20*i), MR(-20*i), MR(-20*i))
+
+		neck.C0 = necko * CA(MR(-10+10*i), 0, MR(-60+40*i))
+
+		wait()
+
+	end
+
+	for i = 0.14, 1, 0.25 do
+
+		RAW.C0 = CA(MR(150-60*i), MR(-5+15*i), MR(35-10*i))
+
+		HW.C0 = CA(MR(-20+20*i), 0, MR(60-30*i))
+
+		neck.C0 = necko * CA(0, 0, MR(-60+40+5*i))
+
+		wait()
+
+	end
+
+	for i = 0.1, 1, 0.14 do
+
+		RAW.C0 = CA(MR(90-50*i), MR(10+40*i), MR(25-25*i))
+
+		HW.C0 = CA(0, 0, MR(30-30*i))
+
+		neck.C0 = necko * CA(0, 0, MR(-15+15*i))
+
+		wait()
+
+	end
+
+	Normalize()
+
+end
+
+
+
+DeselectAnim = function()
+
+	for i = 0.09, 1, 0.14 do
+
+		RAW.C0 = CA(MR(40+100*i), MR(50-50*i), MR(20*i))
+
+		LAW.C0 = CA(MR(20-20*i), MR(-20+20*i), MR(-20+20*i))
+
+		HW.C0 = CN(0.4*i, 0, 0) * CA(MR(-30*i), MR(5*i), MR(20*i))
+
+		neck.C0 = necko * CA(MR(-5*i), 0, MR(-35*i))
+
+		wait()
+
+	end
+
+	LAW.Part1 = nil
+
+	for i = 0.08, 1, 0.14 do
+
+		RAW.C0 = CA(MR(140+80*i), MR(-30*i), MR(20-55*i))
+
+		HW.C0 = CN(0.4, 0, 0) * CA(MR(-30-30*i), MR(5+5*i), MR(20+80*i))
+
+		neck.C0 = necko * CA(MR(-5-10*i), 0, MR(-35-25*i))
+
+		wait()
+
+	end
+
+	HW.Part1 = nil
+
+	TH.Part1 = Handle
+
+	for i = 0.09, 1, 0.18 do
+
+		RAW.C0 = CA(MR(220-220*i), MR(-30+30*i), MR(20-55+35*i))
+
+		neck.C0 = necko * CA(MR(-5-10+15*i), 0, MR(-35-25+60*i))
+
+		wait()
+
+	end
+
+	neck.C0 = necko
+
+	Detach()
+
+end
+
+
+
+function setatk(s, e)
+
+	Notime(function()
+
+		Attack = e
+
+		wait(0.25)
+
+		Attack = s
+
+	end)
+
+end
+
+
+
+Attacks = {
+
+function()
+
+	Attack = 1
+
+	Able = false
+
+	for i = 0.1, 1, 0.2 do
+
+		RAW.C0 = CA(MR(40+90*i), MR(50-60*i), 0)
+
+		HW.C0 = CA(0, 0, 0)
+
+		LAW.C0 = CA(MR(20+55*i), MR(-20), MR(-20+60*i))
+
+		neck.C0 = necko * CA(MR(-10*i), 0, MR(-25*i))
+
+		wait()
+
+	end
+
+	PlaySound(Sounds.Slash[1], Sounds.Slash[2], Sounds.Slash[3])
+
+	for i = 0.16, 1, 0.33 do
+
+		RAW.C0 = CA(MR(130+5*i), MR(-10-20*i), 0)
+
+		HW.C0 = CA(0, 0, 0)
+
+		LAW.C0 = CA(MR(75+5*i), MR(-20), MR(40+5*i))
+
+		neck.C0 = necko * CA(MR(-10-5*i), 0, MR(-25-5*i))
+
+		wait()
+
+	end
+
+	Hurt = true
+
+	Deb = true
+
+	StartEffect()
+
+	Mode = Dmgs.Slash
+
+	for i = 0.11, 1, 0.22 do
+
+		RAW.C0 = CA(MR(135-115*i), MR(-30), MR(-50*i)) * CN(0, -0.7*i, 0)
+
+		HW.C0 = CA(MR(-70*i), 0, 0)
+
+		LAW.C0 = CA(MR(80-120*i), MR(-20+20*i), MR(45-45*i))
+
+		neck.C0 = necko * CA(MR(-15+30*i), 0, MR(-30+45*i))
+
+		wait()
+
+	end
+
+	EndEffect()
+
+	Hurt = false
+
+	setatk(1,2)
+
+	Able = true
+
+	for i = 0.2, 1, 0.25 do
+
+		RAW.C0 = CA(MR(20-18*i), MR(-30), MR(-50-3*i)) * CN(0, -0.7-0.05*i, 0)
+
+		HW.C0 = CA(MR(-70-5*i), 0, 0)
+
+		neck.C0 = necko * CA(MR(15+3*i), 0, MR(15+3*i))
+
+		wait()
+
+	end
+
+	wait(0.1)
+
+	for i = 0.1, 1, 0.15 do
+
+		if Able == false then return end
+
+		RAW.C0 = CA(MR(2+38*i), MR(-30+80*i), MR(-53+53*i)) * CN(0, -0.75+0.75*i, 0)
+
+		HW.C0 = CA(MR(-75+75*i), 0, 0)
+
+		LAW.C0 = CA(MR(-40+60*i), MR(-20+20-20*i), MR(-20*i))
+
+		neck.C0 = necko * CA(MR(15+3-18*i), 0, MR(15+3-18*i))
+
+		wait()
+
+	end
+
+	Normalize()
+
+end,
+
+
+
+function()
+
+	Attack = 2
+
+	Able = false
+
+	PlaySound(Sounds.Slash[1], Sounds.Slash[2]+0.1, Sounds.Slash[3])
+
+	for i = 0.05, 1, 0.1 do
+
+		RAW.C0 = CA(MR(10+80*i), MR(-30+30*i), MR(-55+35*i)) * CN(0, -0.75+0.35*i, 0)
+
+		LAW.C0 = CA(MR(-40), 0, 0)
+
+		HW.C0 = CA(MR(-75+75*i), 0, MR(90*i))
+
+		neck.C0 = necko * CA(MR(18-13*i), 0, MR(18+22*i))
+
+		wait()
+
+	end
+
+	Hurt = true
+
+	Deb = true
+
+	StartEffect()
+
+	Mode = Dmgs.SideSlash
+
+	for i = 0.09, 1, 0.17 do
+
+		RAW.C0 = CA(MR(90-40*i), 0, MR(-20+110*i)) * CN(0, -0.4+0.4*i, 0)
+
+		HW.C0 = CA(0, MR(-65*i), MR(90))
+
+		LAW.C0 = CA(MR(-40+120*i), MR(-20*i), MR(50*i)) * CN(0, -0.6*i, 0)
+
+		neck.C0 = necko * CA(MR(5), 0, MR(40-90*i))
+
+		wait()
+
+	end
+
+	EndEffect()
+
+	Hurt = false
+
+	Deb = false
+
+	setatk(1,3)
+
+	Able = true
+
+	for i = 0.12, 1, 0.25 do
+
+		RAW.C0 = CA(MR(50-5*i), 0, MR(90+10*i))
+
+		HW.C0 = CA(0, MR(-65-5*i), MR(90))
+
+		LAW.C0 = CA(MR(-40+120), MR(-20), MR(50+5*i)) * CN(0, -0.6, 0)
+
+		neck.C0 = necko * CA(MR(5), 0, MR(40-90-5*i))
+
+		wait()
+
+	end
+
+	wait(0.08)
+
+	for i = 0.05, 1, 0.1 do
+
+		if Able == false then return end
+
+		RAW.C0 = CA(MR(45-5*i), MR(50*i), MR(100-100*i)) * CN(0, 0, 0)
+
+		HW.C0 = CA(0, MR(-70+70*i), MR(90-90*i))
+
+		LAW.C0 = CA(MR(-40+120-60*i), MR(-20), MR(55-75*i)) * CN(0, -0.6+0.6*i, 0)
+
+		neck.C0 = necko * CA(MR(5-5*i), 0, MR(-55+55*i))
+
+		wait()
+
+	end
+
+	Normalize()
+
+end,
+
+
+
+function()
+
+	Able = false
+
+	for i = 0.05, 1, 0.08 do
+
+		RAW.C0 = CA(MR(50+130*i), 0, MR(90-125*i)) * CN(0, -1*i, 0)
+
+		HW.C0 = CA(0, MR(-65-35*i), MR(90-90*i))
+
+		LAW.C0 = CA(MR(80+100*i), MR(-20+20*i), MR(50-15*i)) * CN(0, -0.6-0.4*i, 0)
+
+		neck.C0 = necko * CA(MR(5-25*i), 0, MR(-50+50*i))
+
+		wait()
+
+	end
+
+	PlaySound(Sounds.Slash[1], Sounds.Slash[2]+0.05, Sounds.Slash[3])
+
+	for i = 0.13, 1, 0.25 do
+
+		RAW.C0 = CA(MR(180+10*i), 0, MR(-35)) * CN(0, -1, 0)
+
+		HW.C0 = CA(0, MR(-100), 0)
+
+		LAW.C0 = CA(MR(180+10*i), 0, MR(35)) * CN(0, -1, 0)
+
+		neck.C0 = necko * CA(MR(5-25-5*i), 0, 0)
+
+		wait()
+
+	end
+
+	StartEffect()
+
+	Hurt = true
+
+	Deb = true
+
+	Mode = Dmgs.Smash
+
+	for i = 0.06, 1, 0.12 do
+
+		RAW.C0 = CA(MR(190-160*i), 0, MR(-35)) * CN(0, -1+0.2*i, 0)
+
+		HW.C0 = CA(MR(-20*i), MR(-100-40*i), MR(40*i))
+
+		LAW.C0 = CA(MR(190-160*i), 0, MR(35)) * CN(0, -1+0.2*i, 0)
+
+		neck.C0 = necko * CA(MR(-25+45*i), 0, 0)
+
+		wait()
+
+	end
+
+	PlaySound(Sounds.SmashHit[1], Sounds.SmashHit[2], Sounds.SmashHit[3])
+
+	EndEffect()
+
+	Hurt = false
+
+	Deb = false
+
+	for i = 0.2, 1, 0.5 do
+
+		RAW.C0 = CA(MR(30+15*i), 0, MR(-35)) * CN(0, -0.8+0.4*i, 0)
+
+		HW.C0 = CA(MR(-20), MR(-140), MR(40))
+
+		LAW.C0 = CA(MR(30+15*i), 0, MR(35)) * CN(0, -0.8+0.4*i, 0)
+
+		neck.C0 = necko * CA(MR(20), 0, 0)
+
+		wait()
+
+	end
+
+	setatk(1,4)
+
+	Able = true
+
+	for i = 0.16, 1, 0.33 do
+
+		if not Able then return end
+
+		RAW.C0 = CA(MR(30+15-15*i), 0, MR(-35)) * CN(0, -0.8+0.4-0.2*i, 0)
+
+		HW.C0 = CA(MR(-20), MR(-140), MR(40))
+
+		LAW.C0 = CA(MR(30+15-15*i), 0, MR(35)) * CN(0, -0.8+0.4-0.2*i, 0)
+
+		neck.C0 = necko * CA(MR(20), 0, 0)
+
+		wait()
+
+	end
+
+	for i = 0.05, 1, 0.1 do
+
+		if not Able then return end
+
+		RAW.C0 = CA(MR(30+10*i), MR(50*i), MR(-35+35*i)) * CN(0, -0.8+0.4-0.2+0.6*i, 0)
+
+		HW.C0 = CA(MR(-20+20*i), MR(-140+140*i), MR(40-40*i))
+
+		LAW.C0 = CA(MR(30+15-15-10*i), MR(-20*i), MR(35-55*i)) * CN(0, -0.8+0.4-0.2+0.6*i, 0)
+
+		neck.C0 = necko * CA(MR(20-20*i), 0, 0)
+
+		wait()
+
+	end
+
+	Normalize()
+
+end,
+
+function()
+
+	Able = false
+
+	for i = 0.06, 1, 0.12 do
+
+		RAW.C0 = CA(MR(30), MR(-20*i), MR(-35-25*i)) * CN(0, -0.8, 0)
+
+		HW.C0 = CA(MR(-20-60*i), MR(-140-40*i), MR(40-40*i))
+
+		LAW.C0 = CA(MR(30-110*i), 0, MR(35-35*i)) * CN(0, -0.8+0.8*i, 0)
+
+		neck.C0 = necko * CA(MR(20-15*i), 0, MR(10*i))
+
+		wait()
+
+	end
+
+	Mode = Dmgs.DoubleSlash
+
+	StartEffect()
+
+	playz(Sounds.Slash)
+
+	Hurt = true
+
+	Deb = true
+
+	for i = 0.07, 1, 0.14 do
+
+		RAW.C0 = CA(MR(30+120*i), MR(-20), MR(-60+80*i)) * CN(0, -0.8+0.8*i, 0)
+
+		HW.C0 = CA(MR(-80+60*i), MR(180), 0)
+
+		LAW.C0 = CA(MR(-50+100*i), 0, MR(30*i))
+
+		neck.C0 = necko * CA(MR(5-25*i), 0, MR(10-30*i))
+
+		wait()
+
+	end
+
+	EndEffect()
+
+	Hurt = false
+
+	for i = 0.17, 1, 0.33 do
+
+		RAW.C0 = CA(MR(150+15*i), MR(-20), MR(20+5*i))
+
+		HW.C0 = CA(MR(-20), MR(180), 0)
+
+		LAW.C0 = CA(MR(50+5*i), 0, MR(30+10*i))
+
+		neck.C0 = necko * CA(MR(-20-5*i), 0, MR(-20))
+
+		wait()
+
+	end
+
+	for i = 0.13, 1, 0.25 do
+
+		RAW.C0 = CA(MR(165-15*i), MR(-20+50*i), MR(25-75*i))
+
+		HW.C0 = CA(MR(-20-20*i), MR(180), 0)
+
+		LAW.C0 = CA(MR(55+45*i), 0, MR(40-30*i))
+
+		neck.C0 = necko * CA(MR(-25), 0, MR(-20+35*i))
+
+		wait()
+
+	end
+
+	StartEffect()
+
+	Hurt = true
+
+	Deb = true
+
+	playz(Sounds.Slash)
+
+	for i = 0.08, 1, 0.16 do
+
+		RAW.C0 = CA(MR(150-110*i), MR(30), MR(-50+65*i))
+
+		HW.C0 = CA(MR(-40-40*i), MR(180), 0)
+
+		LAW.C0 = CA(MR(100-50*i), MR(-30*i), MR(10+30*i)) * CN(0, -1.1*i, 0)
+
+		neck.C0 = necko * CA(MR(-25+45*i), 0, MR(15-30*i))
+
+		wait()
+
+	end
+
+	EndEffect()
+
+	Hurt = false
+
+	for i = 0.13, 1, 0.25 do
+
+		RAW.C0 = CA(MR(40-5*i), MR(30), MR(15+5*i))
+
+		HW.C0 = CA(MR(-80-5*i), MR(180), 0)
+
+		LAW.C0 = CA(MR(50), MR(-30), MR(40)) * CN(0, -1.1-0.1*i, 0)
+
+		neck.C0 = necko * CA(MR(20+5*i), 0, MR(-15-5*i))
+
+		wait()
+
+	end
+
+	for i = 0.09, 1, 0.16 do
+
+		RAW.C0 = CA(MR(35+5*i), MR(30+20*i), MR(20-20*i))
+
+		HW.C0 = CA(MR(-85+85*i), MR(180+180*i), 0)
+
+		LAW.C0 = CA(MR(50-30*i), MR(-30+10*i), MR(40-60*i)) * CN(0, -1.2+1.2*i, 0)
+
+		neck.C0 = necko * CA(MR(25-25*i), 0, MR(-20+20*i))
+
+		wait()
+
+	end
+
+	Normalize()
+
+	Able = true
+
+	Attack = 1
+
+end
+
+}
+
+
+
+SpinSlash = function(plaic)
+
+	if Rage < Dmgs.Spin[6] then return end
+
+	Rage = Rage - Dmgs.Spin[6]
+
+	local cf = torso.CFrame
+
+	local CF = ComputePos(cf.p, cf * CN(0, 0, -2))
+
+	if plaic then
+
+		CF = ComputePos(cf.p, plaic)
+
+	end
+
+	AbleAll = false
+
+	local bg = Add.BG(torso)
+
+	bg.cframe = CF
+
+	for i = 0.07, 1, 0.14 do
+
+		RAW.C0 = CA(MR(40+50*i), MR(50-65*i), 0)
+
+		HW.C0 = CA(0, 0, MR(90*i))
+
+		LAW.C0 = CA(MR(20-20*i), MR(-20+20*i), MR(-20-60*i))
+
+		neck.C0 = necko * CA(0, 0, MR(-30*i))
+
+		bg.cframe = CF * CA(0, MR(30*i), 0)
+
+		wait()
+
+	end
+
+	StartEffect()
+
+	Hurt = true
+
+	Deb = true
+
+	Mode = Dmgs.Spin
+
+	Notime(function()
+
+		while Hurt do
+
+			PlaySound(Sounds.Slash[1], Sounds.Slash[2]+0.35, Sounds.Slash[3])
+
+			wait(0.15)
+
+		end
+
+	end)
+
+	for i = 0.04, 1, 0.06 do
+
+		RAW.C0 = CA(MR(90-10*i), MR(-15), MR(90*i))
+
+		HW.C0 = CA(0, MR(-70*i), MR(90))
+
+		LAW.C0 = CA(MR(90*i), 0, MR(-20-60+120*i)) * CN(0, -0.7*i, 0)
+
+		neck.C0 = necko * CA(0, 0, MR(-30+20*i))
+
+		bg.cframe = CF * CA(0, MR(30-380*i), 0)
+
+		wait()
+
+	end
+
+	EndEffect()
+
+	for i = 0.09, 1, 0.17 do
+
+		RAW.C0 = CA(MR(80), MR(-15), MR(90))
+
+		HW.C0 = CA(0, MR(-70-10*i), MR(90))
+
+		LAW.C0 = CA(MR(90), 0, MR(-20-60+120+20*i)) * CN(0, -0.7, 0)
+
+		neck.C0 = necko * CA(0, 0, MR(-10+60*i))
+
+		bg.cframe = CF * CA(0, MR(-350-60*i), 0)
+
+		wait()
+
+	end
+
+	Hurt = false
+
+	Deb = false
+
+	for i = 0.05, 1, 0.1 do
+
+		RAW.C0 = CA(MR(80-40*i), MR(-15+65*i), MR(90-90*i))
+
+		HW.C0 = CA(0, MR(-80+80*i), MR(90-90*i))
+
+		LAW.C0 = CA(MR(90-70*i), MR(-20*i), MR(60-80*i)) * CN(0, -0.7+0.7*i, 0)
+
+		neck.C0 = necko * CA(0, 0, MR(-10+60-50*i))
+
+		bg.cframe = CF * CA(0, MR(-410+50*i), 0)
+
+		wait()
+
+	end
+
+	bg:remove()
+
+	Normalize()
+
+	AbleAll = true
+
+end
+
+
+
+Flawp = function(plaic)
+
+	local cf = torso.CFrame
+
+	local CF = ComputePos(cf.p, cf * CN(0, 0, -2))
+
+	if plaic then
+
+		CF = ComputePos(cf.p, plaic)
+
+	end
+
+	local cf2 = CF * CN(0, -1.1, -1)
+
+	local Dist = 8
+
+	local Hit1, Pos1 = RayC(CF.p, (CF * CN(0, -1, 0)).p, 4, char)
+
+	local Hit2, Pos2 = RayC((CF * CN(0, 0, -Dist*2)).p, (CF * CN(0, -1, -Dist*2)).p, 4, char)
+
+	local Hit3, Pos3 = RayC(CF.p, (CF * CN(0, 0, -Dist*2)).p, Dist*2, char)
+
+	if Rage < Dmgs.Boom[6] then return end
+
+	if Hit1 and Hit2 then
+
+		Rage = Rage - Dmgs.Boom[6]
+
+		local bp = Add.BP(torso)
+
+		bp.position = cf.p
+
+		local bg = Add.BG(torso)
+
+		bg.cframe = CF
+
+		AbleAll = false
+
+		RLW.Part1 = Rleg
+
+		LLW.Part1 = Lleg
+
+		for i = 0.05, 1, 0.1 do
+
+			RAW.C0 = CA(MR(40+30*i), MR(50-50*i), MR(25*i))
+
+			LAW.C0 = CA(MR(20+50*i), MR(-20+20*i), MR(-20-5*i))
+
+			HW.C0 = CA(MR(25*i), 0, 0)
+
+			RLW.C0 = CN(0, 1*i, -1*i)
+
+			LLW.C0 = CA(MR(-90*i), 0, 0) * CN(0, 0.5*i, -0.2*i)
+
+			neck.C0 = necko * CA(MR(20*i), 0, 0)
+
+			bp.position = CF * CN(0, -1*i, -1*i).p
+
+			wait()
+
+		end
+
+		local Center = cf2 * CN(0, 0, -Dist)
+
+		hum.PlatformStand = true
+
+		PlaySound(Sounds.Jump[1], Sounds.Jump[2], Sounds.Jump[3])
+
+		for i = 0.06, 1, 0.1 do
+
+			RAW.C0 = CA(MR(70-160*i), 0, MR(25+15*i))
+
+			LAW.C0 = CA(MR(70-160*i), 0, MR(-25-15*i))
+
+			HW.C0 = CA(MR(25), 0, 0)
+
+			RLW.C0 = CN(0, 1-1*i, -1+1*i)
+
+			LLW.C0 = CA(MR(-90+70*i), 0, 0) * CN(0, 0.5+0.7*i, -0.2-0.3*i)
+
+			neck.C0 = necko * CA(MR(20-50*i), 0, 0)
+
+			bp.position = Center * CA(MR(180-45*i), 0, 0) * CN(0, 0, -Dist).p
+
+			bg.cframe = CF * CA(MR(-90*i), 0, 0)
+
+			wait()
+
+		end
+
+		for i = 0.06, 1, 0.1 do
+
+			RAW.C0 = CA(MR(-90-90*i), 0, MR(40+50*i))
+
+			LAW.C0 = CA(MR(-90-90*i), 0, MR(-40-50*i))
+
+			HW.C0 = CA(MR(25-25*i), 0, MR(-90*i))
+
+			RLW.C0 = CN(0, 0, 0)
+
+			LLW.C0 = CA(MR(-20+20*i), 0, 0) * CN(0, 1.2-1.2*i, -0.5+0.5*i)
+
+			bp.position = Center * CA(MR(135-45*i), 0, 0) * CN(0, 0, -Dist).p
+
+			bg.cframe = CF * CA(MR(-90-90*i), 0, 0)
+
+			wait()
+
+		end
+
+		StartEffect()
+
+		for i = 0.06, 1, 0.1 do
+
+			RAW.C0 = CA(MR(180+10*i), 0, MR(90-130*i)) * CN(0, -1*i, 0)
+
+			LAW.C0 = CA(MR(180+10*i), 0, MR(-90+130*i)) * CN(0, -1*i, 0)
+
+			HW.C0 = CA(0, 0, MR(-90-90*i))
+
+			RLW.C0 = CN(0, 0, 0)
+
+			LLW.C0 = CA(0, 0, 0) * CN(0, 0, 0)
+
+			bp.position = Center * CA(MR(90-45*i), 0, 0) * CN(0, 0, -Dist).p
+
+			bg.cframe = CF * CA(MR(-180-90*i), 0, 0)
+
+			wait()
+
+		end
+
+		playz(Sounds.Slash)
+
+		for i = 0.06, 1, 0.1 do
+
+			RAW.C0 = CA(MR(190-100*i), 0, MR(-40)) * CN(0, -1-0.2*i, 0)
+
+			LAW.C0 = CA(MR(190-80*i), MR(-25*i), MR(40-15*i)) * CN(0, -1-0.2*i, 0)
+
+			HW.C0 = CA(0, MR(-45*i), MR(-180))
+
+			RLW.C0 = CN(0, 1*i, -1*i)
+
+			LLW.C0 = CA(MR(-20-70*i), 0, 0) * CN(0, 1.2-0.7*i, -0.5+0.3*i)
+
+			neck.C0 = necko * CA(MR(-30+60*i), 0, 0)
+
+			bp.position = Center * CA(MR(45-45*i), 0, 0) * CN(0, 0, -Dist).p
+
+			bg.cframe = CF * CA(MR(-270-90*i), 0, 0)
+
+			wait()
+
+		end
+
+		Mode = Dmgs.Boom
+
+		EndEffect()
+
+		RAW.C0 = CA(MR(90), 0, MR(-40)) * CN(0, -1.2, 0)
+
+		LAW.C0 = CA(MR(110), MR(-25), MR(25)) * CN(0, -1.2, 0)
+
+		HW.C0 = CA(0, MR(-45), MR(-180))
+
+		RLW.C0 = CN(0, 1, -1)
+
+		LLW.C0 = CA(MR(-90), 0, 0) * CN(0, 0.5, -0.2)
+
+		bp.position = Center * CN(0, 0, -Dist).p
+
+		bg.cframe = CF * CA(0, 0, 0)
+
+		local PosEff = Center * CN(0, -2, -Dist-2.5)
+
+		Notime(function()
+
+			playz(Sounds.Boom)
+
+			local disst = Dmgs.Boom[7]
+
+			local chars = getCharacters(workspace, PosEff.p, disst)
+
+			for _,v in pairs(chars) do
+
+				local c, t, h = v[1], v[2], v[3]
+
+				local d = (t.Position - PosEff.p).magnitude
+
+				local bl, bp, blo = getBlock(c)
+
+				if blo then
+
+					ShieldDamage(Dmgs.Boom, bl, bp, false)
+
+				end
+
+				d = d/4
+
+				if d < 1 then d = 1 end
+
+				Damage(t, h, Dmgs.Boom[2]/d, false, false)
+
+				for _,k in pairs(c:children()) do
+
+					if k:IsA("BasePart") then
+
+						k.Velocity = CFrame.new(PosEff.p, k.Position).lookVector * 40 + Vector3.new(0, 50, 0)
+
+					end
+
+				end
+
+				h.PlatformStand = true
+
+				Notime(function() h.PlatformStand = false end, 0.2)
+
+			end
+
+			local eff = Instance.new("Model",workspace)
+
+			eff.Name = "Effect"
+
+			local wave = Part(eff, true, false, 0, 0, EffectColor, 1, 1, 1, true)
+
+			wave.CFrame = PosEff
+
+			local wavem = Add.Mesh(wave, "http://www.roblox.com/asset/?id=20329976", 3, 2, 3)
+
+			local ball = Part(eff, true, false, 0, 0, EffectColor2, 1, 1, 1, true)
+
+			ball.CFrame = PosEff
+
+			local ballm = Add.Sphere(ball)
+
+			ballm.Scale = Vector3.new(2, 5, 2)
+
+			local diamond = Part(eff, true, false, 0, 0, EffectColor, 1, 1, 1, true)
+
+			diamond.CFrame = PosEff
+
+			local diamondm = Add.Mesh(diamond, "http://www.roblox.com/asset/?id=9756362", 7, 0.5, 7)
+
+			for i = 0, 1, 0.05 do
+
+				wait()
+
+				wave.CFrame = PosEff * CFrame.Angles(0, MR(180*i), 0)
+
+				wave.Transparency = i
+
+				wavem.Scale = Vector3.new(3+(disst*1.15)*i, 2+(disst/1.4)*i, 3+(disst*1.15)*i)
+
+				ball.Transparency = i
+
+				ballm.Scale = Vector3.new(1+(disst*2)*i, 5+(disst*1.2)*i, 1+(disst*2)*i)
+
+				diamond.Transparency = i
+
+				diamondm.Scale = Vector3.new(7-6.5*i, 0.5+(disst*2)*i, 7-6.5*i)
+
+			end
+
+			wait()
+
+			eff:remove()
+
+		end)
+
+		wait(0.4)
+
+		for i = 0.07, 1, 0.1 do
+
+			RAW.C0 = CA(MR(90+50*i), 0, MR(-40)) * CN(0, -1.2+0.4*i, -0.4*i)
+
+			LAW.C0 = CA(MR(110+30*i), MR(-25+25*i), MR(25+15*i)) * CN(0, -1.2+0.4*i, -0.4*i)
+
+			HW.C0 = CA(MR(-30*i), MR(-45+45*i), MR(-180-30*i)) * CN(0, -0.7*i, 0)
+
+			RLW.C0 = CN(0, 1-1*i, -1+1*i)
+
+			LLW.C0 = CA(MR(-90+90*i), 0, 0) * CN(0, 0.5-0.5*i, -0.2+0.2*i)
+
+			neck.C0 = necko * CA(MR(30-15*i), 0, 0)
+
+			bp.position = Center * CN(0, 1.4*i, -Dist-1*i).p
+
+			wait()
+
+		end
+
+		bp:remove()
+
+		bg:remove()
+
+		hum.PlatformStand = false
+
+		for i = 0.05, 1, 0.1 do
+
+			RAW.C0 = CA(MR(140-100*i), MR(50*i), MR(-40+40*i)) * CN(0, -0.8+0.8*i, -0.4+0.4*i)
+
+			LAW.C0 = CA(MR(140-190*i), 0, MR(40-80*i)) * CN(0, -0.8+0.8*i, -0.4+0.4*i)
+
+			HW.C0 = CA(MR(-30+30*i), 0, MR(-210-150*i)) * CN(0, -0.7+0.7*i, 0)
+
+			RLW.C0 = CN()
+
+			LLW.C0 = CN()
+
+			neck.C0 = necko * CA(MR(15-15*i), 0, 0)
+
+			bp.position = Center * CN(0, 1.4-0.4*i, -Dist-1-0.3*i).p
+
+			wait()
+
+		end
+
+		RLW.Part1 = nil
+
+		LLW.Part1 = nil
+
+		for i = 0.1, 1, 0.2 do
+
+			LAW.C0 = CA(MR(-50+70*i), MR(-20*i), MR(-40+20*i))
+
+			wait()
+
+		end
+
+		Normalize()
+
+		AbleAll = true
+
+	end
+
+end
+
+
+
+function Raeg()
+
+	if Rage < Dmgs.RageMode[5] then return end
+
+	if RageMode == false and AbleAll and Able then
+
+		AbleAll = false
+
+		local CF = ComputePos(torso.Position, torso.CFrame * CN(0, 0, -2))
+
+		for i = 0.05, 1, 0.1 do
+
+			RAW.C0 = CA(MR(40-70*i), MR(50-45*i), MR(10*i))
+
+			LAW.C0 = CA(MR(20-50*i), MR(-20+15*i), MR(-20+10*i))
+
+			HW.C0 = CA(MR(20*i), 0, 0)
+
+			wait()
+
+		end
+
+		for i = 0.12, 1, 0.25 do
+
+			RAW.C0 = CA(MR(-30-10*i), MR(5-5*i), MR(10-5*i))
+
+			LAW.C0 = CA(MR(-30-10*i), MR(-5+5*i), MR(-10+5*i))
+
+			HW.C0 = CA(MR(20+5*i), 0, 0)
+
+			wait()
+
+		end
+
+		hum.Jump = true
+
+		playz(Sounds.Jump2)
+
+		CF = ComputePos(torso.Position, torso.CFrame * CN(0, 0, -2))
+
+		local p = Part(workspace, true, false, 0, 0, "Bright red", 0.2, 0.2, 0.2, true)
+
+		p.CFrame = CF * CN(0, -2, 0)
+
+		local m = Add.Mesh(p, "http://www.roblox.com/asset/?id=20329976", 1, 3, 1)
+
+		Notime(function()
+
+			for i = 0, 1, 0.08 do
+
+				wait()
+
+				m.Scale = Vector3.new(1+5*i, 3-2.5*i, 1+5*i)
+
+				p.Transparency = i
+
+			end
+
+			p:remove()
+
+		end)
+
+		for i = 0.05, 1, 0.1 do
+
+			RAW.C0 = CA(MR(-40+220*i), 0, MR(5+35*i))
+
+			LAW.C0 = CA(MR(-40+220*i), 0, MR(-5-35*i))
+
+			HW.C0 = CA(MR(25-115*i), MR(90*i), MR(45*i))
+
+			wait()
+
+		end
+
+		for i = 0.12, 1, 0.25 do
+
+			RAW.C0 = CA(MR(180+8*i), 0, MR(40))
+
+			LAW.C0 = CA(MR(180+8*i), 0, MR(-40))
+
+			HW.C0 = CA(MR(-90), MR(90), MR(45))
+
+			wait()
+
+		end
+
+		for i = 0.05, 1, 0.1 do
+
+			RAW.C0 = CA(MR(188-98*i), 0, MR(40-80*i)) * CN(0, -1*i, 0)
+
+			LAW.C0 = CA(MR(188-98*i), 0, MR(-40+80*i)) * CN(0, -1*i, 0)
+
+			HW.C0 = CA(MR(-90+90*i), MR(90+45*i), MR(45-45*i))
+
+			wait()
+
+		end
+
+		playz(Sounds.GoRage)
+
+		local p2 = Part(workspace, false, false, 1, 0, EffectColor3, 1, 1, 1, true)
+
+		Weld(Tip4, p2, 0, -2, 0, 0, 0, 0)
+
+		local m2 = Add.Sphere(p2)
+
+		m2.Scale = Vector3.new(0.2, 2, 0.5)
+
+		for i = 0, 1, 0.06 do
+
+			p2.Transparency = 1-1*i
+
+			m2.Scale = Vector3.new(0.2+0.7*i, 2+3*i, 0.5+1.6*i)
+
+			wait()
+
+		end
+
+		for _,v in pairs(Blades) do
+
+			v.BrickColor = BrickColor.new(EffectColor3)
+
+		end
+
+		wait(0.5)
+
+		for i = 0, 1, 0.1 do
+
+			p2.Transparency = i
+
+			wait()
+
+		end
+
+		p2:remove()
+
+		playz(Sounds.Shout)
+
+		for i = 0.1, 1, 0.1 do
+
+			RAW.C0 = CA(MR(90-50*i), MR(50*i), MR(-40+40*i)) * CN(0, -1+1*i, 0)
+
+			LAW.C0 = CA(MR(90-70*i), MR(-20*i), MR(-40+80-60*i)) * CN(0, -1+1*i, 0)
+
+			HW.C0 = CA(0, MR(135+45*i), 0)
+
+			wait()
+
+		end
+
+		Normalize()
+
+		AbleAll = true
+
+		RageMode = true
+
+		AddDamage = Dmgs.RageMode[2]
+
+		AddDamageX = Dmgs.RageMode[3]
+
+		AddShield = Dmgs.RageMode[4]
+
+		LineColor = EffectColor3
+
+		Notime(function()
+
+			repeat
+
+				wait()
+
+				Rage = Rage - 0.45
+
+			until Rage < 1
+
+			RageMode = false
+
+			AddDamage = 0
+
+			AddShield = 0
+
+			AddDamageX = 1
+
+			LineColor = "White"
+
+			local p3 = Part(workspace, false, false, 1, 0, BladeColor, 1, 1, 1, true)
+
+			Weld(Tip4, p3, 0, -2, 0, 0, 0, 0)
+
+			local m3 = Add.Sphere(p3)
+
+			m3.Scale = Vector3.new(0.85, 4.9, 1.8)
+
+			playz(Sounds.RageOff)
+
+			for i = 0.1, 1, 0.1 do
+
+				p3.Transparency = 1-1*i
+
+				wait()
+
+			end
+
+			p.Transparency = 0
+
+			for _,v in pairs(Blades) do
+
+				v.BrickColor = BrickColor.new(BladeColor)
+
+			end
+
+			wait(0.2)
+
+			for i = 0.2, 1, 0.2 do
+
+				p3.Transparency = 1*i
+
+				m3.Scale = Vector3.new(0.85+2*i, 4.9+9*i, 1.8+4.5*i)
+
+				wait()
+
+			end
+
+			p3:remove()
+
+		end)
+
+	end
+
+end
+
+
+
+function RageSlash(plaic)
+
+	if Rage < Dmgs.RageSlash[6] then return end
+
+	local cf = torso.CFrame
+
+	local CF = ComputePos(cf.p, cf * CN(0, 0, -2))
+
+	if plaic then
+
+		CF = ComputePos(cf.p, plaic)
+
+		local bg = Add.BG(torso)
+
+		bg.cframe = CF
+
+		Notime(function() bg:remove() end, 0.4)
+
+	end
+
+	Rage = Rage - Dmgs.RageSlash[6]
+
+	AbleAll = false
+
+	for i = 0.05, 1, 0.1 do
+
+		RAW.C0 = CA(MR(40+105*i), MR(50-50*i), MR(-35*i)) * CN(0.15*i, -1*i, 0)
+
+		LAW.C0 = CA(MR(20+125*i), MR(-20+20*i), MR(-20+55*i)) * CN(-0.15*i, -1*i, 0)
+
+		HW.C0 = CA(0, MR(-35*i), 0)
+
+		neck.C0 = necko * CA(MR(-20*i), 0, 0)
+
+		wait()
+
+	end
+
+	for i = 0.09, 1, 0.18 do
+
+		RAW.C0 = CA(MR(145+55*i), 0, MR(-35)) * CN(0.15, -1, 0)
+
+		LAW.C0 = CA(MR(145+55*i), 0, MR(35)) * CN(-0.15, -1, 0)
+
+		HW.C0 = CA(0, MR(-35), 0)
+
+		neck.C0 = necko * CA(MR(-20-20*i), 0, 0)
+
+		wait()
+
+	end
+
+	PlaySound(Sounds.Slash[1], Sounds.Slash[2]-0.7, Sounds.Slash[3])
+
+	for i = 0.12, 1, 0.25 do
+
+		RAW.C0 = CA(MR(200+10*i), 0, MR(-35)) * CN(0.15, -1, 0)
+
+		LAW.C0 = CA(MR(200+10*i), 0, MR(35)) * CN(-0.15, -1, 0)
+
+		HW.C0 = CA(0, MR(-35), 0)
+
+		neck.C0 = necko * CA(MR(-20-20-5*i), 0, 0)
+
+		wait()
+
+	end
+
+	Mode = Dmgs.RageSlash
+
+	StartEffect("Neon orange")
+
+	Hurt = true
+
+	Deb = true
+
+	for i = 0.07, 1, 0.14 do
+
+		RAW.C0 = CA(MR(210-160*i), 0, MR(-35)) * CN(0.15, -1, 0)
+
+		LAW.C0 = CA(MR(210-150*i), MR(-30*i), MR(35)) * CN(-0.15, -1, 0)
+
+		HW.C0 = CA(MR(-70*i), MR(-35), MR(-35*i))
+
+		neck.C0 = necko * CA(MR(-45+80*i), 0, 0)
+
+		wait()
+
+	end
+
+	EndEffect()
+
+	Hurt = false
+
+	for i = 0.33, 1, 0.33 do
+
+		RAW.C0 = CA(MR(50-15*i), 0, MR(-35)) * CN(0.15, -1, 0)
+
+		LAW.C0 = CA(MR(60-15*i), MR(-30), MR(35)) * CN(-0.15, -1, 0)
+
+		HW.C0 = CA(MR(-70-15*i), MR(-35), MR(-35-7*i))
+
+		neck.C0 = necko * CA(MR(-45+80+5*i), 0, 0)
+
+		wait()
+
+	end
+
+	for i = 0.07, 1, 0.14 do
+
+		RAW.C0 = CA(MR(35+5*i), MR(50*i), MR(-35+35*i)) * CN(0.15-0.15*i, -1+1*i, 0)
+
+		LAW.C0 = CA(MR(45-25*i), MR(-30+10*i), MR(35-55*i)) * CN(-0.15+0.15*i, -1+1*i, 0)
+
+		HW.C0 = CA(MR(-70-15+85*i), MR(-35+35*i), MR(-35-7+42*i))
+
+		neck.C0 = necko * CA(MR(-45+80+5-40*i), 0, 0)
+
+		wait()
+
+	end
+
+	Normalize()
+
+	AbleAll = true
+
+end
+
+
+
+--RAW ORIGINAL = CA(MR(40), MR(50), 0)
+
+--LAW ORIGINAL = CA(MR(20), MR(-20), MR(-20))
+
+--HW ORIGINAL = CA(0, 0, 0)
+
+
+
+function Counter()
+
+	local cf = torso.CFrame
+
+	local CF = CFrame.new(cf.p, cf * CN(0, 0, -2).p)
+
+	local bg = Add.BG(torso)
+
+	bg.cframe = CF
+
+	for i = 0.1, 1, 0.2 do
+
+		RAW.C0 = CA(MR(-50+50*i), MR(-35), MR(80*i))
+
+		LAW.C0 = CA(MR(90-20*i), 0, MR(80-20*i)) * CN(-0.75+0.25*i, -0.8+0.5*i, 0)
+
+		HW.C0 = CA(MR(20-60*i), 0, 0)
+
+		bg.cframe = CF * CA(0, MR(-35*i), 0)
+
+		neck.C0 = necko * CA(0, 0, MR(35*i))
+
+		wait()
+
+	end
+
+	StartEffect()
+
+	Hurt = true
+
+	Deb = true
+
+	Mode = Dmgs.Counter
+
+	playz(Sounds.Slash)
+
+	for i = 0.09, 1, 0.18 do
+
+		RAW.C0 = CA(0, MR(-35+130*i), MR(80)) * CN(0, -0.3*i, 0)
+
+		LAW.C0 = CA(MR(70-130*i), 0, MR(60-60*i)) * CN(-0.5+0.5*i, -0.3+0.3*i, 0)
+
+		HW.C0 = CA(MR(-40+40*i), 0, 0)
+
+		bg.cframe = CF * CA(0, MR(-35+80*i), 0)
+
+		neck.C0 = necko * CA(0, 0, MR(35-80*i))
+
+		wait()
+
+	end
+
+	EndEffect()
+
+	Hurt = false
+
+	for i = 0.12, 1, 0.25 do
+
+		RAW.C0 = CA(0, MR(95+10*i), MR(80)) * CN(0, -0.3, 0)
+
+		LAW.C0 = CA(MR(-60-10*i), 0, 0)
+
+		HW.C0 = CA(MR(5*i), 0, 0)
+
+		bg.cframe = CF * CA(0, MR(45+5*i), 0)
+
+		neck.C0 = necko * CA(0, 0, MR(-45-5*i))
+
+		wait()
+
+	end
+
+	for i = 0.06, 1, 0.12 do
+
+		RAW.C0 = CA(MR(40*i), MR(105-55*i), MR(80-80*i)) * CN(0, -0.3+0.3*i, 0)
+
+		LAW.C0 = CA(MR(-70+90*i), MR(-20*i), MR(-20*i))
+
+		HW.C0 = CA(MR(5-5*i), 0, 0)
+
+		bg.cframe = CF * CA(0, MR(50-50*i), 0)
+
+		neck.C0 = necko * CA(0, 0, MR(-50+50*i))
+
+		wait()
+
+	end
+
+	Normalize()
+
+	bg:remove()
+
+end
+
+
+
+function Bloc()
+
+	if AbleAll and Able then
+
+		AbleAll = false
+
+		Block.Value = true
+
+		for i = 0, 1, 0.15 do
+
+			if not Block then break end
+
+			RAW.C0 = CA(MR(40-90*i), MR(50-85*i), 0)
+
+			LAW.C0 = CA(MR(20+70*i), MR(-20+20*i), MR(-20+100*i)) * CN(-0.75*i, -0.8*i, 0)
+
+			HW.C0 = CA(MR(20*i), 0, 0)
+
+			wait()
+
+		end
+
+		RAW.C0 = CA(MR(40-90), MR(50-85), 0)
+
+		LAW.C0 = CA(MR(20+70), MR(-20+20), MR(-20+100)) * CN(-0.75, -0.8, 0)
+
+		HW.C0 = CA(MR(20), 0, 0)
+
+		PlaySound(Sounds.SmashHit[1], Sounds.SmashHit[2]-0.6, Sounds.SmashHit[3])
+
+		repeat
+
+			wait()
+
+			if BlockPower.Value < 1 then
+
+				Block.Value = false
+
+				BlockPower.Value = BlockRealPowa
+
+			end
+
+		until Block.Value == false
+
+		if CounterKey and Rage >= Dmgs.Counter[6] then
+
+			Rage = Rage - Dmgs.Counter[6]
+
+			Counter()
+
+		else
+
+			for i = 1, 0, -0.2 do
+
+				RAW.C0 = CA(MR(40-90*i), MR(50-85*i), 0)
+
+				LAW.C0 = CA(MR(20+70*i), MR(-20+20*i), MR(-20+100*i)) * CN(-0.75*i, -0.8*i, 0)
+
+				HW.C0 = CA(MR(20*i), 0, 0)
+
+				wait()
+
+			end
+
+			Normalize()
+
+		end
+
+		AbleAll = true
+
+	end
+
+end
+
+
+
+function Clicked(mousepos)
+
+	if Block.Value == false and Able and AbleAll then
+
+		if Aim then
+
+			Notime(function()
+
+				local bg = Add.BG(torso)
+
+				bg.cframe = ComputePos(torso.Position, mousepos)
+
+				bg.P = 5500
+
+				wait(0.4)
+
+				bg:remove()
+
+			end)
+
+		end
+
+		Attacks[Attack]()
+
+	end
+
+end
+
+
+
+function KeyDown(key, mouse)
+
+	key = key:lower()
+
+	if Able then
+
+		local aimplace = nil
+
+		if Aim then
+
+			aimplace = mouse.Hit.p
+
+		end
+
+		if key == string.char(48) then
+
+			Notime(function()
+
+				local k = nil
+
+				repeat
+
+					k = mouse.KeyUp:wait()
+
+				until k == string.char(48)
+
+				Block.Value = false
+
+			end)
+
+			Bloc()
+
+		elseif key == "e" then
+
+			if Block.Value == false and AbleAll then
+
+				SpinSlash(aimplace)
+
+			end
+
+		elseif key == "r" then
+
+			if Block.Value == false and AbleAll then
+
+				Flawp(aimplace)
+
+			end
+
+		elseif key == "f" then
+
+			if Block.Value == false and AbleAll then
+
+				Raeg()
+
+			end
+
+		elseif key == "t" then
+
+			Notime(function()
+
+				local k = nil
+
+				CounterKey = true
+
+				repeat
+
+					k = mouse.KeyUp:wait()
+
+				until k == "t"
+
+				CounterKey = false
+
+			end)
+
+		elseif key == "q" then
+
+			if Block.Value == false and AbleAll then
+
+				local a = nil
+
+				if Aim then
+
+					a = mouse.Hit.p
+
+				end
+
+				RageSlash(a)
+
+			end
+
+		end
+
+	end
+
+end
+
+
+
+Select = function(mouse)
+
+	SelectAnim()
+
+	Selected = true
+
+	mouse.Button1Down:connect(function()
+
+		if Able then
+
+			Clicked(mouse.Hit.p)
+
+		end
+
+	end)
+
+	mouse.KeyDown:connect(function(key)
+
+		KeyDown(key, mouse)
+
+	end)
+
+end
+
+
+
+Deselect = function(mouse)
+
+	Selected = false
+
+	DeselectAnim()
+
+end
+
+
+
+Bin.Selected:connect(Select)
+
+Bin.Deselected:connect(Deselect)
+
+
+
+Notime(function()
+
+	local parent = char.Parent
+
+	while char.Parent == parent do
+
+		wait()
+
+		if Rage > MaxRage then Rage = MaxRage elseif Rage < 0 then Rage = 0 end
+
+		RageBar.Size = UD(1, 0, Rage/MaxRage, 0)
+
+		RageBar.Position = UD(0, 0, 1-(Rage/MaxRage), 0)
+
+		RageAmount.Text = math.floor(Rage)
+
+		local hp2 = hum.Health/hum.MaxHealth
+
+		if hp2 > 1 then hp2 = 1 elseif hp2 < 0 then hp2 = 0 end
+
+		HealthBar.Size = UD(1, 0, hp2, 0)
+
+		if Block.Value then
+
+			hum.WalkSpeed = 10
+
+		elseif RageMode and Block.Value then
+
+			hum.WalkSpeed = 16
+
+		elseif RageMode then
+
+			hum.WalkSpeed = 19
+
+		else
+
+			hum.WalkSpeed = 16
+
+		end
+
+	end
+
+end)
+end)
 
 Eyelaser.Name = "Eyelaser"
 Eyelaser.Parent = WeaponScripts
@@ -1059,6 +4183,757 @@ Wand.FontSize = Enum.FontSize.Size14
 Wand.Text = "Wand"
 Wand.TextColor3 = Color3.new(1, 1, 1)
 Wand.TextSize = 14
+Wand.MouseButton1Click:Connect(function()
+tool = Instance.new("HopperBin") 
+
+player = game.Players.LocalPlayer
+char = player.Character 
+tool = Instance.new("HopperBin") 
+tool.Parent = player.Backpack 
+script.Parent = tool
+tool.Name = "Wand" 
+
+spin = false
+
+landc = "Earth green"
+firec = "Bright red"
+icec = "Light blue"
+windc = "Institutional white"
+helthc = "Lime green"
+elec = "New Yeller"
+
+norm = 18
+
+handle = Instance.new("Part") 
+handle.Parent = game.Lighting 
+handle.Name = "Handle" 
+handle.FormFactor = "Symmetric" 
+handle.Size = Vector3.new(1,4,1) 
+handle.TopSurface = 0 
+handle.BottomSurface = 0 
+handle.BrickColor = BrickColor.new("Black") 
+handle.Anchored = false 
+handle.Position = char["Right Arm"].Position 
+handle.CanCollide = false
+handle.Locked = true
+handle2 = Instance.new("Part") 
+handle2.Parent = game.Lighting 
+handle2.Name = "Handle2" 
+handle2.Shape = "Ball"
+handle2.Size = Vector3.new(1,1,1) 
+handle2.TopSurface = 0 
+handle2.BottomSurface = 0 
+handle2.BrickColor = BrickColor.new("Bright red") 
+handle2.Anchored = false 
+handle2.Position = char["Right Arm"].Position 
+handle2.Transparency = 0.1
+handle2.CanCollide = false
+handle2.Locked = true
+
+handle3 = Instance.new("Part") 
+handle3.Parent = game.Lighting 
+handle3.Name = "Handle2" 
+handle3.Shape = "Ball"
+handle3.Size = Vector3.new(1,1,1) 
+handle3.TopSurface = 0 
+handle3.BottomSurface = 0 
+handle3.BrickColor = BrickColor.new("Black") 
+handle3.Anchored = false 
+handle3.Position = char["Right Arm"].Position 
+handle3.CanCollide = false
+handle3.Locked = true
+local m = Instance.new("CylinderMesh") 
+m.Parent = handle 
+m.Scale = Vector3.new(0.42,1,0.42) 
+local m2 = Instance.new("SpecialMesh") 
+m2.Parent = handle2 
+m2.MeshType = "Sphere"
+m2.Scale = Vector3.new(0.8,0.8,0.8) 
+local m3 = Instance.new("SpecialMesh") 
+m3.Parent = handle3 
+m3.MeshType = "FileMesh"
+m3.MeshId = "http://www.roblox.com/asset/?id=1033714"
+m3.Scale = Vector3.new(0.4,0.85,0.4) 
+brick1 = Instance.new("Part")
+brick1.Parent = char
+brick1.formFactor = "Symmetric"
+brick1.Size = Vector3.new(1,1,1)
+brick1.CFrame = player.Character.Torso.CFrame * CFrame.new(-1.5,0.5,0)
+brick1.Shape = "Ball"
+brick1.CanCollide = false
+brick1.Transparency = 1
+brick1.Locked = true
+mesh1 = Instance.new("SpecialMesh")
+mesh1.Parent = brick1
+mesh1.MeshType = "Sphere"
+mesh1.Scale = Vector3.new(1.4,1.4,1.4)
+brick2 = Instance.new("Part")
+brick2.Parent = game.Lighting
+brick2.formFactor = "Symmetric"
+brick2.Size = Vector3.new(1,1,1)
+brick2.CFrame = player.Character.Torso.CFrame * CFrame.new(-1.5,0.5,0)
+brick2.Shape = "Ball"
+brick2.CanCollide = false
+brick2.Transparency = 1
+brick2.BrickColor = handle2.BrickColor
+brick2.Locked = true
+mesh2 = Instance.new("SpecialMesh")
+mesh2.Parent = brick2
+mesh2.MeshType = "Sphere"
+mesh2.Scale = Vector3.new(0.5,0.5,0.5)
+brick3 = Instance.new("Part")
+brick3.Parent = game.Lighting
+brick3.formFactor = "Symmetric"
+brick3.Size = Vector3.new(1,1,1)
+brick3.CFrame = player.Character.Torso.CFrame * CFrame.new(-1.5,0.5,0)
+brick3.Shape = "Ball"
+brick3.CanCollide = false
+brick3.Transparency = 1
+brick3.BrickColor = handle2.BrickColor
+brick3.Locked = true
+mesh3 = Instance.new("SpecialMesh")
+mesh3.Parent = brick3
+mesh3.MeshType = "Sphere"
+mesh3.Scale = Vector3.new(0.5,0.5,0.5)
+wads = Instance.new("Weld")
+wads.Parent = char.Torso
+wads.Part0 = wads.Parent
+wads.Part1 = brick1
+wads.C1 = CFrame.new(-1.5,-0.5,0)
+wads2 = Instance.new("Weld")
+wads2.Parent = handle2
+wads2.Part0 = wads2.Parent
+wads2.Part1 = brick2
+wads2.C1 = CFrame.new(1,0,0)
+wads3 = Instance.new("Weld")
+wads3.Parent = handle2
+wads3.Part0 = wads2.Parent
+wads3.Part1 = brick2
+wads3.C1 = CFrame.new(-1,0,0)
+
+wa = Instance.new("Weld")
+wa.Parent = brick1
+wa.Part0 = nil
+wa.Part1 = nil
+
+weld = Instance.new("Weld")
+
+toha = Instance.new("Weld")
+toha.Parent = char.Torso
+toha.Part0 = nil
+toha.Part1 = nil
+toha.C1 = CFrame.fromEulerAnglesXYZ(0,0,-2.5) * CFrame.new(0,0,-0.7)
+
+original = CFrame.fromEulerAnglesXYZ(-1.55,0,0) * CFrame.new(0,0,0.6)
+weporigin = CFrame.fromEulerAnglesXYZ(1.55,0,0) * CFrame.new(0, 1.1, 0.5)
+
+myhum = char.Humanoid
+myhum.WalkSpeed = norm
+
+enabled = false
+hol = false
+
+function select(mouse, key)
+	wa.Part0 = wa.Parent
+	wa.Part1 = char["Right Arm"]
+	wa.C1 = original
+	weld.Parent = char["Right Arm"] 
+	weld.Part0 = nil
+	weld.Part1 = nil
+	weld.C1 = weporigin 
+	handle.Parent = char 
+	handle2.Parent = char
+	handle3.Parent = char
+	for i = 1, 8 do
+		wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(-0.35,0,0)
+		wait()
+	end
+	for i = 1, 4 do
+		wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0,0.2,0)
+		wait()
+	end
+	toha.Part0 = nil
+	toha.Part1 = nil
+	weld.Part0 = weld.Parent 
+	weld.Part1 = handle 
+	for i = 1, 4 do
+		wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0,-0.2,0)
+		wait()
+	end
+	for i = 1, 8 do
+		wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0.35,0,0)
+		wait()
+	end
+	wa.C1 = original
+	spin = true
+	brick2.Transparency = 0.3
+	brick2.Parent = char
+	brick3.Transparency = 0.3
+	brick3.Parent = char
+	weld2 = Instance.new("Weld") 
+	weld2.Parent = handle 
+	weld2.Part0 = weld2.Parent 
+	weld2.Part1 = handle2 
+	weld2.C1 = CFrame.new(0, 0, 2.1) 
+	weld3 = Instance.new("Weld") 
+	weld3.Parent = handle 
+	weld3.Part0 = weld3.Parent 
+	weld3.Part1 = handle3 
+	weld3.C1 = CFrame.new(0, 0, 1.4) 
+	weld.C1 = CFrame.fromEulerAnglesXYZ(1.55,0,0) * CFrame.new(0, 1.1, 0.5) 
+	weld2.C1 = CFrame.fromEulerAnglesXYZ(0,0,0) * CFrame.new(0, -2.1, 0) 
+	weld3.C1 = CFrame.fromEulerAnglesXYZ(3.2,0,0) * CFrame.new(0, -1.5, 0) 
+	coroutine.resume(coroutine.create(function()
+		while spin == true do
+			for i=1, 20 do
+				wait()
+				handle2.Transparency = handle2.Transparency + 0.025
+			end
+			for i=1, 20 do
+				wait()
+				handle2.Transparency = handle2.Transparency - 0.025
+			end
+		end
+	end))
+	coroutine.resume(coroutine.create(function()
+		while spin == true do
+			wait()
+			wads2.C1 = wads2.C1 * CFrame.fromEulerAnglesXYZ(0,0.15,0)
+			wads3.C1 = wads3.C1 * CFrame.fromEulerAnglesXYZ(0,0.15,0)
+			local fade = brick2:clone()
+			fade.Parent = char
+			fade.CFrame = brick2.CFrame
+			local weld = wads2:clone()
+			weld.Parent = handle2
+			weld.Part0 = weld.Parent
+			weld.Part1 = fade
+			local fade2 = brick3:clone()
+			fade2.Parent = char
+			fade2.CFrame = brick3.CFrame
+			local weld2 = wads3:clone()
+			weld2.Parent = handle2
+			weld2.Part0 = weld2.Parent
+			weld2.Part1 = fade2
+			coroutine.resume(coroutine.create(function()
+				for i=1, 8 do
+					wait()
+					fade.Transparency = fade.Transparency + 0.12
+					fade2.Transparency = fade2.Transparency + 0.12
+				end
+				fade:remove()
+				fade2:remove()
+			end))
+		end
+	end))
+	enabled = false
+	mouse.KeyDown:connect(function(key) 
+		key = key:lower() 
+		if (key == "k") then 
+			if enabled == true then return end
+			enabled = true
+			hol = true
+			for i=1, 6 do
+			wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0.1,0.1,0)
+			wait()
+			end
+			handle2.BrickColor = BrickColor.new(landc)
+			brick2.BrickColor = handle2.BrickColor
+			brick3.BrickColor = handle2.BrickColor
+			while hol == true do
+			wait(0.05)
+			local ki = Instance.new("Part")
+			ki.Parent = workspace
+			ki.Name = "Landmon"
+			ki.Size = Vector3.new(1,1,1)
+			ki.BrickColor = handle2.BrickColor
+			ki.TopSurface = 0
+			ki.BottomSurface = 0
+			ki.CanCollide = false
+			ki.Anchored = true
+			ki.CFrame = CFrame.new(mouse.Hit.p)
+			ki.CFrame = ki.CFrame * CFrame.new(0, -4, 0)
+			local mef = Instance.new("SpecialMesh")
+			mef.Parent = ki
+			mef.MeshType = "Sphere"
+			mef.Scale = Vector3.new(9,16,9)
+			coroutine.resume(coroutine.create(function()
+				for i=1, 5 do
+					wait()
+					wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0,0.12,0)
+				end
+				for i=1, 5 do
+					wait()
+					wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0,-0.12,0)
+				end
+			end))
+			coroutine.resume(coroutine.create(function()
+				for i=1, 25 do
+					wait()
+					ki.CFrame = ki.CFrame * CFrame.new(0, 0.3, 0)
+				end
+				loo = ki.CFrame
+				ki.CanCollide = true
+				mef.Scale = Vector3.new(1,1,1)
+				ki.Size = Vector3.new(9,16,9)
+				ki.CFrame = loo
+				wait(7)
+				for i=1, 20 do
+					wait()
+					ki.Transparency = ki.Transparency + 0.05
+				end
+				ki:remove()
+			end))
+			end
+		elseif (key == "f") then
+			if enabled == true then return end
+			enabled = true
+			pof = mouse.Hit.p
+			local part = Instance.new("Part")
+			local fire = Instance.new("Fire")
+			fire.Parent = part
+			fire.Heat = 30
+			fire.Size = 40
+			local smoke = Instance.new("Smoke")
+			smoke.Parent = part
+			smoke.RiseVelocity = 2
+			smoke.Size = 20
+			smoke.Color = Color3.new(0,0,0)
+			smoke.Opacity = 1
+			local par = Instance.new("Part")
+			par.Parent = workspace
+			par.Size = Vector3.new(9,1,1)
+			par.Transparency = 0
+			par.Anchored = true
+			par.TopSurface = 0
+			par.BottomSurface = 0
+			par.BrickColor = BrickColor.new(firec)
+			par.CFrame = CFrame.new(pof) * CFrame.new(0,-0.498,0)
+			par.CFrame = par.CFrame * CFrame.Angles(0,0.8,0)
+			par.CanCollide = false
+			local mes = Instance.new("SpecialMesh")
+			mes.Parent = par
+			mes.MeshType = "Brick"
+			mes.Scale = Vector3.new(1,1,1)
+			local pa = par:clone()
+			pa.Parent = workspace
+			pa.CFrame = CFrame.new(pof) * CFrame.new(0,-0.498,0)
+			pa.CFrame = pa.CFrame * CFrame.Angles(0,-0.8,0)
+			handle2.BrickColor = BrickColor.new(firec)
+			brick2.BrickColor = handle2.BrickColor
+			brick3.BrickColor = handle2.BrickColor
+			for i=1, 10 do
+				wait(0.03)
+				wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(-0.1,0.05,0)
+			end
+			for i=1, 4 do
+			for i=1, 3 do
+				wait(0.01)
+				wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0,-0.05,0.1)
+			end
+			for i=1, 3 do
+				wait(0.01)
+				wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0.03,0.05,-0.1)
+			end
+			end
+			for i=1, 7 do
+				wait(0.01)
+				wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0,0.1,-0.1)
+			end
+			wait(0.6)
+			for i=1, 10 do
+				wait(0.02)
+				wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0.1,-0.05,0.3)
+				par.Transparency = par.Transparency + 0.1
+				pa.Transparency = pa.Transparency + 0.1
+				mes.Scale = mes.Scale + Vector3.new(0.1,0,0.05)
+				pa.Mesh.Scale = pa.Mesh.Scale + Vector3.new(0.1,0,0.05)
+			end
+			wait(0.1)
+			pa:remove()
+			par:remove()
+			part.Parent = workspace
+			part.Size = Vector3.new(3,3,3)
+			part.Anchored = true
+			part.CFrame = CFrame.new(pof) 
+			part.CFrame = part.CFrame * CFrame.Angles(1.2,0,0)
+			part.Transparency = 1
+			coroutine.resume(coroutine.create(function()
+				for i=1, 100 do
+					wait()
+					part.CFrame = part.CFrame * CFrame.Angles(0,0,0.4)
+				end
+			end))
+			local explode = Instance.new("Explosion")
+			explode.Parent = char
+			explode.BlastRadius = 11
+			explode.BlastPressure = 400000
+			explode.Position = part.Position
+			explode.archivable = false
+			wait(0.3)
+			wa.C1 = original
+			wait(0.7)
+			fire.Enabled = false
+			smoke.Enabled = false
+			wait(0.2)
+			part:remove()
+			wait(1)
+			enabled = false
+		elseif (key == "q") then
+			if enabled == true then return end
+			enabled = true
+			handle2.BrickColor = BrickColor.new(windc)
+			brick2.BrickColor = handle2.BrickColor
+			brick3.BrickColor = handle2.BrickColor
+			for i=1, 8 do
+				wait(0.01)
+				wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0,0,-0.18)
+			end
+			for i=1, 2 do
+				wait(0.01)
+				wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0,-0.15,0)
+			end
+			wait(0.3)
+			for i=1, 2 do
+				wait(0.01)
+				wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0,0.3,0)
+			end
+			local p = Instance.new("Part")
+			p.Parent = workspace
+			p.Name = "Sword"
+			p.Size = Vector3.new(1,4,1)
+			p.BottomSurface = 0
+			p.TopSurface = 0
+			p.Anchored = false
+			p.CanCollide = false
+			p.CFrame = handle.CFrame
+			p.CFrame = p.CFrame * CFrame.Angles(0,0,1.55)
+			p:BreakJoints()
+			local mt = Instance.new("SpecialMesh")
+			mt.Parent = p
+			mt.MeshType = "FileMesh"
+			mt.MeshId = "http://www.roblox.com/asset/?id=12768042"
+			mt.TextureId = "http://www.roblox.com/asset/?id=21262906"
+			local bv = Instance.new("BodyVelocity")
+			bv.Parent = p
+			bv.velocity = char.Torso.CFrame.lookVector * 45
+			local bva = Instance.new("BodyAngularVelocity")
+			bva.Parent = p
+			bva.angularvelocity = Vector3.new(0,14,0)
+			p.Touched:connect(function(hit)
+				if hit.Parent.Name == player.Name then return end
+				local hum = hit.Parent:findFirstChild("Humanoid")
+				if hum ~= nil then
+					local hed = hit.Parent:findFirstChild("Head")
+					if hed ~= nil then
+						for i=1, 5 do
+							wait()
+							hed.Parent.Torso.Neck.C1 = hed.Parent.Torso.Neck.C1 * CFrame.new(0, 0, -0.9)
+						end
+						hum.Health = 0
+						wait(0.05)
+						hed.Velocity = Vector3.new(math.random(-30,30),40,math.random(-30,30))
+						hed.RotVelocity = Vector3.new(math.random(-25,25),math.random(-25,25),math.random(-25,25))
+					end
+					hum.Health = 0
+				end
+			end)
+			local spi = true
+			coroutine.resume(coroutine.create(function()
+				while spi == true do
+					local fad = p:clone()
+					fad.Parent = workspace
+					fad.BrickColor = BrickColor.new(windc)
+					fad.Transparency = 0.2
+					fad.Mesh.TextureId = "Clear"
+					fad.Anchored = true
+					coroutine.resume(coroutine.create(function()
+						for i=1, 8 do
+							wait()
+							fad.Transparency = fad.Transparency + 0.1
+						end
+						fad:remove()
+					end))
+					wait()
+				end
+			end))
+			for i=1, 4 do
+				wait(0.01)
+				wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0,0.3,0)
+			end
+			wait(0.3)
+			for i=1, 7 do
+				wait(0.01)
+				wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0,-0.2,0.3)
+			end
+			wa.C1 = original
+			wait(0.3)
+			enabled = false
+			wait(1.2)
+			spi = false
+			wait()
+			p:remove()
+		elseif (key == "e") then
+			if enabled == true then return end
+			enabled = true
+			myhum.WalkSpeed = 0
+			handle2.BrickColor = BrickColor.new(helthc)
+			brick2.BrickColor = handle2.BrickColor
+			brick3.BrickColor = handle2.BrickColor
+			hol = true
+			for i=1, 6 do
+				wait(0.01)
+				wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(-0.13,0,0)
+				weld.C1 = weld.C1 * CFrame.fromEulerAnglesXYZ(0,0,0) * CFrame.new(0,0,-0.1)
+			end
+			wait(0.5)
+			for i=1, 3 do
+				wait(0.01)
+				wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0.4,0,0)
+				weld.C1 = weld.C1 * CFrame.fromEulerAnglesXYZ(0,0,0) * CFrame.new(0,0,-0.23)
+			end
+			local pf = Instance.new("Part")
+			pf.Parent = workspace
+			pf.Name = "Healthbump"
+			pf.Size = Vector3.new(7,1,7)
+			pf.BottomSurface = 0
+			pf.TopSurface = 0
+			pf.Anchored = true
+			pf.CanCollide = false
+			pf.CFrame = char.Torso.CFrame * CFrame.new(0,-2.8, 0)
+			pf.Transparency = 0.3
+			pf.BrickColor = handle2.BrickColor
+			local meg = Instance.new("CylinderMesh")
+			meg.Parent = pf
+			meg.Scale = Vector3.new(0.6,0.8,0.6)
+			hecols = {"Bright green", "Lime green", "Dark green", "Camo"}
+			coroutine.resume(coroutine.create(function()
+				for i=1, 50 do
+					wait()
+					pf.Transparency = pf.Transparency + 0.02
+					meg.Scale = meg.Scale + Vector3.new(0.045,0,0.045)
+				end
+			end))
+			while hol == true do
+				wait(0)
+				myhum.Health = myhum.Health + 0.5
+				local chanc = math.random(1,20)
+				if chanc == 8 then
+					coroutine.resume(coroutine.create(function()
+						pf.Transparency = 0.3
+						meg.Scale = Vector3.new(0.6,0.8,0.6)
+						for i=1, 50 do
+							wait()
+							pf.Transparency = pf.Transparency + 0.02
+							meg.Scale = meg.Scale + Vector3.new(0.045,0,0.045)
+						end
+					end))
+				end
+				local hp = Instance.new("Part")
+				hp.Parent = workspace
+				hp.formFactor = "Symmetric"
+				local randsiz = math.random(1,2)
+				local col = math.random(1,4)
+				hp.Size = Vector3.new(randsiz,randsiz,randsiz)
+				hp.BrickColor = BrickColor.new(hecols[col])
+				hp.TopSurface = 0
+				hp.BottomSurface = 0
+				hp.Transparency = 0.1
+				hp.CFrame = char.Torso.CFrame * CFrame.new(math.random(-5,5),-3,math.random(-5,5))
+				hp.CFrame = hp.CFrame * CFrame.Angles(math.random(),math.random(),math.random())
+				hp.CanCollide = false
+				hp.Anchored = false
+				hp:BreakJoints()
+				local mf = Instance.new("SpecialMesh")
+				mf.MeshType = "Brick"
+				mf.Parent = hp
+				mf.Scale = Vector3.new(0.65,0.65,0.65)
+				local bv = Instance.new("BodyVelocity")
+				bv.Parent = hp
+				bv.velocity = Vector3.new(0,10,0)
+				coroutine.resume(coroutine.create(function()
+					wait(0.9)
+					for i=1, 9 do
+						hp.Transparency = hp.Transparency + 0.1
+						wait()
+					end
+					hp:remove()
+				end))
+			end
+		elseif (key == "r") then
+			if enabled == true then return end
+			enabled = true
+			myhum.WalkSpeed = 0
+			handle2.BrickColor = BrickColor.new(elec)
+			brick2.BrickColor = handle2.BrickColor
+			brick3.BrickColor = handle2.BrickColor
+			cols = {"Neon orange", "New Yeller", "Bright yellow", "Bright orange"}
+			for i=1, 6 do
+				wait(0.01)
+				wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(-0.11,0,0)
+			end
+			wait(0.35)
+			tab = {}
+			for i=1, 50 do
+			for i=1, 20 do
+				local a = Instance.new("Part")
+				a.Parent = workspace
+				a.formFactor = "Symmetric"
+				a.Size = Vector3.new(4,1,1)
+				a.TopSurface = 0
+				a.BottomSurface = 0
+				local numb = math.random(1,4)
+				a.BrickColor = BrickColor.new(cols[numb])
+				a.Anchored = true
+				a.CanCollide = false
+				a.Transparency = 0.3
+				local mo = Instance.new("SpecialMesh")
+				mo.Parent = a
+				mo.MeshType = "Brick"
+				mo.Scale = Vector3.new(1,0.2,0.2)
+				a.CFrame = handle2.CFrame
+				a.CFrame = a.CFrame * CFrame.Angles(math.random(-3.2,3.2),math.random(-3.2,3.2),math.random(-3.2,3.2)) * CFrame.new(2,0,0)
+				table.insert(tab, a)
+			end
+			wait()
+			for _, v in pairs(tab) do
+				v:remove()
+			end
+			end
+			for i=1, 7 do
+				wait(0.01)
+				wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0.17,0.1,0)
+			end
+			coroutine.resume(coroutine.create(function()
+			for i=1, 10 do
+				wait(0.2)
+				local h = Instance.new("Part")
+				h.Parent = workspace
+				h.Shape = "Ball"
+				h.Size = Vector3.new(3,3,3)
+				h.TopSurface = 0
+				h.BottomSurface = 0
+				local numb = math.random(1,4)
+				h.BrickColor = BrickColor.new(cols[numb])
+				h.Anchored = true
+				h.CanCollide = false
+				h.Transparency = 0.5
+				h.CFrame = handle2.CFrame
+				local function magn(hif)
+					if hif.Parent.Name == player.Name then return end
+					local dist = (char.Torso.Position - hif.Position).magnitude
+					if dist >= 10 then
+						print(dist)
+						local hum = hif.Parent:findFirstChild("Humanoid")
+						if hum ~= nil then
+							hum.Health = 0
+						end
+					end
+				end
+				coroutine.resume(coroutine.create(function()
+					for i=1, 30 do
+						wait()
+						magn(char.Torso)
+					end
+				end))
+				coroutine.resume(coroutine.create(function()
+					for i=1, 30 do
+						wait(0.04)
+						h.Size = h.Size + Vector3.new(2,2,2)
+						h.Transparency = h.Transparency + 0.023
+						h.CFrame = handle2.CFrame
+					end
+					h:remove()
+				end))
+			end
+			end))
+			for i=1, 19 do
+			for i=1, 30 do
+				local f = Instance.new("Part")
+				f.Parent = workspace
+				f.formFactor = "Symmetric"
+				f.Size = Vector3.new(25,1,1)
+				f.TopSurface = 0
+				f.BottomSurface = 0
+				local numb = math.random(1,4)
+				f.BrickColor = BrickColor.new(cols[numb])
+				f.Anchored = true
+				f.CanCollide = false
+				f.Transparency = 0.3
+				local mo = Instance.new("SpecialMesh")
+				mo.Parent = f
+				mo.MeshType = "Brick"
+				mo.Scale = Vector3.new(1,math.random(0.8,1.7),math.random(0.8,1.7))
+				f.CFrame = handle2.CFrame
+				f.CFrame = f.CFrame * CFrame.Angles(math.random(-3.2,3.2),math.random(-3.2,3.2),math.random(-3.2,3.2)) * CFrame.new(12.5,0,0)
+				table.insert(tab, f)
+			end
+			wait(0.1)
+			for _, v in pairs(tab) do
+				v:remove()
+			end
+			end
+			myhum.WalkSpeed = norm
+			enabled = false
+		end
+	end) 
+	mouse.KeyUp:connect(function(key) 
+		key = key:lower() 
+		if (key == "k") then 
+			hol = false
+			for i=1, 6 do
+			wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(-0.1,-0.1,0)
+			wait()
+			end
+			wa.C1 = original
+			enabled = false
+			wait(0.3)
+			wa.C1 = original
+		elseif (key == "e") then
+			hol = false
+			for i=1, 6 do
+			wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(-0.1,-0.02,0)
+			weld.C1 = weld.C1 * CFrame.fromEulerAnglesXYZ(0,0,0) * CFrame.new(0,0,0.24)
+			wait()
+			end
+			myhum.WalkSpeed = norm
+			for i=1, 5 do
+				wait(0.15)
+				wa.C1 = original
+				weld.C1 = weporigin
+			end
+			enabled = false
+		end
+	end)
+	mouse.Button1Down:connect(function()
+		e = char.Torso
+		wait(0.2)
+		e.CFrame = CFrame.new(mouse.Hit.p) * CFrame.new(0,2.5,0)
+	end)
+end 
+
+function deselect() 
+	spin = false
+	for i = 1, 8 do
+		wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(-0.35,0,0)
+		wait()
+	end
+	for i = 1, 4 do
+		wa.C1 = wa.C1 * CFrame.fromEulerAnglesXYZ(0,0.2,0)
+		wait()
+	end
+	toha.Part0 = toha.Parent
+	toha.Part1 = handle
+	weld.Part0 = nil
+	weld.Part1 = nil
+	wait()
+	wa.Part0 = nil
+	wa.Part1 = nil
+end 
+
+
+script.Parent.Selected:connect(select) 
+script.Parent.Deselected:connect(deselect) 
+end)
 
 DualBlades.Name = "Dual Blades"
 DualBlades.Parent = WeaponScripts
@@ -1073,6 +4948,1061 @@ DualBlades.FontSize = Enum.FontSize.Size14
 DualBlades.Text = "Dual Blades"
 DualBlades.TextColor3 = Color3.new(1, 1, 1)
 DualBlades.TextSize = 14
+DualBlades.MouseButton1Click:Connect(function()
+--MADE BY OneLegend (NOT THE SCRIPT) LOCAL SCRIPT: Go to line 5 and put your name where it says "YOUR NAME HERE"
+
+if script.Parent.className ~= "HopperBin" then 
+h = Instance.new("HopperBin") 
+local admin = game.Players.LocalPlayer
+h.Name = "Epic Blades" 
+script.Parent = h 
+h.Parent = admin.Backpack 
+end 
+
+bin = script.Parent 
+player = bin.Parent.Parent.Character 
+rarm = player["Right Arm"] 
+larm = player["Left Arm"] 
+visible = true 
+--for i, v in pairs(game.Players:GetChildren()) do 
+--bin:Clone().Parent = v.Backpack 
+--end 
+on = 1 
+
+local glideg = Instance.new("BodyGyro") 
+local glidev = Instance.new("BodyVelocity") 
+
+function shadow(rblade,lblade) 
+while on == 1 do 
+wait(.1) 
+if visible then 
+local a = rblade:clone() 
+local b = lblade:clone() 
+a.Anchored = true 
+a.Parent = player 
+a.CFrame = rblade.CFrame 
+a.CanCollide = false 
+a.Transparency = .2 
+b.Anchored = true 
+b.Parent = player 
+b.CFrame = lblade.CFrame 
+b.CanCollide = false 
+b.Transparency = .2 
+coroutine.resume(coroutine.create(function() dissapate(a,b) end)) 
+end 
+end 
+end 
+
+function stun(blast) 
+for x = 1,15 do 
+wait(1) 
+local sap = game.Players:GetChildren() 
+for i = 1,#sap do 
+wait() 
+if (sap.Character.Torso.Position - Workspace.keel.Position).magnitude < 20 then 
+sap.Character.Humanoid.Sit = true 
+end 
+end 
+end 
+end 
+
+function dissapate(a,b) 
+for i = 1,8 do 
+wait() 
+a.Transparency = a.Transparency +.1 
+b.Transparency = b.Transparency +.1 
+end 
+a:remove() 
+b:remove() 
+end 
+
+bin.Selected:connect(function(mouse) 
+on = 1 
+if player.Torso:findFirstChild("Right Shoulder") ~= nil then 
+rs = player.Torso["Right Shoulder"] 
+rs.Part1 = nil 
+end 
+if player.Torso:findFirstChild("Left Shoulder") ~= nil then 
+ls = player.Torso["Left Shoulder"] 
+ls.Part1 = nil 
+end 
+if player:FindFirstChild("check") == nil then 
+rns = Instance.new("Weld") 
+rns.Parent = player.Torso 
+rns.Part0 = rns.Parent 
+rns.Part1 = player["Right Arm"] 
+rns.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+lns = Instance.new("Weld") 
+lns.Parent = player.Torso 
+lns.Part0 = lns.Parent 
+lns.Part1 = player["Left Arm"] 
+lns.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+rblade = Instance.new("Part") 
+rblade.BrickColor = BrickColor.new("Institutional white") 
+rblade.Name ="check" 
+rblade.Parent = player 
+rblade.CanCollide = false 
+rblade.Size = Vector3.new(1,3,1) 
+rblade.formFactor = "Symmetric" 
+rblade.TopSurface = 0 
+rblade.BottomSurface = 0 
+rbm = Instance.new("BlockMesh") 
+rbm.Parent = rblade 
+rbm.Scale = Vector3.new(.1,1,.3) 
+rbw = Instance.new("Weld") 
+rbw.Parent = rarm 
+rbw.Part0 = rarm 
+rbw.Part1 = rblade 
+rbw.C1 = CFrame.new(0,1,0) 
+lblade = Instance.new("Part") 
+lblade.BrickColor = rblade.BrickColor 
+lblade.Name = "checkb" 
+lblade.Parent = player 
+lblade.CanCollide = false 
+lblade.Size = Vector3.new(1,3,1) 
+lblade.formFactor = "Symmetric" 
+lblade.TopSurface = 0 
+lblade.BottomSurface = 0 
+lbm = Instance.new("BlockMesh") 
+lbm.Parent = lblade 
+lbm.Scale = Vector3.new(.1,1,.3) 
+lbw = Instance.new("Weld") 
+lbw.Parent = larm 
+lbw.Part0 = larm 
+lbw.Part1 = lblade 
+lbw.C1 = CFrame.new(0,1,0) 
+coroutine.resume(coroutine.create(function() shadow(rblade, lblade) end)) 
+end 
+rblade.Touched:connect(function(hit) 
+if hit.Parent:findFirstChild("Humanoid") ~= nil then 
+if hit.Parent.Name ~= player.Name then 
+if hit.Parent.Humanoid.MaxHealth > 100 then 
+hit.Parent.Humanoid.MaxHealth = 100 
+end 
+hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - math.random(3,7) 
+for i = 1, (math.random(1,3)) do 
+wait() 
+local bleed = Instance.new("Part") 
+bleed.formFactor = "Symmetric" 
+bleed.Size = Vector3.new(1,1,1) 
+bleed.BrickColor = BrickColor.new("Bright red") 
+bleed.TopSurface = 0 
+bleed.BottomSurface = 0 
+bleed.Reflectance = .1 
+bleed.Transparency = .4 
+bleed.Parent = Workspace 
+bleed.Position = rblade.Position 
+local bleedm = Instance.new("SpecialMesh") 
+bleedm.MeshType = "Sphere" 
+bleedm.Scale = Vector3.new(.2,.2,.2) 
+bleedm.Parent = bleed 
+game:GetService("Debris"):AddItem(bleed, 5) 
+end 
+end 
+end 
+end) 
+
+lblade.Touched:connect(function(hit) 
+if hit.Parent:findFirstChild("Humanoid") ~= nil then 
+if hit.Parent.Name ~= player.Name then 
+if hit.Parent.Humanoid.MaxHealth > 100 then 
+hit.Parent.Humanoid.MaxHealth = 100 
+end 
+hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - math.random(3,7) 
+for i = 1, (math.random(1,3)) do 
+wait() 
+local bleed = Instance.new("Part") 
+bleed.formFactor = "Symmetric" 
+bleed.Size = Vector3.new(1,1,1) 
+bleed.BrickColor = BrickColor.new("Bright red") 
+bleed.TopSurface = 0 
+bleed.BottomSurface = 0 
+bleed.Reflectance = .1 
+bleed.Transparency = .4 
+bleed.Parent = Workspace 
+bleed.Position = lblade.Position 
+local bleedm = Instance.new("SpecialMesh") 
+bleedm.MeshType = "Sphere" 
+bleedm.Scale = Vector3.new(.2,.2,.2) 
+bleedm.Parent = bleed 
+game:GetService("Debris"):AddItem(bleed, 5) 
+end 
+end 
+end 
+end) 
+----end of blades 
+right = rns 
+left = lns 
+mouse.KeyDown:connect(function(key) 
+key = key:lower() 
+print(key) 
+if key == "z" and rblade.Transparency <= 0 then 
+for i = 1,50 do 
+wait() 
+rblade.Transparency = rblade.Transparency + .02 
+lblade.Transparency = lblade.Transparency + .02 
+end 
+rblade.Transparency = 1 
+lblade.Transparency = 1 
+visible = false 
+elseif key == "x" and rblade.Transparency > 0 then 
+visible = true 
+for i = 1,50 do 
+wait() 
+rblade.Transparency = rblade.Transparency - .02 
+lblade.Transparency = lblade.Transparency - .02 
+end 
+rblade.Transparency = 0 
+lblade.Transparency = 0 
+elseif key == "c" then 
+wait() 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+end 
+if key == "e" then 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+wait() 
+right.C1 = CFrame.new(-1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*-.05)) 
+wait() 
+right.C1 = CFrame.new(-1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*-.1)) 
+wait() 
+right.C1 = CFrame.new(-1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*-.15)) 
+wait() 
+right.C1 = CFrame.new(-1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*-.2)) 
+wait() 
+right.C1 = CFrame.new(-1.35,.5,-.25)*CFrame.Angles((math.pi*-.5),(math.pi*0),(math.pi*-.25)) 
+wait(.5) 
+right.C1 = CFrame.new(-1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*-.2)) 
+wait() 
+right.C1 = CFrame.new(-1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*-.15)) 
+wait() 
+right.C1 = CFrame.new(-1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*-.1)) 
+wait() 
+right.C1 = CFrame.new(-1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*-.05)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+elseif key == "q" then 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+wait() 
+left.C1 = CFrame.new(1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*.05)) 
+wait() 
+left.C1 = CFrame.new(1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*.1)) 
+wait() 
+left.C1 = CFrame.new(1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*.15)) 
+wait() 
+left.C1 = CFrame.new(1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*.2)) 
+wait() 
+left.C1 = CFrame.new(1.35,.5,-.25)*CFrame.Angles((math.pi*-.5),(math.pi*0),(math.pi*.25)) 
+wait(.5) 
+left.C1 = CFrame.new(1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*.2)) 
+wait() 
+left.C1 = CFrame.new(1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*.15)) 
+wait() 
+left.C1 = CFrame.new(1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*.1)) 
+wait() 
+left.C1 = CFrame.new(1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*.05)) 
+wait() 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+elseif key == "r" then 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+wait() 
+left.C1 = CFrame.new(1.42,0.62,0)*CFrame.Angles((math.pi*0),(math.pi*0),(math.pi*.3)) 
+wait() 
+left.C1 = CFrame.new(1.29,0.84,0)*CFrame.Angles((math.pi*0),(math.pi*0),(math.pi*.35)) 
+wait() 
+left.C1 = CFrame.new(1.16,1.06,0)*CFrame.Angles((math.pi*0),(math.pi*0),(math.pi*.4)) 
+wait() 
+left.C1 = CFrame.new(1.03,1.28,0)*CFrame.Angles((math.pi*0),(math.pi*0),(math.pi*.45)) 
+wait() 
+left.C1 = CFrame.new(0.9,1.5,0)*CFrame.Angles((math.pi*0),(math.pi*0),(math.pi*.5)) 
+wait(.2) 
+left.C1 = CFrame.new(0.9,1.5,-0.15)*CFrame.Angles((math.pi*-.15),(math.pi*0),(math.pi*.5)) 
+wait() 
+left.C1 = CFrame.new(0.9,1.5,-0.30)*CFrame.Angles((math.pi*-.30),(math.pi*0),(math.pi*.5)) 
+wait() 
+left.C1 = CFrame.new(0.9,1.5,-0.45)*CFrame.Angles((math.pi*-.45),(math.pi*0),(math.pi*.5)) 
+wait() 
+left.C1 = CFrame.new(0.9,1.5,-0.60)*CFrame.Angles((math.pi*-.60),(math.pi*0),(math.pi*.5)) 
+wait() 
+left.C1 = CFrame.new(0.9,1.5,-0.75)*CFrame.Angles((math.pi*-.75),(math.pi*0),(math.pi*.5)) 
+wait(.1) 
+left.C1 = CFrame.new(1.03,1.28,0)*CFrame.Angles((math.pi*-.60),(math.pi*0),(math.pi*.45)) 
+wait() 
+left.C1 = CFrame.new(1.16,1.06,0)*CFrame.Angles((math.pi*-.45),(math.pi*0),(math.pi*.4)) 
+wait() 
+left.C1 = CFrame.new(1.29,0.84,0)*CFrame.Angles((math.pi*-.30),(math.pi*0),(math.pi*.35)) 
+wait() 
+left.C1 = CFrame.new(1.42,0.62,0)*CFrame.Angles((math.pi*-.15),(math.pi*0),(math.pi*.3)) 
+wait() 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+elseif key == "t" then 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+wait() 
+right.C1 = CFrame.new(-1.42,0.62,0)*CFrame.Angles((math.pi*0),(math.pi*0),(math.pi*-.3)) 
+wait() 
+right.C1 = CFrame.new(-1.29,0.84,0)*CFrame.Angles((math.pi*0),(math.pi*0),(math.pi*-.35)) 
+wait() 
+right.C1 = CFrame.new(-1.16,1.06,0)*CFrame.Angles((math.pi*0),(math.pi*0),(math.pi*-.4)) 
+wait() 
+right.C1 = CFrame.new(-1.03,1.28,0)*CFrame.Angles((math.pi*0),(math.pi*0),(math.pi*-.45)) 
+wait() 
+right.C1 = CFrame.new(-0.9,1.5,0)*CFrame.Angles((math.pi*0),(math.pi*0),(math.pi*-.5)) 
+wait(.2) 
+right.C1 = CFrame.new(-0.9,1.5,-0.15)*CFrame.Angles((math.pi*-.15),(math.pi*0),(math.pi*-.5)) 
+wait() 
+right.C1 = CFrame.new(-0.9,1.5,-0.30)*CFrame.Angles((math.pi*-.30),(math.pi*0),(math.pi*-.5)) 
+wait() 
+right.C1 = CFrame.new(-0.9,1.5,-0.45)*CFrame.Angles((math.pi*-.45),(math.pi*0),(math.pi*-.5)) 
+wait() 
+right.C1 = CFrame.new(-0.9,1.5,-0.60)*CFrame.Angles((math.pi*-.60),(math.pi*0),(math.pi*-.5)) 
+wait() 
+right.C1 = CFrame.new(-0.9,1.5,-0.75)*CFrame.Angles((math.pi*-.75),(math.pi*0),(math.pi*-.5)) 
+wait(.1) 
+right.C1 = CFrame.new(-1.03,1.28,0)*CFrame.Angles((math.pi*-.60),(math.pi*0),(math.pi*-.45)) 
+wait() 
+right.C1 = CFrame.new(-1.16,1.06,0)*CFrame.Angles((math.pi*-.45),(math.pi*0),(math.pi*-.4)) 
+wait() 
+right.C1 = CFrame.new(-1.29,0.84,0)*CFrame.Angles((math.pi*-.30),(math.pi*0),(math.pi*-.35)) 
+wait() 
+right.C1 = CFrame.new(-1.42,0.62,0)*CFrame.Angles((math.pi*-.15),(math.pi*0),(math.pi*-.3)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+end 
+--abilities 
+if key == "b" then 
+local a = player:GetChildren() 
+for i = 1,#a do 
+wait() 
+if a.className == "Part" and a.Name ~= "check" and a.Name ~= "checkb" then 
+for x = 1, 5 do 
+wait() 
+a.Transparency = a.Transparency +.2 
+end 
+elseif a.className == "Hat" then 
+for x = 1, 5 do 
+wait() 
+a.Handle.Transparency = a.Handle.Transparency +.2 
+end 
+end 
+end 
+player.Torso.CFrame = mouse.Hit + Vector3.new(0,4,0) 
+wait() 
+for i = 1,#a do 
+wait() 
+if a.className == "Part" and a.Name ~= "check" and a.Name ~= "checkb" then 
+for x = 1, 5 do 
+wait() 
+a.Transparency = a.Transparency -.2 
+end 
+elseif a.className == "Hat" then 
+for x = 1, 5 do 
+wait() 
+a.Handle.Transparency = a.Handle.Transparency -.2 
+end 
+end 
+end 
+for i = 1,#a do 
+wait() 
+if a.className == "Part" and a.Name ~= "check" and a.Name ~= "checkb" then 
+wait() 
+a.Transparency = 0 
+elseif a.className == "Hat" then 
+wait() 
+a.Handle.Transparency = 0 
+end 
+end 
+end 
+if key == "v" then 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+wait() 
+right.C1 = CFrame.new(-1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*-.05)) 
+left.C1 = CFrame.new(1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*.05)) 
+wait() 
+right.C1 = CFrame.new(-1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*-.1)) 
+left.C1 = CFrame.new(1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*.1)) 
+wait() 
+right.C1 = CFrame.new(-1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*-.15)) 
+left.C1 = CFrame.new(1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*.15)) 
+wait() 
+right.C1 = CFrame.new(-1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*-.2)) 
+left.C1 = CFrame.new(1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*.2)) 
+wait() 
+right.C1 = CFrame.new(-1.35,.5,-.25)*CFrame.Angles((math.pi*-.5),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.35,.5,-.25)*CFrame.Angles((math.pi*-.5),(math.pi*0),(math.pi*.25)) 
+wait(.2) 
+wait(.45) 
+right.C1 = CFrame.new(-1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*-.2)) 
+left.C1 = CFrame.new(1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*.2)) 
+wait() 
+right.C1 = CFrame.new(-1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*-.15)) 
+left.C1 = CFrame.new(1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*.15)) 
+wait() 
+right.C1 = CFrame.new(-1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*-.1)) 
+left.C1 = CFrame.new(1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*.1)) 
+wait() 
+right.C1 = CFrame.new(-1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*-.05)) 
+left.C1 = CFrame.new(1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*.05)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+end 
+if key == "f" then 
+local tar = mouse.Target 
+if tar.Parent:findFirstChild("Humanoid") ~= nil then 
+local float = Instance.new("BodyPosition") 
+float.Parent = tar.Parent.Torso 
+float.maxForce = Vector3.new(math.huge,math.huge,math.huge) 
+float.position = tar.Parent.Torso.Position + Vector3.new(0,10,0) 
+wait(1) 
+player.Humanoid.MaxHealth = 99999 
+player.Humanoid.Health = 99999 
+local floatme = Instance.new("BodyPosition") 
+floatme.Parent = player.Torso 
+floatme.maxForce = Vector3.new(math.huge,math.huge,math.huge) 
+floatme.position = tar.Parent.Torso.Position 
+wait(1) 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+wait() 
+right.C1 = CFrame.new(-1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*-.05)) 
+left.C1 = CFrame.new(1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*.05)) 
+wait() 
+right.C1 = CFrame.new(-1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*-.1)) 
+left.C1 = CFrame.new(1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*.1)) 
+wait() 
+right.C1 = CFrame.new(-1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*-.15)) 
+left.C1 = CFrame.new(1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*.15)) 
+wait() 
+right.C1 = CFrame.new(-1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*-.2)) 
+left.C1 = CFrame.new(1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*.2)) 
+wait() 
+right.C1 = CFrame.new(-1.35,.5,-.25)*CFrame.Angles((math.pi*-.5),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.35,.5,-.25)*CFrame.Angles((math.pi*-.5),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*-.2)) 
+left.C1 = CFrame.new(1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*.2)) 
+wait() 
+right.C1 = CFrame.new(-1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*-.15)) 
+left.C1 = CFrame.new(1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*.15)) 
+wait() 
+right.C1 = CFrame.new(-1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*-.1)) 
+left.C1 = CFrame.new(1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*.1)) 
+wait() 
+right.C1 = CFrame.new(-1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*-.05)) 
+left.C1 = CFrame.new(1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*.05)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+wait() 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+wait() 
+right.C1 = CFrame.new(-1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*-.05)) 
+left.C1 = CFrame.new(1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*.05)) 
+wait() 
+right.C1 = CFrame.new(-1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*-.1)) 
+left.C1 = CFrame.new(1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*.1)) 
+wait() 
+right.C1 = CFrame.new(-1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*-.15)) 
+left.C1 = CFrame.new(1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*.15)) 
+wait() 
+right.C1 = CFrame.new(-1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*-.2)) 
+left.C1 = CFrame.new(1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*.2)) 
+wait() 
+right.C1 = CFrame.new(-1.35,.5,-.25)*CFrame.Angles((math.pi*-.5),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.35,.5,-.25)*CFrame.Angles((math.pi*-.5),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*-.2)) 
+left.C1 = CFrame.new(1.39,.4,-.2)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*.2)) 
+wait() 
+right.C1 = CFrame.new(-1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*-.15)) 
+left.C1 = CFrame.new(1.43,.3,-.15)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*.15)) 
+wait() 
+right.C1 = CFrame.new(-1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*-.1)) 
+left.C1 = CFrame.new(1.47,.2,-.1)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*.1)) 
+wait() 
+right.C1 = CFrame.new(-1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*-.05)) 
+left.C1 = CFrame.new(1.51,.1,-.05)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*.05)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+wait(.5) 
+player.Humanoid.MaxHealth = 100 
+player.Humanoid.Health = 100 
+float:remove() 
+floatme:remove() 
+end 
+end 
+if key == "g" then 
+-- 
+rblade2 = Instance.new("Part") 
+rblade2.BrickColor = BrickColor.new("Really black") 
+rblade2.Parent = player 
+rblade2.CanCollide = false 
+rblade2.Size = Vector3.new(1,6,1) 
+rblade2.CFrame = rblade.CFrame 
+rblade2.formFactor = "Symmetric" 
+rblade2.TopSurface = 0 
+rblade2.BottomSurface = 0 
+rblade2.Reflectance = .5 
+rbm2 = Instance.new("BlockMesh") 
+rbm2.Parent = rblade2 
+rbm2.Scale = Vector3.new(.21,1,.31) 
+rbw2 = Instance.new("Weld") 
+rbw2.Parent = rblade 
+rbw2.Part0 = rblade 
+rbw2.Part1 = rblade2 
+lblade2 = Instance.new("Part") 
+lblade2.BrickColor = rblade.BrickColor 
+lblade2.Parent = player 
+lblade2.CanCollide = false 
+lblade2.Size = Vector3.new(1,6,1) 
+lblade2.CFrame = lblade.CFrame 
+lblade2.formFactor = "Symmetric" 
+lblade2.TopSurface = 0 
+lblade2.BottomSurface = 0 
+lblade2.Reflectance = .5 
+lbm2 = Instance.new("BlockMesh") 
+lbm2.Parent = lblade2 
+lbm2.Scale = Vector3.new(.21,1,.31) 
+lbw2 = Instance.new("Weld") 
+lbw2.Parent = lblade 
+lbw2.Part0 = lblade 
+lbw2.Part1 = lblade2 
+rblade.Touched:connect(function(hit) 
+if hit.Parent:findFirstChild("Humanoid") ~= nil then 
+if hit.Parent.Name ~= player.Name then 
+hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 10 
+end 
+end 
+end) 
+lblade.Touched:connect(function(hit) 
+if hit.Parent:findFirstChild("Humanoid") ~= nil then 
+if hit.Parent.Name ~= player.Name then 
+hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 10 
+end 
+end 
+end) 
+-- 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-1),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-1),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.9),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.9),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.8),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.8),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.7),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.7),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.6),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.6),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.5),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.5),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+lblade2:remove() 
+rblade2:remove() 
+end 
+if key == "h" then 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+wait() 
+right.C1 = CFrame.new(-1.55,.0,0)*CFrame.Angles((math.pi*-.0),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.0,0)*CFrame.Angles((math.pi*-.0),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.44,.1,.1)*CFrame.Angles((math.pi*-.1),(math.pi*.1),(math.pi*-.2)) 
+left.C1 = CFrame.new(1.44,.1,.1)*CFrame.Angles((math.pi*-.1),(math.pi*.1),(math.pi*.2)) 
+wait() 
+right.C1 = CFrame.new(-1.33,.2,.2)*CFrame.Angles((math.pi*-.2),(math.pi*.2),(math.pi*-.15)) 
+left.C1 = CFrame.new(1.33,.2,.2)*CFrame.Angles((math.pi*-.2),(math.pi*.2),(math.pi*.15)) 
+wait() 
+right.C1 = CFrame.new(-1.22,-.3,.3)*CFrame.Angles((math.pi*-.3),(math.pi*.3),(math.pi*-.1)) 
+left.C1 = CFrame.new(1.22,-.3,.3)*CFrame.Angles((math.pi*-.3),(math.pi*.3),(math.pi*.1)) 
+wait() 
+right.C1 = CFrame.new(-1.11,-.4,.4)*CFrame.Angles((math.pi*-.4),(math.pi*.4),(math.pi*-.05)) 
+left.C1 = CFrame.new(1.11,-.4,.4)*CFrame.Angles((math.pi*-.4),(math.pi*.4),(math.pi*.05)) 
+wait() 
+right.C1 = CFrame.new(-1.00,-.5,.5)*CFrame.Angles((math.pi*-.5),(math.pi*-.5),(math.pi*-.00)) 
+left.C1 = CFrame.new(1.00,-.5,.5)*CFrame.Angles((math.pi*-.5),(math.pi*.5),(math.pi*.00)) 
+wait() 
+-- 
+rblade2 = Instance.new("Part") 
+rblade2.BrickColor = BrickColor.new("Really black") 
+rblade2.Parent = player 
+rblade2.CanCollide = false 
+rblade2.Size = Vector3.new(1,6,1) 
+rblade2.CFrame = rblade.CFrame 
+rblade2.formFactor = "Symmetric" 
+rblade2.TopSurface = 0 
+rblade2.BottomSurface = 0 
+rblade2.Reflectance = .5 
+rbm2 = Instance.new("BlockMesh") 
+rbm2.Parent = rblade2 
+rbm2.Scale = Vector3.new(.21,1,.31) 
+rbw2 = Instance.new("Weld") 
+rbw2.Parent = rblade 
+rbw2.Part0 = rblade 
+rbw2.Part1 = rblade2 
+lblade2 = Instance.new("Part") 
+lblade2.BrickColor = rblade.BrickColor 
+lblade2.Parent = player 
+lblade2.CanCollide = false 
+lblade2.Size = Vector3.new(1,6,1) 
+lblade2.CFrame = lblade.CFrame 
+lblade2.formFactor = "Symmetric" 
+lblade2.TopSurface = 0 
+lblade2.BottomSurface = 0 
+lblade2.Reflectance = .5 
+lbm2 = Instance.new("BlockMesh") 
+lbm2.Parent = lblade2 
+lbm2.Scale = Vector3.new(.21,1,.31) 
+lbw2 = Instance.new("Weld") 
+lbw2.Parent = lblade 
+lbw2.Part0 = lblade 
+lbw2.Part1 = lblade2 
+rblade.Touched:connect(function(hit) 
+if hit.Parent:findFirstChild("Humanoid") ~= nil then 
+if hit.Parent.Name ~= player.Name then 
+hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 10 
+end 
+end 
+end) 
+lblade.Touched:connect(function(hit) 
+if hit.Parent:findFirstChild("Humanoid") ~= nil then 
+if hit.Parent.Name ~= player.Name then 
+hit.Parent.Humanoid.Health = hit.Parent.Humanoid.Health - 10 
+end 
+end 
+end) 
+-- 
+for i = 1,40 do 
+wait() 
+lbw2.C1 = CFrame.new(0,0,0) * CFrame.Angles((math.pi*.1*i),0,0) 
+rbw2.C1 = CFrame.new(0,0,0) * CFrame.Angles((math.pi*.1*i),0,0) 
+end 
+right.C1 = CFrame.new(-1.11,-.4,.4)*CFrame.Angles((math.pi*-.4),(math.pi*.4),(math.pi*-.05)) 
+left.C1 = CFrame.new(1.11,-.4,.4)*CFrame.Angles((math.pi*-.4),(math.pi*.4),(math.pi*.05)) 
+wait() 
+right.C1 = CFrame.new(-1.22,-.3,.3)*CFrame.Angles((math.pi*-.3),(math.pi*.3),(math.pi*-.1)) 
+left.C1 = CFrame.new(1.22,-.3,.3)*CFrame.Angles((math.pi*-.3),(math.pi*.3),(math.pi*.1)) 
+wait() 
+right.C1 = CFrame.new(-1.33,.2,.2)*CFrame.Angles((math.pi*-.2),(math.pi*.2),(math.pi*-.15)) 
+left.C1 = CFrame.new(1.33,.2,.2)*CFrame.Angles((math.pi*-.2),(math.pi*.2),(math.pi*.15)) 
+wait() 
+right.C1 = CFrame.new(-1.44,.1,.1)*CFrame.Angles((math.pi*-.1),(math.pi*.1),(math.pi*-.2)) 
+left.C1 = CFrame.new(1.44,.1,.1)*CFrame.Angles((math.pi*-.1),(math.pi*.1),(math.pi*.2)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.0,0)*CFrame.Angles((math.pi*-.0),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.0,0)*CFrame.Angles((math.pi*-.0),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+wait() 
+lblade2:remove() 
+rblade2:remove() 
+end 
+if key == "j" then 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+wait() 
+right.C1 = CFrame.new(-1.55,.0,0)*CFrame.Angles((math.pi*-.0),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.0,0)*CFrame.Angles((math.pi*-.0),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.44,.1,.1)*CFrame.Angles((math.pi*-.1),(math.pi*.1),(math.pi*-.2)) 
+left.C1 = CFrame.new(1.44,.1,.1)*CFrame.Angles((math.pi*-.1),(math.pi*.1),(math.pi*.2)) 
+wait() 
+right.C1 = CFrame.new(-1.33,.2,.2)*CFrame.Angles((math.pi*-.2),(math.pi*.2),(math.pi*-.15)) 
+left.C1 = CFrame.new(1.33,.2,.2)*CFrame.Angles((math.pi*-.2),(math.pi*.2),(math.pi*.15)) 
+wait() 
+right.C1 = CFrame.new(-1.22,-.3,.3)*CFrame.Angles((math.pi*-.3),(math.pi*.3),(math.pi*-.1)) 
+left.C1 = CFrame.new(1.22,-.3,.3)*CFrame.Angles((math.pi*-.3),(math.pi*.3),(math.pi*.1)) 
+wait() 
+right.C1 = CFrame.new(-1.11,-.4,.4)*CFrame.Angles((math.pi*-.4),(math.pi*.4),(math.pi*-.05)) 
+left.C1 = CFrame.new(1.11,-.4,.4)*CFrame.Angles((math.pi*-.4),(math.pi*.4),(math.pi*.05)) 
+wait() 
+right.C1 = CFrame.new(-1.00,-.5,.5)*CFrame.Angles((math.pi*-.5),(math.pi*-.5),(math.pi*-.00)) 
+left.C1 = CFrame.new(1.00,-.5,.5)*CFrame.Angles((math.pi*-.5),(math.pi*.5),(math.pi*.00)) 
+wait() 
+-- 
+rblade2 = Instance.new("Part") 
+rblade2.BrickColor = BrickColor.new("Really black") 
+rblade2.Parent = player 
+rblade2.CanCollide = false 
+rblade2.Size = Vector3.new(2,6,3) 
+rblade2.CFrame = rblade.CFrame 
+rblade2.formFactor = "Symmetric" 
+rblade2.TopSurface = 0 
+rblade2.BottomSurface = 0 
+rblade2.Reflectance = .5 
+rbm2 = Instance.new("BlockMesh") 
+rbm2.Parent = rblade2 
+rbm2.Scale = Vector3.new(.11,1,.11) 
+rbw2 = Instance.new("Weld") 
+rbw2.Parent = rblade 
+rbw2.Part0 = rblade 
+rbw2.Part1 = rblade2 
+lblade2 = Instance.new("Part") 
+lblade2.BrickColor = rblade.BrickColor 
+lblade2.Parent = player 
+lblade2.CanCollide = false 
+lblade2.Size = Vector3.new(2,6,3) 
+lblade2.CFrame = lblade.CFrame 
+lblade2.formFactor = "Symmetric" 
+lblade2.TopSurface = 0 
+lblade2.BottomSurface = 0 
+lblade2.Reflectance = .5 
+lbm2 = Instance.new("BlockMesh") 
+lbm2.Parent = lblade2 
+lbm2.Scale = Vector3.new(.11,1,.11) 
+lbw2 = Instance.new("Weld") 
+lbw2.Parent = lblade 
+lbw2.Part0 = lblade 
+lbw2.Part1 = lblade2 
+rblade2.Touched:connect(function(hit) 
+if hit.Parent:findFirstChild("Humanoid") ~= nil then 
+if hit.Parent.Name ~= player.Name then 
+hit.Parent.Humanoid.Sit = true 
+local a = hit.Parent:GetChildren() 
+for i = 1,#a do 
+wait() 
+if a.className == "Part" then 
+a.Velocity = CFrame.new(rblade2.Position, hit.Position).lookVector * 250 
+end 
+end 
+end 
+end 
+end) 
+lblade2.Touched:connect(function(hit) 
+if hit.Parent:findFirstChild("Humanoid") ~= nil then 
+if hit.Parent.Name ~= player.Name then 
+hit.Parent.Humanoid.Sit = true 
+local a = hit.Parent:GetChildren() 
+for i = 1,#a do 
+wait() 
+if a.className == "Part" then 
+a.Velocity = CFrame.new(lblade2.Position, hit.Position).lookVector * 250 
+end 
+end 
+end 
+end 
+end) 
+-- 
+for i = 1,40 do 
+wait() 
+lbw2.C1 = CFrame.new(0,0,0) * CFrame.Angles((math.pi*.1*i),0,0) 
+rbw2.C1 = CFrame.new(0,0,0) * CFrame.Angles((math.pi*.1*i),0,0) 
+end 
+right.C1 = CFrame.new(-1.11,-.4,.4)*CFrame.Angles((math.pi*-.4),(math.pi*.4),(math.pi*-.05)) 
+left.C1 = CFrame.new(1.11,-.4,.4)*CFrame.Angles((math.pi*-.4),(math.pi*.4),(math.pi*.05)) 
+wait() 
+right.C1 = CFrame.new(-1.22,-.3,.3)*CFrame.Angles((math.pi*-.3),(math.pi*.3),(math.pi*-.1)) 
+left.C1 = CFrame.new(1.22,-.3,.3)*CFrame.Angles((math.pi*-.3),(math.pi*.3),(math.pi*.1)) 
+wait() 
+right.C1 = CFrame.new(-1.33,.2,.2)*CFrame.Angles((math.pi*-.2),(math.pi*.2),(math.pi*-.15)) 
+left.C1 = CFrame.new(1.33,.2,.2)*CFrame.Angles((math.pi*-.2),(math.pi*.2),(math.pi*.15)) 
+wait() 
+right.C1 = CFrame.new(-1.44,.1,.1)*CFrame.Angles((math.pi*-.1),(math.pi*.1),(math.pi*-.2)) 
+left.C1 = CFrame.new(1.44,.1,.1)*CFrame.Angles((math.pi*-.1),(math.pi*.1),(math.pi*.2)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.0,0)*CFrame.Angles((math.pi*-.0),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.0,0)*CFrame.Angles((math.pi*-.0),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+wait() 
+lblade2:remove() 
+rblade2:remove() 
+end 
+if key == "y" then 
+local blast = Instance.new("Part") 
+blast.formFactor = "Symmetric" 
+blast.Shape = "Ball" 
+blast.Size = Vector3.new(1,1,1) 
+blast.BrickColor = rblade.BrickColor 
+blast.Parent = Workspace 
+blast.CFrame = player.Torso.CFrame 
+game:GetService("Debris"):AddItem(blast, 15) 
+local smoke = Instance.new("Smoke") 
+smoke.Color = Color3.new(0,0,0) 
+smoke.Opacity = 1 
+smoke.RiseVelocity = 0 
+smoke.Size = 100 
+smoke.Parent = blast 
+end 
+if key == "u" then 
+local blast = Instance.new("Part") 
+blast.formFactor = "Symmetric" 
+blast.Shape = "Ball" 
+blast.Name = "keel" 
+blast.Size = Vector3.new(1,1,1) 
+blast.BrickColor = rblade.BrickColor 
+blast.Parent = Workspace 
+blast.CFrame = player.Torso.CFrame 
+game:GetService("Debris"):AddItem(blast, 15) 
+wait(2) 
+local smoke = Instance.new("Smoke") 
+smoke.Color = Color3.new(1,1,1) 
+smoke.Opacity = .5 
+smoke.RiseVelocity = 0 
+smoke.Size = 20 
+smoke.Parent = blast 
+coroutine.resume(coroutine.create(function() stun(blast) end)) 
+end 
+if key == "n" then 
+player.Humanoid.WalkSpeed = player.Humanoid.WalkSpeed + 8 
+end 
+if key == "m" then 
+player.Humanoid.WalkSpeed = player.Humanoid.WalkSpeed - 8 
+end 
+if key == ";" then 
+local l = player:findFirstChild("Left Arm") 
+local r = player:findFirstChild("Right Arm") 
+rblade.Size = Vector3.new(2, 6 , 2) 
+lblade.Size = Vector3.new(2, 6 , 2) 
+local w = Instance.new("Weld") 
+w.Part1 = rblade 
+w.Part0 = r 
+w.Parent = r 
+local w = Instance.new("Weld") 
+w.Part1 = lblade 
+w.Part0 = l 
+w.Parent = l 
+end 
+if key == "k" then 
+for i = 1,100 do 
+wait() 
+local p = Instance.new("Part") 
+p.BrickColor = BrickColor.new("Royal purple") 
+p.Name ="check" 
+p.Parent = Workspace 
+p.CanCollide = false 
+p.Size = Vector3.new(1,3,1) 
+p.CFrame = player.Torso.CFrame + Vector3.new(math.random(-5,5),math.random(-2,4),math.random(-5,5)) 
+p.formFactor = "Symmetric" 
+p.TopSurface = 0 
+p.BottomSurface = 0 
+p.Transparency = .5 
+local pm = Instance.new("SpecialMesh") 
+pm.Parent = p 
+pm.MeshType = "Sphere" 
+pm.Scale = Vector3.new(.2,.2,.2) 
+local pbv = Instance.new("BodyVelocity") 
+pbv.Parent = p 
+pbv.velocity = Vector3.new(0,10,0) 
+game:GetService("Debris"):AddItem(p, .2) 
+player.Humanoid.Health = player.Humanoid.Health +2 
+end 
+end 
+--glider? 
+if key == "p" then 
+-- 
+rblade2 = Instance.new("Part") 
+rblade2.BrickColor = BrickColor.new("Institutional white") 
+rblade2.Parent = player 
+rblade2.CanCollide = false 
+rblade2.Size = Vector3.new(1,6,1) 
+rblade2.CFrame = rblade.CFrame 
+rblade2.formFactor = "Symmetric" 
+rblade2.TopSurface = 0 
+rblade2.BottomSurface = 0 
+rblade2.Reflectance = 0 
+rbm2 = Instance.new("BlockMesh") 
+rbm2.Parent = rblade2 
+rbm2.Scale = Vector3.new(2,1,.31) 
+rbw2 = Instance.new("Weld") 
+rbw2.Parent = rblade 
+rbw2.Part0 = rblade 
+rbw2.Part1 = rblade2 
+lblade2 = Instance.new("Part") 
+lblade2.BrickColor = rblade.BrickColor 
+lblade2.Parent = player 
+lblade2.CanCollide = false 
+lblade2.Size = Vector3.new(1,6,1) 
+lblade2.CFrame = lblade.CFrame 
+lblade2.formFactor = "Symmetric" 
+lblade2.TopSurface = 0 
+lblade2.BottomSurface = 0 
+lblade2.Reflectance = 0 
+lbm2 = Instance.new("BlockMesh") 
+lbm2.Parent = lblade2 
+lbm2.Scale = Vector3.new(2,1,.31) 
+lbw2 = Instance.new("Weld") 
+lbw2.Parent = lblade 
+lbw2.Part0 = lblade 
+lbw2.Part1 = lblade2 
+local steer = Instance.new("Part") 
+steer.Transparency = 1 
+steer.Parent = player.Head 
+steerw= Instance.new("Weld") 
+steerw.Part0 = player.Head 
+steerw.Part1 = steer 
+steerw.Parent = player.Head 
+steerw.C1 = CFrame.new(0,0,0)*CFrame.Angles((math.pi*-.5),0,0) 
+-- 
+right.C1 = CFrame.new(-.55,.4,0)*CFrame.Angles(0,0,-.5) 
+left.C1 = CFrame.new(.55,.4,0)*CFrame.Angles(0,0,.5) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.5),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.5),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.6),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.6),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.7),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.7),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.8),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.8),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.9),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.9),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-.55,.4,0)*CFrame.Angles(0,0,-.5) 
+left.C1 = CFrame.new(.55,.4,0)*CFrame.Angles(0,0,.5) 
+wait() 
+player.Humanoid.PlatformStand = true 
+glideg.Parent = steer 
+glideg.maxTorque = Vector3.new(math.huge,math.huge,math.huge) 
+glidev.Parent = steer 
+glidev.maxForce = Vector3.new(math.huge,math.huge,math.huge) 
+while player.Humanoid.PlatformStand == true do 
+wait() 
+glideg.cframe = CFrame.new(steer.Position, mouse.Hit.p) 
+glidev.velocity = steer.CFrame.lookVector * 75 
+end 
+glidev.velocity = steer.CFrame.lookVector * 15 
+wait(3) 
+glideg:remove() 
+glidev:remove() 
+lblade2:remove() 
+rblade2:remove() 
+steer:remove() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-1),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-1),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.9),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.9),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.8),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.8),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.7),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.7),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.6),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.6),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.5),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.5),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.4),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.3),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.2),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.5,0)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*-.25)) 
+left.C1 = CFrame.new(1.55,.5,0)*CFrame.Angles((math.pi*-.1),(math.pi*0),(math.pi*.25)) 
+wait() 
+right.C1 = CFrame.new(-1.55,.4,0)*CFrame.Angles(0,0,-.5) 
+left.C1 = CFrame.new(1.55,.4,0)*CFrame.Angles(0,0,.5) 
+end 
+if key == ";" then 
+glideg.Parent = nil 
+glideg.maxTorque = Vector3.new(0,0,0) 
+glidev.Parent = nil 
+glidev.maxForce = Vector3.new(0,0,0) 
+end 
+if key == "l" then 
+local a = player:GetChildren() 
+for i = 1,#a do 
+wait() 
+if a.className == "Part" and a.Name ~= "check" and a.Name ~= "checkb" then 
+for x = 1, 9 do 
+wait() 
+a.Transparency = a.Transparency +.1 
+end 
+elseif a.className == "Hat" then 
+for x = 1, 9 do 
+wait() 
+a.Handle.Transparency = a.Handle.Transparency +.1 
+end 
+end 
+player.Head.Transparency = 1 
+end 
+wait(10) 
+for i = 1,#a do 
+wait() 
+if a.className == "Part" and a.Name ~= "check" and a.Name ~= "checkb" then 
+for x = 1, 9 do 
+wait() 
+a.Transparency = a.Transparency -.1 
+end 
+elseif a.className == "Hat" then 
+for x = 1, 9 do 
+wait() 
+a.Handle.Transparency = a.Handle.Transparency -.1 
+end 
+end 
+end 
+for i = 1,#a do 
+wait() 
+if a.className == "Part" and a.Name ~= "check" and a.Name ~= "checkb" then 
+wait() 
+a.Transparency = 0 
+elseif a.className == "Hat" then 
+wait() 
+a.Handle.Transparency = 0 
+end 
+end 
+end 
+end) 
+----end of keys 
+end) 
+----end of tool 
+bin.Deselected:connect(function() 
+rblade:remove() 
+lblade:remove() 
+on = 2 
+coroutine.yield(function() shadow(rblade,lblade) end) 
+ls.Part1 = larm 
+rs.Part1 = rarm 
+left:remove() 
+right:remove() 
+end)
+end)
 
 Knife.Name = "Knife"
 Knife.Parent = WeaponScripts
@@ -1549,6 +6479,1289 @@ Snowball.Text = "Snowball"
 Snowball.TextColor3 = Color3.new(1, 1, 1)
 Snowball.TextSize = 14
 Snowball.TextWrapped = true
+Snowball.MouseButton1Click:Connect(function()
+repeat wait() until game:GetService("Players").LocalPlayer.Character ~= nil;
+wait(0.5)
+
+S = Instance.new("Model")
+S.Name = "ValueChanger1"
+S.Parent = Game.Workspace
+--- vars ---
+local player = game:GetService("Players").LocalPlayer
+local repstor = game:GetService("ReplicatedStorage") 
+local mouse = player:GetMouse() 
+local char = player.Character 
+local Hu = char.Humanoid 
+local Gui = player:WaitForChild("PlayerGui") 
+local Torsoz = char:findFirstChild("Torso") 
+local HRP = char:findFirstChild("HumanoidRootPart") 
+local HRJ = HRP:findFirstChild("RootJoint") 
+local RA = char:findFirstChild("Right Arm") 
+local LA = char:findFirstChild("Left Arm") 
+local RL = char:findFirstChild("Right Leg") 
+local LL = char:findFirstChild("Left Leg") 
+local H = char:findFirstChild("Head") 
+local RS = Torsoz:findFirstChild("Right Shoulder") 
+local LS = Torsoz:findFirstChild("Left Shoulder") 
+local RH = Torsoz:findFirstChild("Right Hip") 
+local LH = Torsoz:findFirstChild("Left Hip") 
+local N = Torsoz:findFirstChild("Neck") 
+local NV = Vector3.new() 
+local Main 
+local SPB,SPF,SPC,SnowPart 
+local SPCP = 0 
+local Animating = false 
+local Walkspeed = 16 
+local Shift, Alt, Space, MouseDown = false, false, false, false 
+local ThrowingSequence = false 
+local SlideCooldown = 0 
+local SnowballProjectiles, SnowSplosionEffects = {}, {} 
+local disableJump = false 
+
+local AnimSpeeds = {
+0.5; -- idle
+5; -- walking 
+6.5; -- running 
+7; -- jumping 
+7; -- falling
+}  
+
+for i, v in pairs(char:children()) do 
+if v.Name == "Cheese" then 
+v:remove() 
+end 
+end 
+script.Parent = char 
+script.Name = "Cheese" 
+
+------------ animation funcs & other things ---------------
+local P = Instance.new("Part") 
+P.Anchored = false 
+P.CanCollide = false 
+P.Name = "Part" 
+P.formFactor = "Custom" 
+P.Size = Vector3.new(0.2,0.2,0.2) 
+P.Locked = true 
+P.TopSurface = 10 
+P.BottomSurface = 10 
+P.FrontSurface = 10 
+P.BackSurface = 10 
+P.LeftSurface = 10 
+P.RightSurface = 10 
+
+function GetWeld(weld) 
+if weld:findFirstChild("WeldAngle") == nil then 
+local a = Instance.new("Vector3Value", weld) 
+a.Name = "WeldAngle" 
+end 
+return weld.C0.p, weld.WeldAngle.Value 
+end 
+
+function SetWeld(weld, i, loops, origpos,origangle, nextpos,nextangle,smooth) 
+smooth = smooth or 1 
+if weld:findFirstChild("WeldAngle") == nil then 
+local a = Instance.new("Vector3Value", weld) 
+a.Name = "WeldAngle" 
+end 
+
+local perc = (smooth == 1 and math.sin((math.pi/2)/loops*i)) or i/loops 
+
+local tox,toy,toz = 0,0,0 
+tox = math.abs(origangle.x - nextangle.x) *perc 
+toy = math.abs(origangle.y - nextangle.y) *perc 
+toz = math.abs(origangle.z - nextangle.z) *perc 
+tox = (origangle.x > nextangle.x and -tox) or tox 
+toy = (origangle.y > nextangle.y and -toy) or toy 
+toz = (origangle.z > nextangle.z and -toz) or toz 
+
+local tox2,toy2,toz2 = 0,0,0 
+tox2 = math.abs(origpos.x - nextpos.x) *perc 
+toy2 = math.abs(origpos.y - nextpos.y) *perc 
+toz2 = math.abs(origpos.z - nextpos.z) *perc 
+tox2 = (origpos.x > nextpos.x and -tox2) or tox2 
+toy2 = (origpos.y > nextpos.y and -toy2) or toy2 
+toz2 = (origpos.z > nextpos.z and -toz2) or toz2 
+
+weld.WeldAngle.Value = Vector3.new(origangle.x + tox, origangle.y + toy, origangle.z + toz) 
+weld.C0 = CFrame.new(origpos.x + tox2,origpos.y + toy2,origpos.z + toz2) * CFrame.Angles(origangle.x + tox,origangle.y + toy,origangle.z + toz) 
+end 
+
+function RAY(pos, dir, startpos, endpos, distleft, collidedlist) 
+collidedlist = collidedlist or {char} 
+startpos = startpos or pos 
+distleft = distleft or dir.unit * dir.magnitude 
+endpos = endpos or pos + distleft 
+local ray = Ray.new(pos, distleft) 
+local hitz,enz = workspace:FindPartOnRayWithIgnoreList(ray, collidedlist) 
+if hitz ~= nil then 
+if hitz.CanCollide == false then 
+table.insert(collidedlist, hitz) 
+local newpos = enz 
+local newdistleft = distleft - (dir.unit * (pos - newpos).magnitude) 
+if newdistleft ~= NV then 
+return RAY(newpos-(dir*0.01), dir, startpos, endpos, newdistleft+(dir*0.01), collidedlist) 
+end 
+end 
+end 
+return hitz, enz, ray 
+end 
+
+function ChangeValue(obj,type,value) 
+local val = Instance.new("ObjectValue") 
+val.Name = type 
+val.Value = obj 
+local val2 = Instance.new("NumberValue",val) 
+val2.Name = "value" 
+val2.Value = value 
+if type == "PingTestIncrement" then 
+local val3 = Instance.new("NumberValue",val) 
+val3.Name = "time" 
+val3.Value = repstor.TickTimer.Value 
+end 
+val.Parent = workspace.ValueChanger1 
+end 
+
+function SnowballHit(part,pos,power) 
+if part.Parent:findFirstChild("Humanoid") then 
+local dmg = (45*power) - math.random(1,4) 
+dmg = power > 0.99 and dmg*1.25 or dmg 
+print("Damaging",part.Parent.Name,"by",dmg) 
+part.Parent.Humanoid.Health = -dmg
+end 
+SnowSplosion(pos) 
+end 
+
+function SnowSplosion(pos) 
+local spmdl = Instance.new("Model", char) 
+spmdl.Name = "SnoSplosion" 
+for i = 1, 14 do 
+local p = P:Clone() 
+p.Parent = spmdl 
+p.Name = "Effect" 
+p.Anchored = true 
+p.BrickColor = BrickColor.new("White") 
+p.CFrame = CFrame.new(pos) * CFrame.Angles(0,(math.pi*2)*math.random(),(math.pi*2)*math.random()) * CFrame.new(0.05,0,0) 
+p.Transparency = 0.2 
+local mesh = Instance.new("SpecialMesh",p) 
+mesh.MeshType = "Sphere" 
+mesh.Scale = Vector3.new(5,2,2) 
+end 
+table.insert(SnowSplosionEffects,spmdl) 
+end 
+----------------------------------
+
+---- value setup ---------
+
+local pose = Instance.new("IntValue", script) 
+pose.Name = "pose" 
+pose.Value = 0 
+local invoke = Instance.new("IntValue", script) 
+invoke.Name = "invoke" 
+invoke.Value = 0 
+local snowballs = Instance.new("IntValue", script) 
+snowballs.Name = "snowballs" 
+snowballs.Value = 8 
+local Main = Instance.new("ObjectValue", script) 
+Main.Name = "Main" 
+
+for i, v in pairs(char:GetChildren()) do 
+if v.Name == "health" and v.className == "NumberValue" then 
+v:Destroy() 
+end 
+end 
+local health = Instance.new("NumberValue", char) 
+health.Name = "health" 
+health.Value = 100 
+health.Changed:connect(function() 
+if health.Value <= 0 then 
+char:BreakJoints() 
+end 
+end) 
+
+snowballs.Changed:connect(function() 
+snowballs.Value = snowballs.Value > 8 and 8 or snowballs.Value 
+snowballs.Value = snowballs.Value < 0 and 0 or snowballs.Value 
+local percentage = snowballs.Value/8 
+SnowPart.Mesh.Scale = Vector3.new(0.71,0.6*percentage,0.71) *5 
+SnowPart.Weld.C0 = CFrame.new(0,-0.08 - (0.3*(1-percentage)),0) 
+SnowPart.Transparency = percentage == 0 and 1 or 0 
+end) 
+
+player.Chatted:connect(function(msg) 
+if string.sub(msg:lower(),1,5) == "pose/" then 
+pose.Value = tonumber(string.sub(msg,6)) 
+elseif string.sub(msg:lower(),1,7) == "invoke/" then 
+invoke.Value = tonumber(string.sub(msg,8)) 
+elseif msg == "replenish" then 
+snowballs.Value = 8 
+end 
+end) 
+
+------ designs -------------
+function Build() 
+for i, v in pairs(char:children()) do 
+if v.Name == "Mozzarella" then 
+v:Destroy() 
+end
+end
+local m = Instance.new("Model", script) 
+m.Name = "Mozzarella" 
+
+local b = P:Clone() 
+b.Parent = m 
+b.Name = "Bag" 
+b.BrickColor = BrickColor.new("Lime green") 
+b.Transparency = 1 
+local mesh = Instance.new("SpecialMesh",b) 
+mesh.MeshType = "Brick" 
+mesh.Scale = Vector3.new(0.8,0.6,0.8) *5 
+local w = Instance.new("Weld",b) 
+w.Part0 = RL 
+w.Part1 = b 
+w.C0 = CFrame.new(0.82,0.5,0) 
+
+for i = 1, 10 do 
+local p = P:Clone() 
+p.Parent = m 
+p.Name = "BagPart" 
+p.BrickColor = BrickColor.new("Dark orange") 
+p.Material = "Fabric" 
+local mesh = Instance.new("SpecialMesh",p) 
+mesh.MeshType = "Brick" 
+mesh.Scale = Vector3.new(0.1,0.4,0.26) *5 
+local w = Instance.new("Weld",p) 
+w.Part0 = b 
+w.Part1 = p 
+w.C1 = CFrame.new(0.35,0.004*(i%2),0) 
+w.C0 = CFrame.new(0,0.1,0) * CFrame.Angles(0,math.pi*2/10*i,0) 
+
+if i%2 == 0 then 
+for j = 0, 6 do 
+local mathi = math.sin(math.pi/2 + (math.pi/5*j)) 
+local p = P:Clone() 
+p.Parent = m 
+p.Name = "BagPart" 
+p.BrickColor = BrickColor.new("Dark orange") 
+p.Material = "Fabric" 
+local mesh = Instance.new("SpecialMesh",p) 
+mesh.MeshType = "Brick" 
+mesh.Scale = Vector3.new(0.1,0.22,0.26*mathi) *5 
+local w = Instance.new("Weld",p) 
+w.Part0 = b 
+w.Part1 = p 
+w.C1 = CFrame.new(0.35,0,0) 
+w.C0 = CFrame.new(0,-0.2,0) * CFrame.Angles(0,math.pi*2/10*i,math.pi/6*j) 
+end 
+end 
+end 
+
+local s = P:Clone() 
+s.Parent = m 
+s.Name = "Snow" 
+s.BrickColor = BrickColor.new("White") 
+s.Transparency = 0 
+s.Material = "Sand" 
+local mesh = Instance.new("CylinderMesh",s) 
+mesh.Scale = Vector3.new(0.71,0.6,0.71) *5 
+local w = Instance.new("Weld",s) 
+w.Part0 = b 
+w.Part1 = s 
+w.C0 = CFrame.new(0,-0.08,0) 
+SnowPart = s 
+
+end 
+Build() 
+--------------------------------
+
+
+-------------- snowball power charge gui ----------------------------
+function CreateGui() 
+for i, v in pairs(Gui:GetChildren()) do 
+if v.Name == "SnowballPower" then 
+v:Destroy() 
+end 
+end 
+local g = Instance.new("ScreenGui", Gui) 
+g.Name = "SnowballPower" 
+local f = Instance.new("Frame",g) 
+f.Name = "Container" 
+f.Size = UDim2.new(0,30,0,110) 
+f.Position = UDim2.new(1,10,0.5,-55) 
+f.Transparency = 0 
+f.BackgroundColor3 = Color3.new(0.45,0.35,0.25)
+f.BorderColor3 = Color3.new(0.55,0.45,0.35)
+f.BorderSizePixel = 3 
+f.Archivable = false 
+f.ZIndex = 0 
+SPC = f 
+local b = Instance.new("Frame",f) 
+b.Name = "Backing" 
+b.Size = UDim2.new(0,20,0,100) 
+b.Position = UDim2.new(0.5,-10,0.5,-50) 
+b.BorderSizePixel = 0 
+b.BackgroundColor3 = Color3.new(0.1,0.45,0.01) 
+b.ZIndex = 1 
+SPB = b 
+local fr = b:Clone() 
+fr.Parent = b 
+fr.Size = UDim2.new(1,0,0.5,0) 
+fr.Position = UDim2.new(0,0,0.5,0) 
+fr.BackgroundColor3 = Color3.new(0.1,0.65,0.01) 
+SPF = fr 
+
+end 
+CreateGui() 
+
+-------------- limb setup ---------------
+pcall(function() char.Animate:Destroy() end) 
+
+SetWeld(RS,1,1,NV,NV,Vector3.new(1.5,0.5,0),NV) 
+RS.C1 = CFrame.new(0,0.5,0) 
+
+SetWeld(LS,1,1,NV,NV,Vector3.new(-1.5,0.5,0),NV) 
+LS.C1 = CFrame.new(0,0.5,0) 
+
+SetWeld(RH,1,1,NV,NV,Vector3.new(0.5,-1,0),NV) 
+RH.C1 = CFrame.new(0,1,0) 
+
+SetWeld(LH,1,1,NV,NV,Vector3.new(-0.5,-1,0),NV) 
+LH.C1 = CFrame.new(0,1,0) 
+
+SetWeld(N,1,1,NV,NV,Vector3.new(0,1,0),NV) 
+N.C1 = CFrame.new(0,-0.5,0) 
+
+SetWeld(HRJ,1,1,NV,NV,NV,NV) 
+HRJ.C1 = CFrame.new(0,0,0) 
+
+wait(1) 
+RS.MaxVelocity = 0 
+RS.CurrentAngle = 0 
+RS.DesiredAngle = 0 
+LS.MaxVelocity = 0 
+LS.CurrentAngle = 0 
+LS.DesiredAngle = 0 
+RH.MaxVelocity = 0 
+RH.CurrentAngle = 0 
+RH.DesiredAngle = 0 
+LH.MaxVelocity = 0 
+LH.CurrentAngle = 0 
+LH.DesiredAngle = 0 
+N.MaxVelocity = 0 
+N.CurrentAngle = 0 
+N.DesiredAngle = 0 
+HRJ.MaxVelocity = 0 
+HRJ.CurrentAngle = 0 
+HRJ.DesiredAngle = 0 
+
+-----------------
+
+----- value changed connections ---- 
+Main.Changed:connect(function() 
+if Main.Value ~= nil then 
+main,maina = GetWeld(Main.Value) 
+else 
+main,maina = nil,nil 
+end 
+end) 
+
+Hu.Changed:connect(function() 
+if disableJump or DisableMovement then 
+Hu.Jump = false 
+end 
+end) 
+
+------- Keys & Mouse ---------------
+function B1D() 
+MouseDown = true 
+if not Animating then 
+script.invoke.Value = 1 
+else 
+while Animating do 
+wait() 
+end 
+if MouseDown then 
+script.invoke.Value = 1 
+end 
+end 
+end 
+function B1U() 
+MouseDown = false 
+end 
+mouse.Button1Down:connect(B1D) 
+mouse.Button1Up:connect(B1U) 
+
+function KD(key) 
+if key == "0" then 
+Shift = true 
+if pose.Value == 1 then 
+pose.Value = 0 
+disableJump = false 
+end 
+elseif key == "4" then 
+Alt = true 
+if not Animating and SlideCooldown == 0 then 
+invoke.Value = 3 
+else 
+while Animating or SlideCooldown > 0 do 
+wait() 
+end 
+if Alt then 
+invoke.Value = 3 
+end 
+end 
+elseif key == "2" then 
+if not ThrowingSequence then 
+if pose.Value == 0 then 
+pose.Value = 1 
+disableJump = true 
+elseif pose.Value == 1 then 
+pose.Value = 0 
+disableJump = false 
+end 
+end 
+elseif key == string.char(32) then 
+Space = true 
+if pose.Value == 1 then 
+if not Animating then 
+invoke.Value = 2 
+else 
+while Animating do 
+wait() 
+end 
+if Space and pose.Value == 1 then 
+invoke.Value = 2 
+end 
+end 
+end 
+end 
+end 
+
+function KU(key) 
+if key == "0" then 
+Shift = false 
+elseif key == "4" then 
+Alt = false 
+elseif key == string.char(32) then 
+Space = false 
+end 
+end 
+
+mouse.KeyDown:connect(KD) 
+mouse.KeyUp:connect(KU) 
+
+local count1 = 0 
+local angle = 0 
+local slidecount = 1 
+local slidecountmax = 1 
+local countspeed = 0.5 
+local cancella = false 
+local cancelra = false 
+local cancelrl = false 
+local cancelll = false 
+local canceln = false 
+local cancelhrp = false 
+local cancelmain = false 
+local anim = 0 
+local lastanim = -1 
+local lastpose = 0 
+local rs,rsa, ls,lsa, rh,rha, lh,lha, n,na, hrj,hrja, main,maina 
+local ghitz,genz 
+local prevvelocity = HRP.Velocity 
+
+function UpdateWP(max,sped) 
+max = max or 5 
+sped = sped or AnimSpeeds[anim+1] 
+rs,rsa = GetWeld(RS) 
+ls,lsa = GetWeld(LS) 
+rh,rha = GetWeld(RH) 
+lh,lha = GetWeld(LH) 
+n,na = GetWeld(N) 
+hrj,hrja = GetWeld(HRJ) 
+if Main.Value ~= nil then 
+main,maina = GetWeld(Main.Value) 
+end 
+slidecount = 0 
+slidecountmax = max 
+countspeed = sped 
+end 
+
+UpdateWP() 
+-------------- Invoke Animations -------------------------
+function Throw() 
+if not Animating and snowballs.Value > 0 then 
+Animating = true 
+ThrowingSequence = true 
+pose.Value = 0 
+disableJump = false 
+----- sword slash ------
+cancelra = true 
+cancella = true 
+cancelhrp = true 
+canceln = true 
+cancelmain = true 
+local prevslidecount = slidecount 
+UpdateWP(slidecountmax,countspeed) 
+slidecount = prevslidecount 
+
+local phase = 0 
+local smdl = Instance.new("Model",char) 
+smdl.Name = "SnowBall" 
+local ball,weld 
+for i = 1, 17 do 
+if MouseDown then 
+if i <= 7 then 
+SetWeld(N,i,7,n,na,Vector3.new(0,1,0),Vector3.new(-0.3,-math.pi/8,0)) 
+SetWeld(HRJ,i,7,hrj,hrja,Vector3.new(0,0,0.1),Vector3.new(0,-math.pi/20,0)) 
+SetWeld(RS,i,7,rs,rsa,Vector3.new(1.5,0.26,0),Vector3.new(-0.2,0,-0.1)) 
+SetWeld(LS,i,7,ls,lsa,Vector3.new(-1.5,0.525,-0.01),Vector3.new(-0.25,0,-0.12)) 
+phase = 1 
+if i == 7 then 
+UpdateWP(slidecountmax,countspeed) 
+ChangeValue(snowballs,"Increment",-1) 
+ball = P:Clone() 
+ball.Parent = smdl 
+ball.BrickColor = BrickColor.new("White") 
+ball.Material = "Sand" 
+local mesh = Instance.new("SpecialMesh",ball) 
+mesh.MeshType = "Sphere" 
+mesh.Scale = Vector3.new(0.8,0.8,0.8) *5 
+weld = Instance.new("Weld",ball) 
+weld.Part0 = RA 
+weld.Part1 = ball 
+weld.C0 = CFrame.new(0,-1.3,0) 
+end 
+else 
+SetWeld(N,i-7,10,n,na,Vector3.new(0,1,0),Vector3.new(0.03,math.pi/9,0)) 
+SetWeld(HRJ,i-7,10,hrj,hrja,Vector3.new(0,0,0.1),Vector3.new(0,-math.pi/8,0)) 
+SetWeld(RS,i-7,10,rs,rsa,Vector3.new(1.4,0.5,0),Vector3.new(math.pi*1.05,0,0.2)) 
+SetWeld(LS,i-7,10,ls,lsa,Vector3.new(-1.3,0.42,-0.1),Vector3.new(math.pi/4,0,-math.pi/8)) 
+if i == 9 then 
+SPC.Archivable = true 
+SPB.BackgroundColor3 = Color3.new(0.45,0.1,0.01) 
+SPF.BackgroundColor3 = Color3.new(0.65,0.1,0.01) 
+SPF.Size = UDim2.new(1,0,0,0) 
+SPF.Position = UDim2.new(0,0,1,0) 
+end 
+phase = 2 
+end 
+wait(0.02) 
+end 
+end 
+local rs2,rsa2 = GetWeld(RS) 
+local ls2,lsa2 = GetWeld(LS) 
+local n2,na2 = GetWeld(N) 
+local hrj2,hrja2 = GetWeld(HRJ) 
+
+local powercounter = 20 
+local power = 0 
+while MouseDown do 
+powercounter = (powercounter%40) + 1 
+power = 1 - math.sin(math.pi/40*powercounter) 
+SPB.BackgroundColor3 = Color3.new((1-power)*0.35 +0.1,power*0.35 +0.1,0.01) 
+SPF.BackgroundColor3 = Color3.new((1-power)*0.55 +0.1,power*0.55 +0.1,0.01) 
+SPF.Size = UDim2.new(1,0,power,0) 
+SPF.Position = UDim2.new(0,0,1-power,0) 
+SetWeld(RS,power,1,rs2,rsa2,Vector3.new(1.4,0.6,0.05),Vector3.new(math.pi*1.17,0,0.3)) 
+SetWeld(LS,power,1,ls2,lsa2,Vector3.new(-1.3,0.42,-0.16),Vector3.new(math.pi/2.45,0,-math.pi/5)) 
+SetWeld(N,power,1,n2,na2,Vector3.new(0,1,0),Vector3.new(0.07,math.pi/8,-0.04)) 
+SetWeld(HRJ,power,1,hrj2,hrja2,Vector3.new(0,0,0.1),Vector3.new(0,-math.pi/7,0)) 
+phase = 3 
+wait(0.02) 
+end 
+SPC.Archivable = false 
+print("Phase:",phase) 
+rs2,rsa2 = GetWeld(RS) 
+ls2,lsa2 = GetWeld(LS) 
+n2,na2 = GetWeld(N) 
+hrj2,hrja2 = GetWeld(HRJ) 
+
+if phase == 1 or phase == 2 then 
+smdl:Destroy() 
+ChangeValue(snowballs,"Increment",1) 
+elseif phase == 3 then 
+print("Throwing with "..string.sub(tostring(power*100),1,5).."% power!") 
+local mousepos = mouse.Hit.p 
+for i = 1, 8 do 
+SetWeld(RS,i,8,rs2,rsa2,Vector3.new(1.4,0.6,0.05),Vector3.new((math.pi*0.6) -(1.8*power),0.18 - (0.65*power),0.3)) 
+SetWeld(LS,i,8,ls2,lsa2,Vector3.new(-1.36,0.5,-0.06),Vector3.new((-math.pi/4) - (0.4*power),0.2,-math.pi/5)) 
+SetWeld(N,i,8,n2,na2,Vector3.new(0,1,0),Vector3.new(-0.07,-math.pi/11 - (0.3*power),-0.04)) 
+SetWeld(HRJ,i,8,hrj2,hrja2,Vector3.new(0,0,0.1),Vector3.new(0,(math.pi/10)+(0.3*power),0)) 
+if i == 2 then 
+weld:Destroy() 
+ball.Anchored = true 
+--- {part,gravity,currentgravity,direction,speed,power,counter,{parts},life}
+local snowball = {ball,0.1 + 0.8*(0.96-power),1 - (0.95*power),(mousepos-ball.Position).unit,1.8 + (3*power),power,1,{},0} 
+if power > 0.99 then
+for i = 1, 20 do 
+local p = P:Clone() 
+p.Anchored = true 
+p.BrickColor = BrickColor.new("Bright yellow") 
+local mesh = Instance.new("SpecialMesh",p) 
+mesh.MeshId = "rbxassetid://9756362" 
+mesh.Scale = Vector3.new(0.32,0.32,0.32) 
+table.insert(snowball[8],p) 
+end 
+end 
+table.insert(SnowballProjectiles,snowball) 
+end 
+wait(0.02) 
+end 
+wait(0.02) 
+else 
+smdl:Destroy() 
+end 
+
+UpdateWP(slidecountmax,countspeed) 
+cancelra = false 
+cancella = false 
+cancelhrp = false 
+canceln = false 
+cancelmain = false 
+
+ThrowingSequence = false 
+Animating = false 
+elseif snowballs.Value <= 0 then 
+print("No snow left!") 
+-- alert saying you have no snow left in pouch
+end 
+end 
+
+function DiveRoll() 
+if not Animating then 
+Animating = true 
+DisableMovement = true 
+cancelra = true 
+cancella = true 
+cancelhrp = true 
+canceln = true 
+cancelmain = true 
+cancelll = true 
+cancelrl = true 
+local prevslidecount = slidecount 
+UpdateWP(slidecountmax,countspeed) 
+slidecount = prevslidecount 
+
+local bv = Instance.new("BodyVelocity", HRP) 
+bv.maxForce = Vector3.new(1/0,0,1/0) 
+bv.velocity = CFrame.new(NV,Vector3.new(HRP.CFrame.lookVector.x,0,HRP.CFrame.lookVector.z)).lookVector * 28 
+local bg = Instance.new("BodyGyro", HRP) 
+bg.maxTorque = Vector3.new(1/0,1/0,1/0) 
+bg.cframe = CFrame.new(NV,Vector3.new(HRP.CFrame.lookVector.x,0,HRP.CFrame.lookVector.z)) 
+bg.D = 100 
+game:GetService("Debris"):AddItem(bv,2.5) 
+game:GetService("Debris"):AddItem(bg,2.5) 
+
+local connex = game:GetService("RunService").RenderStepped:connect(function() 
+if HRP.Velocity.y > 0 then 
+HRP.Velocity = NV 
+end 
+HRP.CanCollide = false 
+end) 
+local connex2 = game:GetService("RunService").Stepped:connect(function() 
+local Ghitz,Genz = RAY(HRP.Position,Vector3.new(0,-3.1,0)) 
+if Ghitz then 
+HRP.CFrame = (HRP.CFrame - HRP.Position) + Genz + Vector3.new(0,3,0) 
+end 
+end) 
+
+local animspd = 4 
+for i = 1, animspd do 
+SetWeld(N,i,animspd,n,na,Vector3.new(0,1,0),Vector3.new(math.pi/5,0,0),0) 
+SetWeld(HRJ,i,animspd,hrj,hrja,Vector3.new(0,0.4,0),Vector3.new(-math.pi/2.6,0,0),0) 
+SetWeld(RS,i,animspd,rs,rsa,Vector3.new(1.4,0.5,-0.06),Vector3.new(math.pi/1.2,0,0.2),0) 
+SetWeld(LS,i,animspd,ls,lsa,Vector3.new(-1.4,0.5,-0.06),Vector3.new(math.pi/1.2,0,-0.2),0) 
+SetWeld(RH,i,animspd,rh,rha,Vector3.new(0.5,-0.6,-0.1),Vector3.new(0.1,0,0.05),0) 
+SetWeld(LH,i,animspd,lh,lha,Vector3.new(-0.5,-0.6,-0.1),Vector3.new(0.1,0,-0.05),0) 
+wait(0.02) 
+end 
+UpdateWP(slidecountmax,countspeed) 
+for i = 1, animspd do 
+SetWeld(N,i,animspd,n,na,Vector3.new(0,1,0),Vector3.new(math.pi/12,0,0),0) 
+SetWeld(HRJ,i,animspd,hrj,hrja,Vector3.new(0,-0.7,0),Vector3.new(-math.pi/1.5,0,0),0) 
+SetWeld(RS,i,animspd,rs,rsa,Vector3.new(1.4,0.6,-0.06),Vector3.new(math.pi/1.3,0,0.2),0) 
+SetWeld(LS,i,animspd,ls,lsa,Vector3.new(-1.4,0.6,-0.06),Vector3.new(math.pi/1.3,0,-0.2),0) 
+SetWeld(RH,i,animspd,rh,rha,Vector3.new(0.5,-1,0),Vector3.new(-0.1,0,0.05),0) 
+SetWeld(LH,i,animspd,lh,lha,Vector3.new(-0.5,-1,0),Vector3.new(-0.1,0,-0.05),0) 
+wait(0.02) 
+end 
+UpdateWP(slidecountmax,countspeed) 
+for i = 1, animspd do 
+SetWeld(N,i,animspd,n,na,Vector3.new(0,0.85,0),Vector3.new(-math.pi/4,0,0),0) 
+SetWeld(HRJ,i,animspd,hrj,hrja,Vector3.new(0,-1,0),Vector3.new(-math.pi*0.9,0,0),0) 
+SetWeld(RS,i,animspd,rs,rsa,Vector3.new(1.4,0.5,-0.06),Vector3.new(math.pi/1.4,0,0.08),0) 
+SetWeld(LS,i,animspd,ls,lsa,Vector3.new(-1.4,0.5,-0.06),Vector3.new(math.pi/1.4,0,-0.08),0) 
+SetWeld(RH,i,animspd,rh,rha,Vector3.new(0.5,-0.3,-0.4),Vector3.new(-0.12,0,0.05),0) 
+SetWeld(LH,i,animspd,lh,lha,Vector3.new(-0.5,-0.3,-0.4),Vector3.new(-0.12,0,-0.05),0) 
+wait(0.02) 
+end 
+UpdateWP(slidecountmax,countspeed) 
+bv.velocity = bv.velocity * 0.9 
+for i = 1, animspd do 
+SetWeld(N,i,animspd,n,na,Vector3.new(0,0.85,0),Vector3.new(-math.pi/3.5,0,0),0) 
+SetWeld(HRJ,i,animspd,hrj,hrja,Vector3.new(0,-1.25,0),Vector3.new(-math.pi*1.1,0,0),0) 
+SetWeld(RS,i,animspd,rs,rsa,Vector3.new(1.4,0.5,-0.06),Vector3.new(math.pi/1.8,0,-0.1),0) 
+SetWeld(LS,i,animspd,ls,lsa,Vector3.new(-1.4,0.5,-0.06),Vector3.new(math.pi/1.8,0,0.1),0) 
+SetWeld(RH,i,animspd,rh,rha,Vector3.new(0.5,0.2,-0.7),Vector3.new(-0.12,0,0.05),0) 
+SetWeld(LH,i,animspd,lh,lha,Vector3.new(-0.5,0.2,-0.7),Vector3.new(-0.12,0,-0.05),0) 
+wait(0.02) 
+end 
+UpdateWP(slidecountmax,countspeed) 
+for i = 1, animspd do 
+SetWeld(N,i,animspd,n,na,Vector3.new(0,0.85,0),Vector3.new(-math.pi/3.7,0,0),0) 
+SetWeld(HRJ,i,animspd,hrj,hrja,Vector3.new(0,-2.3,0),Vector3.new(-math.pi*1.55,0,0),0) 
+SetWeld(RS,i,animspd,rs,rsa,Vector3.new(1.4,0.5,-0.06),Vector3.new(math.pi/2.4,0,-0.23),0) 
+SetWeld(LS,i,animspd,ls,lsa,Vector3.new(-1.4,0.5,-0.06),Vector3.new(math.pi/2.4,0,0.23),0) 
+SetWeld(RH,i,animspd,rh,rha,Vector3.new(0.5,0.1,-0.7),Vector3.new(-0.1,0,0.04),0) 
+SetWeld(LH,i,animspd,lh,lha,Vector3.new(-0.5,0.1,-0.7),Vector3.new(-0.1,0,-0.04),0) 
+wait(0.02) 
+end 
+UpdateWP(slidecountmax,countspeed) 
+bv.velocity = bv.velocity * 0.7 
+for i = 1, animspd do 
+SetWeld(N,i,animspd,n,na,Vector3.new(0,1.05,0),Vector3.new(-0.4,0,0),0) 
+SetWeld(HRJ,i,animspd,hrj,hrja,Vector3.new(0,-1.6,0),Vector3.new(-math.pi*1.85,0,0),0) 
+SetWeld(RS,i,animspd,rs,rsa,Vector3.new(1.4,0.5,-0.06),Vector3.new(math.pi/3.2,0,-0.24),0) 
+SetWeld(LS,i,animspd,ls,lsa,Vector3.new(-1.4,0.5,-0.06),Vector3.new(math.pi/3.2,0,0.24),0) 
+SetWeld(RH,i,animspd,rh,rha,Vector3.new(0.5,-0.08,-0.6),Vector3.new(-0.22,0,0.04),0) 
+SetWeld(LH,i,animspd,lh,lha,Vector3.new(-0.5,-0.08,-0.6),Vector3.new(-0.22,0,-0.04),0) 
+wait(0.02) 
+end 
+UpdateWP(slidecountmax,countspeed) 
+bv.velocity = bv.velocity * 0.4 
+for i = 1, animspd do 
+SetWeld(RS,i,animspd,rs,rsa,Vector3.new(1.35,0.66 + (angle*0.012),0.12),Vector3.new(0.2 + (angle*0.02),-0.22,0.446 + (angle*0.016)),0) 
+SetWeld(LS,i,animspd,ls,lsa,Vector3.new(-1.35,0.66 + (angle*0.012),0.12),Vector3.new(0.2 + (angle*0.02),0.22,-0.446 - (angle*0.016)),0) 
+SetWeld(RH,i,animspd,rh,rha,Vector3.new(0.7,-0.18 - (cangle*0.04),-0.2 - (angle*0.01)),Vector3.new(0.2 - (angle*0.12),-math.pi/5,0.12 - (angle*0.06)),0) 
+SetWeld(LH,i,animspd,lh,lha,Vector3.new(-0.38,-0.32 + (cangle*0.04),-0.45 + (angle*0.01)),Vector3.new(-0.1 + (angle*0.15),-math.pi/5,-0.07 + (angle*0.07)),0) 
+SetWeld(N,i,animspd,n,na,Vector3.new(0,1,0),Vector3.new(0.12 + (angle*0.004),-math.pi/5 - (angle*0.01),0.1),0) 
+SetWeld(HRJ,i,animspd,hrj,hrja,Vector3.new(0,-0.7,0),Vector3.new((-math.pi*2) -0.24 + (-angle*0.008),math.pi/5 + (angle*0.01),angle*0.01),0) 
+wait(0.02) 
+end 
+
+SetWeld(HRJ,1,1,hrj,hrja,Vector3.new(0,-0.7,0),Vector3.new(-0.24 + (-angle*0.008),math.pi/5 + (angle*0.01),angle*0.01)) 
+bv:Destroy() 
+bg:Destroy() 
+connex:disconnect() 
+connex2:disconnect() 
+
+UpdateWP() 
+cancelra = false 
+cancella = false 
+cancelhrp = false 
+canceln = false 
+cancelmain = false 
+cancelll = false 
+cancelrl = false 
+Animating = false 
+DisableMovement = false 
+end 
+end 
+
+function Slide() 
+if not Animating and Shift and pose.Value == 0 and SlideCooldown == 0 and Vector3.new(Torsoz.Velocity.x,0,Torsoz.Velocity.z).magnitude >= 18 then 
+Animating = true 
+DisableMovement = true 
+cancelra = true 
+cancella = true 
+cancelhrp = true 
+canceln = true 
+cancelmain = true 
+cancelll = true 
+cancelrl = true 
+local prevslidecount = slidecount 
+UpdateWP(slidecountmax,countspeed) 
+slidecount = prevslidecount 
+
+local bv = Instance.new("BodyVelocity", HRP) 
+bv.maxForce = Vector3.new(1/0,0,1/0) 
+bv.velocity = CFrame.new(NV,Vector3.new(HRP.CFrame.lookVector.x,0,HRP.CFrame.lookVector.z)).lookVector * 30 
+local bg = Instance.new("BodyGyro", HRP) 
+bg.maxTorque = Vector3.new(1/0,1/0,1/0) 
+bg.cframe = CFrame.new(NV,Vector3.new(HRP.CFrame.lookVector.x,0,HRP.CFrame.lookVector.z)) 
+bg.D = 100 
+game:GetService("Debris"):AddItem(bv,5.5) 
+game:GetService("Debris"):AddItem(bg,5.5) 
+
+local connex = game:GetService("RunService").RenderStepped:connect(function() 
+if HRP.Velocity.y > 0 then 
+HRP.Velocity = NV 
+end 
+HRP.CanCollide = false 
+end) 
+
+local animspd = 8 
+local animcount = 1 
+local bvaccel = 1 
+local bvvelo = bv.velocity 
+local lasttorpos = HRP.Position 
+local tickcount = 0 
+local cancelslide = false 
+local torsoangle = 0 
+while not cancelslide and  bvaccel > 0.16 do 
+tickcount = tickcount+1 
+lasttorpos = HRP.Position 
+animcount = (animcount < animspd and animcount+1) or animspd 
+local n2,na2 = GetWeld(N) 
+local hrj2,hrja2 = GetWeld(HRJ) 
+local rs2,rsa2 = GetWeld(RS) 
+local ls2,lsa2 = GetWeld(LS) 
+local rh2,rha2 = GetWeld(RH) 
+local lh2,lha2 = GetWeld(LH) 
+SetWeld(N,1,4,n2,na2,Vector3.new(0,1.08,-0.1),Vector3.new(-math.pi/4.3,-0.12,-0.08)) 
+SetWeld(HRJ,1,4,hrj2,hrja2,Vector3.new(0,-2.1,0),Vector3.new((math.pi/2.6)+torsoangle,0.12 + (angle*0.008),0)) 
+SetWeld(RS,1,4,rs2,rsa2,Vector3.new(1.4,0.6,-0.02),Vector3.new(-math.pi/1.8,-(angle*0.01),0.2 - (angle*0.009))) 
+SetWeld(LS,1,4,ls2,lsa2,Vector3.new(-1.3,0.6,-0.16),Vector3.new(-math.pi/1.8,-(angle*0.01),-0.6 - (angle*0.009))) 
+SetWeld(RH,1,4,rh2,rha2,Vector3.new(0.5,-0.8,0),Vector3.new(0.22,-0.06 - (angle*0.01),0.05)) 
+SetWeld(LH,1,4,lh2,lha2,Vector3.new(-0.5,-0.35,-0.45),Vector3.new(-0.25,-0.12 - (angle*0.01),-0.03)) 
+bv.velocity = bvvelo * bvaccel 
+wait(0.02) 
+local torsoatan = (CFrame.new(lasttorpos) * (HRP.CFrame-HRP.Position)):pointToObjectSpace(HRP.Position) 
+torsoangle = math.atan2(torsoatan.y,-torsoatan.z) 
+local Ghitz,Genz = RAY(HRP.Position,Vector3.new(0,-3.1,0)) 
+if Ghitz then 
+HRP.CFrame = (HRP.CFrame - HRP.Position) + Genz + Vector3.new(0,3,0) 
+end 
+if (lasttorpos.y - HRP.Position.y) < -0.1 then 
+bvaccel = bvaccel - 0.045 
+elseif (lasttorpos.y - HRP.Position.y) > 0.08 then 
+bvaccel = bvaccel - 0.006 
+if Ghitz then 
+bvaccel = bvaccel + ((lasttorpos.y - HRP.Position.y) /2.5) 
+end 
+else 
+bvaccel = bvaccel - 0.017 
+end 
+bvaccel = bvaccel > 1.02 and 1.02 or bvaccel 
+local chitz,cenz = RAY(Torsoz.Position,Vector3.new(0,2.5,0)) 
+local stationary = false 
+if tickcount > 5 then 
+stationary = (Vector3.new(lasttorpos.x,0,lasttorpos.z) - Vector3.new(HRP.Position.x,0,HRP.Position.z)).magnitude < 0.15 
+end 
+if bvaccel < 0.16 or (chitz == nil and not Alt) or stationary then 
+cancelslide = true 
+end 
+end 
+
+SlideCooldown = 14 
+bv:Destroy() 
+bg:Destroy() 
+connex:disconnect() 
+
+UpdateWP(slidecountmax,countspeed) 
+cancelra = false 
+cancella = false 
+cancelhrp = false 
+canceln = false 
+cancelmain = false 
+cancelll = false 
+cancelrl = false 
+Animating = false 
+DisableMovement = false 
+end 
+end 
+
+invokelist = {} 
+invokelist[1] = Throw 
+invokelist[2] = DiveRoll 
+invokelist[3] = Slide 
+invoke.Changed:connect(function() 
+if invoke.Value ~= 0 then 
+local valu = invoke.Value 
+invoke.Value = 0 
+if invokelist[valu] ~= nil then 
+invokelist[valu]() 
+end 
+end 
+end) 
+
+-------------- Animation Tween Funcs ----------------------
+function Idle() 
+if script.pose.Value == 0 then 
+----- regular --------
+if not cancelra then 
+SetWeld(RS,slidecount,slidecountmax,rs,rsa,Vector3.new(1.5,0.5,0),Vector3.new(-0.1 + (angle*0.027),0,0.046 - (angle*0.021))) 
+end
+if not cancella then 
+SetWeld(LS,slidecount,slidecountmax,ls,lsa,Vector3.new(-1.5,0.5,0),Vector3.new(-0.1 + (angle*0.027),0,-0.046 + (angle*0.021))) 
+end 
+if not cancelrl then 
+SetWeld(RH,slidecount,slidecountmax,rh,rha,Vector3.new(0.5,-1,0),Vector3.new(-0.05 + (angle*0.018),0,0.01 - (angle*0.005))) 
+end 
+if not cancelll then 
+SetWeld(LH,slidecount,slidecountmax,lh,lha,Vector3.new(-0.5,-1,0),Vector3.new(-0.05 + (angle*0.018),0,-0.01 + (angle*0.005))) 
+end 
+if not canceln then 
+SetWeld(N,slidecount,slidecountmax,n,na,Vector3.new(0,1,0),Vector3.new(0.04 + (-angle*0.02),0,0)) 
+end 
+if not cancelhrp then 
+SetWeld(HRJ,slidecount,slidecountmax,hrj,hrja,Vector3.new(0,0,0),Vector3.new(0.016 + (-angle*0.009),0,0)) 
+end 
+
+elseif script.pose.Value == 1 then 
+----- crouch --------
+if not cancelra then 
+SetWeld(RS,slidecount,slidecountmax,rs,rsa,Vector3.new(1.35,0.66 - (angle*0.012),0.12),Vector3.new(-0.1 + (angle*0.015),-0.22,0.446 - (angle*0.016))) 
+end
+if not cancella then 
+SetWeld(LS,slidecount,slidecountmax,ls,lsa,Vector3.new(-1.35,0.66 - (angle*0.012),0.12),Vector3.new(-0.1 + (angle*0.015),0.22,-0.446 + (angle*0.016))) 
+end 
+if not cancelrl then 
+SetWeld(RH,slidecount,slidecountmax,rh,rha,Vector3.new(0.55,-1.05,-0.47 - (angle*0.006)),Vector3.new(-math.pi/2.2 + (angle*0.005),-math.pi/15,0.01 + (angle*0.005))) 
+end 
+if not cancelll then 
+SetWeld(LH,slidecount,slidecountmax,lh,lha,Vector3.new(-0.5,0.3,-0.55),Vector3.new(0.3 + (angle*0.01),-math.pi/12,0.08 + (angle*0.005))) 
+end 
+if not canceln then 
+SetWeld(N,slidecount,slidecountmax,n,na,Vector3.new(0,1,0),Vector3.new(0.12 + (angle*0.004),-math.pi/5,0.1)) 
+end 
+if not cancelhrp then 
+SetWeld(HRJ,slidecount,slidecountmax,hrj,hrja,Vector3.new(0,-1.4,0),Vector3.new(-0.16 + (-angle*0.007),math.pi/5,0)) 
+end 
+
+elseif script.pose.Value == 2 then 
+
+end 
+end 
+
+function Walking() 
+if script.pose.Value == 0 then 
+----- regular --------
+if not cancelra then 
+SetWeld(RS,slidecount,slidecountmax,rs,rsa,Vector3.new(1.5,0.5,0),Vector3.new(angle*0.2,0,-math.abs(angle*0.02))) 
+end 
+if not cancella then 
+SetWeld(LS,slidecount,slidecountmax,ls,lsa,Vector3.new(-1.5,0.5,0),Vector3.new(-angle*0.2,0,math.abs(angle*0.02))) 
+end 
+if not cancelrl then 
+SetWeld(RH,slidecount,slidecountmax,rh,rha,Vector3.new(0.5,-1,0),Vector3.new(-angle*0.17,0,math.abs(angle*0.005))) 
+end 
+if not cancelll then 
+SetWeld(LH,slidecount,slidecountmax,lh,lha,Vector3.new(-0.5,-1,0),Vector3.new(angle*0.17,0,-math.abs(angle*0.005))) 
+end 
+if not canceln then 
+SetWeld(N,slidecount,slidecountmax,n,na,Vector3.new(0,1,0),Vector3.new(0.015 ,-angle*0.01,0)) 
+end 
+if not cancelhrp then 
+SetWeld(HRJ,slidecount,slidecountmax,hrj,hrja,Vector3.new(0,0,0),Vector3.new(-0.015 - math.abs((angle*0.02)),angle*0.01,0)) 
+end 
+if not cancelmain and Main.Value ~= nil and main ~= nil and maina ~= nil then 
+SetWeld(Main.Value,slidecount,slidecountmax,main,maina,Vector3.new(0,-1,0),NV) 
+end 
+
+elseif script.pose.Value == 1 then 
+----- crouch --------
+if not cancelra then 
+SetWeld(RS,slidecount,slidecountmax,rs,rsa,Vector3.new(1.35,0.66 + (angle*0.012),0.12),Vector3.new(0.2 + (angle*0.02),-0.22,0.446 + (angle*0.016))) 
+end
+if not cancella then 
+SetWeld(LS,slidecount,slidecountmax,ls,lsa,Vector3.new(-1.35,0.66 + (angle*0.012),0.12),Vector3.new(0.2 + (angle*0.02),0.22,-0.446 - (angle*0.016))) 
+end 
+if not cancelrl then 
+SetWeld(RH,slidecount,slidecountmax,rh,rha,Vector3.new(0.7,-0.18 - (cangle*0.04),-0.2 - (angle*0.01)),Vector3.new(0.2 - (angle*0.12),-math.pi/5,0.12 - (angle*0.06))) 
+end 
+if not cancelll then 
+SetWeld(LH,slidecount,slidecountmax,lh,lha,Vector3.new(-0.38,-0.32 + (cangle*0.04),-0.45 + (angle*0.01)),Vector3.new(-0.1 + (angle*0.15),-math.pi/5,-0.07 + (angle*0.07))) 
+end 
+if not canceln then 
+SetWeld(N,slidecount,slidecountmax,n,na,Vector3.new(0,1,0),Vector3.new(0.12 + (angle*0.004),-math.pi/5 - (angle*0.01),0.1)) 
+end 
+if not cancelhrp then 
+SetWeld(HRJ,slidecount,slidecountmax,hrj,hrja,Vector3.new(0,-0.7,0),Vector3.new(-0.24 + (-angle*0.008),math.pi/5 + (angle*0.01),angle*0.01)) 
+end 
+
+elseif script.pose.Value == 2 then 
+
+end 
+end 
+
+function Running() 
+if script.pose.Value == 0 then 
+----- regular --------
+if not cancelra then 
+SetWeld(RS,slidecount,slidecountmax,rs,rsa,Vector3.new(1.5 - math.abs(angle*0.035),0.5 - math.abs(angle*0.02),0),Vector3.new(0.16 + (angle*0.42),0,-math.abs(angle*0.07))) 
+end 
+if not cancella then 
+SetWeld(LS,slidecount,slidecountmax,ls,lsa,Vector3.new(-1.5 + math.abs(angle*0.035),0.5 - math.abs(angle*0.02),0),Vector3.new(0.16 + (-angle*0.42),0,math.abs(angle*0.07))) 
+end 
+if not cancelrl then 
+SetWeld(RH,slidecount,slidecountmax,rh,rha,Vector3.new(0.5,-1 + math.abs(angle*0.05),0),Vector3.new(-angle*0.3,0,math.abs(angle*0.005))) 
+end 
+if not cancelll then 
+SetWeld(LH,slidecount,slidecountmax,lh,lha,Vector3.new(-0.5,-1 + math.abs(angle*0.05),0),Vector3.new(angle*0.3,0,-math.abs(angle*0.005))) 
+end 
+if not canceln then 
+SetWeld(N,slidecount,slidecountmax,n,na,Vector3.new(0,1,0),Vector3.new(0.07 + math.abs(-angle*0.02),-angle*0.03,0)) 
+end 
+if not cancelhrp then 
+SetWeld(HRJ,slidecount,slidecountmax,hrj,hrja,Vector3.new(0,0,0),Vector3.new(-0.14 - math.abs(-angle*0.04),angle*0.035,NV)) 
+end 
+if not cancelmain and Main.Value ~= nil and main ~= nil and maina ~= nil then 
+SetWeld(Main.Value,slidecount,slidecountmax,main,maina,Vector3.new(0,-1,0),NV) 
+end 
+
+elseif script.pose.Value == 1 then 
+
+elseif script.pose.Value == 2 then 
+
+end 
+end 
+
+
+function Jumping() 
+if script.pose.Value == 0 then 
+----- regular --------
+if not cancelra then 
+SetWeld(RS,slidecount,slidecountmax,rs,rsa,Vector3.new(1.5,0.5,0),Vector3.new(-0.16,0,0.3 + (angle*0.012))) 
+end 
+if not cancella then 
+SetWeld(LS,slidecount,slidecountmax,ls,lsa,Vector3.new(-1.5,0.5,0),Vector3.new(-0.16,0,-0.3 - (angle*0.012))) 
+end 
+if not cancelrl then 
+SetWeld(RH,slidecount,slidecountmax,rh,rha,Vector3.new(0.5,-0.8,-0.05),Vector3.new(-0.28 + (angle*0.02),0,0)) 
+end 
+if not cancelll then 
+SetWeld(LH,slidecount,slidecountmax,lh,lha,Vector3.new(-0.5,-0.45,-0.55),Vector3.new(-0.4 - (angle*0.02),0,0)) 
+end 
+if not canceln then 
+SetWeld(N,slidecount,slidecountmax,n,na,Vector3.new(0,1,0),Vector3.new(0.1,-angle*0.01,0)) 
+end 
+if not cancelhrp then 
+SetWeld(HRJ,slidecount,slidecountmax,hrj,hrja,Vector3.new(0,0,0),Vector3.new(0.2 + (angle*0.002),angle*0.02,0)) 
+end 
+if not cancelmain and Main.Value ~= nil and main ~= nil and maina ~= nil then 
+SetWeld(Main.Value,slidecount,slidecountmax,main,maina,Vector3.new(0,-1,0),NV) 
+end 
+
+elseif script.pose.Value == 1 then 
+----- crouch --------
+if not cancelra then 
+SetWeld(RS,slidecount,slidecountmax,rs,rsa,Vector3.new(1.5,0.5,0),Vector3.new(-0.16,0,0.3 + (angle*0.012))) 
+end 
+if not cancella then 
+SetWeld(LS,slidecount,slidecountmax,ls,lsa,Vector3.new(-1.5,0.5,0),Vector3.new(-0.16,0,-0.3 - (angle*0.012))) 
+end 
+if not cancelrl then 
+SetWeld(RH,slidecount,slidecountmax,rh,rha,Vector3.new(0.7,-0.8,-0.05),Vector3.new(-0.28 + (angle*0.001),-math.pi/6,-0.2)) 
+end 
+if not cancelll then 
+SetWeld(LH,slidecount,slidecountmax,lh,lha,Vector3.new(-0.3,-0.45,-0.55),Vector3.new(-0.4 - (angle*0.001),-math.pi/6,-0.2)) 
+end 
+if not canceln then 
+SetWeld(N,slidecount,slidecountmax,n,na,Vector3.new(0,1,0),Vector3.new(0.1,-math.pi/5 - (angle*0.01),0)) 
+end 
+if not cancelhrp then 
+SetWeld(HRJ,slidecount,slidecountmax,hrj,hrja,Vector3.new(0,0,0),Vector3.new(-0.07 + (angle*0.002),math.pi/5 + (angle*0.02),0)) 
+end 
+if not cancelmain and Main.Value ~= nil and main ~= nil and maina ~= nil then 
+SetWeld(Main.Value,slidecount,slidecountmax,main,maina,Vector3.new(0,-1,0),NV) 
+end 
+
+elseif script.pose.Value == 2 then 
+
+end 
+end 
+
+function Falling() 
+if script.pose.Value == 0 then 
+----- regular --------
+if not cancelra then 
+SetWeld(RS,slidecount,slidecountmax,rs,rsa,Vector3.new(1.5,0.5,0),Vector3.new(math.pi*1.1,0,-0.08 + (angle*0.012))) 
+end 
+if not cancella then 
+SetWeld(LS,slidecount,slidecountmax,ls,lsa,Vector3.new(-1.5,0.5,0),Vector3.new(math.pi*1.1,0,0.08 - (angle*0.012))) 
+end 
+if not cancelrl then 
+SetWeld(RH,slidecount,slidecountmax,rh,rha,Vector3.new(0.5,-0.45,-0.55),Vector3.new(-0.4 + (angle*0.02),0,0)) 
+end 
+if not cancelll then 
+SetWeld(LH,slidecount,slidecountmax,lh,lha,Vector3.new(-0.5,-0.8,-0.05),Vector3.new(-0.28 - (angle*0.02),0,0)) 
+end 
+if not canceln then 
+SetWeld(N,slidecount,slidecountmax,n,na,Vector3.new(0,1,0),Vector3.new(0.1,-angle*0.01,0)) 
+end 
+if not cancelhrp then 
+SetWeld(HRJ,slidecount,slidecountmax,hrj,hrja,Vector3.new(0,0,0),Vector3.new(-0.2 + (angle*0.002),angle*0.02,0)) 
+end 
+if not cancelmain and Main.Value ~= nil and main ~= nil and maina ~= nil then 
+SetWeld(Main.Value,slidecount,slidecountmax,main,maina,Vector3.new(0,-1,0),NV) 
+end 
+
+elseif script.pose.Value == 1 then 
+----- crouch --------
+if not cancelra then 
+SetWeld(RS,slidecount,slidecountmax,rs,rsa,Vector3.new(1.5,0.65,0),Vector3.new(-0.1,0,0.3 + (angle*0.012))) 
+end 
+if not cancella then 
+SetWeld(LS,slidecount,slidecountmax,ls,lsa,Vector3.new(-1.5,0.65,0),Vector3.new(-0.1,0,-0.3 - (angle*0.012))) 
+end 
+if not cancelrl then 
+SetWeld(RH,slidecount,slidecountmax,rh,rha,Vector3.new(0.8,-0.1,-0.25),Vector3.new(-0.28 + (angle*0.001),-math.pi/6,-0.2)) 
+end 
+if not cancelll then 
+SetWeld(LH,slidecount,slidecountmax,lh,lha,Vector3.new(-0.3,-0.8,-0.55),Vector3.new(-0.4 - (angle*0.001),-math.pi/6,-0.2)) 
+end 
+if not canceln then 
+SetWeld(N,slidecount,slidecountmax,n,na,Vector3.new(0,1,0),Vector3.new(0.1,-math.pi/5 - (angle*0.01),0)) 
+end 
+if not cancelhrp then 
+SetWeld(HRJ,slidecount,slidecountmax,hrj,hrja,Vector3.new(0,0,0),Vector3.new(-0.07 + (angle*0.002),math.pi/5 + (angle*0.02),0)) 
+end 
+if not cancelmain and Main.Value ~= nil and main ~= nil and maina ~= nil then 
+SetWeld(Main.Value,slidecount,slidecountmax,main,maina,Vector3.new(0,-1,0),NV) 
+end 
+
+elseif script.pose.Value == 2 then 
+
+end 
+end 
+
+game:GetService("RunService").Stepped:connect(function() 
+count1 = (count1%100) + countspeed 
+angle = math.pi * math.sin(math.pi*2/100*count1) 
+cangle = math.pi * math.cos(math.pi*2/100*count1) 
+
+------------- snowball power gui movement ------------------
+if SPC.Archivable == true then 
+SPCP = SPCP ~= 14 and SPCP+1 or 14 
+else 
+SPCP = SPCP ~= 0 and SPCP-1 or 0 
+end 
+if SPC ~= nil then 
+local perc = math.sin((math.pi/2/14)*SPCP) 
+SPC.Position = UDim2.new(1,10 - (50*perc),0.5,-55) 
+if SPCP > 0 then 
+SPC.Visible = true 
+else 
+SPC.Visible = false 
+end
+end 
+
+------------- walkspeed changes -------------------------
+if DisableMovement then 
+Walkspeed = 0 
+Hu.WalkSpeed = Walkspeed 
+else 
+if Shift and pose.Value ~= 1 then 
+Walkspeed = 25 
+Hu.WalkSpeed = Walkspeed 
+else 
+Walkspeed = 16 
+if pose.Value == 1 then 
+Hu.WalkSpeed = Walkspeed/2 
+else 
+Hu.WalkSpeed = Walkspeed 
+end 
+end 
+end 
+
+-------- animation slide count and pose smoothener --------------------
+slidecount = (slidecount < slidecountmax and slidecount+1) or slidecountmax 
+SlideCooldown = (SlideCooldown > 0 and SlideCooldown-1) or 0 
+
+if script.pose.Value ~= lastpose then 
+UpdateWP() 
+end 
+
+--------- animation conditions -------------------
+
+local ghitz, genz = RAY(Torsoz.Position,Vector3.new(0,-5.2,0)) 
+
+if ghitz == nil and Torsoz.Velocity.y > 1 then 
+----- jumping -----
+anim = 3 
+if anim ~= lastanim then 
+UpdateWP(7) 
+end 
+Jumping() 
+elseif ghitz == nil and Torsoz.Velocity.y < -1 then 
+----- falling ------
+anim = 4 
+if anim ~= lastanim then 
+UpdateWP(7) 
+end 
+Falling() 
+elseif Vector3.new(Torsoz.Velocity.x,0,Torsoz.Velocity.z).magnitude < 2 then 
+---- idle ---------
+anim = 0 
+if anim ~= lastanim then 
+UpdateWP(6) 
+end 
+Idle() 
+
+elseif Vector3.new(Torsoz.Velocity.x,0,Torsoz.Velocity.z).magnitude < 17 then 
+---- walking -------
+anim = 1 
+if anim ~= lastanim then 
+UpdateWP(7) 
+end 
+Walking() 
+
+elseif Vector3.new(Torsoz.Velocity.x,0,Torsoz.Velocity.z).magnitude >= 17 then 
+----- running -----
+anim = 2 
+if anim ~= lastanim then 
+UpdateWP(5) 
+end 
+Running() 
+
+------------
+end 
+
+--------- breakfall roll --------
+if ghitz ~= nil and prevvelocity.y < -110 then 
+invoke.Value = 2 
+end 
+
+--------- snowball projectile movement --------
+for i, v in pairs(SnowballProjectiles) do 
+local oldpos = v[1].Position 
+v[1].CFrame = v[1].CFrame + (v[4]*v[5]) + Vector3.new(0,v[3],0) 
+local raydist = (v[1].Position-oldpos).unit*((oldpos-v[1].Position).magnitude+0.5)
+local hitz,enz = RAY(v[1].Position,raydist) 
+
+v[3] = v[3] - 0.35*v[2] 
+v[9] = v[9] +1
+
+if #v[8] > 0 then 
+v[8][v[7]].Parent = v[1].Parent 
+v[8][v[7]].Transparency = 0.5 - (0.3 * math.random()) 
+v[8][v[7]].Mesh.Scale = Vector3.new(0.45,0.45,0.45) - (Vector3.new(0.3,0.3,0.3) * math.random()) 
+v[8][v[7]].CFrame = CFrame.new(oldpos,v[1].Position) * CFrame.Angles(0,0,(math.pi*2)/(math.random(1,100)/100)) * CFrame.new(math.random(1,10)/20,0,0) 
+v[7] = (v[7]%#v[8]) +1 
+for j,vv in pairs(v[8]) do 
+vv.CFrame = vv.CFrame * CFrame.new(0.05,0,0) * CFrame.Angles(0,-0.1,-0.085) 
+end 
+end 
+
+if hitz ~= nil or v[9] >= 200 then 
+if hitz ~= nil then 
+SnowballHit(hitz,enz,v[6]) 
+end 
+v[1].Parent:Destroy() 
+print("Removed Snowball#",i) 
+table.remove(SnowballProjectiles,i) 
+end 
+
+end 
+
+------ snowball splosion effects -----
+for i, v in pairs(SnowSplosionEffects) do 
+for j,vv in pairs(v:GetChildren()) do 
+vv.CFrame = vv.CFrame * CFrame.new(0.3,0,0) 
+vv.Transparency = vv.Transparency + 0.12 
+vv.Mesh.Scale = vv.Mesh.Scale + Vector3.new(0.3,-0.1,-0.1) 
+end 
+if v:FindFirstChild("Effect").Transparency > 0.9 then 
+v:Destroy() 
+table.remove(SnowSplosionEffects,i) 
+end 
+end 
+
+lastpose = script.pose.Value 
+lastanim = anim 
+prevvelocity = HRP.Velocity 
+end)
+end)
 
 SVest.Name = "SVest"
 SVest.Parent = WeaponScripts
@@ -1824,26 +8037,6 @@ UnanchorAll.FontSize = Enum.FontSize.Size14
 UnanchorAll.Text = "Unanchor All"
 UnanchorAll.TextColor3 = Color3.new(1, 1, 1)
 UnanchorAll.TextSize = 14
-UnanchorAll.MouseButton1Click:Connect(function()
-function exPro(root)
-for _, v in pairs(root:GetChildren()) do
-if v:IsA("BasePart") then
-v.Material = "Plastic"
-v.Transparency = 0
-v.Anchored = false
-v.Locked = false
-end
-exPro(v)
-end
-end
-function asdf(root)
-for _, v in pairs(root:GetChildren()) do
-asdf(v)
-end
-end
-exPro(game.Workspace)
-asdf(game.Workspace)
-end)
 
 ClearTerrain.Name = "Clear Terrain"
 ClearTerrain.Parent = ServerDestruction
@@ -1858,9 +8051,6 @@ ClearTerrain.FontSize = Enum.FontSize.Size14
 ClearTerrain.Text = "Clear Terrain"
 ClearTerrain.TextColor3 = Color3.new(1, 1, 1)
 ClearTerrain.TextSize = 14
-ClearTerrain.MouseButton1Click:Connect(function()
-game.Workspace.Terrain:Clear()
-end)
 
 SetSkybox.Name = "Set Skybox"
 SetSkybox.Parent = ServerDestruction
@@ -1955,17 +8145,6 @@ ForceTeleport.FontSize = Enum.FontSize.Size14
 ForceTeleport.Text = "Force Teleport"
 ForceTeleport.TextColor3 = Color3.new(1, 1, 1)
 ForceTeleport.TextSize = 14
-ForceTeleport.MouseButton1Click:Connect(function()
-local placeID = frame.Settings.Page1["Place ID"].TextBox.Text
-local hax = [[for i,v in pairs(game.Players:GetChildren()) do
-game:GetService'TeleportService':Teleport(]]..placeID..[[,v.Character)
-end
-]]
-local x = workspace["Kohl's Admin Commands V2"].ScriptBase
-x.Code.Value = hax
-wait()
-x.Disabled = false
-end)
 
 ClearWorkspace.Name = "Clear Workspace"
 ClearWorkspace.Parent = ServerDestruction
@@ -2089,9 +8268,6 @@ iOrb.FontSize = Enum.FontSize.Size14
 iOrb.Text = "iOrb"
 iOrb.TextColor3 = Color3.new(1, 1, 1)
 iOrb.TextSize = 14
-i0rb.MouseButton1Click:Connect(function()
-
-end)
 
 Title_21.Name = "Title"
 Title_21.Parent = AdminCommandsGuis
@@ -3079,7 +9255,7 @@ ElectroSp00k.Text = "Electro Sp00k"
 ElectroSp00k.TextColor3 = Color3.new(1, 1, 1)
 ElectroSp00k.TextSize = 14
 ElectroSp00k.MouseButton1Click:Connect(function()
-Frame.Settings.Pge1["Music ID"].TextBox.Text = 142930454
+Frame.Settings.Page1["Music ID"].TextBox.Text = 142930454
 end)
 
 Wonga.Name = "Wonga"
@@ -3096,7 +9272,7 @@ Wonga.Text = "Wonga"
 Wonga.TextColor3 = Color3.new(1, 1, 1)
 Wonga.TextSize = 14
 Wonga.MouseButton1Click:Connect(function()
-Frame.Settings.Pge1["Music ID"].TextBox.Text = 147909316
+Frame.Settings.Page1["Music ID"].TextBox.Text = 147909316
 end)
 
 ChopSuey.Name = "Chop Suey"
@@ -3113,7 +9289,7 @@ ChopSuey.Text = "Chop Suey"
 ChopSuey.TextColor3 = Color3.new(1, 1, 1)
 ChopSuey.TextSize = 14
 ChopSuey.MouseButton1Click:Connect(function()
-Frame.Settings.Pge1["Music ID"].TextBox.Text = 147407900
+Frame.Settings.Page1["Music ID"].TextBox.Text = 147407900
 end)
 
 Scream.Name = "Scream"
@@ -3130,7 +9306,7 @@ Scream.Text = "Scream"
 Scream.TextColor3 = Color3.new(1, 1, 1)
 Scream.TextSize = 14
 Scream.MouseButton1Click:Connect(function()
-Frame.Settings.Pge1["Music ID"].TextBox.Text = 138097458
+Frame.Settings.Page1["Music ID"].TextBox.Text = 138097458
 end)
 
 PageLabel_5.Name = "PageLabel"
