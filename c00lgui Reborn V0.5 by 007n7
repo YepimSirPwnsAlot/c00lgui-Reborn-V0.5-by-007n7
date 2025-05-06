@@ -7,13 +7,13 @@
 local c00kkiddgui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local Title = Instance.new("TextLabel")
-local TextButton = Instance.new("TextButton")
-local TextButton_2 = Instance.new("TextButton")
+local Right = Instance.new("TextButton")
+local Left = Instance.new("TextButton")
 local Settings = Instance.new("Frame")
 local SettingsButton = Instance.new("TextButton")
 local Title_2 = Instance.new("TextLabel")
-local TextButton_3 = Instance.new("TextButton")
-local TextButton_4 = Instance.new("TextButton")
+local RightButton2 = Instance.new("TextButton")
+local LeftButton2 = Instance.new("TextButton")
 local Pge1 = Instance.new("Frame")
 local SkyboxDecalID = Instance.new("Frame")
 local Title_3 = Instance.new("TextLabel")
@@ -205,20 +205,20 @@ Title.Text = "c00lgui Reborn V0.5 by 007n7"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.TextSize = 24
 
-TextButton.Name = "<"
-TextButton.Parent = Frame
-TextButton.BackgroundColor3 = Color3.new(0, 0, 0)
-TextButton.BorderColor3 = Color3.new(1, 0, 0)
-TextButton.BorderSizePixel = 3
-TextButton.Position = UDim2.new(0, 0, 0, 40)
-TextButton.Size = UDim2.new(0.5, 0, 0, 40)
-TextButton.ZIndex = 2
-TextButton.Font = Enum.Font.SourceSans
-TextButton.FontSize = Enum.FontSize.Size48
-TextButton.Text = "<"
-TextButton.TextColor3 = Color3.new(1, 1, 1)
-TextButton.TextSize = 48
-TextButton.MouseButton1Click:Connect(function()
+Right.Name = "<"
+Right.Parent = Frame
+Right.BackgroundColor3 = Color3.new(0, 0, 0)
+Right.BorderColor3 = Color3.new(1, 0, 0)
+Right.BorderSizePixel = 3
+Right.Position = UDim2.new(0, 0, 0, 40)
+Right.Size = UDim2.new(0.5, 0, 0, 40)
+Right.ZIndex = 2
+Right.Font = Enum.Font.SourceSans
+Right.FontSize = Enum.FontSize.Size48
+Right.Text = "<"
+Right.TextColor3 = Color3.new(1, 1, 1)
+Right.TextSize = 48
+Right.MouseButton1Click:Connect(function()
 if Page1_2.Visible == true then
 		Page1_2.Visible = false
 		Page5.Visible = true
@@ -237,20 +237,20 @@ if Page1_2.Visible == true then
 	end	
 end)
 
-TextButton_2.Name = ">"
-TextButton_2.Parent = Frame
-TextButton_2.BackgroundColor3 = Color3.new(0, 0, 0)
-TextButton_2.BorderColor3 = Color3.new(1, 0, 0)
-TextButton_2.BorderSizePixel = 3
-TextButton_2.Position = UDim2.new(0.5, 3, 0, 40)
-TextButton_2.Size = UDim2.new(0.5, -3, 0, 40)
-TextButton_2.ZIndex = 2
-TextButton_2.Font = Enum.Font.SourceSans
-TextButton_2.FontSize = Enum.FontSize.Size48
-TextButton_2.Text = ">"
-TextButton_2.TextColor3 = Color3.new(1, 1, 1)
-TextButton_2.TextSize = 48
-TextButton.MouseButton1Click:Connect(function()
+Left.Name = ">"
+Left.Parent = Frame
+Left.BackgroundColor3 = Color3.new(0, 0, 0)
+Left.BorderColor3 = Color3.new(1, 0, 0)
+Left.BorderSizePixel = 3
+Left.Position = UDim2.new(0.5, 3, 0, 40)
+Left.Size = UDim2.new(0.5, -3, 0, 40)
+Left.ZIndex = 2
+Left.Font = Enum.Font.SourceSans
+Left.FontSize = Enum.FontSize.Size48
+Left.Text = ">"
+Left.TextColor3 = Color3.new(1, 1, 1)
+Left.TextSize = 48
+Left.MouseButton1Click:Connect(function()
 if Page1_2.Visible == true then
 		Page1_2.Visible = false
 		Page5.Visible = true
@@ -327,31 +327,51 @@ Title_2.Text = "Settings"
 Title_2.TextColor3 = Color3.new(1, 1, 1)
 Title_2.TextSize = 24
 
-TextButton_3.Name = "<"
-TextButton_3.Parent = Settings
-TextButton_3.BackgroundColor3 = Color3.new(0, 0, 0)
-TextButton_3.BorderColor3 = Color3.new(1, 0, 0)
-TextButton_3.BorderSizePixel = 3
-TextButton_3.Position = UDim2.new(0, 0, 0, 40)
-TextButton_3.Size = UDim2.new(0.5, 0, 0, 40)
-TextButton_3.Font = Enum.Font.SourceSans
-TextButton_3.FontSize = Enum.FontSize.Size48
-TextButton_3.Text = "<"
-TextButton_3.TextColor3 = Color3.new(1, 1, 1)
-TextButton_3.TextSize = 48
+RightButton2.Name = "<"
+RightButton2.Parent = Settings
+RightButton2.BackgroundColor3 = Color3.new(0, 0, 0)
+RightButton2.BorderColor3 = Color3.new(1, 0, 0)
+RightButton2.BorderSizePixel = 3
+RightButton2.Position = UDim2.new(0, 0, 0, 40)
+RightButton2.Size = UDim2.new(0.5, 0, 0, 40)
+RightButton2.Font = Enum.Font.SourceSans
+RightButton2.FontSize = Enum.FontSize.Size48
+RightButton2.Text = "<"
+RightButton2.TextColor3 = Color3.new(1, 1, 1)
+RightButton2.TextSize = 48
+RightButton2.MouseButton1Click:Connect(function()
+if Pge1.Visible == true then
+Pge1.Visible = false
+Pge2.Visible = true else
+if Pge2.Visible == true then
+Pge2.Visible = false
+Pge1.Visible = true
+end
+end
+end)
 
-TextButton_4.Name = ">"
-TextButton_4.Parent = Settings
-TextButton_4.BackgroundColor3 = Color3.new(0, 0, 0)
-TextButton_4.BorderColor3 = Color3.new(1, 0, 0)
-TextButton_4.BorderSizePixel = 3
-TextButton_4.Position = UDim2.new(0.5, 3, 0, 40)
-TextButton_4.Size = UDim2.new(0.5, -3, 0, 40)
-TextButton_4.Font = Enum.Font.SourceSans
-TextButton_4.FontSize = Enum.FontSize.Size48
-TextButton_4.Text = ">"
-TextButton_4.TextColor3 = Color3.new(1, 1, 1)
-TextButton_4.TextSize = 48
+LeftButton2.Name = ">"
+LeftButton2.Parent = Settings
+LeftButton2.BackgroundColor3 = Color3.new(0, 0, 0)
+LeftButton2.BorderColor3 = Color3.new(1, 0, 0)
+LeftButton2.BorderSizePixel = 3
+LeftButton2.Position = UDim2.new(0.5, 3, 0, 40)
+LeftButton2.Size = UDim2.new(0.5, -3, 0, 40)
+LeftButton2.Font = Enum.Font.SourceSans
+LeftButton2.FontSize = Enum.FontSize.Size48
+LeftButton2.Text = ">"
+LeftButton2.TextColor3 = Color3.new(1, 1, 1)
+LeftButton2.TextSize = 48
+LeftButton2.MouseButton1Click:Connect(function()
+if Pge1.Visible == true then
+Pge1.Visible = false
+Pge2.Visible = true else
+if Pge2.Visible == true then
+Pge2.Visible = false
+Pge1.Visible = true
+end
+end
+end)
 
 Pge1.Name = "Pge1"
 Pge1.Parent = Settings
