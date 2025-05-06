@@ -181,8 +181,8 @@ local CloseOpen = Instance.new("TextButton")
 
 -- Properties
 
-c00kkiddgui.Name = "c00kkidd gui"
-c00kkiddgui.Parent = game.Workspace
+c00kkiddgui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+c00kkiddgui.ResetOnSpawn = false
 
 Frame.Parent = c00kkiddgui
 Frame.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -327,7 +327,7 @@ Title_2.Text = "Settings"
 Title_2.TextColor3 = Color3.new(1, 1, 1)
 Title_2.TextSize = 24
 
-RightButton2.Name = "<"
+RightButton2.Name = "RightButton2"
 RightButton2.Parent = Settings
 RightButton2.BackgroundColor3 = Color3.new(0, 0, 0)
 RightButton2.BorderColor3 = Color3.new(1, 0, 0)
@@ -339,15 +339,15 @@ RightButton2.FontSize = Enum.FontSize.Size48
 RightButton2.Text = "<"
 RightButton2.TextColor3 = Color3.new(1, 1, 1)
 RightButton2.TextSize = 48
+
 RightButton2.MouseButton1Click:Connect(function()
-if Pge1.Visible == true then
-Pge1.Visible = false
-Pge2.Visible = true else
-if Pge2.Visible == true then
-Pge2.Visible = false
-Pge1.Visible = true
-end
-end
+    if Pge1.Visible == true then
+        Pge1.Visible = false
+        Pge2.Visible = true
+    elseif Pge2.Visible == true then
+        Pge2.Visible = false
+        Pge1.Visible = true
+    end
 end)
 
 LeftButton2.Name = ">"
@@ -362,15 +362,15 @@ LeftButton2.FontSize = Enum.FontSize.Size48
 LeftButton2.Text = ">"
 LeftButton2.TextColor3 = Color3.new(1, 1, 1)
 LeftButton2.TextSize = 48
+
 LeftButton2.MouseButton1Click:Connect(function()
-if Pge1.Visible == true then
-Pge1.Visible = false
-Pge2.Visible = true else
-if Pge2.Visible == true then
-Pge2.Visible = false
-Pge1.Visible = true
-end
-end
+    if Pge1.Visible == true then
+        Pge1.Visible = false
+        Pge2.Visible = true
+    elseif Pge2.Visible == true then
+        Pge2.Visible = false
+        Pge1.Visible = true
+    end
 end)
 
 Pge1.Name = "Pge1"
@@ -626,7 +626,7 @@ PageLabel.TextSize = 18
 PageLabel.TextWrapped = true
 
 BillboardGuiText.Name = "Billboard Gui Text"
-BillboardGuiText.Parent = Page1
+BillboardGuiText.Parent = Pge1
 BillboardGuiText.BackgroundColor3 = Color3.new(0, 0, 0)
 BillboardGuiText.BorderColor3 = Color3.new(1, 0, 0)
 BillboardGuiText.BorderSizePixel = 3
@@ -771,7 +771,7 @@ PageLabel_2.TextSize = 18
 PageLabel_2.TextWrapped = true
 
 AntiRobloxianRange.Name = "Anti Robloxian Range"
-AntiRobloxianRange.Parent = Page2
+AntiRobloxianRange.Parent = Pge2
 AntiRobloxianRange.BackgroundColor3 = Color3.new(0, 0, 0)
 AntiRobloxianRange.BorderColor3 = Color3.new(1, 0, 0)
 AntiRobloxianRange.BorderSizePixel = 3
@@ -2794,6 +2794,30 @@ DiscoFog.FontSize = Enum.FontSize.Size14
 DiscoFog.Text = "Disco Fog"
 DiscoFog.TextColor3 = Color3.new(1, 1, 1)
 DiscoFog.TextSize = 14
+DiscoFog.MouseButton1Click:Connect(function()
+local basics = {
+	Color3.new(1, 0, 0),
+	Color3.new(1, 85/255, 0),
+	Color3.new(218/255, 218/255, 0),
+	Color3.new(0, 190/255, 0),
+	Color3.new(0, 85/255, 1),
+	Color3.new(0, 0, 127/255),
+	Color3.new(170/255, 0, 1),
+	Color3.new(0, 204/255, 204/255),
+	Color3.new(1, 85/255, 127/255),
+	Color3.new(0, 0, 0),
+	Color3.new(1, 1, 1)
+}
+
+local Lighting = game:GetService("Lighting")
+Lighting.FogStart = 25
+Lighting.FogEnd = 300
+
+while true do
+	wait(0.5)
+	Lighting.FogColor = basics[math.random(1, #basics)]
+end
+end)
 
 RestoreSkybox.Name = "Restore Skybox"
 RestoreSkybox.Parent = Misc
@@ -2933,12 +2957,6 @@ LeaderstatAdd.Text = "Leaderstat Add"
 LeaderstatAdd.TextColor3 = Color3.new(1, 1, 1)
 LeaderstatAdd.TextSize = 14
 LeaderstatAdd.TextWrapped = true
-LeaderstatAdd.MouseButton1Click:Connect(function()
-while true do
-wait(.1)
-game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Pge2["Leaderstat Name"].TextBox.Text).Value = game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Pge2["Leaderstat Name"].TextBox.Text)+game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Pge2["Leaderstat Amount"].TextBox.Text)	
-end
-end)
 
 LeaderstatChange.Name = "Leaderstat Change"
 LeaderstatChange.Parent = Misc
@@ -2954,9 +2972,6 @@ LeaderstatChange.Text = "Leaderstat Change"
 LeaderstatChange.TextColor3 = Color3.new(1, 1, 1)
 LeaderstatChange.TextSize = 14
 LeaderstatChange.TextWrapped = true
-LeaderstatChange.MouseButton1Click:Connect(function()
-game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Pge2["Leaderstat Name"].TextBox.Text)game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Pge2["Leaderstat Amount"].TextBox.Text)	
-end)
 
 PageLabel_6.Name = "PageLabel"
 PageLabel_6.Parent = Page3
@@ -3169,7 +3184,7 @@ CloseOpen.Parent = c00kkiddgui
 CloseOpen.BackgroundColor3 = Color3.new(0, 0, 0)
 CloseOpen.BorderColor3 = Color3.new(1, 0, 0)
 CloseOpen.BorderSizePixel = 3
-CloseOpen.Position = UDim2.new(0, 3, 0.300000012, 380)
+CloseOpen.Position = UDim2.new(0, 3, 0.3, 380)
 CloseOpen.Size = UDim2.new(0, 300, 0, 20)
 CloseOpen.ZIndex = 3
 CloseOpen.Font = Enum.Font.SourceSans
@@ -3177,13 +3192,15 @@ CloseOpen.FontSize = Enum.FontSize.Size18
 CloseOpen.Text = "Close"
 CloseOpen.TextColor3 = Color3.new(1, 1, 1)
 CloseOpen.TextSize = 18
+
 CloseOpen.MouseButton1Click:Connect(function()
-if CloseOpen.Text == "Close" then
-Frame.Visible = false	
-CloseOpen.Text = "Open" else
-Frame.Visible = true
-CloseOpen.Text = "Close"	
-end	
+	if CloseOpen.Text == "Close" then
+		Frame.Visible = false
+		CloseOpen.Text = "Open"
+	else
+		Frame.Visible = true
+		CloseOpen.Text = "Close"
+	end
 end)
 
 local m = Instance.new("Message")
