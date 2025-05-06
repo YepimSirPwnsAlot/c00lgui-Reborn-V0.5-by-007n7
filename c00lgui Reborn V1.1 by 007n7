@@ -2794,14 +2794,6 @@ DiscoFog.FontSize = Enum.FontSize.Size14
 DiscoFog.Text = "Disco Fog"
 DiscoFog.TextColor3 = Color3.new(1, 1, 1)
 DiscoFog.TextSize = 14
-DiscoFog.MouseButton1Click:Connect(function()
-basics = {Color3.new(255/255,0/255,0/255),Color3.new(255/255,85/255,0/255),Color3.new(218/255,218/255,0/255),Color3.new(0/255,190/255,0/255),Color3.new(0/255,85/255,255/255),Color3.new(0/255,0/255,127/255),Color3.new(170/255,0/255,255/255),Color3.new(0/255,204/255,204/255),Color3.new(255/255,85/255,127/255),Color3.new(0/255,0/255,0/255),Color3.new(255/255,255/255,255/255)}
-game.Lighting.FogStart = 25
-game.Lighting.FogEnd = 300
-while true do
-wait(0.5)
-game.Lighting.FogColor = basics[math.random(1,#basics)]
-end)
 
 RestoreSkybox.Name = "Restore Skybox"
 RestoreSkybox.Parent = Misc
@@ -2817,11 +2809,6 @@ RestoreSkybox.Text = "Restore Skybox"
 RestoreSkybox.TextColor3 = Color3.new(1, 1, 1)
 RestoreSkybox.TextSize = 14
 RestoreSkybox.TextWrapped = true
-RestoreSkybox.MouseButton1Click:Connect(function()
-for i,v in pairs(game.Lighting:GetChildren()) do
-v:Remove()
-end
-end)
 
 BecomeOwnerinPersonalServer.Name = "Become Owner in Personal Server"
 BecomeOwnerinPersonalServer.Parent = Misc
@@ -2852,10 +2839,6 @@ StealPlayerPoints.Text = "Steal Player Points"
 StealPlayerPoints.TextColor3 = Color3.new(1, 1, 1)
 StealPlayerPoints.TextSize = 14
 StealPlayerPoints.TextWrapped = true
-StealPlayerPoints.MouseButton1Click:Connect(function()
-local service = game:GetService("PointsService")
-service:AwardPoints(game.Players.LocalPlayer.userId, service:GetAwardablePoints())
-end)
 
 FencingRestore.Name = "Fencing Restore"
 FencingRestore.Parent = Misc
