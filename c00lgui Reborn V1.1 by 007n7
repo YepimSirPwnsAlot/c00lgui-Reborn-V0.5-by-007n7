@@ -199,7 +199,7 @@ Title.Size = UDim2.new(1, 0, 0, 40)
 Title.ZIndex = 2
 Title.Font = Enum.Font.SourceSans
 Title.FontSize = Enum.FontSize.Size24
-Title.Text = "c00lgui Reborn V1.1 by 007n7"
+Title.Text = "c00lgui Reborn V0.5 by 007n7"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.TextSize = 24
 
@@ -216,6 +216,24 @@ TextButton.FontSize = Enum.FontSize.Size48
 TextButton.Text = "<"
 TextButton.TextColor3 = Color3.new(1, 1, 1)
 TextButton.TextSize = 48
+TextButton.MouseButton1Click:Connect(function()
+if Page1_2.Visible == true then
+		Page1_2.Visible = false
+		Page5.Visible = true
+	elseif Page2_2.Visible == true then
+		Page2_2.Visible = false
+		Page1_2.Visible = true
+	elseif Page3.Visible == true then
+		Page3.Visible = false
+		Page2_2.Visible = true
+	elseif Page4.Visible == true then
+		Page4.Visible = false
+		Page3.Visible = true
+	elseif Page5.Visible == true then
+		Page5.Visible = false
+		Page4.Visible = true
+	end	
+end)
 
 TextButton_2.Name = ">"
 TextButton_2.Parent = Frame
@@ -230,6 +248,24 @@ TextButton_2.FontSize = Enum.FontSize.Size48
 TextButton_2.Text = ">"
 TextButton_2.TextColor3 = Color3.new(1, 1, 1)
 TextButton_2.TextSize = 48
+TextButton_2.MouseButton1Click:Connect(function()
+if Page1_2.Visible == true then
+		Page1_2.Visible = false
+		Page5.Visible = true
+	elseif Page2_2.Visible == true then
+		Page2_2.Visible = false
+		Page1_2.Visible = true
+	elseif Page3.Visible == true then
+		Page3.Visible = false
+		Page2_2.Visible = true
+	elseif Page4.Visible == true then
+		Page4.Visible = false
+		Page3.Visible = true
+	elseif Page5.Visible == true then
+		Page5.Visible = false
+		Page4.Visible = true
+	end	
+end)
 
 Settings.Name = "Settings"
 Settings.Parent = Frame
