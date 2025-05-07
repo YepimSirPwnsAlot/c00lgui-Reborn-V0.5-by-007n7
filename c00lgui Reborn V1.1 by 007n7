@@ -2449,7 +2449,7 @@ Text.TextSize = 14
 Text.TextWrapped = true
 Text.TextYAlignment = Enum.TextYAlignment.Top
 
-PageLabel_7.Name = "PageLabel"
+PageLabel_7.Name = "PageLabel_7"
 PageLabel_7.Parent = Page5
 PageLabel_7.BackgroundColor3 = Color3.new(0, 0, 0)
 PageLabel_7.BorderColor3 = Color3.new(1, 0, 0)
