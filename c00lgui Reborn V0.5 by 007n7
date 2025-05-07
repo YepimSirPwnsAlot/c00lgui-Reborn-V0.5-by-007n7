@@ -1,5 +1,8 @@
+----==== Thx For Usin Mah Script Broski ====----
+----==== Remade By YepImSirPwnsAlot Creds to 007n7 ====----
 
--- Objects
+
+----==== Instances and Objects ====----
 
 local c00kkiddgui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
@@ -287,6 +290,31 @@ SettingsButton.FontSize = Enum.FontSize.Size48
 SettingsButton.Text = "<"
 SettingsButton.TextColor3 = Color3.new(1, 1, 1)
 SettingsButton.TextSize = 48
+local cango = true
+
+SettingsButton.MouseButton1Click:Connect(function()
+	if cango == true then
+		cango = false
+		if SettingsButton.Text == "<" then
+			SettingsButton.Text = ">"
+			repeat
+				wait()
+				Settings.Position = UDim2.new(1, Settings.Position.X.Offset - 10, 0, 0)
+			until Settings.Position.X.Offset <= -293
+			wait()
+			Settings.Position = UDim2.new(1, -300, 0, 0)
+		else
+			SettingsButton.Text = "<"
+			repeat
+				wait()
+				Settings.Position = UDim2.new(1, Settings.Position.X.Offset + 10, 0, 0)
+			until Settings.Position.X.Offset >= -10
+			wait()
+			Settings.Position = UDim2.new(1, 3, 0, 0)
+		end
+		cango = true
+	end
+end)
 
 Title_2.Name = "Title"
 Title_2.Parent = Settings
@@ -312,6 +340,15 @@ TextButton_3.FontSize = Enum.FontSize.Size48
 TextButton_3.Text = "<"
 TextButton_3.TextColor3 = Color3.new(1, 1, 1)
 TextButton_3.TextSize = 48
+TextButton_3.MouseButton1Click:Connect(function()
+    if Page1.Visible == true then
+        Page1.Visible = false
+        Page2.Visible = true
+    elseif Page2.Visible == true then
+        Page2.Visible = false
+        Page1.Visible = true
+    end
+end)
 
 TextButton_4.Name = ">"
 TextButton_4.Parent = Settings
@@ -325,6 +362,15 @@ TextButton_4.FontSize = Enum.FontSize.Size48
 TextButton_4.Text = ">"
 TextButton_4.TextColor3 = Color3.new(1, 1, 1)
 TextButton_4.TextSize = 48
+TextButton_4.MouseButton1Click:Connect(function()
+    if Page1.Visible == true then
+        Page1.Visible = false
+        Page2.Visible = true
+    elseif Page2.Visible == true then
+        Page2.Visible = false
+        Page1.Visible = true
+    end
+end)
 
 Page1.Name = "Page1"
 Page1.Parent = Settings
@@ -953,6 +999,9 @@ xBow.FontSize = Enum.FontSize.Size14
 xBow.Text = "xBow"
 xBow.TextColor3 = Color3.new(1, 1, 1)
 xBow.TextSize = 14
+xBow.MouseButton1Click:Connect(function()
+loadstring(game:HttpGetAsync("https://pastebin.com/raw/UpexViXw"))()
+end)
 
 Title_18.Name = "Title"
 Title_18.Parent = WeaponScripts
@@ -981,6 +1030,9 @@ Drage.FontSize = Enum.FontSize.Size14
 Drage.Text = "Drage"
 Drage.TextColor3 = Color3.new(1, 1, 1)
 Drage.TextSize = 14
+Drage.MouseButton1Click:Connect(function()
+loadstring(game:HttpGetAsync("https://pastebin.com/raw/AnkzsX0U"))()
+end)
 
 Eyelaser.Name = "Eyelaser"
 Eyelaser.Parent = WeaponScripts
@@ -995,6 +1047,15 @@ Eyelaser.FontSize = Enum.FontSize.Size14
 Eyelaser.Text = "Eyelaser"
 Eyelaser.TextColor3 = Color3.new(1, 1, 1)
 Eyelaser.TextSize = 14
+Eyelaser.MouseButton1Click:Connect(function()
+local player = game.Players.LocalPlayer
+local backpack = player:WaitForChild("Backpack")
+
+local toolModel = game:GetObjects("rbxassetid://142007482")[1]
+
+toolModel.Parent = backpack
+
+end)
 
 Wand.Name = "Wand"
 Wand.Parent = WeaponScripts
@@ -1009,6 +1070,9 @@ Wand.FontSize = Enum.FontSize.Size14
 Wand.Text = "Wand"
 Wand.TextColor3 = Color3.new(1, 1, 1)
 Wand.TextSize = 14
+Wand.MouseButton1Click:Connect(function()
+loadstring(game:HttpGetAsync("https://pastebin.com/raw/Zgvsnh0R"))()
+end)
 
 DualBlades.Name = "Dual Blades"
 DualBlades.Parent = WeaponScripts
@@ -1023,6 +1087,9 @@ DualBlades.FontSize = Enum.FontSize.Size14
 DualBlades.Text = "Dual Blades"
 DualBlades.TextColor3 = Color3.new(1, 1, 1)
 DualBlades.TextSize = 14
+DualBlades.MouseButton1Click:Connect(function()
+loadstring(game:HttpGetAsync("https://pastebin.com/raw/Zgvsnh0R"))()
+end)
 
 Knife.Name = "Knife"
 Knife.Parent = WeaponScripts
@@ -1037,6 +1104,9 @@ Knife.FontSize = Enum.FontSize.Size14
 Knife.Text = "Knife"
 Knife.TextColor3 = Color3.new(1, 1, 1)
 Knife.TextSize = 14
+Knife.MouseButton1Click:Connect(function()
+game:GetObjects("rbxassetid://92001561")[1].Parent=game.Players.LocalPlayer.Backpack
+end)
 
 Lightsaber.Name = "Lightsaber"
 Lightsaber.Parent = WeaponScripts
@@ -1051,6 +1121,9 @@ Lightsaber.FontSize = Enum.FontSize.Size14
 Lightsaber.Text = "Lightsaber"
 Lightsaber.TextColor3 = Color3.new(1, 1, 1)
 Lightsaber.TextSize = 14
+Lightsaber.MouseButton1Click:Connect(function()
+game:GetObjects("rbxassetid://137264892")[1].Parent=game.Players.LocalPlayer.Backpack
+end)
 
 MasterHand.Name = "Master Hand"
 MasterHand.Parent = WeaponScripts
@@ -1066,6 +1139,9 @@ MasterHand.Text = "Master Hand"
 MasterHand.TextColor3 = Color3.new(1, 1, 1)
 MasterHand.TextSize = 14
 MasterHand.TextWrapped = true
+MasterHand.MouseButton1Click:Connect(function()
+loadstring(game:HttpGetAsync("https://pastebin.com/raw/erEs2pqG"))()
+end)
 
 Staff.Name = "Staff"
 Staff.Parent = WeaponScripts
@@ -1080,6 +1156,9 @@ Staff.FontSize = Enum.FontSize.Size14
 Staff.Text = "Staff"
 Staff.TextColor3 = Color3.new(1, 1, 1)
 Staff.TextSize = 14
+Staff.MouseButton1Click:Connect(function()
+game:GetObjects("rbxassetid://149941868")[1].Parent=game.Players.LocalPlayer.Backpack
+end)
 
 TechnoGauntlet.Name = "Techno Gauntlet"
 TechnoGauntlet.Parent = WeaponScripts
@@ -1095,6 +1174,9 @@ TechnoGauntlet.Text = "Techno Gauntlet"
 TechnoGauntlet.TextColor3 = Color3.new(1, 1, 1)
 TechnoGauntlet.TextSize = 14
 TechnoGauntlet.TextWrapped = true
+TechnoGauntlet.MouseButton1Click:Connect(function()
+game:GetObjects("rbxassetid://142496704")[1].Parent=game.Players.LocalPlayer.Backpack
+end)
 
 Plane.Name = "Plane"
 Plane.Parent = WeaponScripts
@@ -1109,6 +1191,9 @@ Plane.FontSize = Enum.FontSize.Size14
 Plane.Text = "Plane"
 Plane.TextColor3 = Color3.new(1, 1, 1)
 Plane.TextSize = 14
+Plane.MouseButton1Click:Connect(function()
+loadstring(game:HttpGetAsync("https://pastebin.com/raw/MTnLqKrC"))()
+end)
 
 Snowball.Name = "Snowball"
 Snowball.Parent = WeaponScripts
@@ -2454,3 +2539,23 @@ CloseOpen.FontSize = Enum.FontSize.Size18
 CloseOpen.Text = "Close"
 CloseOpen.TextColor3 = Color3.new(1, 1, 1)
 CloseOpen.TextSize = 18
+CloseOpen.MouseButton1Click:Connect(function()
+if CloseOpen.Text == "Close" then
+Frame.Visible = false	
+CloseOpen.Text = "Open" else
+Frame.Visible = true
+CloseOpen.Text = "Close"	
+end	
+end)
+
+local m = Instance.new("Message")
+m.Parent = Workspace
+m.Text = "c00lgui Reborn V0.5 has loaded."
+wait(3)
+m:Destroy()
+
+local m = Instance.new("Hint")
+m.Parent = Workspace
+m.Text = "c00lgui Reborn V0.5 has loaded! Remade by YepImSirPwnsAlot, Creds to 007n7"
+wait(5)
+m:Destroy()
