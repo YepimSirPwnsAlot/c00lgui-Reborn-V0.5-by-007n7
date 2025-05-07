@@ -110,6 +110,7 @@ local AdminCommandsGuis = Instance.new("Frame")
 local iOrb = Instance.new("TextButton")
 local Title_21 = Instance.new("TextLabel")
 local KohlsAdmin = Instance.new("TextButton")
+local NexPluviaAdmin = Instance.new("TextButton")
 local KillGui = Instance.new("TextButton")
 local SilentExecutor = Instance.new("TextButton")
 local Nilizer = Instance.new("TextButton")
@@ -177,8 +178,9 @@ local CloseOpen = Instance.new("TextButton")
 
 -- Properties
 
+c00kkiddgui.Name = "c00kkiddgui"
 c00kkiddgui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-c00kkiddgui.ResetOnSpawn = false
+c00kkiddgui.ResetOnSpawn = true
 
 Frame.Parent = c00kkiddgui
 Frame.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -214,24 +216,6 @@ TextButton.FontSize = Enum.FontSize.Size48
 TextButton.Text = "<"
 TextButton.TextColor3 = Color3.new(1, 1, 1)
 TextButton.TextSize = 48
-TextButton.MouseButton1Click:Connect(function()
-if Page1_2.Visible == true then
-		Page1_2.Visible = false
-		Page5.Visible = true
-	elseif Page2_2.Visible == true then
-		Page2_2.Visible = false
-		Page1_2.Visible = true
-	elseif Page3.Visible == true then
-		Page3.Visible = false
-		Page2_2.Visible = true
-	elseif Page4.Visible == true then
-		Page4.Visible = false
-		Page3.Visible = true
-	elseif Page5.Visible == true then
-		Page5.Visible = false
-		Page4.Visible = true
-	end	
-end)
 
 TextButton_2.Name = ">"
 TextButton_2.Parent = Frame
@@ -246,24 +230,6 @@ TextButton_2.FontSize = Enum.FontSize.Size48
 TextButton_2.Text = ">"
 TextButton_2.TextColor3 = Color3.new(1, 1, 1)
 TextButton_2.TextSize = 48
-TextButton_2.MouseButton1Click:Connect(function()
-if Page1_2.Visible == true then
-		Page1_2.Visible = false
-		Page5.Visible = true
-	elseif Page2_2.Visible == true then
-		Page2_2.Visible = false
-		Page1_2.Visible = true
-	elseif Page3.Visible == true then
-		Page3.Visible = false
-		Page2_2.Visible = true
-	elseif Page4.Visible == true then
-		Page4.Visible = false
-		Page3.Visible = true
-	elseif Page5.Visible == true then
-		Page5.Visible = false
-		Page4.Visible = true
-	end	
-end)
 
 Settings.Name = "Settings"
 Settings.Parent = Frame
@@ -285,31 +251,6 @@ SettingsButton.FontSize = Enum.FontSize.Size48
 SettingsButton.Text = "<"
 SettingsButton.TextColor3 = Color3.new(1, 1, 1)
 SettingsButton.TextSize = 48
-local cango = true
-
-SettingsButton.MouseButton1Click:Connect(function()
-	if cango == true then
-		cango = false
-		if SettingsButton.Text == "<" then
-			SettingsButton.Text = ">"
-			repeat
-				wait()
-				Settings.Position = UDim2.new(1, Settings.Position.X.Offset - 10, 0, 0)
-			until Settings.Position.X.Offset <= -293
-			wait()
-			Settings.Position = UDim2.new(1, -300, 0, 0)
-		else
-			SettingsButton.Text = "<"
-			repeat
-				wait()
-				Settings.Position = UDim2.new(1, Settings.Position.X.Offset + 10, 0, 0)
-			until Settings.Position.X.Offset >= -10
-			wait()
-			Settings.Position = UDim2.new(1, 3, 0, 0)
-		end
-		cango = true
-	end
-end)
 
 Title_2.Name = "Title"
 Title_2.Parent = Settings
@@ -2449,7 +2390,7 @@ Text.TextSize = 14
 Text.TextWrapped = true
 Text.TextYAlignment = Enum.TextYAlignment.Top
 
-PageLabel_7.Name = "PageLabel_7"
+PageLabel_7.Name = "PageLabel"
 PageLabel_7.Parent = Page5
 PageLabel_7.BackgroundColor3 = Color3.new(0, 0, 0)
 PageLabel_7.BorderColor3 = Color3.new(1, 0, 0)
@@ -2477,25 +2418,3 @@ CloseOpen.FontSize = Enum.FontSize.Size18
 CloseOpen.Text = "Close"
 CloseOpen.TextColor3 = Color3.new(1, 1, 1)
 CloseOpen.TextSize = 18
-
-CloseOpen.MouseButton1Click:Connect(function()
-	if CloseOpen.Text == "Close" then
-		Frame.Visible = false
-		CloseOpen.Text = "Open"
-	else
-		Frame.Visible = true
-		CloseOpen.Text = "Close"
-	end
-end)
-
-local m = Instance.new("Message")
-m.Parent = Workspace
-m.Text = "c00lgui Reborn V0.5 has loaded."
-wait(3)
-m:Destroy()
-
-local m = Instance.new("Hint")
-m.Parent = Workspace
-m.Text = "c00lgui Reborn V0.5 has loaded! Remade by YepImSirPwnsAlot, Creds to 007n7"
-wait(5)
-m:Destroy()
