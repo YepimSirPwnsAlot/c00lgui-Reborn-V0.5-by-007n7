@@ -543,6 +543,17 @@ TextButton_5.FontSize = Enum.FontSize.Size14
 TextButton_5.Text = "Off"
 TextButton_5.TextColor3 = Color3.new(1, 1, 1)
 TextButton_5.TextSize = 14
+TextButton_5.MouseButton1Click:Connect(function()
+if TextButton_5.Text == "Off" then
+	game.Players.LocalPlayer.Character.Humanoid.MaxHealth = math.huge
+	game.Players.LocalPlayer.Character.Humanoid.Health = math.huge
+	TextButton_5.Text = "On"
+	else
+	game.Players.LocalPlayer.Character.Humanoid.MaxHealth = 100
+	game.Players.LocalPlayer.Character.Humanoid.Health = 100
+	TextButton_5.Text = "Off"
+end
+end)
 
 Invisibility.Name = "Invisibility"
 Invisibility.Parent = Page1
@@ -576,6 +587,27 @@ TextButton_6.FontSize = Enum.FontSize.Size14
 TextButton_6.Text = "Off"
 TextButton_6.TextColor3 = Color3.new(1, 1, 1)
 TextButton_6.TextSize = 14
+TextButton_6.MouseButton1Click:Connect(function()
+if TextButton_6.Text == "Off" then
+game.Players.LocalPlayer.Character.Head.Transparency = 1
+game.Players.LocalPlayer.Character.Head.face.Transparency = 1
+game.Players.LocalPlayer.Character.Torso.Transparency = 1
+game.Players.LocalPlayer.Character["Right Arm"].Transparency = 1
+game.Players.LocalPlayer.Character["Left Arm"].Transparency = 1
+game.Players.LocalPlayer.Character["Right Leg"].Transparency = 1
+game.Players.LocalPlayer.Character["Left Leg"].Transparency = 1
+TextButton_6.Text = "On"
+else
+game.Players.LocalPlayer.Character.Head.Transparency = 0
+game.Players.LocalPlayer.Character.Head.face.Transparency = 0
+game.Players.LocalPlayer.Character.Torso.Transparency = 0
+game.Players.LocalPlayer.Character["Right Arm"].Transparency = 0
+game.Players.LocalPlayer.Character["Left Arm"].Transparency = 0
+game.Players.LocalPlayer.Character["Right Leg"].Transparency = 0
+game.Players.LocalPlayer.Character["Left Leg"].Transparency = 0
+TextButton_6.Text = "Off"
+end
+end)
 
 CustomGearID.Name = "Custom Gear ID"
 CustomGearID.Parent = Page1
@@ -672,14 +704,21 @@ Save.Text = "Save IDs"
 Save.TextColor3 = Color3.new(1, 1, 1)
 Save.TextSize = 18
 
-local lastSavedID = nil
+local lastSavedSkyboxID = nil
+local lastSavedMusicID = nil
 
 Save.MouseButton1Click:Connect(function()
-    local input = Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text
+    local skyboxInput = Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text
+    local musicInput = Frame.Settings.Page1["Music ID"].TextBox.Text
 
-    if input ~= "" then
-        lastSavedID = input
-        print("Saved ID: " .. lastSavedID)
+    if skyboxInput ~= "" then
+        lastSavedSkyboxID = skyboxInput
+        print("Saved Skybox ID: " .. lastSavedSkyboxID)
+    end
+
+    if musicInput ~= "" then
+        lastSavedMusicID = musicInput
+        print("Saved Music ID: " .. lastSavedMusicID)
     end
 end)
 
@@ -698,9 +737,14 @@ Load.Text = "Load IDs"
 Load.TextColor3 = Color3.new(1, 1, 1)
 Load.TextSize = 18
 Load.MouseButton1Click:Connect(function()
-    if lastSavedID ~= nil then
-        Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text = lastSavedID
-        print("Loaded ID: " .. lastSavedID)
+    if lastSavedSkyboxID ~= nil then
+        Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text = lastSavedSkyboxID
+        print("" .. lastSavedSkyboxID)
+    end
+
+    if lastSavedMusicID ~= nil then
+        Frame.Settings.Page1["Music ID"].TextBox.Text = lastSavedMusicID
+        print("" .. lastSavedMusicID)
     end
 end)
 
@@ -2993,7 +3037,7 @@ local head = workspace[You].Head:Clone()
 local model = Instance.new("Model",workspace)
 local humanoid = Instance.new("Humanoid",model)
 head.Parent = model
-model.Name = Frame.Settings.Page2["Name Box"].TextBox.Text
+model.Name = Frame.Settings.Page2["NameBox"].TextBox.Text
 humanoid.MaxHealth = 0 
 local w = Instance.new("Weld",model)
 w.Part0,w.Part1 = workspace[You].Head,head
