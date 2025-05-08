@@ -543,6 +543,17 @@ TextButton_5.FontSize = Enum.FontSize.Size14
 TextButton_5.Text = "Off"
 TextButton_5.TextColor3 = Color3.new(1, 1, 1)
 TextButton_5.TextSize = 14
+TextButton_5.MouseButton1Click:Connect(function()
+if TextButton_5.Text == "Off" then
+	game.Players.LocalPlayer.Character.Humanoid.MaxHealth = math.huge
+	game.Players.LocalPlayer.Character.Humanoid.Health = math.huge
+	TextButton_5.Text = "On"
+	else
+	game.Players.LocalPlayer.Character.Humanoid.MaxHealth = 100
+	game.Players.LocalPlayer.Character.Humanoid.Health = 100
+	TextButton_5.Text = "Off"
+end
+end)
 
 Invisibility.Name = "Invisibility"
 Invisibility.Parent = Page1
@@ -576,6 +587,27 @@ TextButton_6.FontSize = Enum.FontSize.Size14
 TextButton_6.Text = "Off"
 TextButton_6.TextColor3 = Color3.new(1, 1, 1)
 TextButton_6.TextSize = 14
+TextButton_6.MouseButton1Click:Connect(function()
+if TextButton_6.Text == "Off" then
+game.Players.LocalPlayer.Character.Head.Transparency = 1
+game.Players.LocalPlayer.Character.Head.face.Transparency = 1
+game.Players.LocalPlayer.Character.Torso.Transparency = 1
+game.Players.LocalPlayer.Character["Right Arm"].Transparency = 1
+game.Players.LocalPlayer.Character["Left Arm"].Transparency = 1
+game.Players.LocalPlayer.Character["Right Leg"].Transparency = 1
+game.Players.LocalPlayer.Character["Left Leg"].Transparency = 1
+TextButton_6.Text = "On"
+else
+game.Players.LocalPlayer.Character.Head.Transparency = 0
+game.Players.LocalPlayer.Character.Head.face.Transparency = 0
+game.Players.LocalPlayer.Character.Torso.Transparency = 0
+game.Players.LocalPlayer.Character["Right Arm"].Transparency = 0
+game.Players.LocalPlayer.Character["Left Arm"].Transparency = 0
+game.Players.LocalPlayer.Character["Right Leg"].Transparency = 0
+game.Players.LocalPlayer.Character["Left Leg"].Transparency = 0
+TextButton_6.Text = "Off"
+end
+end)
 
 CustomGearID.Name = "Custom Gear ID"
 CustomGearID.Parent = Page1
@@ -707,12 +739,12 @@ Load.TextSize = 18
 Load.MouseButton1Click:Connect(function()
     if lastSavedSkyboxID ~= nil then
         Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text = lastSavedSkyboxID
-        print("Loaded Skybox ID: " .. lastSavedSkyboxID)
+        print("" .. lastSavedSkyboxID)
     end
 
     if lastSavedMusicID ~= nil then
         Frame.Settings.Page1["Music ID"].TextBox.Text = lastSavedMusicID
-        print("Loaded Music ID: " .. lastSavedMusicID)
+        print("" .. lastSavedMusicID)
     end
 end)
 
