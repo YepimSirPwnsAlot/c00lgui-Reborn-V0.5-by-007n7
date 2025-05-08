@@ -713,12 +713,10 @@ Save.MouseButton1Click:Connect(function()
 
     if skyboxInput ~= "" then
         lastSavedSkyboxID = skyboxInput
-        print("Saved Skybox ID: " .. lastSavedSkyboxID)
     end
 
     if musicInput ~= "" then
         lastSavedMusicID = musicInput
-        print("Saved Music ID: " .. lastSavedMusicID)
     end
 end)
 
@@ -739,19 +737,14 @@ Load.TextSize = 18
 Load.MouseButton1Click:Connect(function()
     if lastSavedSkyboxID ~= nil then
         Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text = lastSavedSkyboxID
-        print("Loaded Skybox ID: " .. lastSavedSkyboxID)
     else
         Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text = "158118263"
-        print("No saved Skybox ID found. Reset to default: 158118263")
     end
 
     if lastSavedMusicID ~= nil then
         Frame.Settings.Page1["Music ID"].TextBox.Text = lastSavedMusicID
-        print("Loaded Music ID: " .. lastSavedMusicID)
     else
-        -- Add this line to handle the case where lastSavedMusicID is nil
         Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text = "157772998"
-        print("No saved Music ID found. Reset to default: 157772998")
     end
 end)
 
