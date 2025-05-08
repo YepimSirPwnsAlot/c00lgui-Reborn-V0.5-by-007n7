@@ -1328,6 +1328,13 @@ CustomGear.FontSize = Enum.FontSize.Size14
 CustomGear.Text = "Custom Gear"
 CustomGear.TextColor3 = Color3.new(1, 1, 1)
 CustomGear.TextSize = 14
+CustomGear.MouseButton1Click:Connect(function()
+local x = game:GetService("InsertService"):LoadAsset(Frame.Settings.Page1["Custom Gear ID"].TextBox.Text)
+for i,v in pairs(x:GetChildren()) do
+v.Parent = game.Players.LocalPlayer.Backpack
+end
+x:Remove()
+end)
 
 Title_19.Name = "Title"
 Title_19.Parent = GearTools
