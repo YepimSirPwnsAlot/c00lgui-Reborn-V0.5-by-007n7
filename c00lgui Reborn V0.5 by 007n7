@@ -183,7 +183,7 @@ local CloseOpen = Instance.new("TextButton")
 
 c00kkiddgui.Name = "c00kkiddgui"
 c00kkiddgui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-c00kkiddgui.ResetOnSpawn = true
+c00kkiddgui.ResetOnSpawn = false
 
 Frame.Parent = c00kkiddgui
 Frame.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -222,19 +222,19 @@ TextButton.TextSize = 48
 TextButton.MouseButton1Click:Connect(function()
 if Page1_2.Visible == true then
 		Page1_2.Visible = false
-		Page5.Visible = true
-	elseif Page2_2.Visible == true then
+		Page2_2.Visible = true
+	elseif page2_2.Visible == true then
 		Page2_2.Visible = false
-		Page1_2.Visible = true
+		Page3.Visible = true
 	elseif Page3.Visible == true then
 		Page3.Visible = false
-		Page2_2.Visible = true
+		Page4.Visible = true
 	elseif Page4.Visible == true then
 		Page4.Visible = false
-		Page3.Visible = true
+		Page5.Visible = true
 	elseif Page5.Visible == true then
 		Page5.Visible = false
-		Page4.Visible = true
+		Page1_2.Visible = true
 	end	
 end)
 
@@ -254,19 +254,19 @@ TextButton_2.TextSize = 48
 TextButton_2.MouseButton1Click:Connect(function()
 if Page1_2.Visible == true then
 		Page1_2.Visible = false
-		Page5.Visible = true
-	elseif Page2_2.Visible == true then
+		Page2_2.Visible = true
+	elseif page2_2.Visible == true then
 		Page2_2.Visible = false
-		Page1_2.Visible = true
+		Page3.Visible = true
 	elseif Page3.Visible == true then
 		Page3.Visible = false
-		Page2_2.Visible = true
+		Page4.Visible = true
 	elseif Page4.Visible == true then
 		Page4.Visible = false
-		Page3.Visible = true
+		Page5.Visible = true
 	elseif Page5.Visible == true then
 		Page5.Visible = false
-		Page4.Visible = true
+		Page1_2.Visible = true
 	end	
 end)
 
