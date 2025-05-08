@@ -686,6 +686,9 @@ Load.FontSize = Enum.FontSize.Size18
 Load.Text = "Load IDs"
 Load.TextColor3 = Color3.new(1, 1, 1)
 Load.TextSize = 18
+Load.MouseButton1Click:Connect(function()
+Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text = 157772998
+end)
 
 Page2.Name = "Page2"
 Page2.Parent = Settings
@@ -2605,6 +2608,64 @@ DZRSpawnItemGui.Text = "DZR Spawn Item Gui"
 DZRSpawnItemGui.TextColor3 = Color3.new(1, 1, 1)
 DZRSpawnItemGui.TextSize = 14
 DZRSpawnItemGui.TextWrapped = true
+DZRSpawnItemGui.MouseButton1Click:Connect(function()
+
+--Instances:
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "WeaponGUI"
+screenGui.ResetOnSpawn = true
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 230, 0, 45)
+mainFrame.Position = UDim2.new(0, 0, 0, 410)
+mainFrame.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+mainFrame.BorderSizePixel = 1
+mainFrame.Parent = screenGui
+
+local weaponLabel = Instance.new("TextLabel")
+weaponLabel.Name = "WeaponLabel"
+weaponLabel.Size = UDim2.new(0.85, 0, 0.5, 0)
+weaponLabel.Position = UDim2.new(0, 0, 0, 0)
+weaponLabel.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
+weaponLabel.BorderSizePixel = 1
+weaponLabel.Text = "Precision Rifle"
+weaponLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+weaponLabel.TextScaled = true
+weaponLabel.Font = Enum.Font.SourceSans
+weaponLabel.Parent = mainFrame
+
+local amountBox = Instance.new("TextBox")
+amountBox.Name = "AmountBox"
+amountBox.Size = UDim2.new(0.15, 0, 0.5, 0)
+amountBox.Position = UDim2.new(0.85, 0, 0, 0)
+amountBox.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
+amountBox.BorderSizePixel = 1
+amountBox.Text = "1"
+amountBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+amountBox.TextScaled = true
+amountBox.Font = Enum.Font.SourceSans
+amountBox.ClearTextOnFocus = false
+amountBox.Parent = mainFrame
+
+local spawnButton = Instance.new("TextButton")
+spawnButton.Name = "SpawnButton"
+spawnButton.Size = UDim2.new(1, 0, 0.5, 0)
+spawnButton.Position = UDim2.new(0, 0, 0.5, 0)
+spawnButton.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
+spawnButton.BorderSizePixel = 1
+spawnButton.Text = "Spawn"
+spawnButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+spawnButton.TextScaled = true
+spawnButton.Font = Enum.Font.SourceSansBold
+spawnButton.Parent = mainFrame
+
+spawnButton.MouseButton1Click:Connect(function()
+    print("Spawning", weaponLabel.Text, "x" .. amountBox.Text)
+end)
+end)
 
 PageLabel_4.Name = "PageLabel"
 PageLabel_4.Parent = Page1_2
