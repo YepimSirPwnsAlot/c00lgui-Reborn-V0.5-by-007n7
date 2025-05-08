@@ -672,14 +672,21 @@ Save.Text = "Save IDs"
 Save.TextColor3 = Color3.new(1, 1, 1)
 Save.TextSize = 18
 
-local lastSavedID = nil
+local lastSavedSkyboxID = nil
+local lastSavedMusicID = nil
 
 Save.MouseButton1Click:Connect(function()
-    local input = Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text
+    local skyboxInput = Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text
+    local musicInput = Frame.Settings.Page1["Music ID"].TextBox.Text
 
-    if input ~= "" then
-        lastSavedID = input
-        print("Saved ID: " .. lastSavedID)
+    if skyboxInput ~= "" then
+        lastSavedSkyboxID = skyboxInput
+        print("Saved Skybox ID: " .. lastSavedSkyboxID)
+    end
+
+    if musicInput ~= "" then
+        lastSavedMusicID = musicInput
+        print("Saved Music ID: " .. lastSavedMusicID)
     end
 end)
 
@@ -698,9 +705,14 @@ Load.Text = "Load IDs"
 Load.TextColor3 = Color3.new(1, 1, 1)
 Load.TextSize = 18
 Load.MouseButton1Click:Connect(function()
-    if lastSavedID ~= nil then
-        Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text = lastSavedID
-        print("Loaded ID: " .. lastSavedID)
+    if lastSavedSkyboxID ~= nil then
+        Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text = lastSavedSkyboxID
+        print("Loaded Skybox ID: " .. lastSavedSkyboxID)
+    end
+
+    if lastSavedMusicID ~= nil then
+        Frame.Settings.Page1["Music ID"].TextBox.Text = lastSavedMusicID
+        print("Loaded Music ID: " .. lastSavedMusicID)
     end
 end)
 
