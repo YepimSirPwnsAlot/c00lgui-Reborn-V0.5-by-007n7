@@ -672,6 +672,17 @@ Save.Text = "Save IDs"
 Save.TextColor3 = Color3.new(1, 1, 1)
 Save.TextSize = 18
 
+local lastSavedID = nil
+
+Save.MouseButton1Click:Connect(function()
+    local input = Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text
+
+    if input ~= "" then
+        lastSavedID = input
+        print("Saved ID: " .. lastSavedID)
+    end
+end)
+
 Load.Name = "Load"
 Load.Parent = Settings
 Load.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -687,7 +698,10 @@ Load.Text = "Load IDs"
 Load.TextColor3 = Color3.new(1, 1, 1)
 Load.TextSize = 18
 Load.MouseButton1Click:Connect(function()
-Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text = 157772998
+    if lastSavedID ~= nil then
+        Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text = lastSavedID
+        print("Loaded ID: " .. lastSavedID)
+    end
 end)
 
 Page2.Name = "Page2"
@@ -2619,8 +2633,8 @@ screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 280, 0, 40)
-mainFrame.Position = UDim2.new(0, 0, 0, 400)
+mainFrame.Size = UDim2.new(0, 230, 0, 45)
+mainFrame.Position = UDim2.new(0, 0, 0, 410)
 mainFrame.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
 mainFrame.BorderSizePixel = 1
 mainFrame.Parent = screenGui
