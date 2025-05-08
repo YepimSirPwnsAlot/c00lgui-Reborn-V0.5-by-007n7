@@ -2673,12 +2673,12 @@ DZRSpawnItemGui.MouseButton1Click:Connect(function()
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "WeaponGUI"
 screenGui.ResetOnSpawn = true
-screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+screenGui.Parent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
 
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 230, 0, 45)
-mainFrame.Position = UDim2.new(0, 0, 0, 410)
+mainFrame.Size = UDim2.new(0, 223, 0, 45)
+mainFrame.Position = UDim2.new(0, 0, 0, 409)
 mainFrame.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
 mainFrame.BorderSizePixel = 1
 mainFrame.Parent = screenGui
@@ -2691,7 +2691,7 @@ weaponLabel.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
 weaponLabel.BorderSizePixel = 1
 weaponLabel.Text = "Precision Rifle"
 weaponLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-weaponLabel.TextScaled = true
+weaponLabel.TextSize = 14 -- Fixed: Use numeric value
 weaponLabel.Font = Enum.Font.SourceSans
 weaponLabel.Parent = mainFrame
 
@@ -2703,7 +2703,7 @@ amountBox.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
 amountBox.BorderSizePixel = 1
 amountBox.Text = "1"
 amountBox.TextColor3 = Color3.fromRGB(0, 0, 0)
-amountBox.TextScaled = true
+amountBox.TextSize = 12 -- Fixed: Use numeric value
 amountBox.Font = Enum.Font.SourceSans
 amountBox.ClearTextOnFocus = false
 amountBox.Parent = mainFrame
@@ -2716,12 +2716,17 @@ spawnButton.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
 spawnButton.BorderSizePixel = 1
 spawnButton.Text = "Spawn"
 spawnButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-spawnButton.TextScaled = true
+spawnButton.TextSize = 12 -- Fixed: Use numeric value
 spawnButton.Font = Enum.Font.SourceSansBold
 spawnButton.Parent = mainFrame
 
 spawnButton.MouseButton1Click:Connect(function()
-    print("Spawning", weaponLabel.Text, "x" .. amountBox.Text)
+	local amount = tonumber(amountBox.Text)
+	if amount and amount > 0 then
+		print("Spawning", weaponLabel.Text, "x" .. amount)
+	else
+		warn("Invalid amount:", amountBox.Text)
+	end
 end)
 end)
 
@@ -3037,7 +3042,7 @@ local head = workspace[You].Head:Clone()
 local model = Instance.new("Model",workspace)
 local humanoid = Instance.new("Humanoid",model)
 head.Parent = model
-model.Name = Frame.Settings.Page2["Name Box"].TextBox.Text
+model.Name = Frame.Settings.Page2["NameBox"].TextBox.Text
 humanoid.MaxHealth = 0 
 local w = Instance.new("Weld",model)
 w.Part0,w.Part1 = workspace[You].Head,head
