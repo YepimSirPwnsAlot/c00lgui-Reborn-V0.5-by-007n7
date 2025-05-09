@@ -2690,7 +2690,7 @@ mainFrame.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
 mainFrame.BorderSizePixel = 1
 mainFrame.Parent = screenGui
 
-local weaponLabel = Instance.new("TextLabel")
+local weaponLabel = Instance.new("TextBox")
 weaponLabel.Name = "WeaponLabel"
 weaponLabel.Size = UDim2.new(0.85, 0, 0.5, 0)
 weaponLabel.Position = UDim2.new(0, 0, 0, 0)
