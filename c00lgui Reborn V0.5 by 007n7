@@ -1,8 +1,8 @@
-----==== Thx For Usin Mah Script Broski ====----
-----==== Remade By YepImSirPwnsAlot Creds to 007n7 ====----
+----====[ Thx For Usin Mah Script Broski :D ]====----
+----====[ Remade By YepImSirPwnsAlot Creds to 007n7 ]====----
 
 
-----==== Instances and Objects ====----
+----====[ Instances and Objects ]====----
 
 local c00kkiddgui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
