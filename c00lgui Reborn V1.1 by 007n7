@@ -174,6 +174,8 @@ local DualDarkhearts = Instance.new("TextButton")
 local DualVenomshanks = Instance.new("TextButton")
 local GhostfireSword = Instance.new("TextButton")
 local Hyperbike = Instance.new("TextButton")
+local b03d = Instance.new("TextButton")
+local Explorer = Instance.new("TextButton")
 local End = Instance.new("Frame")
 local Text = Instance.new("TextLabel")
 local PageLabel_7 = Instance.new("TextLabel")
@@ -202,7 +204,7 @@ Title.Size = UDim2.new(1, 0, 0, 40)
 Title.ZIndex = 2
 Title.Font = Enum.Font.SourceSans
 Title.FontSize = Enum.FontSize.Size24
-Title.Text = "c00lgui Reborn V0.5 by 007n7"
+Title.Text = "c00lgui Reborn V1.1 by 007n7"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.TextSize = 24
 
@@ -4075,6 +4077,42 @@ Hyperbike.MouseButton1Click:Connect(function()
 Frame.Settings.Page1["Custom Gear ID"].TextBox.Text = 130113061
 end)
 
+b03d.Name = "Reload c00lgui"
+b03d.Parent = epikservertrollgui
+b03d.BackgroundColor3 = Color3.new(0, 0, 0)
+b03d.BorderColor3 = Color3.new(1, 0, 0)
+b03d.BorderSizePixel = 3
+b03d.Position = UDim2.new(1, -103, 1, -23)
+b03d.Size = UDim2.new(0, 100, 0, 20)
+b03d.ZIndex = 2
+b03d.Font = Enum.Font.SourceSans
+b03d.FontSize = Enum.FontSize.Size18
+b03d.Text = "Reload c00lgui"
+b03d.TextColor3 = Color3.new(1, 1, 1)
+b03d.TextSize = 14
+b03d.TextWrapped = true
+b03d.MouseButton1Click:Connect(function()
+    if game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("epikservertrollgui") then
+        game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("epikservertrollgui"):Destroy()    
+    end    
+    loadstring(game:GetObjects("rbxassetid://11801912144")[1].Source)()
+end)
+
+Explorer.Name = "Explorer Button"
+Explorer.Parent = epikservertrollgui
+Explorer.BackgroundColor3 = Color3.new(0, 0, 0)
+Explorer.BorderColor3 = Color3.new(1, 0, 0)
+Explorer.BorderSizePixel = 3
+Explorer.Position = UDim2.new(0.7, 0, 0.97 ,0)
+Explorer.Size = UDim2.new(0.1, 0, 0.025, 0)
+Explorer.ZIndex = 2
+Explorer.Font = Enum.Font.SourceSans
+Explorer.FontSize = Enum.FontSize.Size18
+Explorer.Text = "Explorer"
+Explorer.TextColor3 = Color3.new(1, 1, 1)
+Explorer.TextSize = 14
+Explorer.TextWrapped = true
+
 End.Name = "End"
 End.Parent = Page5
 End.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -4139,7 +4177,7 @@ end)
 
 local m = Instance.new("Message")
 m.Parent = Workspace
-m.Text = "c00lgui Reborn V0.5 has loaded."
+m.Text = "c00lgui Reborn V1.1 has loaded."
 wait(3)
 m:Destroy()
 
