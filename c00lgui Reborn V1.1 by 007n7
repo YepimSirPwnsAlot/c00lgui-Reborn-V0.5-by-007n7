@@ -174,8 +174,6 @@ local DualDarkhearts = Instance.new("TextButton")
 local DualVenomshanks = Instance.new("TextButton")
 local GhostfireSword = Instance.new("TextButton")
 local Hyperbike = Instance.new("TextButton")
-local b03d = Instance.new("TextButton")
-local Explorer = Instance.new("TextButton")
 local End = Instance.new("Frame")
 local Text = Instance.new("TextLabel")
 local PageLabel_7 = Instance.new("TextLabel")
@@ -204,7 +202,7 @@ Title.Size = UDim2.new(1, 0, 0, 40)
 Title.ZIndex = 2
 Title.Font = Enum.Font.SourceSans
 Title.FontSize = Enum.FontSize.Size24
-Title.Text = "c00lgui Reborn V1.1 by 007n7"
+Title.Text = "c00lgui Reborn V0.5 by 007n7"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.TextSize = 24
 
@@ -4077,8 +4075,13 @@ Hyperbike.MouseButton1Click:Connect(function()
 Frame.Settings.Page1["Custom Gear ID"].TextBox.Text = 130113061
 end)
 
+local culgui = Instance.new("ScreenGui")
+culgui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+culgui.Name = "c00lgui"
+
+local b03d = Instance.new("TextButton")
 b03d.Name = "Reload c00lgui"
-b03d.Parent = epikservertrollgui
+b03d.Parent = culgui
 b03d.BackgroundColor3 = Color3.new(0, 0, 0)
 b03d.BorderColor3 = Color3.new(1, 0, 0)
 b03d.BorderSizePixel = 3
@@ -4090,7 +4093,6 @@ b03d.FontSize = Enum.FontSize.Size18
 b03d.Text = "Reload c00lgui"
 b03d.TextColor3 = Color3.new(1, 1, 1)
 b03d.TextSize = 14
-b03d.TextWrapped = true
 b03d.MouseButton1Click:Connect(function()
     if game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("epikservertrollgui") then
         game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("epikservertrollgui"):Destroy()    
@@ -4099,10 +4101,10 @@ b03d.MouseButton1Click:Connect(function()
 end)
 
 Explorer.Name = "Explorer Button"
-Explorer.Parent = epikservertrollgui
+Explorer.Parent = culgui
 Explorer.BackgroundColor3 = Color3.new(0, 0, 0)
 Explorer.BorderColor3 = Color3.new(1, 0, 0)
-Explorer.BorderSizePixel = 3
+Explorer.BorderSizePixel = 1
 Explorer.Position = UDim2.new(0.7, 0, 0.97 ,0)
 Explorer.Size = UDim2.new(0.1, 0, 0.025, 0)
 Explorer.ZIndex = 2
@@ -4177,7 +4179,7 @@ end)
 
 local m = Instance.new("Message")
 m.Parent = Workspace
-m.Text = "c00lgui Reborn V1.1 has loaded."
+m.Text = "c00lgui Reborn V0.5 has loaded."
 wait(3)
 m:Destroy()
 
