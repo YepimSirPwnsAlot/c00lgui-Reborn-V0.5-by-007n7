@@ -4075,13 +4075,15 @@ Hyperbike.MouseButton1Click:Connect(function()
 Frame.Settings.Page1["Custom Gear ID"].TextBox.Text = 130113061
 end)
 
-local culgui = Instance.new("ScreenGui")
-culgui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-culgui.Name = "c00lgui"
+local ScreenGui = Instance.new("ScreenGui")
+ScreenGui.Name = "ScreenGui"
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.ResetOnSpawn = false
 
 local b03d = Instance.new("TextButton")
 b03d.Name = "Reload c00lgui"
-b03d.Parent = culgui
+b03d.Parent = ScreenGui
 b03d.BackgroundColor3 = Color3.new(0, 0, 0)
 b03d.BorderColor3 = Color3.new(1, 0, 0)
 b03d.BorderSizePixel = 3
@@ -4100,12 +4102,9 @@ b03d.MouseButton1Click:Connect(function()
     loadstring(game:GetObjects("rbxassetid://11801912144")[1].Source)()
 end)
 
-local Explorer = Instance.new("ScreenGui")
-Explorer.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-Explorer.Name = "Explorer"
-
+local Explorer = Instance.new("TextButton")
 Explorer.Name = "Explorer Button"
-Explorer.Parent = Explorer
+Explorer.Parent = ScreenGui
 Explorer.BackgroundColor3 = Color3.new(0, 0, 0)
 Explorer.BorderColor3 = Color3.new(1, 0, 0)
 Explorer.BorderSizePixel = 1
