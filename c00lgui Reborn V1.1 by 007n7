@@ -4123,12 +4123,13 @@ Explorer.TextSize = 14
 Explorer.TextWrapped = true
 Explorer.MouseButton1Click:Connect(function()
 	if game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("Scweengui") == nil then
-		pcall(function()
-			local PlayerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-			if PlayerGui:FindFirstChild("RobloxGui") and PlayerGui.RobloxGui:FindFirstChild("PlayerListScreen") then
-				PlayerGui.RobloxGui.PlayerListScreen.Visible = false
-			end
-		end)
+    	pcall(function()
+        	local PlayerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+        	if PlayerGui:FindFirstChild("RobloxGui") and PlayerGui.RobloxGui:FindFirstChild("PlayerListScreen") then
+            	PlayerGui.RobloxGui.PlayerListScreen.Visible = false
+        	end
+    	end)
+	end
 
 		ItemGuis = {}
 		PropGuis = {}
@@ -4279,7 +4280,7 @@ Explorer.MouseButton1Click:Connect(function()
 		explore.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 		local otherframe = Instance.new("TextLabel", explore)
 		otherframe.Name = "OtherFrame"
-		otherframe.Parent = explore
+		otherframe.Parent = explore -- Set Parent
 		otherframe.BackgroundColor = BrickColor.new("Really black")
 		otherframe.BackgroundTransparency = 0.2
 		otherframe.BorderColor = BrickColor.new("Really red")
@@ -4296,7 +4297,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local expbutton = Instance.new("TextButton", otherframe)
 		expbutton.Name = "ExpButton"
-		expbuttom.Parent = explore
+		expbutton.Parent = otherframe -- Set Parent
 		expbutton.BackgroundColor = BrickColor.new("Really black")
 		expbutton.BackgroundTransparency = 0.2
 		expbutton.BorderColor = BrickColor.new("Really red")
@@ -4313,7 +4314,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local propsbutton = Instance.new("TextButton", otherframe)
 		propsbutton.Name = "PropsButton"
-		propsbutton.Parent = explore
+		propsbutton.Parent = otherframe -- Set Parent
 		propsbutton.BackgroundColor = BrickColor.new("Really black")
 		propsbutton.BackgroundTransparency = 0.2
 		propsbutton.BorderColor = BrickColor.new("Really red")
@@ -4330,7 +4331,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local expframe = Instance.new("Frame", otherframe)
 		expframe.Name = "ExplorerFrame"
-		expframe.Parent = explore
+		expframe.Parent = otherframe -- Set Parent
 		expframe.BackgroundColor = BrickColor.new("Really black")
 		expframe.BackgroundTransparency = 0.4
 		expframe.BorderColor = BrickColor.new("Really red")
@@ -4343,7 +4344,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local list = Instance.new("Frame", expframe)
 		list.Name = "List"
-		list.Parent = explore
+		list.Parent = expframe -- Set Parent
 		list.BackgroundColor = BrickColor.new("Really black")
 		list.BackgroundTransparency = 0.8
 		list.BorderColor = BrickColor.new("Really red")
@@ -4355,7 +4356,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local back = Instance.new("TextButton", expframe)
 		back.Name = "BackButton"
-		back.Parent = explore
+		back.Parent = expframe -- Set Parent
 		back.BackgroundColor = BrickColor.new("Really black")
 		back.BackgroundTransparency = 0.6
 		back.BorderColor = BrickColor.new("Really red")
@@ -4372,7 +4373,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local search = Instance.new("TextBox", expframe)
 		search.Name = "SearchBox"
-		search.Parent = explore
+		search.Parent = expframe -- Set Parent
 		search.BackgroundColor = BrickColor.new("Really black")
 		search.BackgroundTransparency = 0.6
 		search.BorderColor = BrickColor.new("Really red")
@@ -4389,7 +4390,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local upbutton = Instance.new("TextButton", otherframe)
 		upbutton.Name = "UpButton"
-		upbutton.Parent = explore
+		upbutton.Parent = otherframe -- Set Parent
 		upbutton.BackgroundColor = BrickColor.new("Really black")
 		upbutton.BackgroundTransparency = 0.6
 		upbutton.BorderColor = BrickColor.new("Really red")
@@ -4406,7 +4407,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local downbutton = Instance.new("TextButton", otherframe)
 		downbutton.Name = "DownButton"
-		downbutton.Parent = explore
+		downbutton.Parent = otherframe -- Set Parent
 		downbutton.BackgroundColor = BrickColor.new("Really black")
 		downbutton.BackgroundTransparency = 0.6
 		downbutton.BorderColor = BrickColor.new("Really red")
@@ -4423,7 +4424,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local refreshbutton = Instance.new("ImageButton", expframe)
 		refreshbutton.Name = "RefreshButton"
-		refreshbutton.Parent = explore
+		refreshbutton.Parent = expframe -- Set Parent
 		refreshbutton.BackgroundColor = BrickColor.new("Really black")
 		refreshbutton.BackgroundTransparency = 0.6
 		refreshbutton.BorderColor = BrickColor.new("Really red")
@@ -4436,7 +4437,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local options = Instance.new("Frame", list)
 		options.Name = "Options"
-		options.Parent = explore
+		options.Parent = list -- Set Parent
 		options.BackgroundColor = BrickColor.new("Really black")
 		options.BackgroundTransparency = 0.4
 		options.BorderColor = BrickColor.new("Really red")
@@ -4448,7 +4449,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local copybutton = Instance.new("TextButton", options)
 		copybutton.Name = "CopyButton"
-		copybutton.Parent = explore
+		copybutton.Parent = options -- Set Parent
 		copybutton.BackgroundColor = BrickColor.new("Really black")
 		copybutton.BackgroundTransparency = 0.6
 		copybutton.BorderColor = BrickColor.new("Really red")
@@ -4465,7 +4466,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local pastebutton = Instance.new("TextButton", options)
 		pastebutton.Name = "PasteButton"
-		pastebutton.Parent = explore
+		pastebutton.Parent = options -- Set Parent
 		pastebutton.BackgroundColor = BrickColor.new("Really black")
 		pastebutton.BackgroundTransparency = 0.6
 		pastebutton.BorderColor = BrickColor.new("Really red")
@@ -4482,7 +4483,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local cutbutton = Instance.new("TextButton", options)
 		cutbutton.Name = "CutButton"
-		cutbutton.Parent = explore
+		cutbutton.Parent = options -- Set Parent
 		cutbutton.BackgroundColor = BrickColor.new("Really black")
 		cutbutton.BackgroundTransparency = 0.6
 		cutbutton.BorderColor = BrickColor.new("Really red")
@@ -4499,7 +4500,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local insertbutton = Instance.new("TextBox", options)
 		insertbutton.Name = "InsertButton"
-		insertbutton.Parent = explore
+		insertbutton.Parent = options -- Set Parent
 		insertbutton.BackgroundColor = BrickColor.new("Really black")
 		insertbutton.BackgroundTransparency = 0.6
 		insertbutton.BorderColor = BrickColor.new("Really red")
@@ -4515,7 +4516,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local editbutton = Instance.new("TextButton", options)
 		editbutton.Name = "EditButton"
-		editbutton.Parent = explore
+		editbutton.Parent = options -- Set Parent
 		editbutton.BackgroundColor = BrickColor.new("Really black")
 		editbutton.BackgroundTransparency = 0.6
 		editbutton.BorderColor = BrickColor.new("Really red")
@@ -4531,6 +4532,7 @@ Explorer.MouseButton1Click:Connect(function()
 
 		local config = Instance.new("ObjectValue", options)
 		config.Name = "ConfiguredObject"
+		config.Parent = options -- Set Parent
 		config.Value = nil
 	end
 end)
@@ -4609,4 +4611,4 @@ m.Text = "c00lgui Reborn V0.5 has loaded! Remade by YepImSirPwnsAlot, Creds to 0
 wait(5)
 m:Destroy()
 
--- sigh
+-- nigger
