@@ -4108,11 +4108,11 @@ ScreenGufr.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 
 local Explorer = Instance.new("TextButton")
 Explorer.Name = "ExplorerButton"
-Explorer.Parent = ScreenGui
+Explorer.Parent = ScreenGufr
 Explorer.BackgroundColor3 = Color3.new(0, 0, 0)
 Explorer.BorderColor3 = Color3.new(1, 0, 0)
 Explorer.BorderSizePixel = 1
-Explorer.Position = UDim2.new(0.7, 0, 0.97, 0)
+Explorer.Position = UDim2.new(0.7, 0, 0.97 ,0)
 Explorer.Size = UDim2.new(0.1, 0, 0.025, 0)
 Explorer.ZIndex = 2
 Explorer.Font = Enum.Font.SourceSans
@@ -4120,13 +4120,11 @@ Explorer.Text = "Explorer"
 Explorer.TextColor3 = Color3.new(1, 1, 1)
 Explorer.TextSize = 14
 Explorer.TextWrapped = true
-
--- Explorer Button Click
 Explorer.MouseButton1Click:Connect(function()
-	if not PlayerGui:FindFirstChild("ExplorerGui") then
-		local explore = Instance.new("ScreenGui")
-		explore.Name = "ExplorerGui"
-		explore.Parent = PlayerGui
+	if game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("ScreenGufr") == nil then
+        pcall(function()
+            Game.Players.LocalPlayer:WaitForChild("PlayerGui").RobloxGui.PlayerListScreen.Visible = false
+        end)
 
 		local otherframe = Instance.new("TextLabel")
 		otherframe.Name = "OtherFrame"
@@ -4197,6 +4195,7 @@ Explorer.MouseButton1Click:Connect(function()
 		back.TextColor3 = Color3.new(1, 1, 1)
 		back.Font = Enum.Font.ArialBold
 		back.TextSize = 14
+		back.TextXAlignment = Enum.TextXAlignment.Center
 
 		local search = Instance.new("TextBox")
 		search.Name = "SearchBox"
@@ -4210,8 +4209,8 @@ Explorer.MouseButton1Click:Connect(function()
 		search.TextColor3 = Color3.new(1, 1, 1)
 		search.Font = Enum.Font.ArialBold
 		search.TextSize = 14
+		search.TextXAlignment = Enum.TextXAlignment.Center
 
-		-- Create Up/Down Buttons
 		local function CreateSmallButton(name, text, pos)
 			local btn = Instance.new("TextButton")
 			btn.Name = name
@@ -4225,6 +4224,7 @@ Explorer.MouseButton1Click:Connect(function()
 			btn.TextColor3 = Color3.new(1, 1, 1)
 			btn.Font = Enum.Font.ArialBold
 			btn.TextSize = 12
+			btn.TextXAlignment = Enum.TextXAlignment.Center
 			btn.ZIndex = 2
 			return btn
 		end
@@ -4232,7 +4232,6 @@ Explorer.MouseButton1Click:Connect(function()
 		CreateSmallButton("UpButton", [[/\]], UDim2.new(0.9, 0, 1.75, 0))
 		CreateSmallButton("DownButton", [[\/]], UDim2.new(0.9, 0, 16.25, 0))
 
-		-- Refresh button
 		local refreshbutton = Instance.new("ImageButton")
 		refreshbutton.Name = "RefreshButton"
 		refreshbutton.Parent = expframe
@@ -4244,7 +4243,6 @@ Explorer.MouseButton1Click:Connect(function()
 		refreshbutton.Image = "http://www.roblox.com/asset/?id=21367268"
 		refreshbutton.ZIndex = 2
 
-		-- Options frame
 		local options = Instance.new("Frame")
 		options.Name = "Options"
 		options.Parent = list
@@ -4256,80 +4254,19 @@ Explorer.MouseButton1Click:Connect(function()
 		options.Visible = false
 		options.ZIndex = 3
 
-		local function CreateOptionButton(name, text, pos)
-			local btn = Instance.new("TextButton")
-			btn.Name = name
-			btn.Parent = options
-			btn.BackgroundColor3 = Color3.new(0, 0, 0)
-			btn.BackgroundTransparency = 0.6
-			btn.BorderColor3 = Color3.new(1, 0, 0)
-			btn.Position = pos
-			btn.Size = UDim2.new(1, 0, 0.25, 0)
-			btn.Text = text
-			btn.TextColor3 = Color3.new(1, 1, 1)
-			btn.Font = Enum.Font.ArialBold
-			btn.TextSize = 12
-			btn.ZIndex = 3
-			return btn
-		end
-
-		CreateOptionButton("CopyButton", "Copy", UDim2.new(0, 0, 0.00, 0))
-		CreateOptionButton("PasteButton", "Paste", UDim2.new(0, 0, 0.25, 0))
-		CreateOptionButton("CutButton", "Cut", UDim2.new(0, 0, 0.5, 0))
-
-		local insertbox = Instance.new("TextBox")
-		insertbox.Name = "InsertButton"
-		insertbox.Parent = options
-		insertbox.BackgroundColor3 = Color3.new(0, 0, 0)
-		insertbox.BackgroundTransparency = 0.6
-		insertbox.BorderColor3 = Color3.new(1, 0, 0)
-		insertbox.Position = UDim2.new(0, 0, 0.75, 0)
-		insertbox.Size = UDim2.new(1, 0, 0.25, 0)
-		insertbox.Text = "Insert"
-		insertbox.TextColor3 = Color3.new(1, 1, 1)
-		insertbox.Font = Enum.Font.ArialBold
-		insertbox.TextSize = 12
-		insertbox.ZIndex = 3
-		insertbox.ClearTextOnFocus = false
-
-		-- Explorer Item Guis
-		local ItemGuis = {}
-		for i = 0, 19 do
-			local item = Instance.new("Frame", list)
-			item.Name = "Item"
-			item.BackgroundColor3 = Color3.new(0, 0, 0)
-			item.BackgroundTransparency = 0.8
-			item.BorderColor3 = Color3.new(1, 0, 0)
-			item.Position = UDim2.new(0, 0, i * 0.05, 0)
-			item.Size = UDim2.new(1, 0, 0.05, 0)
-			item.ZIndex = 1
-
-			local name = Instance.new("TextButton", item)
-			name.Name = "ItemName"
-			name.Size = UDim2.new(0.9, 0, 1, 0)
-			name.Position = UDim2.new(0.1, 0, 0, 0)
-			name.BackgroundTransparency = 0.8
-			name.BackgroundColor3 = Color3.new(0, 0, 0)
-			name.BorderColor3 = Color3.new(1, 0, 0)
-			name.Font = Enum.Font.ArialBold
-			name.TextSize = 14
-			name.TextColor3 = Color3.new(1, 1, 1)
-			name.Text = "Object"
-
-			local icon = Instance.new("ImageLabel", item)
-			icon.Name = "Icon"
-			icon.BackgroundTransparency = 0.2
-			icon.BackgroundColor3 = Color3.new(0, 0, 0)
-			icon.BorderColor3 = Color3.new(1, 0, 0)
-			icon.Position = UDim2.new(0, 0, 0, 0)
-			icon.Size = UDim2.new(0.1, 0, 1, 0)
-			icon.Image = Images.Property
-
-			local value = Instance.new("ObjectValue", item)
-			value.Name = "ObjectValue"
-
-			table.insert(ItemGuis, item)
-		end
+		local copybutton = Instance.new("TextButton")
+		copybutton.Name = "CopyButton"
+		copybutton.Parent = options
+		copybutton.BackgroundColor3 = Color3.new(0, 0, 0)
+		copybutton.BackgroundTransparency = 0.6
+		copybutton.BorderColor3 = Color3.new(1, 0, 0)
+		copybutton.Position = UDim2.new(0, 0, 0, 0)
+		copybutton.Size = UDim2.new(1, 0, 0.25, 0)
+		copybutton.Text = "Copy"
+		copybutton.TextColor3 = Color3.new(1, 1, 1)
+		copybutton.Font = Enum.Font.ArialBold
+		copybutton.TextSize = 12
+		copybutton.ZIndex = 3
 	end
 end)
 
