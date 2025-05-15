@@ -4244,41 +4244,237 @@ Explorer.MouseButton1Click:Connect(function()
 		CreateSmallButton("UpButton", [[/\]], UDim2.new(0.9, 0, 1.75, 0))
 		CreateSmallButton("DownButton", [[\/]], UDim2.new(0.9, 0, 16.25, 0))
 
-		local refreshbutton = Instance.new("ImageButton")
-		refreshbutton.Name = "RefreshButton"
-		refreshbutton.Parent = expframe
-		refreshbutton.BackgroundColor3 = Color3.new(0, 0, 0)
-		refreshbutton.BackgroundTransparency = 0.6
-		refreshbutton.BorderColor3 = Color3.new(1, 0, 0)
-		refreshbutton.Position = UDim2.new(0.9, 0, 0, 0)
-		refreshbutton.Size = UDim2.new(0.1, 0, 0.05, 0)
-		refreshbutton.Image = "http://www.roblox.com/asset/?id=21367268"
-		refreshbutton.ZIndex = 2
+		-- REQUIRED REFERENCES
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
 
-		local options = Instance.new("Frame")
-		options.Name = "Options"
-		options.Parent = list
-		options.BackgroundColor3 = Color3.new(0, 0, 0)
-		options.BackgroundTransparency = 0.4
-		options.BorderColor3 = Color3.new(1, 0, 0)
-		options.Position = UDim2.new(-1, 0, 0, 0)
-		options.Size = UDim2.new(0.5, 0, 0.25, 0)
-		options.Visible = false
-		options.ZIndex = 3
+-- Make sure these are defined elsewhere:
+-- expframe, list, Base, Images, ItemGuis = {}, explore, otherframe, PropGuis = {}
 
-		local copybutton = Instance.new("TextButton")
-		copybutton.Name = "CopyButton"
-		copybutton.Parent = options
-		copybutton.BackgroundColor3 = Color3.new(0, 0, 0)
-		copybutton.BackgroundTransparency = 0.6
-		copybutton.BorderColor3 = Color3.new(1, 0, 0)
-		copybutton.Position = UDim2.new(0, 0, 0, 0)
-		copybutton.Size = UDim2.new(1, 0, 0.25, 0)
-		copybutton.Text = "Copy"
-		copybutton.TextColor3 = Color3.new(1, 1, 1)
-		copybutton.Font = Enum.Font.ArialBold
-		copybutton.TextSize = 12
-		copybutton.ZIndex = 3
+-- REFRESH BUTTON
+local refreshbutton = Instance.new("ImageButton")
+refreshbutton.Name = "RefreshButton"
+refreshbutton.Parent = expframe
+refreshbutton.BackgroundColor3 = Color3.new(0, 0, 0)
+refreshbutton.BackgroundTransparency = 0.6
+refreshbutton.BorderColor3 = Color3.new(1, 0, 0)
+refreshbutton.Position = UDim2.new(0.9, 0, 0, 0)
+refreshbutton.Size = UDim2.new(0.1, 0, 0.05, 0)
+refreshbutton.Image = "http://www.roblox.com/asset/?id=21367268"
+refreshbutton.ZIndex = 2
+
+-- OPTIONS FRAME
+local options = Instance.new("Frame")
+options.Name = "Options"
+options.Parent = list
+options.BackgroundColor3 = Color3.new(0, 0, 0)
+options.BackgroundTransparency = 0.4
+options.BorderColor3 = Color3.new(1, 0, 0)
+options.Position = UDim2.new(-1, 0, 0, 0)
+options.Size = UDim2.new(0.5, 0, 0.25, 0)
+options.Visible = false
+options.ZIndex = 3
+
+-- COPY BUTTON
+local copybutton = Instance.new("TextButton")
+copybutton.Name = "CopyButton"
+copybutton.Parent = options
+copybutton.BackgroundColor3 = Color3.new(0, 0, 0)
+copybutton.BackgroundTransparency = 0.6
+copybutton.BorderColor3 = Color3.new(1, 0, 0)
+copybutton.Position = UDim2.new(0, 0, 0, 0)
+copybutton.Size = UDim2.new(1, 0, 0.25, 0)
+copybutton.Text = "Copy"
+copybutton.TextColor3 = Color3.new(1, 1, 1)
+copybutton.Font = Enum.Font.ArialBold
+copybutton.TextSize = 12
+copybutton.ZIndex = 3
+
+-- PASTE BUTTON
+local pastebutton = Instance.new("TextButton")
+pastebutton.Name = "PasteButton"
+pastebutton.Parent = options
+pastebutton.BackgroundColor3 = Color3.new(0, 0, 0)
+pastebutton.BackgroundTransparency = 0.6
+pastebutton.BorderColor3 = Color3.new(1, 0, 0)
+pastebutton.Position = UDim2.new(0, 0, 0.25, 0)
+pastebutton.Size = UDim2.new(1, 0, 0.25, 0)
+pastebutton.Text = "Paste"
+pastebutton.TextColor3 = Color3.new(1, 1, 1)
+pastebutton.Font = Enum.Font.ArialBold
+pastebutton.TextSize = 12
+pastebutton.ZIndex = 3
+
+-- CUT BUTTON
+local cutbutton = pastebutton:Clone()
+cutbutton.Name = "CutButton"
+cutbutton.Position = UDim2.new(0, 0, 0.5, 0)
+cutbutton.Text = "Cut"
+cutbutton.Parent = options
+
+-- INSERT BOX
+local insertbutton = Instance.new("TextBox")
+insertbutton.Name = "InsertButton"
+insertbutton.Parent = options
+insertbutton.BackgroundColor3 = Color3.new(0, 0, 0)
+insertbutton.BackgroundTransparency = 0.6
+insertbutton.BorderColor3 = Color3.new(1, 0, 0)
+insertbutton.Position = UDim2.new(0, 0, 0.75, 0)
+insertbutton.Size = UDim2.new(1, 0, 0.25, 0)
+insertbutton.Text = "Insert"
+insertbutton.TextColor3 = Color3.new(1, 1, 1)
+insertbutton.Font = Enum.Font.ArialBold
+insertbutton.TextSize = 12
+insertbutton.TextXAlignment = Enum.TextXAlignment.Center
+insertbutton.ZIndex = 3
+insertbutton.ClearTextOnFocus = false
+
+-- EDIT BUTTON
+local editbutton = pastebutton:Clone()
+editbutton.Name = "EditButton"
+editbutton.Text = "Edit"
+editbutton.Position = UDim2.new(0, 0, 1, 0)
+editbutton.Visible = false
+editbutton.Parent = options
+
+-- CONFIG OBJECT HOLDER
+local config = Instance.new("ObjectValue")
+config.Name = "ConfiguredObject"
+config.Value = nil
+config.Parent = options
+
+-- SELECTION OBJECT
+local sel = Instance.new("ObjectValue")
+sel.Name = "Selection"
+sel.Value = game
+sel.Parent = expframe
+_G.Selection = sel
+
+-- HIGHLIGHT
+local highlight = Instance.new("SelectionBox")
+highlight.Name = "ObjectHighlight"
+highlight.Adornee = nil
+highlight.Color3 = Color3.fromRGB(0, 170, 255)
+highlight.Parent = CoreGui
+
+-- ITEM LIST
+for i = 0, 19 do
+	local item = Instance.new("Frame")
+	item.Name = "Item"
+	item.Parent = list
+	item.BackgroundColor3 = Color3.new(0, 0, 0)
+	item.BackgroundTransparency = 0.8
+	item.BorderColor3 = Color3.new(1, 0, 0)
+	item.Position = UDim2.new(0, 0, i * 0.05, 0)
+	item.Size = UDim2.new(1, 0, 0.05, 0)
+	item.ZIndex = 1
+
+	local name = Instance.new("TextButton")
+	name.Name = "ItemName"
+	name.Parent = item
+	name.Size = UDim2.new(0.9, 0, 1, 0)
+	name.Position = UDim2.new(0.1, 0, 0, 0)
+	name.BackgroundTransparency = 0.8
+	name.BackgroundColor3 = Color3.new(0, 0, 0)
+	name.BorderColor3 = Color3.new(1, 0, 0)
+	name.Font = Enum.Font.ArialBold
+	name.TextSize = 14
+	name.TextColor3 = Color3.new(1, 1, 1)
+	name.Text = "Object"
+
+	local icon = Instance.new("ImageLabel")
+	icon.Name = "Icon"
+	icon.Parent = item
+	icon.BackgroundTransparency = 0.2
+	icon.BackgroundColor3 = Color3.new(0, 0, 0)
+	icon.BorderColor3 = Color3.new(1, 0, 0)
+	icon.Position = UDim2.new(0, 0, 0, 0)
+	icon.Size = UDim2.new(0.1, 0, 1, 0)
+	icon.Image = Base .. Images.Property
+
+	local value = Instance.new("ObjectValue")
+	value.Name = "ObjectValue"
+	value.Parent = item
+
+	table.insert(ItemGuis, item)
+end
+
+-- PROPERTIES FRAME
+local propsframe = Instance.new("Frame")
+propsframe.Name = "PropertiesFrame"
+propsframe.Parent = otherframe
+propsframe.BackgroundColor3 = Color3.new(0, 0, 0)
+propsframe.BackgroundTransparency = 0.4
+propsframe.BorderColor3 = Color3.new(1, 0, 0)
+propsframe.Position = UDim2.new(0, 0, 1, 0)
+propsframe.Size = UDim2.new(1, 0, 16, 0)
+propsframe.Visible = false
+propsframe.ZIndex = 1
+
+-- PROPERTIES LIST
+local list2 = Instance.new("Frame")
+list2.Name = "List"
+list2.Parent = propsframe
+list2.BackgroundColor3 = Color3.new(0, 0, 0)
+list2.BackgroundTransparency = 0.8
+list2.BorderColor3 = Color3.new(1, 0, 0)
+list2.Position = UDim2.new(0, 0, 0.05, 0)
+list2.Size = UDim2.new(0.9, 0, 0.9, 0)
+
+for i = 0, 19 do
+	local property = Instance.new("Frame", list2)
+	property.Name = "Property"
+	property.BackgroundColor3 = Color3.new(0, 0, 0)
+	property.BackgroundTransparency = 0.8
+	property.BorderColor3 = Color3.new(1, 0, 0)
+	property.Position = UDim2.new(0, 0, i * 0.05, 0)
+	property.Size = UDim2.new(1, 0, 0.05, 0)
+
+	local propname = Instance.new("TextLabel", property)
+	propname.Name = "PropertyName"
+	propname.Size = UDim2.new(0.5, 0, 1, 0)
+	propname.BackgroundTransparency = 0.8
+	propname.Font = Enum.Font.ArialBold
+	propname.TextSize = 14
+	propname.TextColor3 = Color3.new(1, 1, 1)
+	propname.Text = "Property"
+	propname.TextScaled = true
+
+	local propvalue = Instance.new("TextBox", property)
+	propvalue.Name = "PropertyValue"
+	propvalue.Position = UDim2.new(0.5, 0, 0, 0)
+	propvalue.Size = UDim2.new(0.5, 0, 1, 0)
+	propvalue.BackgroundTransparency = 0.8
+	propvalue.Font = Enum.Font.ArialBold
+	propvalue.TextSize = 14
+	propvalue.Text = "Value"
+	propvalue.TextColor3 = Color3.new(1, 1, 1)
+	propvalue.TextScaled = true
+	propvalue.ClearTextOnFocus = false
+
+	table.insert(PropGuis, property)
+end
+
+-- FUNCTION: REPLACEWITH
+function ReplaceWith(GuiType, Gui)
+	if not GuiType or not Gui then return end
+	local Parent = Gui.Parent
+	local NewGui = Instance.new(GuiType)
+	NewGui.Name = Gui.Name
+	NewGui.Parent = Parent
+
+	for _, prop in ipairs({
+		"BackgroundColor3", "BackgroundTransparency", "BorderColor3", "Position", "Size", "Visible", "ZIndex"
+	}) do
+		pcall(function() NewGui[prop] = Gui[prop] end)
+	end
+
+	if NewGui:IsA("TextLabel") or NewGui:IsA("TextBox") or NewGui:IsA("TextButton") then
+		NewGui.Font = Gui.Font
+		NewGui.Text = Gui.Text
+		NewGui.TextSize = Gui.TextSize
+		NewGui.TextColor3 = Gui.TextColor3
+		NewGui.TextScaled = Gui.TextScaled
 	end
 end)
 
@@ -4355,3 +4551,5 @@ m.Parent = Workspace
 m.Text = "c00lgui Reborn V0.5 has loaded! Remade by YepImSirPwnsAlot, Creds to 007n7"
 wait(5)
 m:Destroy()
+----====[ End Of Ep1kal Script ]====----
+----====[ STILL CHILL STILL CHILL STILL CHILL ]====----
