@@ -4101,14 +4101,14 @@ b03d.MouseButton1Click:Connect(function()
     loadstring(game:GetObjects("rbxassetid://11801912144")[1].Source)()
 end)
 
-local ScreenGufr = PlayerGui:FindFirstChild("ScreenGufr")
-ScreenGufr = Instance.new("ScreenGui")
-ScreenGufr.Name = "ScreenGufr"
-ScreenGufr.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+local Nigger = PlayerGui:FindFirstChild("ScreenGufr")
+Nigger.Name = "Nigger"
+Nigger.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Nigger.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 local Explorer = Instance.new("TextButton")
 Explorer.Name = "ExplorerButton"
-Explorer.Parent = ScreenGufr
+Explorer.Parent = Nigger
 Explorer.BackgroundColor3 = Color3.new(0, 0, 0)
 Explorer.BorderColor3 = Color3.new(1, 0, 0)
 Explorer.BorderSizePixel = 1
@@ -4120,20 +4120,21 @@ Explorer.Text = "Explorer"
 Explorer.TextColor3 = Color3.new(1, 1, 1)
 Explorer.TextSize = 14
 Explorer.TextWrapped = true
+
 Explorer.MouseButton1Click:Connect(function()
-	if game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("ScreenGufr") == nil then
-        pcall(function()
-            Game.Players.LocalPlayer:WaitForChild("PlayerGui").RobloxGui.PlayerListScreen.Visible = false
-        end)
+	if playerGui:FindFirstChild("Nigger") == nil then
+		pcall(function()
+			playerGui:FindFirstChild("RobloxGui").PlayerListScreen.Visible = false
+		end)
 
 		local otherframe = Instance.new("TextLabel")
 		otherframe.Name = "OtherFrame"
-		otherframe.Parent = explore
+		otherframe.Parent = ScreenGufr
 		otherframe.BackgroundColor3 = Color3.new(0, 0, 0)
 		otherframe.BackgroundTransparency = 0.2
 		otherframe.BorderColor3 = Color3.new(1, 0, 0)
-		otherframe.Position = UDim2.new(0.8,0,0,0)
-		otherframe.Size = UDim2.new(0.2,0,0.05,0)
+		otherframe.Position = UDim2.new(0.8, 0, 0, 0)
+		otherframe.Size = UDim2.new(0.2, 0, 0.05, 0)
 		otherframe.Text = ""
 		otherframe.TextColor3 = Color3.new(1, 1, 1)
 		otherframe.Font = Enum.Font.ArialBold
@@ -4159,8 +4160,8 @@ Explorer.MouseButton1Click:Connect(function()
 			return btn
 		end
 
-		CreateButton("ExpButton", "Explorer", UDim2.new(0, 0, 16.25, 0))
-		CreateButton("PropsButton", "Properties", UDim2.new(0.45, 0, 16.25, 0))
+		CreateButton("ExpButton", "Explorer", UDim2.new(0, 0, 0, 0))
+		CreateButton("PropsButton", "Properties", UDim2.new(0.45, 0, 0, 0))
 
 		local expframe = Instance.new("Frame")
 		expframe.Name = "ExplorerFrame"
@@ -4229,8 +4230,8 @@ Explorer.MouseButton1Click:Connect(function()
 			return btn
 		end
 
-		CreateSmallButton("UpButton", [[/\]], UDim2.new(0.9, 0, 1.75, 0))
-		CreateSmallButton("DownButton", [[\/]], UDim2.new(0.9, 0, 16.25, 0))
+		CreateSmallButton("UpButton", [[/\]], UDim2.new(0.9, 0, 0, 0))
+		CreateSmallButton("DownButton", [[\/]], UDim2.new(0.9, 0, 0.75, 0))
 
 		local refreshbutton = Instance.new("ImageButton")
 		refreshbutton.Name = "RefreshButton"
