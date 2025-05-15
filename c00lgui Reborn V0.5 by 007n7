@@ -4101,14 +4101,14 @@ b03d.MouseButton1Click:Connect(function()
     loadstring(game:GetObjects("rbxassetid://11801912144")[1].Source)()
 end)
 
-local ExplorerButton = Instance.new("ScreenGui")
-ExplorerButton.Name = "ExplorerButton"
-ExplorerButton.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-ExplorerButton.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local Scweengui = Instance.new("ScreenGui")
+Scweengui.Name = "Scweengui"
+Scweengui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Scweengui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 local Explorer = Instance.new("TextButton")
-Explorer.Name = "ExplorerButton"
-Explorer.Parent = ExplorerButton
+Explorer.Name = "Explorer Button"
+Explorer.Parent = Scweengui
 Explorer.BackgroundColor3 = Color3.new(0, 0, 0)
 Explorer.BorderColor3 = Color3.new(1, 0, 0)
 Explorer.BorderSizePixel = 1
@@ -4116,157 +4116,367 @@ Explorer.Position = UDim2.new(0.7, 0, 0.97 ,0)
 Explorer.Size = UDim2.new(0.1, 0, 0.025, 0)
 Explorer.ZIndex = 2
 Explorer.Font = Enum.Font.SourceSans
+Explorer.FontSize = Enum.FontSize.Size18
 Explorer.Text = "Explorer"
 Explorer.TextColor3 = Color3.new(1, 1, 1)
 Explorer.TextSize = 14
 Explorer.TextWrapped = true
 Explorer.MouseButton1Click:Connect(function()
-	if game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("ExplorerButton") == nil then
-        pcall(function()
-            game.Players.LocalPlayer:WaitForChild("PlayerGui").RobloxGui.PlayerListScreen.Visible = false
-        end)
+	if game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("Scweengui") == nil then
+        	pcall(function()
+            	game.Players.LocalPlayer:WaitForChild("PlayerGui").RobloxGui.PlayerListScreen.Visible = false
+        	end)
 
-		local otherframe = Instance.new("TextLabel")
+			ItemGuis = {}
+        	PropGuis = {}
+        	ScrollPlaces = {}
+        	MouseFunction = nil
+        	KeyDownFunction = nil
+        	KeyUpFunction = nil
+       		_G.Selection = nil
+        	ExplorerGui = nil
+        	CopiedItem = nil
+       		AddingConnection = nil
+        	RemovingConnection = nil
+       		Mouse = nil
+      		ExpScrollNumber = 1
+       		PropScrollNumber = 1
+        	ViewGui = "Explorer"
+
+			if Game.Players.LocalPlayer ~= nil then
+                Mouse = Game.Players.LocalPlayer:GetMouse()
+            end
+            
+            Base = "http://www.roblox.com/asset/?id="
+            Images = {Value=40332408,Sound=40332463,Script=40332546,ScreenGui=40332596,Part=40332760,SpawnLocation=117933272,Nil=40332825,Model=40332865,Message=40332942,LocalScript=40332996,Joint=40333049,Frame=40333121,Camera=40333217,Backpack=40333260,Player=40332674,Body=40339623,HopperBin=40339572,Tool=40339513,Workspace=40484518,Mesh=40484580,Property=40493937,Animation=40531758,Hat=40531808,Humanoid=40531903,Light=117825710,Decal=117930421,Shirt=117931182,Pants=117931169,Terrain=117931310,ForceField=117931567,Seat=117931937,BillboardGui=117932485,Texture=118002183}
+            
+            function SetImage(Par,class)
+                if (class=="IntValue") or (class=="BoolValue") or (class=="StringValue") or (class=="ObjectValue") or (class=="CFrameValue") or (class=="Vector3Value") or (class=="NumberValue") or (class=="RayValue") or (class=="Color3Value") or (class=="BrickColorValue") then
+                CreateImageLabel(Par,Base..Images.Value)
+            elseif (class=="Sound") or (class=="StockSound") or (class=="SoundService") then
+                CreateImageLabel(Par,Base..Images.Sound)
+            elseif (class=="Script") then
+                CreateImageLabel(Par,Base..Images.Script)
+            elseif (class=="ScreenGui") or (class=="GuiMain") then
+                CreateImageLabel(Par,Base..Images.ScreenGui)
+            elseif (class=="BillboardGui") then
+                CreateImageLabel(Par,Base..Images.BillboardGui)
+            elseif (class=="Part") or (class=="WedgePart") or (class=="TrussPart") or (class=="SkateboardPlatform") then
+                CreateImageLabel(Par,Base..Images.Part)
+            elseif (class=="SpawnLocation") then
+                
+				CreateImageLabel(Par,Base..Images.SpawnLocation)
+            elseif (class=="Model") then
+                CreateImageLabel(Par,Base..Images.Model)
+            elseif (class=="Hint") or (class=="Message") then
+                CreateImageLabel(Par,Base..Images.Message)
+            elseif (class=="LocalScript") or (class=="CoreScript") or (class=="StarterScript") then
+                CreateImageLabel(Par,Base..Images.LocalScript)
+            elseif (class=="Weld") or (class=="Snap") or (class=="Glue") or (class=="Rotate") or (class=="RotateP") or (class=="RotateV") or (class=="JointsService") then
+    	            CreateImageLabel(Par,Base..Images.Joint)
+		 	elseif (class=="Frame") or (class=="TextLabel") or (class=="TextButton") or (class=="TextBox") or (class=="ImageButton") or (class=="ImageLabel") then
+                
+				CreateImageLabel(Par,Base..Images.Frame)
+            elseif (class=="Camera") then
+                CreateImageLabel(Par,Base..Images.Camera)
+            elseif (class=="Backpack") or (class=="StarterGear") or (class=="StarterPack") or (class=="StarterGui") or (class=="PlayerGui") then
+                CreateImageLabel(Par,Base..Images.Backpack)
+            elseif (class=="Player") or (class=="PseudoPlayer") or (class=="Players") then
+                CreateImageLabel(Par,Base..Images.Player)
+            elseif (class=="BodyPosition") or (class=="BodyGyro") or (class=="BodyVelocity") or (class=="BodyThrust") or (class=="BodyForce") or (class=="RocketPropulsion") then
+                CreateImageLabel(Par,Base..Images.Body)
+            elseif (class=="HopperBin") then
+                CreateImageLabel(Par,Base..Images.HopperBin)
+            elseif (class=="Tool") then
+                CreateImageLabel(Par,Base..Images.Tool)
+            elseif (class=="Workspace") then
+                CreateImageLabel(Par,Base..Images.Workspace)
+            elseif (class=="BlockMesh") or (class=="SpecialMesh") or (class=="CylinderMesh") then
+                CreateImageLabel(Par,Base..Images.Mesh)
+            elseif (class=="Animation") or (class=="CharacterMesh") then
+                CreateImageLabel(Par,Base..Images.Animation)
+            elseif (class=="Hat") then
+                CreateImageLabel(Par,Base..Images.Hat)
+            elseif (class=="Humanoid") then
+                CreateImageLabel(Par,Base..Images.Humanoid)
+            elseif (class=="Lighting") then
+				CreateImageLabel(Par,Base..Images.Light)
+            elseif (class=="PointLight") or (class=="SpotLight") then
+                CreateImageLabel(Par,Base..Images.Light)
+            elseif (class=="Decal") then
+            	CreateImageLabel(Par,Base..Images.Decal)
+            elseif (class=="Texture") then
+                CreateImageLabel(Par,Base..Images.Texture)
+            elseif (class=="Terrain") then
+                CreateImageLabel(Par,Base..Images.Terrain)
+            elseif (class=="Shirt") then
+                CreateImageLabel(Par,Base..Images.Shirt)
+            elseif (class=="Pants") then
+                CreateImageLabel(Par,Base..Images.Pants)
+            elseif (class=="ForceField") then
+                CreateImageLabel(Par,Base..Images.ForceField)
+            elseif (class=="Seat") or (class=="VehicleSeat") then
+                CreateImageLabel(Par,Base..Images.Seat)
+            else CreateImageLabel(Par,Base..Images.Nil)
+            end
+            end
+                    
+                function CreateImageLabel(Par,image)
+                    Par.Image = image
+                end
+                    
+                function GetProperties(Object,Table)
+                    local Return = {}
+                    local function C() end
+                        for i=1,#Table do
+                            if pcall(function() C(Object[Table[i]]) end) then
+                                if (Object:FindFirstChild(Table[i]) == nil) then
+                                    table.insert(Return, Table[i])
+                                end end end
+                                return Return
+                            end
+						--[[ Create Gui's ]]--
+    	explore = Instance.new("ScreenGui"))
+		explore.Name = "ExplorerGui"
+   		otherframe = Instance.new("TextLabel", explore)
 		otherframe.Name = "OtherFrame"
-		otherframe.Parent = explore
-		otherframe.BackgroundColor3 = Color3.new(0, 0, 0)
+		otherframe.BackgroundColor = BrickColor.new("Really black")
 		otherframe.BackgroundTransparency = 0.2
-		otherframe.BorderColor3 = Color3.new(1, 0, 0)
-		otherframe.Position = UDim2.new(0.8,0,0,0)
-		otherframe.Size = UDim2.new(0.2,0,0.05,0)
-		otherframe.Text = ""
-		otherframe.TextColor3 = Color3.new(1, 1, 1)
-		otherframe.Font = Enum.Font.ArialBold
-		otherframe.TextSize = 14
-		otherframe.TextXAlignment = Enum.TextXAlignment.Center
+		otherframe.BorderColor = BrickColor.new("Really red")
+		otherframe.Position = UDim2.new(0.8, 0, 0, 0)
+		otherframe.Size = UDim2.new(0.2, 0, 0.05, 0)
+		otherframe.Visible = true
+		otherframe.ZIndex = 2
+		otherframe.Draggable = true
+		otherframe.Font = "ArialBold"
+		otherframe.FontSize = "Size14"
+		otherframe.TextColor = BrickColor.new("Institutional white")
+		otherframe.TextXAlignment = "Center"
 		otherframe.Active = true
 
-		local function CreateButton(name, text, position)
-			local btn = Instance.new("TextButton")
-			btn.Name = name
-			btn.Parent = otherframe
-			btn.BackgroundColor3 = Color3.new(0, 0, 0)
-			btn.BackgroundTransparency = 0.2
-			btn.BorderColor3 = Color3.new(1, 0, 0)
-			btn.Position = position
-			btn.Size = UDim2.new(0.45, 0, 0.75, 0)
-			btn.Text = text
-			btn.TextColor3 = Color3.new(1, 1, 1)
-			btn.Font = Enum.Font.ArialBold
-			btn.TextSize = 14
-			btn.TextXAlignment = Enum.TextXAlignment.Center
-			btn.ZIndex = 2
-			return btn
-		end
+		expbutton = Instance.new("TextButton", otherframe)
+		expbutton.Name = "ExpButton"
+		expbutton.BackgroundColor = BrickColor.new("Really black")
+		expbutton.BackgroundTransparency = 0.2
+		expbutton.BorderColor = BrickColor.new("Really red")
+		expbutton.Position = UDim2.new(0, 0, 1.75, 0)
+		expbutton.Size = UDim2.new(0.45, 0, 0.75, 0)
+		expbutton.Visible = true
+		expbutton.ZIndex = 2
+		expbutton.Draggable = false
+		expbutton.Font = "ArialBold"
+		expbutton.FontSize = "Size14"
+		expbutton.Text = "Explorer"
+		expbutton.TextColor = BrickColor.new("Institutional white")
+		expbutton.TextXAlignment = "Center"
 
-		CreateButton("ExpButton", "Explorer", UDim2.new(0, 0, 16.25, 0))
-		CreateButton("PropsButton", "Properties", UDim2.new(0.45, 0, 16.25, 0))
+		propsbutton = Instance.new("TextButton", otherframe)
+		propsbutton.Name = "PropsButton"
+		propsbutton.BackgroundColor = BrickColor.new("Really black")
+		propsbutton.BackgroundTransparency = 0.2
+		propsbutton.BorderColor = BrickColor.new("Really red")
+		propsbutton.Position = UDim2.new(0.45, 0, 1.75, 0)
+		propsbutton.Size = UDim2.new(0.45, 0, 0.75, 0)
+		propsbutton.Visible = true
+		propsbutton.ZIndex = 2
+		propsbutton.Draggable = false
+		propsbutton.Font = "ArialBold"
+		propsbutton.FontSize = "Size14"
+		propsbutton.Text = "Properties"
+		propsbutton.TextColor = BrickColor.new("Institutional white")
+		propsbutton.TextXAlignment = "Center"
 
-		local expframe = Instance.new("Frame")
+		expframe = Instance.new("Frame", otherframe)
 		expframe.Name = "ExplorerFrame"
-		expframe.Parent = otherframe
-		expframe.BackgroundColor3 = Color3.new(0, 0, 0)
+		expframe.BackgroundColor = BrickColor.new("Really black")
 		expframe.BackgroundTransparency = 0.4
-		expframe.BorderColor3 = Color3.new(1, 0, 0)
+		expframe.BorderColor = BrickColor.new("Really red")
 		expframe.Position = UDim2.new(0, 0, 1, 0)
 		expframe.Size = UDim2.new(1, 0, 16, 0)
+		expframe.Visible = true
 		expframe.ZIndex = 1
+		expframe.Draggable = false
 		expframe.Active = true
 
-		local list = Instance.new("Frame")
+		list = Instance.new("Frame", expframe)
 		list.Name = "List"
-		list.Parent = expframe
-		list.BackgroundColor3 = Color3.new(0, 0, 0)
+		list.BackgroundColor = BrickColor.new("Really black")
 		list.BackgroundTransparency = 0.8
-		list.BorderColor3 = Color3.new(1, 0, 0)
+		list.BorderColor = BrickColor.new("Really red")
 		list.Position = UDim2.new(0, 0, 0.1, 0)
 		list.Size = UDim2.new(0.9, 0, 0.85, 0)
+		list.Visible = true
 		list.ZIndex = 1
+		list.Draggable = false
 
-		local back = Instance.new("TextButton")
+		back = Instance.new("TextButton", expframe)
 		back.Name = "BackButton"
-		back.Parent = expframe
-		back.BackgroundColor3 = Color3.new(0, 0, 0)
+		back.BackgroundColor = BrickColor.new("Really black")
 		back.BackgroundTransparency = 0.6
-		back.BorderColor3 = Color3.new(1, 0, 0)
+		back.BorderColor = BrickColor.new("Really red")
 		back.Position = UDim2.new(0, 0, 0.05, 0)
 		back.Size = UDim2.new(1, 0, 0.05, 0)
+		back.Visible = true
+		back.ZIndex = 1
+		back.Draggable = false
+		back.Font = "ArialBold"
+		back.FontSize = "Size14"
 		back.Text = "Object's Parent is Nil"
-		back.TextColor3 = Color3.new(1, 1, 1)
-		back.Font = Enum.Font.ArialBold
-		back.TextSize = 14
-		back.TextXAlignment = Enum.TextXAlignment.Center
+		back.TextColor = BrickColor.new("Institutional white")
+		back.TextXAlignment = "Center"
 
-		local search = Instance.new("TextBox")
+		search = Instance.new("TextBox", expframe)
 		search.Name = "SearchBox"
-		search.Parent = expframe
-		search.BackgroundColor3 = Color3.new(0, 0, 0)
+		search.BackgroundColor = BrickColor.new("Really black")
 		search.BackgroundTransparency = 0.6
-		search.BorderColor3 = Color3.new(1, 0, 0)
+		search.BorderColor = BrickColor.new("Really red")
 		search.Position = UDim2.new(0, 0, 0, 0)
 		search.Size = UDim2.new(1, 0, 0.05, 0)
+		search.Visible = true
+		search.ZIndex = 1
+		search.Draggable = false
+		search.Font = "ArialBold"
+		search.FontSize = "Size14"
 		search.Text = "Search in Place1"
-		search.TextColor3 = Color3.new(1, 1, 1)
-		search.Font = Enum.Font.ArialBold
-		search.TextSize = 14
-		search.TextXAlignment = Enum.TextXAlignment.Center
+		search.TextColor = BrickColor.new("Institutional white")
+		search.TextXAlignment = "Center"
 
-		local function CreateSmallButton(name, text, pos)
-			local btn = Instance.new("TextButton")
-			btn.Name = name
-			btn.Parent = otherframe
-			btn.BackgroundColor3 = Color3.new(0, 0, 0)
-			btn.BackgroundTransparency = 0.6
-			btn.BorderColor3 = Color3.new(1, 0, 0)
-			btn.Position = pos
-			btn.Size = UDim2.new(0.1, 0, 0.75, 0)
-			btn.Text = text
-			btn.TextColor3 = Color3.new(1, 1, 1)
-			btn.Font = Enum.Font.ArialBold
-			btn.TextSize = 12
-			btn.TextXAlignment = Enum.TextXAlignment.Center
-			btn.ZIndex = 2
-			return btn
-		end
+		upbutton = Instance.new("TextButton", otherframe)
+		upbutton.Name = "UpButton"
+		upbutton.BackgroundColor = BrickColor.new("Really black")
+		upbutton.BackgroundTransparency = 0.6
+		upbutton.BorderColor = BrickColor.new("Really red")
+		upbutton.Position = UDim2.new(0.9, 0, 1.75, 0)
+		upbutton.Size = UDim2.new(0.1, 0, 0.75, 0)
+		upbutton.Visible = true
+		upbutton.ZIndex = 2
+		upbutton.Draggable = false
+		upbutton.Font = "ArialBold"
+		upbutton.FontSize = "Size12"
+		upbutton.Text = [[/\]]
+		upbutton.TextColor = BrickColor.new("Institutional white")
+		upbutton.TextXAlignment = "Center"
 
-		CreateSmallButton("UpButton", [[/\]], UDim2.new(0.9, 0, 1.75, 0))
-		CreateSmallButton("DownButton", [[\/]], UDim2.new(0.9, 0, 16.25, 0))
+		downbutton = Instance.new("TextButton", otherframe)
+		downbutton.Name = "DownButton"
+		downbutton.BackgroundColor = BrickColor.new("Really black")
+		downbutton.BackgroundTransparency = 0.6
+		downbutton.BorderColor = BrickColor.new("Really red")
+		downbutton.Position = UDim2.new(0.9, 0, 2.5, 0)
+		downbutton.Size = UDim2.new(0.1, 0, 0.75, 0)
+		downbutton.Visible = true
+		downbutton.ZIndex = 2
+		downbutton.Draggable = false
+		downbutton.Font = "ArialBold"
+		downbutton.FontSize = "Size12"
+		downbutton.Text = [[\/]]
+		downbutton.TextColor = BrickColor.new("Institutional white")
+		downbutton.TextXAlignment = "Center"
 
-		local refreshbutton = Instance.new("ImageButton")
+		refreshbutton = Instance.new("ImageButton", expframe)
 		refreshbutton.Name = "RefreshButton"
-		refreshbutton.Parent = expframe
-		refreshbutton.BackgroundColor3 = Color3.new(0, 0, 0)
+		refreshbutton.BackgroundColor = BrickColor.new("Really black")
 		refreshbutton.BackgroundTransparency = 0.6
-		refreshbutton.BorderColor3 = Color3.new(1, 0, 0)
+		refreshbutton.BorderColor = BrickColor.new("Really red")
 		refreshbutton.Position = UDim2.new(0.9, 0, 0, 0)
 		refreshbutton.Size = UDim2.new(0.1, 0, 0.05, 0)
-		refreshbutton.Image = "http://www.roblox.com/asset/?id=21367268"
+		refreshbutton.Visible = true
 		refreshbutton.ZIndex = 2
+		refreshbutton.Draggable = false
+		refreshbutton.Image = "http://www.roblox.com/asset/?id=21367268"
 
-		local options = Instance.new("Frame")
+		options = Instance.new("Frame", list)
 		options.Name = "Options"
-		options.Parent = list
-		options.BackgroundColor3 = Color3.new(0, 0, 0)
+		options.BackgroundColor = BrickColor.new("Really black")
 		options.BackgroundTransparency = 0.4
-		options.BorderColor3 = Color3.new(1, 0, 0)
+		options.BorderColor = BrickColor.new("Really red")
 		options.Position = UDim2.new(-1, 0, 0, 0)
 		options.Size = UDim2.new(0.5, 0, 0.25, 0)
 		options.Visible = false
 		options.ZIndex = 3
+		options.Draggable = false
 
-		local copybutton = Instance.new("TextButton")
+		copybutton = Instance.new("TextButton", options)
 		copybutton.Name = "CopyButton"
-		copybutton.Parent = options
-		copybutton.BackgroundColor3 = Color3.new(0, 0, 0)
+		copybutton.BackgroundColor = BrickColor.new("Really black")
 		copybutton.BackgroundTransparency = 0.6
-		copybutton.BorderColor3 = Color3.new(1, 0, 0)
+		copybutton.BorderColor = BrickColor.new("Really red")
 		copybutton.Position = UDim2.new(0, 0, 0, 0)
 		copybutton.Size = UDim2.new(1, 0, 0.25, 0)
-		copybutton.Text = "Copy"
-		copybutton.TextColor3 = Color3.new(1, 1, 1)
-		copybutton.Font = Enum.Font.ArialBold
-		copybutton.TextSize = 12
+		copybutton.Visible = true
 		copybutton.ZIndex = 3
+		copybutton.Draggable = false
+		copybutton.Font = "ArialBold"
+		copybutton.FontSize = "Size12"
+		copybutton.Text = "Copy"
+		copybutton.TextColor = BrickColor.new("Institutional white")
+		copybutton.TextXAlignment = "Center"
+
+		pastebutton = Instance.new("TextButton", options)
+		pastebutton.Name = "PasteButton"
+		pastebutton.BackgroundColor = BrickColor.new("Really black")
+		pastebutton.BackgroundTransparency = 0.6
+		pastebutton.BorderColor = BrickColor.new("Really red")
+		pastebutton.Position = UDim2.new(0, 0, 0.25, 0)
+		pastebutton.Size = UDim2.new(1, 0, 0.25, 0)
+		pastebutton.Visible = true
+		pastebutton.ZIndex = 3
+		pastebutton.Draggable = false
+		pastebutton.Font = "ArialBold"
+		pastebutton.FontSize = "Size12"
+		pastebutton.Text = "Paste"
+		pastebutton.TextColor = BrickColor.new("Institutional white")
+		pastebutton.TextXAlignment = "Center"
+
+		cutbutton = Instance.new("TextButton", options)
+		cutbutton.Name = "CutButton"
+		cutbutton.BackgroundColor = BrickColor.new("Really black")
+		cutbutton.BackgroundTransparency = 0.6
+		cutbutton.BorderColor = BrickColor.new("Really red")
+		cutbutton.Position = UDim2.new(0, 0, 0.5, 0)
+		cutbutton.Size = UDim2.new(1, 0, 0.25, 0)
+		cutbutton.Visible = true
+		cutbutton.ZIndex = 3
+		cutbutton.Draggable = false
+		cutbutton.Font = "ArialBold"
+		cutbutton.FontSize = "Size12"
+		cutbutton.Text = "Cut"
+		cutbutton.TextColor = BrickColor.new("Institutional white")
+		cutbutton.TextXAlignment = "Center"
+
+		insertbutton = Instance.new("TextBox", options)
+		insertbutton.Name = "InsertButton"
+		insertbutton.BackgroundColor = BrickColor.new("Really black")
+		insertbutton.BackgroundTransparency = 0.6
+		insertbutton.BorderColor = BrickColor.new("Really red")
+		insertbutton.Position = UDim2.new(0, 0, 0.75, 0)
+		insertbutton.Size = UDim2.new(1, 0, 0.25, 0)
+		insertbutton.Visible = true
+		insertbutton.ZIndex = 3
+		insertbutton.Font = "ArialBold"
+		insertbutton.FontSize = "Size12"
+		insertbutton.Text = "Insert"
+		insertbutton.TextColor = BrickColor.new("Institutional white")
+		insertbutton.TextXAlignment = "Center"
+
+		editbutton = Instance.new("TextButton", options)
+		editbutton.Name = "EditButton"
+		editbutton.BackgroundColor = BrickColor.new("Really black")
+		editbutton.BackgroundTransparency = 0.6
+		editbutton.BorderColor = BrickColor.new("Really red")
+		editbutton.Position = UDim2.new(0, 0, 1, 0)
+		editbutton.Size = UDim2.new(1, 0, 0.25, 0)
+		editbutton.Visible = false
+		editbutton.ZIndex = 3
+		editbutton.Font = "ArialBold"
+		editbutton.FontSize = "Size12"
+		editbutton.Text = "Edit"
+		editbutton.TextColor = BrickColor.new("Institutional white")
+		editbutton.TextXAlignment = "Center"
+
+		config = Instance.new("ObjectValue", options)
+		config.Name = "ConfiguredObject"
+		config.Value = nil
 	end
 end)
 
@@ -4343,5 +4553,5 @@ m.Parent = Workspace
 m.Text = "c00lgui Reborn V0.5 has loaded! Remade by YepImSirPwnsAlot, Creds to 007n7"
 wait(5)
 m:Destroy()
-----====[ End Of Ep1kal Script ]====----
-----====[ STILL CHILL STILL CHILL STILL CHILL ]====----
+
+-- hot 
