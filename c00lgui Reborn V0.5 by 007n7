@@ -4189,6 +4189,274 @@ Explorer.MouseButton1Click:Connect(function()
 		list.Position = UDim2.new(0, 0, 0.1, 0)
 		list.Size = UDim2.new(0.9, 0, 0.85, 0)
 		list.Parent = expframe
+                                
+        upbutton = Instance.new("TextButton",otherframe)
+        upbutton.Name = "UpButton"
+        upbutton.BackgroundColor = BrickColor.new("Really black")
+        upbutton.BackgroundTransparency = 0.6
+        upbutton.BorderColor = BrickColor.new("Really red")
+        upbutton.Position = UDim2.new(0.9,0,1.75,0)
+        upbutton.Size = UDim2.new(0.1,0,0.75,0)
+        upbutton.Visible = true
+        upbutton.ZIndex = 2
+        upbutton.Draggable = false
+        upbutton.Font = "ArialBold"
+        upbutton.FontSize = "Size12"
+    	upbutton.Text = [[/\]]
+        upbutton.TextColor = BrickColor.new("Institutional white")
+        upbutton.TextXAlignment = Enum.TextXAlignment.Center
+                                
+        downbutton = Instance.new("TextButton",otherframe)
+        downbutton.Name = "DownButton"
+        downbutton.BackgroundColor = BrickColor.new("Really black")
+        downbutton.BackgroundTransparency = 0.6
+        downbutton.BorderColor = BrickColor.new("Really red")
+        downbutton.Position = UDim2.new(0.9,0,16.25,0)
+        downbutton.Size = UDim2.new(0.1,0,0.75,0)
+    	downbutton.Visible = true
+        downbutton.ZIndex = 2
+        downbutton.Draggable = false
+        downbutton.Font = "ArialBold"
+    	downbutton.FontSize = "Size12"
+        downbutton.Text = [[\/]]
+        downbutton.TextColor = BrickColor.new("Institutional white")
+		downbutton.TextXAlignment = Enum.TextXAlignment.Center
+		
+		refreshbutton = Instance.new("ImageButton",expframe)
+        refreshbutton.Name = "RefreshButton"
+        refreshbutton.BackgroundColor = BrickColor.new("Really black")
+        refreshbutton.BackgroundTransparency = 0.6
+        refreshbutton.BorderColor = BrickColor.new("Really red")
+        refreshbutton.Position = UDim2.new(0.9,0,0,0)
+        refreshbutton.Size = UDim2.new(0.1,0,0.05,0)
+        refreshbutton.Visible = true
+        refreshbutton.ZIndex = 2
+    	refreshbutton.Draggable = false
+        refreshbutton.Image = "http://www.roblox.com/asset/?id=21367268"
+                                
+        options = Instance.new("Frame",list)
+        options.Name = "Options"
+        options.BackgroundColor = BrickColor.new("Really black")
+        options.BackgroundTransparency = 0.4
+        options.BorderColor = BrickColor.new("Really red")
+        options.Position = UDim2.new(-1,0,0,0)
+        options.Size = UDim2.new(0.5,0,0.25,0)
+        options.Visible = false
+    	options.ZIndex = 3
+        options.Draggable = false
+                                
+        copybutton = Instance.new("TextButton",options)
+        copybutton.Name = "CopyButton"
+        copybutton.BackgroundColor = BrickColor.new("Really black")
+        copybutton.BackgroundTransparency = 0.6
+    	copybutton.BorderColor = BrickColor.new("Really red")
+        copybutton.Position = UDim2.new(0,0,0,0)
+    	copybutton.Size = UDim2.new(1,0,0.25,0)
+        copybutton.Visible = true
+        copybutton.ZIndex = 3
+    	copybutton.Draggable = false
+        copybutton.Font = "ArialBold"
+        copybutton.FontSize = "Size12"
+    	copybutton.Text = "Copy"
+        copybutton.TextColor = BrickColor.new("Institutional white")
+    	copybutton.TextXAlignment = Enum.TextXAlignment.Center
+		
+		pastebutton = Instance.new("TextButton",options)
+        pastebutton.Name = "PasteButton"
+        pastebutton.BackgroundColor = BrickColor.new("Really black")
+        pastebutton.BackgroundTransparency = 0.6
+        pastebutton.BorderColor = BrickColor.new("Really red")
+        pastebutton.Position = UDim2.new(0,0,0.25,0)
+        pastebutton.Size = UDim2.new(1,0,0.25,0)
+        pastebutton.Visible = true
+        pastebutton.ZIndex = 3
+        pastebutton.Draggable = false
+    	pastebutton.Font = "ArialBold"
+        pastebutton.FontSize = "Size12"
+        pastebutton.Text = "Paste"
+        pastebutton.TextColor = BrickColor.new("Institutional white")
+        pastebutton.TextXAlignment = Enum.TextXAlignment.Center
+                                
+        cutbutton = Instance.new("TextButton",options)
+        cutbutton.Name = "CutButton"
+        cutbutton.BackgroundColor = BrickColor.new("Really black")
+        cutbutton.BackgroundTransparency = 0.6
+        cutbutton.BorderColor = BrickColor.new("Really red")
+        cutbutton.Position = UDim2.new(0,0,0.5,0)
+		cutbutton.Size = UDim2.new(1,0,0.25,0)
+       	cutbutton.Visible = true
+        cutbutton.ZIndex = 3
+        cutbutton.Draggable = false
+        cutbutton.Font = "ArialBold"
+        cutbutton.FontSize = "Size12"
+        cutbutton.Text = "Cut"
+        cutbutton.TextColor = BrickColor.new("Institutional white")
+        cutbutton.TextXAlignment = Enum.TextXAlignment.Center
+                                
+    	insertbutton = Instance.new("TextBox",options)
+    	insertbutton.Name = "InsertButton"
+        insertbutton.BackgroundColor = BrickColor.new("Really black")
+        insertbutton.BackgroundTransparency = 0.6
+    	insertbutton.BorderColor = BrickColor.new("Really red")
+        insertbutton.Position = UDim2.new(0,0,0.75,0)
+        insertbutton.Size = UDim2.new(1,0,0.25,0)
+        insertbutton.Visible = true
+        insertbutton.ZIndex = 3
+        insertbutton.Font = "ArialBold"
+        insertbutton.FontSize = "Size12"
+        insertbutton.Text = "Insert"
+        insertbutton.TextColor = BrickColor.new("Institutional white")
+    	insertbutton.TextXAlignment = Enum.TextXAlignment.Center
+                                
+        editbutton = Instance.new("TextButton",options)
+        editbutton.Name = "Editbutton"
+        editbutton.BackgroundColor = BrickColor.new("Really black")
+    	editbutton.BackgroundTransparency = 0.6
+        editbutton.BorderColor = BrickColor.new("Really red")
+        editbutton.Position = UDim2.new(0,0,1,0)
+        editbutton.Size = UDim2.new(1,0,0.25,0)
+        editbutton.Visible = false
+        editbutton.ZIndex = 3
+        editbutton.Font = "ArialBold"
+        editbutton.FontSize = "Size12"
+        editbutton.Text = "Edit"
+        editbutton.TextColor = BrickColor.new("Institutional white")
+		editbutton.TextXAlignment = Enum.TextXAlignment.Center
+		                          
+        config = Instance.new("ObjectValue",options)
+        config.Name = "ConfiguredObject"
+        config.Value = nil
+                                
+        sel = Instance.new("ObjectValue",expframe)
+    	sel.Name = "Selection"
+        sel.Value = Game
+    	_G.Selection = sel
+                                
+        highlight = Instance.new("SelectionBox",Game:GetService("CoreGui"))
+        highlight.Name = "ObjectHighlight"
+        highlight.Color = BrickColor.new("Bright blue")
+                                
+    for i=0,19 do
+            item = Instance.new("Frame",list)
+        	item.Name = "Item"
+            item.BackgroundColor = BrickColor.new("Really black")
+            item.BackgroundTransparency = 0.8
+        	item.BorderColor = BrickColor.new("Really red")
+            item.Position = UDim2.new(0,0,i*0.05,0)
+            item.Size = UDim2.new(1,0,0.05,0)
+            item.Visible = true
+            item.ZIndex = 1
+            item.Draggable = false
+                                    
+    	name = Instance.new("TextButton",item)
+        name.Name = "ItemName"
+        name.BackgroundColor = BrickColor.new("Really black")
+        name.BackgroundTransparency = 0.8
+        name.BorderColor = BrickColor.new("Really red")
+        name.Position = UDim2.new(0.1,0,0,0)
+        name.Size = UDim2.new(0.9,0,1,0)
+        name.Visible = true
+		name.ZIndex = 1
+        name.Draggable = false
+        name.Font = "ArialBold"
+        name.FontSize = "Size14"
+        name.Text = "Object"
+        name.TextColor = BrickColor.new("Institutional white")
+        name.TextXAlignment = Enum.TextXAlignment.Center
+                                    
+        icon = Instance.new("ImageLabel",item)
+        icon.Name = "Icon"
+        icon.BackgroundColor = BrickColor.new("Really black")
+        icon.BackgroundTransparency = 0.2
+    	icon.BorderColor = BrickColor.new("Really red")
+        icon.Image = Base..Images.Property
+        icon.Position = UDim2.new(0,0,0,0)
+        icon.Size = UDim2.new(0.1,0,1,0)
+        icon.Visible = true
+        icon.ZIndex = 1
+        icon.Draggable = false
+                                    
+        value = Instance.new("ObjectValue")
+        value.Parent = item
+        value.Name = "ObjectValue"
+                                    
+        table.insert(ItemGuis, item)
+    end
+                                
+    Scweengui = explore
+                                
+        propsframe = Instance.new("Frame",otherframe)
+        propsframe.Name = "PropertiesFrame"
+        propsframe.BackgroundColor = BrickColor.new("Really black")
+        propsframe.BackgroundTransparency = 0.4
+        propsframe.BorderColor = BrickColor.new("Really red")
+        propsframe.Position = UDim2.new(0,0,1,0)
+        propsframe.Size = UDim2.new(1,0,16,0)
+        propsframe.Visible = false
+        propsframe.ZIndex = 1
+        propsframe.Draggable = false
+        propsframe.Active = true
+                                
+        list2 = Instance.new("Frame",propsframe)
+        list2.Name = "List"
+        list2.BackgroundColor = BrickColor.new("Really black")
+        list2.BackgroundTransparency = 0.8
+        list2.BorderColor = BrickColor.new("Really red")
+        list2.Position = UDim2.new(0,0,0.05,0)
+    	list2.Size = UDim2.new(0.9,0,0.9,0)
+        list2.Visible = true
+        list2.ZIndex = 1
+        list2.Draggable = false
+                                
+            for i=0,19 do
+                property = Instance.new("Frame",list2)
+                property.Name = "Property"
+        		property.BackgroundColor = BrickColor.new("Really black")
+                property.BackgroundTransparency = 0.8
+                property.BorderColor = BrickColor.new("Really red")
+            	property.Position = UDim2.new(0,0,i*0.05,0)
+            	property.Size = UDim2.new(1,0,0.05,0)
+                property.Visible = true
+            	property.ZIndex = 1
+                property.Draggable = false
+                                    
+                propname = Instance.new("TextLabel",property)
+            	propname.Name = "PropertyName"
+                propname.BackgroundColor = BrickColor.new("Really black")
+                propname.BackgroundTransparency = 0.8
+                propname.BorderColor = BrickColor.new("Really red")
+                propname.Position = UDim2.new(0,0,0,0)
+            	propname.Size = UDim2.new(0.5,0,1,0)
+                propname.Visible = true
+                propname.ZIndex = 1
+                propname.Draggable = false
+                propname.Font = "ArialBold"
+                propname.FontSize = "Size14"
+                propname.Text = "Property"
+                propname.TextColor = BrickColor.new("Institutional white")
+                propname.TextXAlignment = Enum.TextXAlignment.Center
+                propname.TextScaled = true
+                                    
+                propvalue = Instance.new("TextBox",property)
+                propvalue.Name = "PropertyValue"
+                propvalue.BackgroundColor = BrickColor.new("Really black")
+                propvalue.BackgroundTransparency = 0.8
+                propvalue.BorderColor = BrickColor.new("Really red")
+                propvalue.Position = UDim2.new(0.5,0,0,0)
+                propvalue.Size = UDim2.new(0.5,0,1,0)
+            	propvalue.Visible = true
+                propvalue.ZIndex = 1
+                propvalue.Draggable = false
+            	propvalue.Font = "ArialBold"
+                propvalue.FontSize = "Size14"
+                propvalue.Text = "Value"
+                propvalue.TextColor = BrickColor.new("Institutional white")
+                propvalue.TextXAlignment = Enum.TextXAlignment.Center
+                propvalue.TextScaled = true
+                propvalue.ClearTextOnFocus = false
+                                    
+            table.insert(PropGuis, property)
+        end
 	end
 end)
 
