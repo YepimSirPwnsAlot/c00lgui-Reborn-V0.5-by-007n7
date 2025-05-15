@@ -4123,13 +4123,9 @@ Explorer.TextSize = 14
 Explorer.TextWrapped = true
 Explorer.MouseButton1Click:Connect(function()
 	if game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("Scweengui") == nil then
-    	pcall(function()
-        	local PlayerGui = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-        	if PlayerGui:FindFirstChild("RobloxGui") and PlayerGui.RobloxGui:FindFirstChild("PlayerListScreen") then
-            	PlayerGui.RobloxGui.PlayerListScreen.Visible = false
-        	end
-    	end)
-	end
+        	pcall(function()
+            	Game.Players.LocalPlayers.PlayerGui.RobloxGui.PlayerListScreen.Visible = false
+        	end)
 
 		ItemGuis = {}
 		PropGuis = {}
@@ -4611,4 +4607,4 @@ m.Text = "c00lgui Reborn V0.5 has loaded! Remade by YepImSirPwnsAlot, Creds to 0
 wait(5)
 m:Destroy()
 
--- nigger
+-- i just creamed myself from how sexy this script is broski
