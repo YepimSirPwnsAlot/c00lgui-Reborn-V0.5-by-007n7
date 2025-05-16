@@ -4121,7 +4121,6 @@ Explorer.TextColor3 = Color3.new(1, 1, 1)
 Explorer.TextSize = 14
 Explorer.TextWrapped = true
 
--- Utility Function
 local function CreateImageLabel(par, image)
 	local label = Instance.new("ImageLabel")
 	label.Image = image
@@ -4322,33 +4321,8 @@ Explorer.MouseButton1Click:Connect(function()
         editbutton.Text = "Edit"
         editbutton.TextColor = BrickColor.new("Institutional white")
 		editbutton.TextXAlignment = Enum.TextXAlignment.Center
-		                          
-        config = Instance.new("ObjectValue",options)
-        config.Name = "ConfiguredObject"
-        config.Value = nil
-                                
-        sel = Instance.new("ObjectValue",expframe)
-    	sel.Name = "Selection"
-        sel.Value = Game
-    	_G.Selection = sel
-                                
-        highlight = Instance.new("SelectionBox",Game:GetService("CoreGui"))
-        highlight.Name = "ObjectHighlight"
-        highlight.Color = BrickColor.new("Bright blue")
-                                
-    for i=0,19 do
-            item = Instance.new("Frame",list)
-        	item.Name = "Item"
-            item.BackgroundColor = BrickColor.new("Really black")
-            item.BackgroundTransparency = 0.8
-        	item.BorderColor = BrickColor.new("Really red")
-            item.Position = UDim2.new(0,0,i*0.05,0)
-            item.Size = UDim2.new(1,0,0.05,0)
-            item.Visible = true
-            item.ZIndex = 1
-            item.Draggable = false
-                                    
-    	name = Instance.new("TextButton",item)
+
+		name = Instance.new("TextButton",item)
         name.Name = "ItemName"
         name.BackgroundColor = BrickColor.new("Really black")
         name.BackgroundTransparency = 0.8
@@ -4375,17 +4349,8 @@ Explorer.MouseButton1Click:Connect(function()
         icon.Visible = true
         icon.ZIndex = 1
         icon.Draggable = false
-                                    
-        value = Instance.new("ObjectValue")
-        value.Parent = item
-        value.Name = "ObjectValue"
-                                    
-        table.insert(ItemGuis, item)
-    end
-                                
-    Scweengui = explore
-                                
-        propsframe = Instance.new("Frame",otherframe)
+		
+  		propsframe = Instance.new("Frame",otherframe)
         propsframe.Name = "PropertiesFrame"
         propsframe.BackgroundColor = BrickColor.new("Really black")
         propsframe.BackgroundTransparency = 0.4
@@ -4407,56 +4372,52 @@ Explorer.MouseButton1Click:Connect(function()
         list2.Visible = true
         list2.ZIndex = 1
         list2.Draggable = false
-                                
-            for i=0,19 do
-                property = Instance.new("Frame",list2)
-                property.Name = "Property"
-        		property.BackgroundColor = BrickColor.new("Really black")
-                property.BackgroundTransparency = 0.8
-                property.BorderColor = BrickColor.new("Really red")
-            	property.Position = UDim2.new(0,0,i*0.05,0)
-            	property.Size = UDim2.new(1,0,0.05,0)
-                property.Visible = true
-            	property.ZIndex = 1
-                property.Draggable = false
+
+		property = Instance.new("Frame",list2)
+    	property.Name = "Property"
+        property.BackgroundColor = BrickColor.new("Really black")
+    	property.BackgroundTransparency = 0.8
+        property.BorderColor = BrickColor.new("Really red")
+        property.Position = UDim2.new(0,0,i*0.05,0)
+        property.Size = UDim2.new(1,0,0.05,0)
+		property.Visible = true
+        property.ZIndex = 1
+        property.Draggable = false
                                     
-                propname = Instance.new("TextLabel",property)
-            	propname.Name = "PropertyName"
-                propname.BackgroundColor = BrickColor.new("Really black")
-                propname.BackgroundTransparency = 0.8
-                propname.BorderColor = BrickColor.new("Really red")
-                propname.Position = UDim2.new(0,0,0,0)
-            	propname.Size = UDim2.new(0.5,0,1,0)
-                propname.Visible = true
-                propname.ZIndex = 1
-                propname.Draggable = false
-                propname.Font = "ArialBold"
-                propname.FontSize = "Size14"
-                propname.Text = "Property"
-                propname.TextColor = BrickColor.new("Institutional white")
-                propname.TextXAlignment = Enum.TextXAlignment.Center
-                propname.TextScaled = true
+        propname = Instance.new("TextLabel",property)
+        propname.Name = "PropertyName"
+        propname.BackgroundColor = BrickColor.new("Really black")
+        propname.BackgroundTransparency = 0.8
+        propname.BorderColor = BrickColor.new("Really red")
+        propname.Position = UDim2.new(0,0,0,0)
+        propname.Size = UDim2.new(0.5,0,1,0)
+        propname.Visible = true
+        propname.ZIndex = 1
+        propname.Draggable = false
+        propname.Font = "ArialBold"
+        propname.FontSize = "Size14"
+        propname.Text = "Property"
+        propname.TextColor = BrickColor.new("Institutional white")
+        propname.TextXAlignment = Enum.TextXAlignment.Center
+        propname.TextScaled = true
                                     
-                propvalue = Instance.new("TextBox",property)
-                propvalue.Name = "PropertyValue"
-                propvalue.BackgroundColor = BrickColor.new("Really black")
-                propvalue.BackgroundTransparency = 0.8
-                propvalue.BorderColor = BrickColor.new("Really red")
-                propvalue.Position = UDim2.new(0.5,0,0,0)
-                propvalue.Size = UDim2.new(0.5,0,1,0)
-            	propvalue.Visible = true
-                propvalue.ZIndex = 1
-                propvalue.Draggable = false
-            	propvalue.Font = "ArialBold"
-                propvalue.FontSize = "Size14"
-                propvalue.Text = "Value"
-                propvalue.TextColor = BrickColor.new("Institutional white")
-                propvalue.TextXAlignment = Enum.TextXAlignment.Center
-                propvalue.TextScaled = true
-                propvalue.ClearTextOnFocus = false
-                                    
-            table.insert(PropGuis, property)
-        end
+        propvalue = Instance.new("TextBox",property)
+        propvalue.Name = "PropertyValue"
+        propvalue.BackgroundColor = BrickColor.new("Really black")
+        propvalue.BackgroundTransparency = 0.8
+        propvalue.BorderColor = BrickColor.new("Really red")
+        propvalue.Position = UDim2.new(0.5,0,0,0)
+        propvalue.Size = UDim2.new(0.5,0,1,0)
+    	propvalue.Visible = true
+    	propvalue.ZIndex = 1
+    	propvalue.Draggable = false
+		propvalue.Font = "ArialBold"
+        propvalue.FontSize = "Size14"
+        propvalue.Text = "Value"
+        propvalue.TextColor = BrickColor.new("Institutional white")
+        propvalue.TextXAlignment = Enum.TextXAlignment.Center
+        propvalue.TextScaled = true
+        propvalue.ClearTextOnFocus = false
 	end
 end)
 
