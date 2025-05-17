@@ -4491,6 +4491,6 @@ m:Destroy()
 
 local m = Instance.new("Hint")
 m.Parent = Workspace
-m.Text = "c00lgui Reborn V0.5 has loaded! Remade by YepImSirPwnsAlot, Creds to 007n7"
+m.Text = "c00lgui Reborn V1.1 has loaded! Remade by YepImSirPwnsAlot, Creds to 007n7"
 wait(5)
 m:Destroy()
