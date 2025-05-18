@@ -1887,467 +1887,7 @@ NexPluviaAdmin.TextColor3 = Color3.new(1, 1, 1)
 NexPluviaAdmin.TextSize = 14
 NexPluviaAdmin.TextWrapped = true
 NexPluviaAdmin.MouseButton1Click:Connect(function()
-version="Pluvia"
-Selection=1
-TextBoxInUse=false
-Player=nil
-ColorSelection=BrickColor.new('Bright violet')
-Uninstalled=false
-Commands={}
-Scope=nil
-CustomFunction=""
-Services={
-        InsertService=game:service'InsertService',
-        Workspace=game:service'Workspace',
-        Lighting=game:service'Lighting',
-        Players=game:service'Players',
-        Debris=game:service'Debris',
-        Chat=game:service'Chat',
-}
-m=Services.Players.LocalPlayer:GetMouse()
-SGUI=Instance.new('ScreenGui',Services.Players.LocalPlayer.PlayerGui)
-BAR=Instance.new('Frame',SGUI)
-BAR.Size=UDim2.new(1,0,0,20)
-BAR.Position=UDim2.new(0,0,0,20)
-BAR.BorderSizePixel=0
-BAR.BackgroundColor3=Color3.new(0,0,0)
-TEXTBOX=Instance.new('TextLabel',BAR)
-TEXTBOX.Size=UDim2.new(1,0,1,0)
-TEXTBOX.BackgroundTransparency=1
-TEXTBOX.TextColor3=Color3.new(453,0,435)
-TEXTBOX.FontSize="Size12"
-PlayerCheck=function()
-        if m.Target ~= nil then
-                for i,v in ipairs(Services.Players:GetPlayers())do
-                        if(v.Character and m.Target:IsDescendantOf(v.Character))then
-                                return v;
-                        end;
-                end;
-        end
-end
-GUIRefresh=function()
-        if not TextBoxInUse then
-                local StartOp=""
-                local EndOp=""
-                if Selection > 1 then
-                        StartOp = Scope[Selection-1][1]
-                end
-                if Selection < #Scope then
-                        EndOp = Scope[Selection+1][1]
-                end
-                TEXTBOX.Text = "<-- "..StartOp.." | ["..Selection.."]: ["..Scope[Selection][1].."] | "..EndOp.." -->"
-        end
-end
-GUIDisplay=function(string)
-        TextBoxInUse=true
-        for i = 1,string.len(string) do
-                TEXTBOX.Text = string.sub(string,1,i).."_"
-                wait(.05)
-        end
-        wait(string.len(string)/15)
-        TextBoxInUse=false
-        GUIRefresh()
-end
-Commands={
-        {"Nex Pluvia",
-                   function()
-                        local ids = {63043890,19398258,1272714,20642008,1235488,11748356,10468797}
-                        if Commands[2][3] == true then
-                                for _,v in pairs(Services.Players.LocalPlayer.Character:GetChildren()) do
-                                        for _,x in pairs(ids) do
-                                                if v.Name == "ExtraAsset" then
-                                                        v.Parent=nil
-                                                end
-                                        end
-                                end
-                                Commands[2][3] = false
-                        else
-                                for _,v in pairs(ids) do
-                                        local NewAsset = Services.InsertService:LoadAsset(v):GetChildren()[1]
-                                        NewAsset.Parent=Services.Players.LocalPlayer.Character
-                                        NewAsset.Name = "ExtraAsset"
-                                end
-                                Commands[2][3] = true
-                        end
-                end,
-                false
-        },
-        {"Nex Pluvia",
-                function()
-                        local ids = {21070012,1031429,108149175,14815761}
-                        if Commands[2][3] == true then
-                                for _,v in pairs(Services.Players.LocalPlayer.Character:GetChildren()) do
-                                        for _,x in pairs(ids) do
-                                                if v.Name == "ExtraAsset" then
-                                                        v.Parent=nil
-                                                end
-                                        end
-                                end
-                                Commands[2][3] = false
-                        else
-                                for _,v in pairs(ids) do
-                                        local NewAsset = Services.InsertService:LoadAsset(v):GetChildren()[1]
-                                        NewAsset.Parent=Services.Players.LocalPlayer.Character
-                                        NewAsset.Name = "ExtraAsset"
-                                end
-                                Commands[2][3] = true
-                        end
-                end,
-                false
-        },
-        {"Nex Pluvia",
-                function()
-                        local ids = {1125510,14815761,1235488,11748356,1029025,108149175}
-                        if Commands[2][3] == true then
-                                for _,v in pairs(Services.Players.LocalPlayer.Character:GetChildren()) do
-                                        for _,x in pairs(ids) do
-                                                if v.Name == "ExtraAsset" then
-                                                        v.Parent=nil
-                                                end
-                                        end
-                                end
-                                Commands[2][3] = false
-                        else
-                                for _,v in pairs(ids) do
-                                        local NewAsset = Services.InsertService:LoadAsset(v):GetChildren()[1]
-                                        NewAsset.Parent=Services.Players.LocalPlayer.Character
-                                        NewAsset.Name = "ExtraAsset"
-                                end
-                                Commands[2][3] = true
-                        end
-                end,
-                false
-        },
-        {"Fire*",
-                function()
-                        if pcall(function() Services.Players.LocalPlayer.Character.Head.Fire.Parent=nil end) then
-                        else
-                                pcall(function()
-                                        fire=Instance.new('Fire',Services.Players.LocalPlayer.Character.Head)
-                                        fire.Size=3
-                                        fire.Color=Color3.new(453,0,435)
-                                        fire.SecondaryColor=Color3.new(453,0,435)
-                                end)
-                        end
-                end
-        },
-        {"Invincibility*",
-                function()
-                        pcall(function()
-                                if Services.Players.LocalPlayer.Character.Humanoid.MaxHealth==100 then
-                                        Services.Players.LocalPlayer.Character.Humanoid.MaxHealth=math.huge
-                                else
-                                        Services.Players.LocalPlayer.Character.Humanoid.MaxHealth=100
-                                end
-                        end)
-                end
-        },
-        {"Teleport*",
-                function()
-                        if m.Target ~= nil then
-                                pcall(function() Services.Players.LocalPlayer.Character:MoveTo(m.Hit.p) end)
-                        end
-                end
-        },
-        {"Teleport",
-                function()
-                        if Player == nil and m.Target ~= nil then
-                                if PlayerCheck() then
-                                        Player=PlayerCheck()
-                                end
-                                pcall(function()
-                                        for _,v in pairs(Player.Character:GetChildren()) do
-                                                if v:IsA('Part') then
-                                                        local sb = Instance.new('SelectionBox',Services.Workspace.CurrentCamera)
-                                                        sb.Adornee = v
-                                                        sb.Name = "sb"
-                                                        sb.Color = BrickColor.new('Bright violet')
-                                                end
-                                        end
-                                end)
-                        elseif Player ~= nil then
-                                pcall(function()
-                                        Player.Character:MoveTo(m.Hit.p)
-                                end)
-                                Player = nil
-                                for _,v in pairs(Services.Workspace.CurrentCamera:GetChildren()) do
-                                        if v:IsA('SelectionBox') and v.Name == "sb" then
-                                                v.Parent=nil
-                                        end
-                                end
-                        end
-                end
-        },
-        {"Kill",
-                function()
-                        pcall(function() PlayerCheck().Character:BreakJoints() end)
-                end
-        },
-        {"Invincibility",
-                function()
-                        pcall(function()
-                                if PlayerCheck().Character.Humanoid.MaxHealth==100 then
-                                        PlayerCheck().Character.Humanoid.MaxHealth=math.huge
-                                else
-                                        PlayerCheck().Character.Humanoid.MaxHealth=100
-                                end
-                        end)
-                end
-        },
-        {":BreakJoints()",
-                function()
-                        pcall(function() m.Target:BreakJoints() end)
-                end
-        },
-        {"Kick",
-                function()
-                        pcall(function() PlayerCheck().Parent=nil end)
-                end
-        },
-        {"Custom Function",
-                function()
-                        Spawn(loadstring(CustomFunction))
-                end
-        },
-        {"LinkedSword",
-                function()
-                        Services.InsertService:LoadAsset(47433):GetChildren()[1].Parent=Services.Players.LocalPlayer.Backpack
-                end
-        },
-        {":GetFullName()",
-                function()
-                        if m.Target then
-                                local string = m.Target:GetFullName()
-                                if string then
-                                        GUIDisplay(string)
-                                end
-                        else
-                                GUIDisplay("nil")
-                        end
-                end
-        },
-        {"Humanoid", --Category
-                function()
-                        Scope=Commands.Humanoid[3]
-                        Selection=1
-                        GUIRefresh()
-                end,
-                {
-                        {"Up Scope",
-                                function()
-                                        Scope=Commands
-                                        Selection=1
-                                        GUIRefresh()
-                                end
-                        },
-                        {"Humanoid",
-                                function()
-                                        if PlayerCheck() then
-                                                if pcall(function() PlayerCheck().Character.Humanoid.Parent=nil end) then
-                                                else
-                                                        pcall(function() Instance.new('Humanoid',PlayerCheck().Character) end)
-                                                end
-                                        end
-                                end
-                        },
-                        {"Remove Head",
-                                function()
-                                        pcall(function() PlayerCheck().Character.Head.Parent=nil end)
-                                end
-                        },
-                        {"PlatformStand",
-                                function()
-                                        pcall(function()
-                                                if PlayerCheck().Character.Humanoid.PlatformStand==true then
-                                                        PlayerCheck().Character.Humanoid.PlatformStand=false
-                                                else
-                                                        PlayerCheck().Character.Humanoid.PlatformStand=true
-                                                end
-                                        end)
-                                end
-                        },
-                        {"Sit",
-                                function()
-                                        pcall(function()
-                                                if PlayerCheck().Character.Humanoid.Sit==true then
-                                                        PlayerCheck().Character.Humanoid.Sit=false
-                                                else
-                                                        PlayerCheck().Character.Humanoid.Sit=true
-                                                end
-                                        end)
-                                end
-                        },
-                        {"WalkSpeed",
-                                function()
-                                        pcall(function()
-                                                if PlayerCheck().Character.Humanoid.WalkSpeed==16 then
-                                                        PlayerCheck().Character.Humanoid.WalkSpeed=0
-                                                else
-                                                        PlayerCheck().Character.Humanoid.WalkSpeed=16
-                                                end
-                                        end)
-                                end
-                        },
-                }
-        },
-        {"Building", --Category
-                function()
-                        Scope=Commands.Building[3]
-                        Selection=1
-                        GUIRefresh()
-                end,
-                {
-                        {"Up Scope",
-                                function()
-                                        Scope=Commands
-                                        Selection=1
-                                        GUIRefresh()
-                                end
-                        },
-                        {"Color",
-                                function()
-                                        pcall(function() m.Target.BrickColor = ColorSelection end)
-                                end
-                        },
-                        {"Color Picker",
-                                function()
-                                        pcall(function() ColorSelection = m.Target.BrickColor end)
-                                end
-                        },
-                        {"Anchor",
-                                function()
-                                        pcall(function() m.Target.Anchored=true end)
-                                end
-                        },
-                        {"Unanchor",
-                                function()
-                                        pcall(function() m.Target.Anchored=false end)
-                                end
-                        },
-                        {"Decal",
-                                function()
-                                        pcall(function()
-                                                decal = Instance.new('Decal',m.Target)
-                                                decal.Face = m.TargetSurface
-                                                decal.Texture = "http://roblox.com/asset/?id=123659742"
-                                        end)
-                                end
-                        },
-                        {"Decal2",
-                                function()
-                                        pcall(function()
-                                                decal = Instance.new('Decal',m.Target)
-                                                decal.Face = m.TargetSurface
-                                                decal.Texture = "http://roblox.com/asset/?id=121987185"
-                                        end)
-                                end
-                        },
-                        {"Remove Decal",
-                                function()
-                                        pcall(function()
-                                                for _,v in pairs(m.Target:GetChildren()) do
-                                                        if v:IsA('Decal') then
-                                                                if v.Face == m.TargetSurface then
-                                                                        v.Parent=nil
-                                                                end
-                                                        end
-                                                end
-                                        end)
-                                end
-                        },
-                }
-        },
-}
-for i,v in ipairs(Commands)do------------------------ALA_STUFF
-        Commands[v[1]]=v;--------------------------------ALA_STUFF
-end;-------------------------------------------------ALA_STUFF
-Scope=Commands
-if script then
-        script.Parent=Services.Players.LocalPlayer.PlayerGui
-        script.Name="[Nex v"..version.."]"
-end
-coroutine.wrap(function() repeat wait() until Services.Players.LocalPlayer.Character
-Services.Chat:Chat(Services.Players.LocalPlayer.Character.Head,"Nex "..version.." Installed",Enum.ChatColor.Blue)
-end)()
-GUIDisplay("..Nex Loaded - Made by Nex Pluvia...")
-QDown=false
-EDown=false
-m.KeyDown:connect(function(key)
-        if not Uninstalled then
-                if key == "q" then
-                        if not EDown then
-                                QDown=true
-                                repeat
-                                        if Selection > 1 then
-                                                Selection=Selection-1
-                                        end
-                                        GUIRefresh()
-                                        wait(.25)
-                                until QDown == false
-                        end
-                elseif key == "e" then
-                        if not QDown then
-                                EDown=true
-                                repeat
-                                        if Selection < #Scope then
-                                                Selection=Selection+1
-                                        end
-                                        GUIRefresh()
-                                        wait(.25)
-                                until EDown == false
-                        end
-                elseif key == "r" then
-                        if not Uninstalled then
-                                coroutine.wrap(function()
-                                        if m.Target then
-                                                sb = Instance.new('SelectionBox',Services.Workspace.CurrentCamera)
-                                                sb.Adornee = m.Target
-                                                sb.Name = "sb"
-                                                sb.Color = BrickColor.new('Bright violet')
-                                                wait(.25)
-                                                for _,v in pairs(Services.Workspace.CurrentCamera:GetChildren()) do
-                                                        if v:IsA('SelectionBox') and v.Name == "sb" then
-                                                                v.Parent=nil
-                                                        end
-                                                end
-                                        end
-                                end)()
-                                Scope[Selection][2]()
-                        end
-                end
-        end
-end)
-m.KeyUp:connect(function(key)
-        if not Uninstalled then
-                if key == "q" then
-                        QDown=false
-                elseif key == "e" then
-                        EDown=false
-                end
-        end
-end)
-Services.Players.LocalPlayer.Chatted:connect(function(msg)
-        if not Uninstalled then
-                if string.lower(msg) == "uninstall Nex" then
-                        Uninstalled = true
-                        Services.Chat:Chat(Services.Players.LocalPlayer.Character.Head,"Nex "..version.." UNINSTALLED",Enum.ChatColor.Blue)
-                        SGUI.Parent=nil
-                        if script then
-                                script.Parent=nil
-                        end
-                elseif string.sub(string.lower(msg),1,2) == "c/" then
-                        pcall(function() ColorSelection = BrickColor.new(string.sub(msg,3)) end)
-                elseif string.sub(string.lower(msg),1,2) == "m/" then
-                        for _,v in pairs(Services.Players:GetChildren()) do
-                                if v.Name ~= Services.Players.LocalPlayer.Name then
-                                        Services.Chat:Chat(v.Character.Head,string.sub(msg,3),Enum.ChatColor.Green)
-                                end
-                        end
-                elseif string.sub(string.lower(msg),1,3) == "cf/" then
-                        CustomFunction=string.sub(msg,4)
-                end
-        end
-end)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/YepimSirPwnsAlot/idfk/refs/heads/main/Nex%20Pluvia%20Admin"))()
 end)
 
 KillGui.Name = "Kill Gui"
@@ -2574,23 +2114,23 @@ bu.MouseButton1Down:connect(function()
 local play = game.Players:findFirstChild(bu.Text)
 if play ~= nil then
 for i=1,3600 do
-Instance.new("HopperBin",play.Backpack).Name = "f       u     c   k u"
+Instance.new("HopperBin",play.Backpack).Name = ":^)"
 end
 wait()
 for i=1,3600 do
-Instance.new("HopperBin",play.Backpack).Name = "f       u     c   k u"
+Instance.new("HopperBin",play.Backpack).Name = ":^)"
 end
 wait()
 for i=1,3600 do
-Instance.new("HopperBin",play.Backpack).Name = "f       u     c   k u"
+Instance.new("HopperBin",play.Backpack).Name = ":^)"
 end
 wait()
 for i=1,13000 do
-Instance.new("HopperBin",play.Backpack).Name = "f       u     c   k u"
+Instance.new("HopperBin",play.Backpack).Name = ":^)"
 end
 wait()
 for i=1,3600 do
-Instance.new("HopperBin",play.Backpack).Name = "fuck u"
+Instance.new("HopperBin",play.Backpack).Name = ":^)"
 end
 bu.Text = "Lagged!"
 end
@@ -2672,7 +2212,7 @@ DZRSpawnItemGui.TextSize = 14
 DZRSpawnItemGui.TextWrapped = true
 DZRSpawnItemGui.MouseButton1Click:Connect(function()
 
---Instances:
+wait(0.3)
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "WeaponGUI"
@@ -2695,8 +2235,9 @@ weaponLabel.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
 weaponLabel.BorderSizePixel = 1
 weaponLabel.Text = "Precision Rifle"
 weaponLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
-weaponLabel.TextSize = 14 -- Fixed: Use numeric value
+weaponLabel.TextSize = 14
 weaponLabel.Font = Enum.Font.SourceSans
+weaponLabel.ClearTextOnFocus = false
 weaponLabel.Parent = mainFrame
 
 local amountBox = Instance.new("TextBox")
@@ -2707,7 +2248,7 @@ amountBox.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
 amountBox.BorderSizePixel = 1
 amountBox.Text = "1"
 amountBox.TextColor3 = Color3.fromRGB(0, 0, 0)
-amountBox.TextSize = 12 -- Fixed: Use numeric value
+amountBox.TextSize = 12
 amountBox.Font = Enum.Font.SourceSans
 amountBox.ClearTextOnFocus = false
 amountBox.Parent = mainFrame
@@ -2720,18 +2261,13 @@ spawnButton.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
 spawnButton.BorderSizePixel = 1
 spawnButton.Text = "Spawn"
 spawnButton.TextColor3 = Color3.fromRGB(0, 0, 0)
-spawnButton.TextSize = 12 -- Fixed: Use numeric value
+spawnButton.TextSize = 12
 spawnButton.Font = Enum.Font.SourceSansBold
 spawnButton.Parent = mainFrame
-
 spawnButton.MouseButton1Click:Connect(function()
-	local amount = tonumber(amountBox.Text)
-	if amount and amount > 0 then
-		print("Spawning", weaponLabel.Text, "x" .. amount)
-	else
-		warn("Invalid amount:", amountBox.Text)
-	end
-end)
+	local weaponName = weaponLabel.Text
+	local amount = tonumber(amountBox.Text) or 1
+	print("Spawn requested: " .. weaponName .. " x" .. amount)
 end)
 
 PageLabel_4.Name = "PageLabel"
@@ -3116,8 +2652,8 @@ DominusGhost.TextSize = 14
 DominusGhost.TextWrapped = true
 DominusGhost.MouseButton1Click:Connect(function()
 function nob(who,tra,hat)
-c=who.Character
-pcall(function()u=c["Body Colors"]
+memememe=who.Character
+pcall(function()u=memememe["Body Colors"]
 u.HeadColor=BrickColor.new("Black")
 u.LeftLegColor=BrickColor.new("Black")
 u.RightLegolor=BrickColor.new("Black")
@@ -3125,8 +2661,8 @@ u.LeftArmColor=BrickColor.new("Black")
 u.TorsoColor=BrickColor.new("Black")
 u.RightArmColor=BrickColor.new("Black")
 end)
-pcall(function()c.Shirt:Destroy() c.Pants:Destroy() end)
-for i,v in pairs(c:GetChildren()) do
+pcall(function()memememe.Shirt:Destroy() memememe.Pants:Destroy() end)
+for i,v in pairs(memememe:GetChildren()) do
 if v:IsA("BasePart") then
 v.Transparency=tra
 if v.Name=="HumanoidRootPart" or v.Name=="Head" then
@@ -3142,7 +2678,7 @@ xx=game:service("InsertService"):LoadAsset(hat)
 xy=game:service("InsertService"):LoadAsset(47433)["LinkedSword"]
 xy.Parent=who.Backpack
 for a,hat in pairs(xx:children()) do
-hat.Parent=c
+hat.Parent=memememe
 end
 xx:Destroy()
 h=who.Character.Humanoid
@@ -3439,11 +2975,6 @@ BecomeOwnerinPersonalServer.Text = "Become Owner [PS]"
 BecomeOwnerinPersonalServer.TextColor3 = Color3.new(1, 1, 1)
 BecomeOwnerinPersonalServer.TextSize = 14
 BecomeOwnerinPersonalServer.TextWrapped = true
-BecomeOwnerinPersonalServer.MouseButton1Click:Connect(function()
-while game.Players.LocalPlayer.PersonalServerRank<255 do
-    game:GetService("PersonalServerService"):Promote(game.Players.LocalPlayer)
-end
-end)
 
 StealPlayerPoints.Name = "Steal Player Points"
 StealPlayerPoints.Parent = Misc
@@ -3459,10 +2990,6 @@ StealPlayerPoints.Text = "Steal Player Points"
 StealPlayerPoints.TextColor3 = Color3.new(1, 1, 1)
 StealPlayerPoints.TextSize = 14
 StealPlayerPoints.TextWrapped = true
-StealPlayerPoints.MouseButton1Click:Connect(function()
-local service = game:GetService("PointsService")
-service:AwardPoints(game.Players.LocalPlayer.userId, service:GetAwardablePoints())
-end)
 
 FencingRestore.Name = "Fencing Restore"
 FencingRestore.Parent = Misc
@@ -3479,68 +3006,7 @@ FencingRestore.TextColor3 = Color3.new(1, 1, 1)
 FencingRestore.TextSize = 14
 FencingRestore.TextWrapped = true
 FencingRestore.MouseButton1Click:Connect(function()
---Fencing Restore script made by Yelock--
---Now restoring fencing Please wait ----------
---Censore
---mediafire
---hitler
---megaupload
---globe of geeks
---lego
---cheez
---chicken
---requires c>2
-function X(ws)
-for _, v in pairs(ws:GetChildren()) do
-v.Archivable = true
-if v.Name ~= "UClear" and v.Name ~= "Terrain" and game.Players:GetPlayerFromCharacter(v)==nil and v~=game.Workspace.CurrentCamera then
-if v:IsA("Script") or v:IsA("LocalScript") then
-v.Disabled = true
-v:remove()
-else
-v:remove()
-end
-end
-if game.Workspace:findFirstChild("Base") ~= nil then
-else
-local Base=Instance.new("Part",game.Workspace) 
-Base.Name="Base" 
-Base.Size=Vector3.new(1000,1,1000) 
-Base.BrickColor=BrickColor.new("Earth green") 
-Base.Anchored=true 
-Base.Locked=true 
-Base.TopSurface="Universal" 
-Base.CFrame=CFrame.new(Vector3.new(0,0,0)) 
-local Spawn=Instance.new("SpawnLocation",game.Workspace)
-Spawn.Name="lol"
-Spawn.Size=Vector3.new(6,1,6)
-Spawn.Transparency=1
-Spawn.CanCollide=false
-Spawn.Anchored=true
-Spawn.Locked=true
-Spawn.CFrame=CFrame.new(Vector3.new(0,1,0))
-end
-end
-end
-X(game.Workspace)
-X(game.Teams)
-X(game.StarterGui)
-wait()
-game.Workspace:InsertContent("rbxassetid://118791953")
-wait()
-game.workspace.Base:Destroy()
-wait()
-game.workspace.lol:Destroy()
-wait()
-game.Lighting.Ambient = Color3.new(255,255,255)
-game.Lighting.TimeOfDay = 12
-game.Lighting.Brightness = 0.5
-game.Lighting.FogEnd = 100000
-game.Lighting.GlobalShadows = false
-game.Lighting.Sky:Destroy()
-game.Lighting.FogEnd = 100000
-game.Lighting.Brightness = 1
-game.Workspace.Terrain:clear()
+str_srce = "123116009" loadstring(game:GetObjects("rbxassetid://"..str_srce)[1].Source)()
 end)
 
 LeaderstatAdd.Name = "Leaderstat Add"
@@ -3557,12 +3023,6 @@ LeaderstatAdd.Text = "Leaderstat Add"
 LeaderstatAdd.TextColor3 = Color3.new(1, 1, 1)
 LeaderstatAdd.TextSize = 14
 LeaderstatAdd.TextWrapped = true
-LeaderstatAdd.MouseButton1Click:Connect(function()
-while true do
-wait(.1)
-game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Name"].TextBox.Text).Value = game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Name"].TextBox.Text)+game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Amount"].TextBox.Text)	
-end
-end)
 
 LeaderstatChange.Name = "Leaderstat Change"
 LeaderstatChange.Parent = Misc
@@ -3578,9 +3038,6 @@ LeaderstatChange.Text = "Leaderstat Change"
 LeaderstatChange.TextColor3 = Color3.new(1, 1, 1)
 LeaderstatChange.TextSize = 14
 LeaderstatChange.TextWrapped = true
-LeaderstatChange.MouseButton1Click:Connect(function()
-game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Name"].TextBox.Text)game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Amount"].TextBox.Text)	
-end)
 
 PageLabel_6.Name = "PageLabel"
 PageLabel_6.Parent = Page3
@@ -3775,7 +3232,6 @@ end)
 
 restorebutton = Instance.new("ScreenGui")
 restorebutton.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
 b03d = Instance.new("TextButton",restorebutton)
 b03d.BackgroundColor3 = Color3.new(0/255,0/255,0/255)
 b03d.BorderColor3 = Color3.new(255/255,0/255,0/255)
@@ -4780,10 +4236,7 @@ if game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("ExplorerBu
                                                                             end
                                                                         end)
                                                                     end
-                                                                    
-                                                                    -- Mediafir                                
-                                                                   
-
+																	
 End.Name = "End"
 End.Parent = Page5
 End.BackgroundColor3 = Color3.new(0, 0, 0)
@@ -4853,18 +4306,9 @@ wait(3)
 m:Destroy()
 
 game:GetService("StarterGui"):SetCore("SendNotification",{
-Title = "c00lgui Remade",
-Text = "would you like to join our discord server??", 
-
-Button1 = "Yes",
-Button2 = "No",
-Duration = 30 
-})
-
-game:GetService("StarterGui"):SetCore("SendNotification",{
 Title = "Script credits",
 Text = "Credts to SirPwnsALot who remade this and original creds to 007n7", 
 
-Button1 = "Thanks bruthu!",
+Button1 = "Thanks bruthu",
 Duration = 30 
 })
