@@ -1769,7 +1769,7 @@ KickAll.Text = "Kick All"
 KickAll.TextColor3 = Color3.new(1, 1, 1)
 KickAll.TextSize = 14
 KickAll.TextWrapped = true
-KillAll.MouseButton1Click:Connect(function()
+KickAll.MouseButton1Click:Connect(function()
 for i,v in pairs(game.Players:GetChildren()) do
 v:Remove()	
 end
@@ -2212,7 +2212,7 @@ DZRSpawnItemGui.TextSize = 14
 DZRSpawnItemGui.TextWrapped = true
 DZRSpawnItemGui.MouseButton1Click:Connect(function()
 
-wait(0.3)
+--Instances:
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "WeaponGUI"
@@ -2268,6 +2268,7 @@ spawnButton.MouseButton1Click:Connect(function()
 	local weaponName = weaponLabel.Text
 	local amount = tonumber(amountBox.Text) or 1
 	print("Spawn requested: " .. weaponName .. " x" .. amount)
+end)
 end)
 
 PageLabel_4.Name = "PageLabel"
