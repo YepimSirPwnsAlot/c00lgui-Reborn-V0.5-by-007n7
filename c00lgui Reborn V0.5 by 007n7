@@ -79,7 +79,7 @@ local Staff = Instance.new("TextButton")
 local TechnoGauntlet = Instance.new("TextButton")
 local Plane = Instance.new("TextButton")
 local Snowball = Instance.new("TextButton")
-local SuicideVest = Instance.new("TextButton")
+local Svest = Instance.new("TextButton")
 local Lance = Instance.new("TextButton")
 local GearTools = Instance.new("Frame")
 local CustomGear = Instance.new("TextButton")
@@ -1058,7 +1058,7 @@ xBow.Text = "xBow"
 xBow.TextColor3 = Color3.new(1, 1, 1)
 xBow.TextSize = 14
 xBow.MouseButton1Click:Connect(function()
-loadstring(game:HttpGetAsync("https://pastebin.com/raw/UpexViXw"))()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/YepimSirPwnsAlot/UTG/refs/heads/main/xbow"))()
 end)
 
 Title_18.Name = "Title"
@@ -1089,7 +1089,7 @@ Drage.Text = "Drage"
 Drage.TextColor3 = Color3.new(1, 1, 1)
 Drage.TextSize = 14
 Drage.MouseButton1Click:Connect(function()
-loadstring(game:HttpGetAsync("https://pastebin.com/raw/AnkzsX0U"))()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/YepimSirPwnsAlot/UTG/refs/heads/main/dsgggwewegedas"))()
 end)
 
 Eyelaser.Name = "Eyelaser"
@@ -1129,7 +1129,7 @@ Wand.Text = "Wand"
 Wand.TextColor3 = Color3.new(1, 1, 1)
 Wand.TextSize = 14
 Wand.MouseButton1Click:Connect(function()
-loadstring(game:HttpGetAsync("https://pastebin.com/raw/Zgvsnh0R"))()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/YepimSirPwnsAlot/UTG/refs/heads/main/wand"))()
 end)
 
 DualBlades.Name = "Dual Blades"
@@ -1146,7 +1146,7 @@ DualBlades.Text = "Dual Blades"
 DualBlades.TextColor3 = Color3.new(1, 1, 1)
 DualBlades.TextSize = 14
 DualBlades.MouseButton1Click:Connect(function()
-loadstring(game:HttpGetAsync("https://pastebin.com/raw/Zgvsnh0R"))()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/YepimSirPwnsAlot/UTG/refs/heads/main/epic%20blades"))()
 end)
 
 Knife.Name = "Knife"
@@ -1250,7 +1250,7 @@ Plane.Text = "Plane"
 Plane.TextColor3 = Color3.new(1, 1, 1)
 Plane.TextSize = 14
 Plane.MouseButton1Click:Connect(function()
-loadstring(game:HttpGetAsync("https://pastebin.com/raw/MTnLqKrC"))()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/YepimSirPwnsAlot/UTG/refs/heads/main/plane"))()
 end)
 
 Snowball.Name = "Snowball"
@@ -1271,20 +1271,20 @@ Snowball.MouseButton1Click:Connect(function()
 loadstring(game:HttpGetAsync("https://pastebin.com/raw/Xxwa0mMS"))()
 end)
 
-SuicideVest.Name = "Suicide Vest"
-SuicideVest.Parent = WeaponScripts
-SuicideVest.BackgroundColor3 = Color3.new(0, 0, 0)
-SuicideVest.BorderColor3 = Color3.new(1, 0, 0)
-SuicideVest.BorderSizePixel = 3
-SuicideVest.Position = UDim2.new(0, 0, 0, 231)
-SuicideVest.Size = UDim2.new(0.5, 0, 0, 30)
-SuicideVest.ZIndex = 2
-SuicideVest.Font = Enum.Font.SourceSans
-SuicideVest.FontSize = Enum.FontSize.Size14
-SuicideVest.Text = "Suicide Vest"
-SuicideVest.TextColor3 = Color3.new(1, 1, 1)
-SuicideVest.TextSize = 14
-SuicideVest.MouseButton1Click:Connect(function()
+Svest.Name = "Svest"
+Svest.Parent = WeaponScripts
+Svest.BackgroundColor3 = Color3.new(0, 0, 0)
+Svest.BorderColor3 = Color3.new(1, 0, 0)
+Svest.BorderSizePixel = 3
+Svest.Position = UDim2.new(0, 0, 0, 231)
+Svest.Size = UDim2.new(0.5, 0, 0, 30)
+Svest.ZIndex = 2
+Svest.Font = Enum.Font.SourceSans
+Svest.FontSize = Enum.FontSize.Size14
+Svest.Text = "Suicide Vest"
+Svest.TextColor3 = Color3.new(1, 1, 1)
+Svest.TextSize = 14
+Svest.MouseButton1Click:Connect(function()
 loadstring(Game:GetObjects("rbxassetid://142429056")[1].Source)()
 end)
 
@@ -3007,7 +3007,57 @@ FencingRestore.TextColor3 = Color3.new(1, 1, 1)
 FencingRestore.TextSize = 14
 FencingRestore.TextWrapped = true
 FencingRestore.MouseButton1Click:Connect(function()
-str_srce = "123116009" loadstring(game:GetObjects("rbxassetid://"..str_srce)[1].Source)()
+function X(ws)
+for _, v in pairs(ws:GetChildren()) do
+v.Archivable = true
+if v.Name ~= "UClear" and v.Name ~= "Terrain" and game.Players:GetPlayerFromCharacter(v)==nil and v~=game.Workspace.CurrentCamera then
+if v:IsA("Script") or v:IsA("LocalScript") then
+v.Disabled = true
+v:remove()
+else
+v:remove()
+end
+end
+if game.Workspace:findFirstChild("Base") ~= nil then
+else
+local Base=Instance.new("Part",game.Workspace) 
+Base.Name="Base" 
+Base.Size=Vector3.new(1000,1,1000) 
+Base.BrickColor=BrickColor.new("Earth green") 
+Base.Anchored=true 
+Base.Locked=true 
+Base.TopSurface="Universal" 
+Base.CFrame=CFrame.new(Vector3.new(0,0,0)) 
+local Spawn=Instance.new("SpawnLocation",game.Workspace)
+Spawn.Name="lol"
+Spawn.Size=Vector3.new(6,1,6)
+Spawn.Transparency=1
+Spawn.CanCollide=false
+Spawn.Anchored=true
+Spawn.Locked=true
+Spawn.CFrame=CFrame.new(Vector3.new(0,1,0))
+end
+end
+end
+X(game.Workspace)
+X(game.Teams)
+X(game.StarterGui)
+wait()
+game.Workspace:InsertContent("rbxassetid://118791953")
+wait()
+game.workspace.Base:Destroy()
+wait()
+game.workspace.lol:Destroy()
+wait()
+game.Lighting.Ambient = Color3.new(255,255,255)
+game.Lighting.TimeOfDay = 12
+game.Lighting.Brightness = 0.5
+game.Lighting.FogEnd = 100000
+game.Lighting.GlobalShadows = false
+game.Lighting.Sky:Destroy()
+game.Lighting.FogEnd = 100000
+game.Lighting.Brightness = 1
+game.Workspace.Terrain:clear()
 end)
 
 LeaderstatAdd.Name = "Leaderstat Add"
@@ -3245,8 +3295,8 @@ b03d.Text = "Reload c00lgui"
 b03d.TextColor3 = Color3.new(255/255,255/255,255/255)
 
 b03d.MouseButton1Down:connect(function()
-    if game.Players.LocalPlayer.PlayerGui:FindFirstChild("c00lgui") then
-        game.Players.LocalPlayer.PlayerGui:FindFirstChild("c00lgui"):Remove()    
+    if game.Players.LocalPlayer.PlayerGui:FindFirstChild("epikservertrollgui") then
+        game.Players.LocalPlayer.PlayerGui:FindFirstChild("epikservertrollgui"):Remove()    
     end    
     loadstring(game:GetObjects("rbxassetid://11801912144")[1].Source)()
 end)
