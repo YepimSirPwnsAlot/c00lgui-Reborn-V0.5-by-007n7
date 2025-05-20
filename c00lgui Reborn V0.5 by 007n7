@@ -4356,10 +4356,16 @@ m.Text = "c00lgui Reborn V0.5 has loaded."
 wait(3)
 m:Destroy()
 
+local m = Instance.new("Hint")
+m.Parent = Workspace
+m.Text = "Remade By SirPwnsAlot, Want More Script remakes? DM Me On Discord Their Open For Everyone."
+wait(10)
+m:Destroy()
+
 game:GetService("StarterGui"):SetCore("SendNotification",{
 Title = "Script credits",
-Text = "Credts to SirPwnsALot who remade this and original creds to 007n7", 
+Text = "Credits to SirPwnsAlot who remade this and original creds to 007n7", 
 
-Button1 = "Thanks bruthu",
+Button1 = "Thanks",
 Duration = 30 
 })
