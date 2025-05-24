@@ -1198,7 +1198,7 @@ MasterHand.TextColor3 = Color3.new(1, 1, 1)
 MasterHand.TextSize = 14
 MasterHand.TextWrapped = true
 MasterHand.MouseButton1Click:Connect(function()
-loadstring(game:HttpGetAsync("https://pastebin.com/raw/erEs2pqG"))()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/YepimSirPwnsAlot/Frontlines-exploit-hub/refs/heads/main/masterhand"))()
 end)
 
 Staff.Name = "Staff"
@@ -1268,7 +1268,7 @@ Snowball.TextColor3 = Color3.new(1, 1, 1)
 Snowball.TextSize = 14
 Snowball.TextWrapped = true
 Snowball.MouseButton1Click:Connect(function()
-loadstring(game:HttpGetAsync("https://pastebin.com/raw/Xxwa0mMS"))()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/YepimSirPwnsAlot/Frontlines-exploit-hub/refs/heads/main/snowball"))()
 end)
 
 Svest.Name = "Svest"
@@ -2976,6 +2976,11 @@ BecomeOwnerinPersonalServer.Text = "Become Owner [PS]"
 BecomeOwnerinPersonalServer.TextColor3 = Color3.new(1, 1, 1)
 BecomeOwnerinPersonalServer.TextSize = 14
 BecomeOwnerinPersonalServer.TextWrapped = true
+BecomeOwnerinPersonalServer.MouseButton1Click:Connect(function()
+while game.Players.LocalPlayer.PersonalServerRank<255 do
+    game:GetService("PersonalServerService"):Promote(game.Players.LocalPlayer)
+end
+end)
 
 StealPlayerPoints.Name = "Steal Player Points"
 StealPlayerPoints.Parent = Misc
@@ -2991,6 +2996,10 @@ StealPlayerPoints.Text = "Steal Player Points"
 StealPlayerPoints.TextColor3 = Color3.new(1, 1, 1)
 StealPlayerPoints.TextSize = 14
 StealPlayerPoints.TextWrapped = true
+StealPlayerPoints.MouseButton1Click:Connect(function()
+local service = game:GetService("PointsService")
+service:AwardPoints(game.Players.LocalPlayer.userId, service:GetAwardablePoints())
+end)
 
 FencingRestore.Name = "Fencing Restore"
 FencingRestore.Parent = Misc
@@ -3074,6 +3083,12 @@ LeaderstatAdd.Text = "Leaderstat Add"
 LeaderstatAdd.TextColor3 = Color3.new(1, 1, 1)
 LeaderstatAdd.TextSize = 14
 LeaderstatAdd.TextWrapped = true
+LeaderstatAdd.MouseButton1Click:Connect(function()
+while true do
+wait(.1)
+game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Name"].TextBox.Text).Value = game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Name"].TextBox.Text)+game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Amount"].TextBox.Text)	
+end
+end)
 
 LeaderstatChange.Name = "Leaderstat Change"
 LeaderstatChange.Parent = Misc
@@ -3089,6 +3104,9 @@ LeaderstatChange.Text = "Leaderstat Change"
 LeaderstatChange.TextColor3 = Color3.new(1, 1, 1)
 LeaderstatChange.TextSize = 14
 LeaderstatChange.TextWrapped = true
+LeaderstatChange.MouseButton1Click:Connect(function()
+game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Name"].TextBox.Text)game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Amount"].TextBox.Text)	
+end)
 
 PageLabel_6.Name = "PageLabel"
 PageLabel_6.Parent = Page3
@@ -3357,7 +3375,8 @@ m:Destroy()
 
 game:GetService("StarterGui"):SetCore("SendNotification",{
 Title = "Script credits",
-Text = "Credits to SirPwnsAlot who remade this and original creds to 007n7", 
+Text = "Credits to SirPwnsAlot who remade this and original creds to 007n7",
+Icon = "http://www.roblox.com/asset/?id=158118263"
 
 Button1 = "Thanks",
 Duration = 30 
