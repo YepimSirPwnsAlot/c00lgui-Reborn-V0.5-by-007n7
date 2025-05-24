@@ -3376,7 +3376,7 @@ m:Destroy()
 game:GetService("StarterGui"):SetCore("SendNotification",{
 Title = "Script credits",
 Text = "Credits to SirPwnsAlot who remade this and original creds to 007n7",
-Icon = "http://www.roblox.com/asset/?id=158118263"
+Icon = "http://www.roblox.com/asset/?id=158118263",
 
 Button1 = "Thanks",
 Duration = 30 
