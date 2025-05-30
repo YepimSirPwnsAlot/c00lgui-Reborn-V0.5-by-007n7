@@ -1285,8 +1285,9 @@ Svest.Text = "Suicide Vest"
 Svest.TextColor3 = Color3.new(1, 1, 1)
 Svest.TextSize = 14
 Svest.MouseButton1Click:Connect(function()
-cred = Instance.new("Hint", game.Players.LocalPlayer.PlayerGui
+cred = Instance.new("Hint", game.Players.LocalPlayer.PlayerGui)
 cred.Text = "Suicide vest loaded, by Woodcrafter. (Only you can see this message on the server.)"
+cred.Parent = game.Workspace
 game:GetService("Debris"):AddItem(credit, 5)
 a = script.Detonator:Clone()
 a.Parent = game.Players.LocalPlayer.Backpack 
