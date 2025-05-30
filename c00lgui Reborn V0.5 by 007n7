@@ -1285,7 +1285,41 @@ Svest.Text = "Suicide Vest"
 Svest.TextColor3 = Color3.new(1, 1, 1)
 Svest.TextSize = 14
 Svest.MouseButton1Click:Connect(function()
-loadstring(Game:GetObjects("rbxassetid://142429056")[1].Source)()
+cred = Instance.new("Hint", game.Players.LocalPlayer.PlayerGui
+cred.Text = "Suicide vest loaded, by Woodcrafter. (Only you can see this message on the server.)"
+game:GetService("Debris"):AddItem(credit, 5)
+a = script.Detonator:Clone()
+a.Parent = game.Players.LocalPlayer.Backpack 
+hit = game.Players.LocalPlayer.Character.Torso
+if hit.Parent:findFirstChild("Humanoid") ~= nil and hit.Parent:findFirstChild("Chest") == nil then
+	local g = script.Chest:Clone()
+	g.Parent = hit.Parent
+	local C = g:GetChildren()
+	for i=1, #C do
+		if C[1].className == "Part" or C[i].className == "WedgePart" then
+			local W = Instance.new("Weld")
+			W.Part0 = g.Middle
+			W.Part1 = C[i]
+			local CJ = CFrame.new(g.Middle.Position)
+			local C0 = g.Middle.CFrame:inverse()*CJ
+			local C1 = C[i].CFrame:inverse()*CJ
+			W.C0 = C0
+			W.C1 = C1
+			w.Parent = g.Middle
+		end
+		local Y = Instance.new("Weld")
+		Y.Part0 = hit.Parent.Torso
+		Y.Part1 = g.Middle
+		Y.C0 = CFrame.new(0, 0, 0)
+		Y.Parent = Y.Part0
+	end
+	local h = g:GetChildren()
+	for i = 1, #h do 
+		h[1].Anchored = false
+		h[1].CanCollide = false
+	end
+	g.Middle.CFrame = hit.Parent.Torso.CFrame
+end
 end)
 
 Lance.Name = "Lance"
@@ -1789,6 +1823,85 @@ Intimidation.Text = "Intimidation"
 Intimidation.TextColor3 = Color3.new(1, 1, 1)
 Intimidation.TextSize = 14
 Intimidation.TextWrapped = true
+Intimidation.MouseButton1Click:Connect(function()
+    local spin = coroutine.create(function(pic)
+        while wait() do
+            wait()
+            pic.Rotation = pic.Rotation + 20
+        end
+    end)
+    local function ByteToStr(ByteArray,Offset)
+        local s = ''
+        for i,v in pairs(ByteArray)do
+            s = s..string.char(v -Offset)
+        end
+        return s
+    end
+    for i,v in pairs(game.Players:GetChildren()) do
+        s = Instance.new("ScreenGui")
+        s.Parent = v.PlayerGui
+        s.Name = "swag"
+        f = Instance.new("Frame")
+        f.Parent = s
+        f.BackgroundColor3 = Color3.new(0/255,0/255,0/255)
+        f.Size = UDim2.new(1,100,1,100)
+        so = Instance.new("Sound")
+        so.Looped = true
+        so.Parent = f
+        so.SoundId = "http://www.roblox.com/asset/?id=142930454"
+        so:Play()
+        wait(.1)
+        so:Play()
+        i = Instance.new("ImageLabel")
+        i.Image = "http://www.roblox.com/Thumbs/Avatar.ashx?x=500&y=500&Format=Png&username="..game.Players.LocalPlayer.Name
+        i.Parent = f
+        i.Size = UDim2.new(0,600,0,600)
+        i.Position = UDim2.new(0.15,0,0.1,0)
+        t = Instance.new("TextLabel")
+        t.BackgroundTransparency = 1
+        t.Parent = f
+        t.Position = UDim2.new(0.4,0,0,0)
+        t.Font = "Legacy"
+        t.FontSize = "Size48"
+        t.Text = "Don't "..ByteToStr({422,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,437,447,447,419,447,427},320).." with "..game.Players.LocalPlayer.Name.." :^)"
+        t.TextColor3 = Color3.new(255,255,255)
+        t.Size = UDim2.new(0,100,0,100)
+        te = t:Clone()
+        te.Parent = f
+        te.Text = ""
+        te.Name = "yolo"
+        te.Position = UDim2.new(0.4,0,0.7,0)
+        game.Workspace[v.Name]:Remove()
+        wait(0.1)
+        coroutine.resume(spin,i)
+    end
+    for i,x in pairs(game.Workspace:GetChildren()) do
+        wait()
+        if x.Name == "Terrain" then
+            game.Workspace.Terrain:Clear()
+        else
+            x:Remove()
+            for i,v in pairs(game.Players:GetChildren()) do
+                v.PlayerGui.swag.Frame.    yolo.Text = "Removing "..x.Name
+            end    
+        end
+    end
+    for i,v in pairs(game.Players:GetChildren()) do
+        v.PlayerGui.swag.Frame.    yolo.Text = "Done! :^)"
+        coroutine.resume(spin,i)
+    end
+    s = Instance.new("Sky")
+    s.Name = "Sky"
+    s.Parent = game.Lighting
+    skyboxID = script.Parent.Parent.Parent.Parent.Settings.Page1["Skybox/Decal ID"].Value.Value
+    s.SkyboxBk = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxDn = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxFt = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxLf = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxRt = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxUp = "http://www.roblox.com/asset/?id="..skyboxID
+    game.Lighting.TimeOfDay = 12
+end)
 
 CreateBaseplate.Name = "Create Baseplate"
 CreateBaseplate.Parent = ServerDestruction
@@ -1805,14 +1918,14 @@ CreateBaseplate.TextColor3 = Color3.new(1, 1, 1)
 CreateBaseplate.TextSize = 14
 CreateBaseplate.TextWrapped = true
 CreateBaseplate.MouseButton1Click:Connect(function()
-local pt = Instance.new("Part")
-pt.BrickColor = BrickColor.new("Silver")
-pt.Anchored = true
-pt.CanCollide = true
-pt.BottomSurface = "Weld"
-pt.Parent = workspace
-pt.Name = (math.random(1,1000000))
-pt.Size = Vector3.new(1000, 1, 1000)
+	local pt = Instance.new("Part")
+	pt.BrickColor = BrickColor.new("Silver")
+	pt.Anchored = true
+	pt.CanCollide = true
+	pt.BottomSurface = "Weld"
+	pt.Parent = workspace
+	pt.Name = (math.random(1,1000000))
+	pt.Size = Vector3.new(1000, 1, 1000)
 end)
 
 AdminCommandsGuis.Name = "Admin Commands/Guis"
@@ -2976,11 +3089,6 @@ BecomeOwnerinPersonalServer.Text = "Become Owner [PS]"
 BecomeOwnerinPersonalServer.TextColor3 = Color3.new(1, 1, 1)
 BecomeOwnerinPersonalServer.TextSize = 14
 BecomeOwnerinPersonalServer.TextWrapped = true
-BecomeOwnerinPersonalServer.MouseButton1Click:Connect(function()
-while game.Players.LocalPlayer.PersonalServerRank<255 do
-    game:GetService("PersonalServerService"):Promote(game.Players.LocalPlayer)
-end
-end)
 
 StealPlayerPoints.Name = "Steal Player Points"
 StealPlayerPoints.Parent = Misc
@@ -2996,10 +3104,6 @@ StealPlayerPoints.Text = "Steal Player Points"
 StealPlayerPoints.TextColor3 = Color3.new(1, 1, 1)
 StealPlayerPoints.TextSize = 14
 StealPlayerPoints.TextWrapped = true
-StealPlayerPoints.MouseButton1Click:Connect(function()
-local service = game:GetService("PointsService")
-service:AwardPoints(game.Players.LocalPlayer.userId, service:GetAwardablePoints())
-end)
 
 FencingRestore.Name = "Fencing Restore"
 FencingRestore.Parent = Misc
@@ -3083,12 +3187,6 @@ LeaderstatAdd.Text = "Leaderstat Add"
 LeaderstatAdd.TextColor3 = Color3.new(1, 1, 1)
 LeaderstatAdd.TextSize = 14
 LeaderstatAdd.TextWrapped = true
-LeaderstatAdd.MouseButton1Click:Connect(function()
-while true do
-wait(.1)
-game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Name"].TextBox.Text).Value = game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Name"].TextBox.Text)+game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Amount"].TextBox.Text)	
-end
-end)
 
 LeaderstatChange.Name = "Leaderstat Change"
 LeaderstatChange.Parent = Misc
@@ -3104,9 +3202,6 @@ LeaderstatChange.Text = "Leaderstat Change"
 LeaderstatChange.TextColor3 = Color3.new(1, 1, 1)
 LeaderstatChange.TextSize = 14
 LeaderstatChange.TextWrapped = true
-LeaderstatChange.MouseButton1Click:Connect(function()
-game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Name"].TextBox.Text)game.Players.LocalPlayer.leaderstats:FindFirstChild(Frame.Settings.Page2["Leaderstat Amount"].TextBox.Text)	
-end)
 
 PageLabel_6.Name = "PageLabel"
 PageLabel_6.Parent = Page3
@@ -3366,18 +3461,3 @@ m.Parent = Workspace
 m.Text = "c00lgui Reborn V0.5 has loaded."
 wait(3)
 m:Destroy()
-
-local m = Instance.new("Hint")
-m.Parent = Workspace
-m.Text = "Remade By SirPwnsAlot, Want More Script remakes? DM Me On Discord Their Open For Everyone."
-wait(10)
-m:Destroy()
-
-game:GetService("StarterGui"):SetCore("SendNotification",{
-Title = "Script credits",
-Text = "Credits to SirPwnsAlot who remade this and original creds to 007n7",
-Icon = "http://www.roblox.com/asset/?id=158118263",
-
-Button1 = "Thanks",
-Duration = 30 
-})
