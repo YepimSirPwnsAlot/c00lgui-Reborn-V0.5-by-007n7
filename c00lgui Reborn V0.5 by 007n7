@@ -820,37 +820,37 @@ setskybox.Text = ("Set Skybox")
 setskybox.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 
 function setskyboxClick()
-local s = Instance.new("Sky")
+s = Instance.new("Sky")
 s.Name = "Sky"
 s.Parent = game.Lighting
-local skyboxID = game.Players.LocalPlayer.PlayerGui.servertrollgui.interface.settings.Pge1["Skybox/Decal ID"].TextBox.Text
+local skyboxID = game.Players.LocalPlayer.PlayerGui.servertrollgui.Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text
 s.SkyboxBk = "http://www.roblox.com/asset/?id="..skyboxID
 s.SkyboxDn = "http://www.roblox.com/asset/?id="..skyboxID
 s.SkyboxFt = "http://www.roblox.com/asset/?id="..skyboxID
 s.SkyboxLf = "http://www.roblox.com/asset/?id="..skyboxID
 s.SkyboxRt = "http://www.roblox.com/asset/?id="..skyboxID
 s.SkyboxUp = "http://www.roblox.com/asset/?id="..skyboxID
-game.Lighting.TimeOfDay = 12		
+game.Lighting.TimeOfDay = 12
 end
 
 setskybox.MouseButton1Down:connect(setskyboxClick)
 
-decalspam = Instance.new("TextButton")
-decalspam.Name = ("Decal Spam")
-decalspam.Parent = serverdestruction
-decalspam.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
-decalspam.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
-decalspam.BorderSizePixel = 3
-decalspam.Position = UDim2.new(0.5, 3, 0, 99)
-decalspam.Size = UDim2.new(0.5, -3, 0, 30)
-decalspam.ZIndex = 2
-decalspam.Font = ("SourceSans")
-decalspam.FontSize = ("Size14")
-decalspam.Text = ("Decal Spam")
-decalspam.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+decal = Instance.new("TextButton")
+decal.Name = ("Decal Spam")
+decal.Parent = serverdestruction
+decal.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+decal.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+decal.BorderSizePixel = 3
+decal.Position = UDim2.new(0.5, 3, 0, 99)
+decal.Size = UDim2.new(0.5, -3, 0, 30)
+decal.ZIndex = 2
+decal.Font = ("SourceSans")
+decal.FontSize = ("Size14")
+decal.Text = ("Decal Spam")
+decal.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 
-function decalspamClick()
-decalID = interface.settings.Pge1["Skybox/Decal ID"].TextBox.Text
+function decalClick()
+decalID = interface.Settings.Page1["Skybox/Decal ID"].TextBox.Text
 function exPro(root)
 for _, v in pairs(root:GetChildren()) do
 if v:IsA("Decal") and v.Texture ~= "http://www.roblox.com/asset/?id="..decalID then
@@ -889,7 +889,7 @@ exPro(game.Workspace)
 asdf(game.Workspace)
 end
 
-decalspam.MouseButton1Down:connect(decalspamClick)
+decal.MouseButton1Down:connect(decalClick)
 
 forcetp = Instance.new("TextButton")
 forcetp.Name = ("Force Teleport")
@@ -1269,17 +1269,17 @@ title.Text = ("Skybox/Decal ID")
 title.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 title.TextWrapped = true
 
-textbox = Instance.new("TextBox")
-textbox.Parent = skyboxdecalid
-textbox.BackgroundColor3 = Color3.new(0, 0, 0)
-textbox.BorderColor3 = Color3.new(1, 0, 0)
-textbox.BorderSizePixel = 3
-textbox.Position = UDim2.new(0, 0, 0.5, 0)
-textbox.Size = UDim2.new(1, 1, 0.5, -1)
-textbox.Font = Enum.Font.SourceSans
-textbox.FontSize = Enum.FontSize.Size14
-textbox.Text = "158118263"
-textbox.TextColor3 = Color3.new(1, 1, 1)
+txtbx = Instance.new("TextBox")
+txtbx.Parent = skyboxdecalid
+txtbx.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+txtbx.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+txtbx.BorderSizePixel = 3
+txtbx.Position = UDim2.new(0, 0, 0.5, 0)
+txtbx.Size = UDim2.new(1, 1, 0.5, -1)
+txtbx.Font = ("SourceSans")
+txtbx.FontSize = ("Size14")
+txtbx.Text = ("158118263")
+txtbx.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 
 placeid = Instance.new("Frame")
 placeid.Name = ("Place ID")
