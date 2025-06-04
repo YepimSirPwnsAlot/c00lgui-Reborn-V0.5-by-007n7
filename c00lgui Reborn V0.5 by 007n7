@@ -53,20 +53,20 @@ leftarrow.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 function leftarrowClick()
 
 if Page1.Visible == true then
-	Page1.Visible = false
-	Page2.Visible = true
+Page1.Visible = false
+Page2.Visible = true
 elseif Page2.Visible == true then
-	Page2.Visible = false
-	Page3.Visible = true
+Page2.Visible = false
+Page3.Visible = true
 elseif Page3.Visible == true then
-	Page3.Visible = false
-	Page4.Visible = true
+Page3.Visible = false
+Page4.Visible = true
 elseif Page4.Visible == true then
-	Page4.Visible = false
-	Page5.Visible = true
+Page4.Visible = false
+Page5.Visible = true
 elseif Page5.Visible == true then
-	Page5.Visible = false
-	Page1.Visible = true
+Page5.Visible = false
+Page1.Visible = true
 end
 end
 
@@ -89,20 +89,20 @@ rightarrow.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 function rightarrowClick()
 
 if Page5.Visible == true then
-	Page5.Visible = false
-	Page4.Visible = true
+Page5.Visible = false
+Page4.Visible = true
 elseif Page4.Visible == true then
-	Page4.Visible = false
-	Page3.Visible = true
+Page4.Visible = false
+Page3.Visible = true
 elseif Page3.Visible == true then
-	Page3.Visible = false
-	Page2.Visible = true
+Page3.Visible = false
+Page2.Visible = true
 elseif Page2.Visible == true then
-	Page2.Visible = false
-	Page1.Visible = true
+Page2.Visible = false
+Page1.Visible = true
 elseif Page1_2.Visible == true then
-	Page1_2.Visible = false
-	Page5.Visible = true
+Page1.Visible = false
+Page5.Visible = true
 end
 end
 
@@ -890,6 +890,225 @@ asdf(game.Workspace)
 end
 
 decalspam.MouseButton1Down:connect(decalspamClick)
+
+forcetp = Instance.new("TextButton")
+forcetp.Name = ("Force Teleport")
+forcetp.Parent = serverdestruction
+forcetp.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+forcetp.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+forcetp.BorderSizePixel = 3
+forcetp.Position = UDim2.new(0, 0, 0, 132)
+forcetp.Size = UDim2.new(0.5, 0, 0, 30)
+forcetp.ZIndex = 2
+forcetp.Font = ("SourceSans")
+forcetp.FontSize = ("Size14")
+forcetp.Text = "Force Teleport"
+forcetp.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+
+function forcetpClick()
+local placeID = Frame.Settings.Page1["Place ID"].TextBox.Text
+local hax = [[for i,v in pairs(game.Players:GetChildren()) do
+game:GetService'TeleportService':Teleport(]]..placeID..[[,v.Character)
+end
+]]
+local x = workspace["Kohl's Admin Commands V2"].ScriptBase
+x.Code.Value = hax
+wait()
+x.Disabled = false
+end
+
+forcetp.MouseButton1Down:connect(forcetpClick)
+
+clearws = Instance.new("TextButton")
+clearws.Name = ("Clear Workspace")
+clearws.Parent = serverdestruction
+clearws.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+clearws.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+clearws.BorderSizePixel = 3
+clearws.Position = UDim2.new(0.5, 3, 0, 132)
+clearws.Size = UDim2.new(0.5, -3, 0, 30)
+clearws.ZIndex = 2
+clearws.Font = ("SourceSans")
+clearws.FontSize = ("Size14")
+clearws.Text = ("Clear Workspace")
+clearws.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+clearws.TextWrapped = true
+
+function clearwsClick()
+game.Workspace:ClearAllChildren()
+end
+
+clearws.MouseButton1Down:connect(clearwsClick)
+
+kill = Instance.new("TextButton")
+kill.Name = ("Kill All")
+kill.Parent = serverdestruction
+kill.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+kill.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+kill.BorderSizePixel = 3
+kill.Position = UDim2.new(0, 0, 0, 165)
+kill.Size = UDim2.new(0.5, 0, 0, 30)
+kill.ZIndex = 2
+kill.Font = ("SourceSans")
+kill.FontSize = ("Size14")
+kill.Text = ("Kill All")
+kill.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+
+function killClick()
+for i,v in pairs(game.Players:GetChildren()) do
+v.Character:BreakJoints()
+end
+end
+
+kill.MouseButton1Down:connect(killClick)
+
+kick = Instance.new("TextButton")
+kick.Name = ("Kick All")
+kick.Parent = serverdestruction
+kick.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+kick.BorderColor3 = Color3.new(255, 0/255, 0/255)
+kick.BorderSizePixel = 3
+kick.Position = UDim2.new(0.5, 3, 0, 165)
+kick.Size = UDim2.new(0.5, -3, 0, 30)
+kick.ZIndex = 2
+kick.Font = ("SourceSans")
+kick.FontSize = ("Size14")
+kick.Text = ("Kick All")
+kick.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+kick.TextWrapped = true
+
+function kickClick()
+for i,v in pairs(game.Players:GetChildren()) do
+v:Remove()	
+end
+end
+
+kick.MouseButton1Down:connect(kickClick)
+
+intim = Instance.new("TextButton")
+intim.Name = ("Intimidation")
+intim.Parent = serverdestruction
+intim.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+intim.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+intim.BorderSizePixel = 3
+intim.Position = UDim2.new(0.5, 0, 0, 198)
+intim.Size = UDim2.new(0.5, 0, 0, 30)
+intim.ZIndex = 2
+intim.Font = ("SourceSans")
+intim.FontSize = ("Size14")
+intim.Text = ("Intimidation")
+intim.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+intim.TextWrapped = true
+
+function intimClick()	
+	local spin = coroutine.create(function(pic)
+        while wait() do
+            wait()
+            pic.Rotation = pic.Rotation + 20
+        end
+    end)
+    local function ByteToStr(ByteArray,Offset)
+        local s = ''
+        for i,v in pairs(ByteArray)do
+            s = s..string.char(v -Offset)
+        end
+        return s
+    end
+    for i,v in pairs(game.Players:GetChildren()) do
+        s = Instance.new("ScreenGui")
+        s.Parent = v.PlayerGui
+        s.Name = "swag"
+        f = Instance.new("Frame")
+        f.Parent = s
+        f.BackgroundColor3 = Color3.new(0/255,0/255,0/255)
+        f.Size = UDim2.new(1,100,1,100)
+        so = Instance.new("Sound")
+        so.Looped = true
+        so.Parent = f
+        so.SoundId = "http://www.roblox.com/asset/?id=142930454"
+        so:Play()
+        wait(.1)
+        so:Play()
+        i = Instance.new("ImageLabel")
+        i.Image = "http://www.roblox.com/Thumbs/Avatar.ashx?x=500&y=500&Format=Png&username="..game.Players.LocalPlayer.Name
+        i.Parent = f
+        i.Size = UDim2.new(0,600,0,600)
+        i.Position = UDim2.new(0.15,0,0.1,0)
+        t = Instance.new("TextLabel")
+        t.BackgroundTransparency = 1
+        t.Parent = f
+        t.Position = UDim2.new(0.4,0,0,0)
+        t.Font = "Legacy"
+        t.FontSize = "Size48"
+        t.Text = "Don't "..ByteToStr({422,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,437,447,447,419,447,427},320).." with "..game.Players.LocalPlayer.Name.." :^)"
+        t.TextColor3 = Color3.new(255,255,255)
+        t.Size = UDim2.new(0,100,0,100)
+        te = t:Clone()
+        te.Parent = f
+        te.Text = ""
+        te.Name = "yolo"
+        te.Position = UDim2.new(0.4,0,0.7,0)
+        game.Workspace[v.Name]:Remove()
+        wait(0.1)
+        coroutine.resume(spin,i)
+    end
+    for i,x in pairs(game.Workspace:GetChildren()) do
+        wait()
+        if x.Name == "Terrain" then
+            game.Workspace.Terrain:Clear()
+        else
+            x:Remove()
+            for i,v in pairs(game.Players:GetChildren()) do
+                v.PlayerGui.swag.Frame.    yolo.Text = "Removing "..x.Name
+            end    
+        end
+    end
+    for i,v in pairs(game.Players:GetChildren()) do
+        v.PlayerGui.swag.Frame.    yolo.Text = "Done! :^)"
+        coroutine.resume(spin,i)
+    end
+    s = Instance.new("Sky")
+    s.Name = "Sky"
+    s.Parent = game.Lighting
+    skyboxID = interface.settings.Pge1["Skybox/Decal ID"].Value.Value
+    s.SkyboxBk = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxDn = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxFt = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxLf = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxRt = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxUp = "http://www.roblox.com/asset/?id="..skyboxID
+    game.Lighting.TimeOfDay = 12
+end
+
+intim.MouseButton1Down:connect(intimClick)
+
+createbaseplate = Instance.new("TextButton")
+createbaseplate.Name = ("Create Baseplate")
+createbaseplate.Parent = serverdestruction
+createbaseplate.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+createbaseplate.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+createbaseplate.BorderSizePixel = 3
+createbaseplate.Position = UDim2.new(0, 0, 0, 198)
+createbaseplate.Size = UDim2.new(0.5, 0, 0, 30)
+createbaseplate.ZIndex = 2
+createbaseplate.Font = ("SourceSans")
+createbaseplate.FontSize = ("Size14")
+createbaseplate.Text = ("Create Baseplate")
+createbaseplate.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+createbaseplate.TextWrapped = true
+
+function createbaseplateClick()	
+	local pt = Instance.new("Part")
+	pt.BrickColor = BrickColor.new("Silver")
+	pt.Anchored = true
+	pt.CanCollide = true
+	pt.BottomSurface = "Weld"
+	pt.Parent = workspace
+	pt.Name = (math.random(1,1000000))
+	pt.Size = Vector3.new(1000, 1, 1000)
+end
+
+createbaseplate.MouseButton1Down:connect(createbaseplateClick)
 
 pagelabel = Instance.new("TextLabel")
 pagelabel.Name = ("PageLabel")
