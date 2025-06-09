@@ -2044,6 +2044,180 @@ end
 
 dominusGhost.MouseButton1Down:connect(dominusGhostClick)
 
+antirobloxian = Instance.new("TextButton")
+antirobloxian.Name = ("anti-robloxian")
+antirobloxian.Parent = localplayer
+antirobloxian.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+antirobloxian.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+antirobloxian.BorderSizePixel = 3
+antirobloxian.Position = UDim2.new(0.5, 3, 0, 99)
+antirobloxian.Size = UDim2.new(0.5, -3, 0, 30)
+antirobloxian.ZIndex = 2
+antirobloxian.Font = ("SourceSans")
+antirobloxian.FontSize = ("Size14")
+antirobloxian.Text = ("Anti-Robloxian")
+antirobloxian.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+antirobloxian.TextSize = 14
+antirobloxian.TextWrapped = true
+
+function antirobloxianClick()
+Player = game.Players.LocalPlayer
+while true do
+local dist = 17
+local distance = dist
+if Player then
+c = game.Players:GetChildren()
+for i = 1, #c do
+if c[i].Name ~= Player.Name then
+if c[i]:DistanceFromCharacter(game.Workspace[Player.Name].Torso.Position) <= distance then
+c[i].Character:BreakJoints()
+local c2 = c[i].Character:GetChildren()
+for i2 =1, #c2 do
+if c2[i2]:IsA("BasePart") then
+Instance.new("Fire", c2[i2])
+end end end end end end wait() end
+end
+end
+
+antirobloxian.MouseButton1Down:connect(antirobloxianClick)
+
+floatingpad = Instance.new("TextButton")
+floatingpad.Name = ("floating pad")
+floatingpad.Parent = localplayer
+floatingpad.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+floatingpad.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+floatingpad.BorderSizePixel = 3
+floatingpad.Position = UDim2.new(0, 0, 0, 132)
+floatingpad.Size = UDim2.new(0.5, 0, 0, 30)
+floatingpad.ZIndex = 2
+floatingpad.Font = ("SourceSans")
+floatingpad.FontSize = ("Size14")
+floatingpad.Text = ("Floating Pad")
+floatingpad.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+floatingpad.TextWrapped = true
+
+function floatingpadClick()
+local name = game.Players.LocalPlayer.Name
+
+local p = Instance.new("Part")
+p.Parent = workspace
+p.Locked = true
+p.BrickColor = BrickColor.new("White")
+p.BrickColor = BrickColor.new(104)
+p.Size = Vector3.new(8, 1.2, 8)
+p.Anchored = true
+local m = Instance.new("CylinderMesh")
+m.Scale = Vector3.new(1, 0.5, 1)
+m.Parent = p
+while true do
+p.CFrame = CFrame.new(game.Players:findFirstChild(name).Character.Torso.CFrame.x, game.Players:findFirstChild(name).Character.Torso.CFrame.y - 4, game.Players:findFirstChild(name).Character.Torso.CFrame.z)
+wait()
+end
+end
+
+floatingpad.MouseButton1Down:connect(floatingpadClick)
+
+headshake = Instance.new("TextButton")
+headshake.Name = ("head shake")
+headshake.Parent = localplayer
+headshake.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+headshake.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+headshake.BorderSizePixel = 3
+headshake.Position = UDim2.new(0.5, 3, 0, 132)
+headshake.Size = UDim2.new(0.5, -3, 0, 30)
+headshake.ZIndex = 2
+headshake.Font = ("SourceSans")
+headshake.FontSize = ("Size14")
+headshake.Text = ("Head Shake")
+headshake.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+headshake.TextWrapped = true
+
+function headshakeClick()
+for X = 1, math.huge, 0.2 do 
+wait() 
+game.Workspace[game.Players.LocalPlayer.Name].Torso.Neck.C0 = CFrame.new(math.sin(X) / 1,1.5,0) 
+game.Workspace[game.Players.LocalPlayer.Name].Torso.Neck.C1 = CFrame.new(0,0,0) 
+end 
+for X = 1, math.huge, 0.1 do 
+wait() 
+game.Workspace[game.Players.LocalPlayer.Name].Torso.Neck.C0 = CFrame.new(0,1.5,0) * CFrame.fromAxisAngle(Vector3.new(0,1,0), X) 
+game.Workspace[game.Players.LocalPlayer.Name].Torso.Neck.C1 = CFrame.new(0,0,0) 
+end 
+for _,c in pairs(game.Players:GetChildren()) do
+	c.Character.Head.Mesh.Scale = Vector3.new(100, 100, 100)
+end
+for _,c in pairs(game.Players:GetChildren()) do
+	c.Character.Head.Mesh.Scale = Vector3.new(1.25, 1.25, 1.25)
+end
+end
+
+headshake.MouseButton1Down:connect(headshakeClick)
+
+meshdisco = Instance.new("TextButton")
+meshdisco.Name = ("mesh disco")
+meshdisco.Parent = localplayer
+meshdisco.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+meshdisco.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+meshdisco.BorderSizePixel = 3
+meshdisco.Position = UDim2.new(0, 0, 0, 165)
+meshdisco.Size = UDim2.new(0.5, 0, 0, 30)
+meshdisco.ZIndex = 2
+meshdisco.Font = ("SourceSans")
+meshdisco.FontSize = ("Size14")
+meshdisco.Text = ("Mesh Disco")
+meshdisco.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+meshdisco.TextWrapped = true
+
+function meshdiscoClick()
+
+plr = game.Players.LocalPlayer.Name
+meshes = {"Brick","Cylinder","Head","Sphere","Torso","Wedge"}
+h = game.Workspace[plr].Head.Mesh
+t = Instance.new("SpecialMesh",game.Workspace[plr].Torso)
+la = Instance.new("SpecialMesh",game.Workspace[plr]["Left Arm"])
+ra = Instance.new("SpecialMesh",game.Workspace[plr]["Right Arm"])
+ll = Instance.new("SpecialMesh",game.Workspace[plr]["Left Leg"])
+rl = Instance.new("SpecialMesh",game.Workspace[plr]["Right Leg"])
+while true do
+wait(0.1)
+h.MeshType = meshes[math.random(1,#meshes)]
+h.Parent.BrickColor = BrickColor.Random()
+t.MeshType = meshes[math.random(1,#meshes)]
+t.Parent.BrickColor = BrickColor.Random()
+la.MeshType = meshes[math.random(1,#meshes)]
+la.Parent.BrickColor = BrickColor.Random()
+ra.MeshType = meshes[math.random(1,#meshes)]
+ra.Parent.BrickColor = BrickColor.Random()
+ll.MeshType = meshes[math.random(1,#meshes)]
+ll.Parent.BrickColor = BrickColor.Random()
+rl.MeshType = meshes[math.random(1,#meshes)]
+rl.Parent.BrickColor = BrickColor.Random()
+end
+end
+
+meshdisco.MouseButton1Down:connect(meshdiscoClick)
+
+setwalkspeed = Instance.new("TextButton")
+setwalkspeed.Name = ("set walkspeed")
+setwalkspeed.Parent = localplayer
+setwalkspeed.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+setwalkspeed.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+setwalkspeed.BorderSizePixel = 3
+setwalkspeed.Position = UDim2.new(0.5, 3, 0, 165)
+setwalkspeed.Size = UDim2.new(0.5, -3, 0, 30)
+setwalkspeed.ZIndex = 2
+setwalkspeed.Font = ("SourceSans")
+setwalkspeed.FontSize = ("Size14")
+setwalkspeed.Text = ("set walkspeed")
+setwalkspeed.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+setwalkspeed.TextWrapped = true
+
+function setwalkspeedClick()
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Frame.Settings.Page2["Walkspeed Amount"].TextBox.Text
+end
+
+setwalkspeed.MouseButton1Down:connect(setwalkspeedClick)
+
 -- Start Of Settings -- 
 settings = Instance.new("Frame")
 settings.Name =	("Settings Tab")
