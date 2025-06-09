@@ -1644,7 +1644,7 @@ teamc00lkiddlogo1.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 teamc00lkiddlogo1.TextWrapped = true
 
 function teamc00lkiddlogo1Click()
-	interface.settings.page1["skybox/decal id"].textbox.Text = "158118263"
+	interface.settings.page1["Skybox/Decal Id"].textbox.Text = "158118263"
 end
 
 teamc00lkiddlogo1.MouseButton1Down:connect(teamc00lkiddlogo1Click)
@@ -1659,7 +1659,7 @@ title.Size = UDim2.new(1, 0, 0, 30)
 title.ZIndex = 2
 title.Font = ("SourceSansBold")
 title.FontSize = ("Size14")
-title.Text = ("preset skybox/decal ids")
+title.Text = ("Preset Skybox/Decal Ids")
 title.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 title.TextWrapped = true
 
@@ -1679,7 +1679,7 @@ teamc00lkiddlogo2.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 teamc00lkiddlogo2.TextWrapped = true
 
 function teamc00lkiddlogo2Click()
-    interface.settings.Pge1["skybox/decal id"].textbox.Text = "164661730"
+    interface.settings.Pge1["Skybox/Decal Id"].textbox.Text = "164661730"
 end
 
 teamc00lkiddlogo2.MouseButton1Down:connect(teamc00lkiddlogo2Click)
@@ -1700,7 +1700,7 @@ thomas.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 thomas.TextWrapped = true
 
 function thomasClick()
-    interface.settings.Pge1["skybox/decal id"].textbox.Text = "160456772"
+    interface.settings.Pge1["Skybox/Decal Id"].textbox.Text = "160456772"
 end
 
 thomas.MouseButton1Down:connect(thomasClick)
@@ -1721,7 +1721,7 @@ c00lkidd.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 c00lkidd.TextWrapped = true
 
 function c00lkiddClick()	
-	interface.settings.Pge1["skybox/decal id"].textbox.Text = "157755295"
+	interface.settings.Pge1["Skybox/Decal Id"].textbox.Text = "157755295"
 end
 
 c00lkidd.MouseButton1Down:connect(c00lkiddClick)
@@ -1746,9 +1746,93 @@ title.Size = UDim2.new(1, 0, 0, 30)
 title.ZIndex = 2
 title.Font = ("SourceSansBold")
 title.FontSize = ("Size14")
-title.Text = ("preset music ids")
+title.Text = ("Preset Music Ids")
 title.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 title.TextWrapped = true
+
+electrosp00k = Instance.new("TextButton")
+electrosp00k.Name = ("Electro Sp00k")
+electrosp00k.Parent = presetmusicids
+electrosp00k.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+electrosp00k.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+electrosp00k.BorderSizePixel = 3
+electrosp00k.Position = UDim2.new(0, 0, 0, 33)
+electrosp00k.Size = UDim2.new(0.5, 0, 0, 30)
+electrosp00k.ZIndex = 2
+electrosp00k.Font = ("SourceSans")
+electrosp00k.FontSize = ("Size14")
+electrosp00k.Text = ("Electro Sp00k")
+electrosp00k.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+electrosp00k.TextWrapped = true
+
+function electrosp00kClick()
+	interface.settings.Pge1["Music ID"].TextBox.Text = "142930454"
+end
+
+electrosp00k.MouseButton1Down:connect(electrosp00kClick)
+
+wonga = Instance.new("TextButton")
+wonga.Name = ("Wonga")
+wonga.Parent = presetmusicids
+wonga.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+wonga.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+wonga.BorderSizePixel = 3
+wonga.Position = UDim2.new(0.5, 3, 0, 33)
+wonga.Size = UDim2.new(0.5, -3, 0, 30)
+wonga.ZIndex = 2
+wonga.Font = ("SourceSans")
+wonga.FontSize = ("Size14")
+wonga.Text = ("Wonga")
+wonga.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+wonga.TextWrapped = true
+
+function wongaClick()
+	interface.settings.Pge1["Music ID"].TextBox.Text = "147909316"
+end
+
+wonga.MouseButton1Down:connect(wongaClick)
+
+chopsuey = Instance.new("TextButton")
+chopsuey.Name = ("Chop Suey")
+chopsuey.Parent = presetmusicids
+chopsuey.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+chopsuey.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+chopsuey.BorderSizePixel = 3
+chopsuey.Position = UDim2.new(0, 0, 0, 66)
+chopsuey.Size = UDim2.new(0.5, 0, 0, 30)
+chopsuey.ZIndex = 2
+chopsuey.Font = ("SourceSans")
+chopsuey.FontSize = ("Size14")
+chopsuey.Text = ("Chop Suey")
+chopsuey.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+chopsuey.TextWrapped = true
+
+function chopsueyClick()
+	interface.settings.Pge1["Music ID"].TextBox.Text = "147407900"
+end
+
+chopsuey.MouseButton1Down:connect(chopsueyClick)
+
+scream = Instance.new("TextButton")
+scream.Name = ("Scream")
+scream.Parent = presetmusicids
+scream.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+scream.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+scream.BorderSizePixel = 3
+scream.Position = UDim2.new(0.5, 3, 0, 66)
+scream.Size = UDim2.new(0.5, -3, 0, 30)
+scream.ZIndex = 2
+scream.Font = ("SourceSans")
+scream.FontSize = ("Size14")
+scream.Text = ("Scream")
+scream.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+scream.TextWrapped = true
+
+function screamClick()
+	interface.settings.Pge1["Music ID"].TextBox.Text = "138097458"
+end
+
+scream.MouseButton1Down:connect(screamClick)
 
 pagelabel = Instance.new("TextLabel")
 pagelabel.Name = ("pagelabel")
