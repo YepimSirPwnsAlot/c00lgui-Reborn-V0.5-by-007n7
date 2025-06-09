@@ -1211,72 +1211,74 @@ killgui.Text = ("Kill Gui")
 killgui.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 killgui.TextWrapped = true
 
-
 function killguiClick()
-	local whoownit = game.Players.LocalPlayer
-	local gui = Instance.new("ScreenGui")
-	gui.Name = "Kill"
-	gui.Parent = whoownit.PlayerGui
 
-	local button = Instance.new("TextButton")
-	button.Parent = gui
-	button.Size = UDim2.new(0, 100, 0, 30)
-	button.Position = UDim2.new(0, 8, 0, 135)
-	button.Text = "Kill"
+whoownit = game.Players.LocalPlayer
+gui = Instance.new("ScreenGui")
+gui.Parent = whoownit.PlayerGui
+gui.Name = "Kill"
 
-	local pos2, pos3 = 10, 0
-	local enabled = false
+pos = 135
+pos2 = 10
+pos3 = 0
 
-	button.MouseButton1Click:Connect(function()
-		if not enabled then
-			enabled = true
-			local players = game.Players:GetChildren()
-			local red, green, blue = 0, 0.5, 0
-			for i, plr in pairs(players) do
-				wait()
-				pos2 = pos2 + 23
-				if pos2 >= 450 then
-					pos3 = pos3 + 103
-					pos2 = 33
-				end
-				if green <= 0.9 then
-					green = green + 0.46
-				else
-					green = green - 0.46
-				end
+enabled = false
 
-				local bu = Instance.new("TextButton")
-				bu.Parent = button
-				bu.Size = UDim2.new(0, 100, 0, 20)
-				bu.Position = UDim2.new(0, pos3, 0, pos2)
-				bu.Text = plr.Name
-				bu.BackgroundTransparency = 1
-				bu.TextTransparency = 1
-				bu.BackgroundColor3 = Color3.new(red, green, blue)
-
-				coroutine.wrap(function()
-					for j = 1, 3 do
-						wait()
-						bu.BackgroundTransparency -= 0.34
-						bu.TextTransparency = bu.BackgroundTransparency
-					end
-				end)()
-
-				bu.MouseButton1Down:Connect(function()
-					local target = game.Players:FindFirstChild(bu.Text)
-					if target then
-						target.Character.Head:Destroy()
-						bu.Text = "Killed!"
-						wait(2)
-						bu.Text = plr.Name
-					end
-				end)
-			end
-		else
-			enabled = false
-			pos2, pos3 = 10, 0
-		end
-	end)
+button = Instance.new("TextButton")
+button.Parent = gui
+button.Size = UDim2.new(0, 100, 0, 30)
+button.Position = UDim2.new(0, 8, 0, pos)
+button.Text = "Kill"
+button.MouseButton1Click:connect(function()
+if enabled == false then 
+enabled = true
+local a = game.Players:GetChildren()
+red = 0
+green = 0.5
+blue = 0
+for i=1, #a do
+wait()
+pos2 = pos2 + 23
+if pos2 >= 450 then
+pos3 = pos3 + 103
+pos2 = 33
+end
+if green <= 0.9 then
+green = green + 0.46
+elseif green >= 0.9 then
+green = green - 0.46
+end
+local bu = Instance.new("TextButton")
+bu.Parent = button
+bu.Size = UDim2.new(0, 100, 0, 20)
+bu.Position = UDim2.new(0, pos3, 0, pos2)
+bu.Text = a[i].Name
+bu.BackgroundTransparency = 1
+bu.TextTransparency = 1
+bu.BackgroundColor3 = Color3.new(red,green,blue)
+coroutine.resume(coroutine.create(function()
+for i=1, 3 do
+wait()
+bu.BackgroundTransparency = bu.BackgroundTransparency - 0.34
+bu.TextTransparency = bu.BackgroundTransparency
+end
+end))
+bu.MouseButton1Down:connect(function()
+local play = game.Players:findFirstChild(bu.Text)
+if play ~= nil then
+play.Character.Head:Remove()
+bu.Text = "Killed!"
+wait(2)
+bu.Text = a[i].Name
+end
+end)
+end
+elseif enabled == true then
+enabled = false
+pos2 = 10
+pos3 = 0
+end
+end)
 end
 
 killgui.MouseButton1Down:connect(killguiClick)
@@ -1541,6 +1543,67 @@ dzrspawnitemgui.Text = ("DZR Spawn Item Gui")
 dzrspawnitemgui.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 dzrspawnitemgui.TextWrapped = true
 
+function dzrspawnitemguiClick()
+
+screenGui = Instance.new("ScreenGui")
+screenGui.Name = "WeaponGUI"
+screenGui.ResetOnSpawn = true
+screenGui.Parent = game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+
+mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 223, 0, 45)
+mainFrame.Position = UDim2.new(0, 0, 0, 409)
+mainFrame.BackgroundColor3 = Color3.fromRGB(230, 230, 230)
+mainFrame.BorderSizePixel = 1
+mainFrame.Parent = screenGui
+
+weaponLabel = Instance.new("TextBox")
+weaponLabel.Name = "WeaponLabel"
+weaponLabel.Size = UDim2.new(0.85, 0, 0.5, 0)
+weaponLabel.Position = UDim2.new(0, 0, 0, 0)
+weaponLabel.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
+weaponLabel.BorderSizePixel = 1
+weaponLabel.Text = "Precision Rifle"
+weaponLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+weaponLabel.TextSize = 14
+weaponLabel.Font = Enum.Font.SourceSans
+weaponLabel.ClearTextOnFocus = false
+weaponLabel.Parent = mainFrame
+
+amountBox = Instance.new("TextBox")
+amountBox.Name = "AmountBox"
+amountBox.Size = UDim2.new(0.15, 0, 0.5, 0)
+amountBox.Position = UDim2.new(0.85, 0, 0, 0)
+amountBox.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
+amountBox.BorderSizePixel = 1
+amountBox.Text = "1"
+amountBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+amountBox.TextSize = 12
+amountBox.Font = Enum.Font.SourceSans
+amountBox.ClearTextOnFocus = false
+amountBox.Parent = mainFrame
+
+spawnButton = Instance.new("TextButton")
+spawnButton.Name = "SpawnButton"
+spawnButton.Size = UDim2.new(1, 0, 0.5, 0)
+spawnButton.Position = UDim2.new(0, 0, 0.5, 0)
+spawnButton.BackgroundColor3 = Color3.fromRGB(245, 245, 245)
+spawnButton.BorderSizePixel = 1
+spawnButton.Text = "Spawn"
+spawnButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+spawnButton.TextSize = 12
+spawnButton.Font = Enum.Font.SourceSansBold
+spawnButton.Parent = mainFrame
+spawnButton.MouseButton1Click:Connect(function()
+	local weaponName = weaponLabel.Text
+	local amount = tonumber(amountBox.Text) or 1
+	print("Spawn requested: " .. weaponName .. " x" .. amount)
+end)
+end
+
+dzrspawnitemgui.MouseButton1Down:connect(dzrspawnitemguiClick)
+
 pagelabel = Instance.new("TextLabel")
 pagelabel.Name = ("PageLabel")
 pagelabel.Parent = Page1
@@ -1553,6 +1616,236 @@ pagelabel.ZIndex = 2
 pagelabel.Font = ("SourceSans")
 pagelabel.FontSize = ("Size18")
 pagelabel.Text = ("Page 1")
+pagelabel.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+pagelabel.TextWrapped = true
+
+presetskyboxdecalids = Instance.new("Frame")
+presetskyboxdecalids.Name = ("preset skybox/decal ids")
+presetskyboxdecalids.Parent = Page4
+presetskyboxdecalids.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+presetskyboxdecalids.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+presetskyboxdecalids.BorderSizePixel = 3
+presetskyboxdecalids.Size = UDim2.new(0.5, 0, 1, 0)
+presetskyboxdecalids.ZIndex = 2
+
+teamc00lkiddlogo1 = Instance.new("TextButton")
+teamc00lkiddlogo1.Name = ("team c00lkidd logo 1")
+teamc00lkiddlogo1.Parent = presetskyboxdecalids
+teamc00lkiddlogo1.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+teamc00lkiddlogo1.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+teamc00lkiddlogo1.BorderSizePixel = 3
+teamc00lkiddlogo1.Position = UDim2.new(0, 0, 0, 33)
+teamc00lkiddlogo1.Size = UDim2.new(0.5, 0, 0, 30)
+teamc00lkiddlogo1.ZIndex = 2
+teamc00lkiddlogo1.Font = ("SourceSans")
+teamc00lkiddlogo1.FontSize = ("Size14")
+teamc00lkiddlogo1.Text = ("team c00lkidd logo 1")
+teamc00lkiddlogo1.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+teamc00lkiddlogo1.TextWrapped = true
+
+function teamc00lkiddlogo1Click()
+	interface.settings.page1["skybox/decal id"].textbox.Text = "158118263"
+end
+
+teamc00lkiddlogo1.MouseButton1Down:connect(teamc00lkiddlogo1Click)
+
+title = Instance.new("TextLabel")
+title.Name = ("title")
+title.Parent = presetskyboxdecalids
+title.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+title.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+title.BorderSizePixel = 3
+title.Size = UDim2.new(1, 0, 0, 30)
+title.ZIndex = 2
+title.Font = ("SourceSansBold")
+title.FontSize = ("Size14")
+title.Text = ("preset skybox/decal ids")
+title.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+title.TextWrapped = true
+
+teamc00lkiddlogo2 = Instance.new("TextButton")
+teamc00lkiddlogo2.Name = ("team c00lkidd logo 2")
+teamc00lkiddlogo2.Parent = presetskyboxdecalids
+teamc00lkiddlogo2.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+teamc00lkiddlogo2.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+teamc00lkiddlogo2.BorderSizePixel = 3
+teamc00lkiddlogo2.Position = UDim2.new(0.5, 3, 0, 33)
+teamc00lkiddlogo2.Size = UDim2.new(0.5, -3, 0, 30)
+teamc00lkiddlogo2.ZIndex = 2
+teamc00lkiddlogo2.Font = ("SourceSans")
+teamc00lkiddlogo2.FontSize = ("Size14")
+teamc00lkiddlogo2.Text = ("team c00lkidd logo 2")
+teamc00lkiddlogo2.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+teamc00lkiddlogo2.TextWrapped = true
+
+function teamc00lkiddlogo2Click()
+    interface.settings.Pge1["skybox/decal id"].textbox.Text = "164661730"
+end
+
+teamc00lkiddlogo2.MouseButton1Down:connect(teamc00lkiddlogo2Click)
+
+thomas = Instance.new("TextButton")
+thomas.Name = ("thomas")
+thomas.Parent = presetskyboxdecalids
+thomas.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+thomas.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+thomas.BorderSizePixel = 3
+thomas.Position = UDim2.new(0, 0, 0, 66)
+thomas.Size = UDim2.new(0.5, 0, 0, 30)
+thomas.ZIndex = 2
+thomas.Font = ("SourceSans")
+thomas.FontSize = ("Size14")
+thomas.Text = ("thomas")
+thomas.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+thomas.TextWrapped = true
+
+function thomasClick()
+    interface.settings.Pge1["skybox/decal id"].textbox.Text = "160456772"
+end
+
+thomas.MouseButton1Down:connect(thomasClick)
+
+c00lkidd = Instance.new("TextButton")
+c00lkidd.Name = ("c00lkidd")
+c00lkidd.Parent = presetskyboxdecalids
+c00lkidd.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+c00lkidd.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+c00lkidd.BorderSizePixel = 3
+c00lkidd.Position = UDim2.new(0.5, 3, 0, 66)
+c00lkidd.Size = UDim2.new(0.5, -3, 0, 30)
+c00lkidd.ZIndex = 2
+c00lkidd.Font = ("SourceSans")
+c00lkidd.FontSize = ("Size14")
+c00lkidd.Text = ("c00lkidd")
+c00lkidd.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+c00lkidd.TextWrapped = true
+
+function c00lkiddClick()	
+	interface.settings.Pge1["skybox/decal id"].textbox.Text = "157755295"
+end
+
+c00lkidd.MouseButton1Down:connect(c00lkiddClick)
+
+presetmusicids = Instance.new("Frame")
+presetmusicids.Name = ("preset music ids")
+presetmusicids.Parent = page4
+presetmusicids.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+presetmusicids.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+presetmusicids.BorderSizePixel = 3
+presetmusicids.Position = UDim2.new(0.5, 3, 0, 0)
+presetmusicids.Size = UDim2.new(0.5, -3, 1, 0)
+presetmusicids.ZIndex = 2
+
+title = Instance.new("TextLabel")
+title.Name = ("title")
+title.Parent = presetmusicids
+title.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+title.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+title.BorderSizePixel = 3
+title.Size = UDim2.new(1, 0, 0, 30)
+title.ZIndex = 2
+title.Font = ("SourceSansBold")
+title.FontSize = ("Size14")
+title.Text = ("preset music ids")
+title.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+title.TextWrapped = true
+
+electrosp00k = Instance.new("TextButton")
+electrosp00k.Name = ("electro sp00k")
+electrosp00k.Parent = presetmusicids
+electrosp00k.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+electrosp00k.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+electrosp00k.BorderSizePixel = 3
+electrosp00k.Position = UDim2.new(0, 0, 0, 33)
+electrosp00k.Size = UDim2.new(0.5, 0, 0, 30)
+electrosp00k.ZIndex = 2
+electrosp00k.Font = ("SourceSans")
+electrosp00k.FontSize = ("Size14")
+electrosp00k.Text = ("electro sp00k")
+electrosp00k.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+electrosp00k.TextWrapped = true
+
+function electrosp00kClick()
+    interface.settings.Pge1["music id"].textbox.Text = "142930454"
+end
+
+electrosp00k.MouseButton1Down:connect(electrosp00kClick)
+
+wonga = Instance.new("TextButton")
+wonga.Name = ("wonga")
+wonga.Parent = presetmusicids
+wonga.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+wonga.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+wonga.BorderSizePixel = 3
+wonga.Position = UDim2.new(0.5, 3, 0, 33)
+wonga.Size = UDim2.new(0.5, -3, 0, 30)
+wonga.ZIndex = 2
+wonga.Font = ("SourceSans")
+wonga.FontSize = ("Size14")
+wonga.Text = ("wonga")
+wonga.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+wonga.TextWrapped = true
+
+function wongaClick()	
+	interface.settings.Pge1["music id"].textbox.Text = "147909316"
+end
+
+wonga.MouseButton1Down:connect(wongaClick)
+
+chopsuey = Instance.new("TextButton")
+chopsuey.Name = ("chop suey")
+chopsuey.Parent = presetmusicids
+chopsuey.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+chopsuey.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+chopsuey.BorderSizePixel = 3
+chopsuey.Position = UDim2.new(0, 0, 0, 66)
+chopsuey.Size = UDim2.new(0.5, 0, 0, 30)
+chopsuey.ZIndex = 2
+chopsuey.Font = ("SourceSans")
+chopsuey.FontSize = ("Size14")
+chopsuey.Text = ("chop suey")
+chopsuey.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+chopsuey.TextWrapped = true
+
+function chopsueyClick()
+    interface.settings.Pge1["music id"].textbox.Text = "147407900"
+end
+
+chopsuey.MouseButton1Down:connect(chopsueyClick)
+
+scream = Instance.new("TextButton")
+scream.Name = ("scream")
+scream.Parent = presetmusicids
+scream.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+scream.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+scream.BorderSizePixel = 3
+scream.Position = UDim2.new(0.5, 3, 0, 66)
+scream.Size = UDim2.new(0.5, -3, 0, 30)
+scream.ZIndex = 2
+scream.Font = ("SourceSans")
+scream.FontSize = ("Size14")
+scream.Text = ("scream")
+scream.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+scream.TextWrapped = true
+
+function screamClick()	
+	interface.settings.Pge1["music id"].textbox.Text = "138097458"
+end
+
+scream.MouseButton1Down:connect(ScreamClick)
+
+pagelabel = Instance.new("TextLabel")
+pagelabel.Name = ("pagelabel")
+pagelabel.Parent = Page4
+pagelabel.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+pagelabel.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+pagelabel.BorderSizePixel = 3
+pagelabel.Position = UDim2.new(0, 0, 1, -30)
+pagelabel.Size = UDim2.new(1, 0, 0, 30)
+pagelabel.ZIndex = 2
+pagelabel.Font = ("SourceSans")
+pagelabel.FontSize = ("Size18")
+pagelabel.Text = ("Page 4")
 pagelabel.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 pagelabel.TextWrapped = true
 
