@@ -1895,7 +1895,7 @@ title.Size = UDim2.new(1, 0, 0, 30)
 title.ZIndex = 2
 title.Font = ("SourceSansBold")
 title.FontSize = ("Size14")
-title.Text = ("localplayer")
+title.Text = ("LocalPlayer")
 title.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 title.TextWrapped = true
 
@@ -1920,7 +1920,7 @@ function changenameclick()
 	local model = Instance.new("Model", workspace)
 	local humanoid = Instance.new("Humanoid", model)
 	head.Parent = model
-	model.Name = Frame.Settings.Page2["namebox"].TextBox.Text
+	model.Name = Frame.Settings.Page2["Name Box"].TextBox.Text
 	humanoid.MaxHealth = 0
 	local w = Instance.new("Weld", model)
 	w.Part0 = workspace[you].Head
@@ -1928,6 +1928,121 @@ function changenameclick()
 end
 
 changename.MouseButton1Down:connect(changenameclick)
+
+discoCharacter = Instance.new("TextButton")
+discoCharacter.Name = ("Disco Character")
+discoCharacter.Parent = localplayer
+discoCharacter.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+discoCharacter.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+discoCharacter.BorderSizePixel = 3
+discoCharacter.Position = UDim2.new(0, 0, 0, 66)
+discoCharacter.Size = UDim2.new(0.5, 0, 0, 30)
+discoCharacter.ZIndex = 2
+discoCharacter.Font = ("SourceSans")
+discoCharacter.FontSize = ("Size14")
+discoCharacter.Text = ("Disco Character")
+discoCharacter.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+discoCharacter.TextWrapped = true
+
+function discoCharacterClick()
+	local presets = {"Bright red","Bright yellow","Bright orange","Bright violet","Bright blue","Bright bluish green","Bright green"}
+	while true do
+		wait(0.5)
+		local ye = game.Workspace[game.Players.LocalPlayer.Name]:GetChildren()
+		for i,v in pairs(ye) do
+			if v.ClassName == ("Part") then
+				v.BrickColor = BrickColor.new(presets[math.random(1,#presets)])
+			end
+		end
+	end
+end
+
+discoCharacter.MouseButton1Down:connect(discoCharacterClick)
+
+chickenArms = Instance.new("TextButton")
+chickenArms.Name = ("Chicken Arms")
+chickenArms.Parent = localplayer
+chickenArms.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+chickenArms.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+chickenArms.BorderSizePixel = 3
+chickenArms.Position = UDim2.new(0.5, 3, 0, 66)
+chickenArms.Size = UDim2.new(0.5, -3, 0, 30)
+chickenArms.ZIndex = 2
+chickenArms.Font = ("SourceSans")
+chickenArms.FontSize = ("Size14")
+chickenArms.Text = ("Chicken Arms")
+chickenArms.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+
+function chickenArmsClick()
+	local chicken = game.Players.LocalPlayer.Name
+	game.Workspace[chicken].Torso["Left Shoulder"].C0 = CFrame.new(-1.5, 0.5, 0) * CFrame.fromEulerAnglesXYZ(0,math.pi/2,0) * CFrame.fromEulerAnglesXYZ(math.pi/2, 0, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0)
+	game.Workspace[chicken].Torso["Left Shoulder"].C1 = CFrame.new(0, 0.5, 0)
+	game.Workspace[chicken].Torso["Right Shoulder"].C0 = CFrame.new(1.5, 0.5, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0) * CFrame.fromEulerAnglesXYZ(math.pi/2, 0, 0) * CFrame.fromEulerAnglesXYZ(0,-math.pi/2,0)
+	game.Workspace[chicken].Torso["Right Shoulder"].C1 = CFrame.new(0, 0.5, 0)
+end
+
+chickenArms.MouseButton1Down:connect(chickenArmsClick)
+
+dominusGhost = Instance.new("TextButton")
+dominusGhost.Name = ("Dominus Ghost")
+dominusGhost.Parent = localplayer
+dominusGhost.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+dominusGhost.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+dominusGhost.BorderSizePixel = 3
+dominusGhost.Position = UDim2.new(0, 0, 0, 99)
+dominusGhost.Size = UDim2.new(0.5, 0, 0, 30)
+dominusGhost.ZIndex = 2
+dominusGhost.Font = ("SourceSans")
+dominusGhost.FontSize = ("Size14")
+dominusGhost.Text = ("Dominus Ghost")
+dominusGhost.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+dominusGhost.TextWrapped = true
+
+function dominusGhostClick()
+	function nob(who, tra, hat)
+		local memememe = who.Character
+		pcall(function()
+			local u = memememe["Body Colors"]
+			u.HeadColor = BrickColor.new("Black")
+			u.LeftLegColor = BrickColor.new("Black")
+			u.RightLegolor = BrickColor.new("Black")
+			u.LeftArmColor = BrickColor.new("Black")
+			u.TorsoColor = BrickColor.new("Black")
+			u.RightArmColor = BrickColor.new("Black")
+		end)
+		pcall(function()
+			memememe.Shirt:Destroy()
+			memememe.Pants:Destroy()
+		end)
+		for i,v in pairs(memememe:GetChildren()) do
+			if v:IsA("BasePart") then
+				v.Transparency = tra
+				if v.Name == ("HumanoidRootPart") or v.Name == ("Head") then
+					v.Transparency = 1
+				end
+				wait()
+				v.BrickColor = BrickColor.new("Black")
+			elseif v:IsA("Hat") then
+				v:Destroy()
+			end
+		end
+		local xx = game:service("InsertService"):LoadAsset(hat)
+		local xy = game:service("InsertService"):LoadAsset(47433)["LinkedSword"]
+		xy.Parent = who.Backpack
+		for a,hat in pairs(xx:GetChildren()) do
+			hat.Parent = memememe
+		end
+		xx:Destroy()
+		local h = who.Character.Humanoid
+		h.MaxHealth = 50000
+		wait(1.5)
+		h.Health = 50000
+		h.WalkSpeed = 32
+	end
+	nob(game.Players.LocalPlayer, 0.6, 21070012)
+end
+
+dominusGhost.MouseButton1Down:connect(dominusGhostClick)
 
 -- Start Of Settings -- 
 settings = Instance.new("Frame")
