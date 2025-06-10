@@ -1744,6 +1744,7 @@ presetmusicids.BorderSizePixel = 3
 presetmusicids.Position = UDim2.new(0.5, 3, 0, 0)
 presetmusicids.Size = UDim2.new(0.5, -3, 1, 0)
 presetmusicids.ZIndex = 2
+presetmusicids.Visible = true
 
 title = Instance.new("TextLabel")
 title.Name = ("title")
@@ -1758,6 +1759,7 @@ title.FontSize = ("Size14")
 title.Text = ("Preset Music Ids")
 title.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 title.TextWrapped = true
+title.Visible = true
 
 electrosp00k = Instance.new("TextButton")
 electrosp00k.Name = ("Electro Sp00k")
@@ -1773,9 +1775,10 @@ electrosp00k.FontSize = ("Size14")
 electrosp00k.Text = ("Electro Sp00k")
 electrosp00k.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 electrosp00k.TextWrapped = true
+electrosp00k.Visible = true
 
 function electrosp00kClick()
-	interface.settings.Pge1["Music ID"].TextBox.Text = "142930454"
+	interface.settings.Pge1["Music ID"].textbox.Text = "142930454"
 end
 
 electrosp00k.MouseButton1Down:connect(electrosp00kClick)
@@ -1794,9 +1797,10 @@ wonga.FontSize = ("Size14")
 wonga.Text = ("Wonga")
 wonga.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 wonga.TextWrapped = true
+wonga.Visible = true
 
 function wongaClick()
-	interface.settings.Pge1["Music ID"].TextBox.Text = "147909316"
+	interface.settings.Pge1["Music ID"].textbox.Text = "147909316"
 end
 
 wonga.MouseButton1Down:connect(wongaClick)
@@ -1815,12 +1819,34 @@ chopsuey.FontSize = ("Size14")
 chopsuey.Text = ("Chop Suey")
 chopsuey.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 chopsuey.TextWrapped = true
+chopsuey.Visible = true
 
 function chopsueyClick()
-	interface.settings.Pge1["Music ID"].TextBox.Text = "147407900"
+	interface.settings.Pge1["Music ID"].textbox.Text = "147407900"
 end
 
 chopsuey.MouseButton1Down:connect(chopsueyClick)
+
+scream = Instance.new("TextButton")
+scream.Name = ("Scream")
+scream.Parent = presetmusicids
+scream.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+scream.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+scream.BorderSizePixel = 3
+scream.Position = UDim2.new(0.5, 3, 0, 66)
+scream.Size = UDim2.new(0.5, -3, 0, 30)
+scream.ZIndex = 2
+scream.Font = ("SourceSans")
+scream.FontSize = ("Size14")
+scream.Text = ("Scream")
+scream.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+scream.Visible = true
+
+function screamClick()
+	interface.settings.Pge1["Music ID"].textbox.Text = 138097458
+end
+
+scream.MouseButton1Down:connect(screamClick)
 
 pagelabel = Instance.new("TextLabel")
 pagelabel.Name = ("pagelabel")
@@ -2221,7 +2247,7 @@ setwalkspeed.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 setwalkspeed.TextWrapped = true
 
 function setwalkspeedClick()
-	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Frame.Settings.Page2["Walkspeed Amount"].TextBox.Text
+	game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = interface.settings.Pge2["Walkspeed Amount"].textbox.Text
 end
 
 setwalkspeed.MouseButton1Down:connect(setwalkspeedClick)
@@ -3150,7 +3176,7 @@ textbox.Font = ("SourceSans")
 textbox.FontSize = ("Size14")
 textbox.Text = ("God")
 textbox.TextColor3 = Color3.new(255/255, 255/255, 255/255)
--- End Of Settings --
+-- End Of Settings -
 
 closeopen = Instance.new("TextButton")
 closeopen.Name = ("Close/Open")
