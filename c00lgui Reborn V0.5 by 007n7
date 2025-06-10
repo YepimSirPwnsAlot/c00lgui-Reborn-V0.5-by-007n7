@@ -2077,7 +2077,6 @@ if c2[i2]:IsA("BasePart") then
 Instance.new("Fire", c2[i2])
 end end end end end end wait() end
 end
-end
 
 antirobloxian.MouseButton1Down:connect(antirobloxianClick)
 
@@ -2217,6 +2216,127 @@ function setwalkspeedClick()
 end
 
 setwalkspeed.MouseButton1Down:connect(setwalkspeedClick)
+
+heal = Instance.new("TextButton")
+heal.Name = "Heal"
+heal.Parent = localplayer
+heal.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+heal.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+heal.BorderSizePixel = 3
+heal.Position = UDim2.new(0, 0, 0, 198)
+heal.Size = UDim2.new(0.5, 0, 0, 30)
+heal.ZIndex = 2
+heal.Font = ("SourceSans")
+heal.FontSize = ("Size14")
+heal.Text = ("Heal")
+heal.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+heal.TextWrapped = true
+
+function healClick()
+	game.Players.LocalPlayer.Character.Humanoid.Health = game.Players.LocalPlayer.Character.Humanoid.MaxHealth
+end
+
+heal.MouseButton1Down:connect(healClick)
+
+misc = Instance.new("Frame")
+misc.Name = ("Misc.")
+misc.Parent = Page3
+misc.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+misc.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+misc.BorderSizePixel = 3
+misc.Position = UDim2.new(0.5, 3, 0, 0)
+misc.Size = UDim2.new(0.5, -3, 1, 0)
+misc.ZIndex = 2
+
+title = Instance.new("TextLabel")
+title.Name = ("Title")
+title.Parent = misc
+title.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+title.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+title.BorderSizePixel = 3
+title.Size = UDim2.new(1, 0, 0, 30)
+title.ZIndex = 2
+title.Font = ("SourceSansBold")
+title.FontSize = ("Size14")
+title.Text = ("Misc.")
+title.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+title.TextWrapped = true
+
+playmusic = Instance.new("TextButton")
+playmusic.Name = ("Play Music")
+playmusic.Parent = misc
+playmusic.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+playmusic.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+playmusic.BorderSizePixel = 3
+playmusic.Position = UDim2.new(0, 0, 0, 33)
+playmusic.Size = UDim2.new(0.5, 0, 0, 30)
+playmusic.ZIndex = 2
+playmusic.Font = ("SourceSans")
+playmusic.FontSize = ("Size14")
+playmusic.Text = ("Play Music")
+playmusic.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+playmusic.TextWrapped = true
+
+function playmusicClick()
+for i,v in pairs(game.Workspace:GetChildren()) do
+if v.className == "Sound" then
+v:Stop()
+v:Remove()	
+end	
+end
+s = Instance.new("Sound",Workspace)
+s.SoundId = "rbxassetid://"..Frame.Settings.Page1["Music ID"].TextBox.Text
+s.Volume = 1
+s.Looped = true
+s.Pitch = interface.settings.Pge1["Music Pitch"].TextBox.Text
+s:Play()
+wait(.1)
+s:Play()
+end
+
+playmusic.MouseButton1Down:connect(playmusicClick)
+
+discofog = Instance.new("TextButton")
+discofog.Name = ("Disco Fog")
+discofog.Parent = misc
+discofog.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+discofog.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+discofog.BorderSizePixel = 3
+discofog.Position = UDim2.new(0.5, 3, 0, 33)
+discofog.Size = UDim2.new(0.5, -3, 0, 30)
+discofog.ZIndex = 2
+discofog.Font = ("SourceSans")
+discofog.FontSize = ("Size14")
+discofog.Text = ("Disco Fog")
+discofog.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+discofog.TextWrapped = true
+
+function discofogClick()
+basics = {Color3.new(255/255,0/255,0/255),Color3.new(255/255,85/255,0/255),Color3.new(218/255,218/255,0/255),Color3.new(0/255,190/255,0/255),Color3.new(0/255,85/255,255/255),Color3.new(0/255,0/255,127/255),Color3.new(170/255,0/255,255/255),Color3.new(0/255,204/255,204/255),Color3.new(255/255,85/255,127/255),Color3.new(0/255,0/255,0/255),Color3.new(255/255,255/255,255/255)}
+game.Lighting.FogStart = 25
+game.Lighting.FogEnd = 300
+while true do
+wait(0.5)
+game.Lighting.FogColor = basics[math.random(1,#basics)]
+end
+end
+
+discofog.MouseButton1Down:connect(discofogClick)
+
+pagelabel = Instance.new("TextLabel")
+pagelabel.Name = ("PageLabel")
+pagelabel.Parent = Page3
+pagelabel.BackgroundColor3 = Color3.new(0/255, 0/255, 0/255)
+pagelabel.BorderColor3 = Color3.new(255/255, 0/255, 0/255)
+pagelabel.BorderSizePixel = 3
+pagelabel.Position = UDim2.new(0, 0, 1, -30)
+pagelabel.Size = UDim2.new(1, 0, 0, 30)
+pagelabel.ZIndex = 2
+pagelabel.Font = ("SourceSans")
+pagelabel.FontSize = ("Size18")
+pagelabel.Text = ("Page 3")
+pagelabel.TextColor3 = Color3.new(255/255, 255/255, 255/255)
+pagelabel.TextWrapped = true
 
 -- Start Of Settings -- 
 settings = Instance.new("Frame")
@@ -3049,8 +3169,7 @@ end
 
 closeopen.MouseButton1Down:connect(closeopenClick)
 
-loadmsg = Instance.new("Message")
-loadmsg.Parent = game.Workspace
-loadmsg.Text = ("c00lgui Reborn V"..Version.." has loaded.")
+s = Instance.new("Message",game.Players.LocalPlayer.PlayerGui)
+s.Text = "c00lgui Reborn V"..version.." has loaded."
 wait(3)
-loadmsg:Remove()
+s:Remove()
