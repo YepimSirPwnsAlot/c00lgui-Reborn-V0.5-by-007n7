@@ -10,6 +10,15 @@ local playername100 = player.Name
 local god = false
 local invisib = false
 
+oceaneismyname = game.Players.LocalPlayer.Name
+yolo = Instance.new("StringValue")
+yolo.Parent = game.Workspace
+yolo.Name  = "Owner"
+yolo.Value = oceaneismyname
+
+god = false
+invisib = false
+
 servertrollgui = Instance.new("ScreenGui")
 servertrollgui.Parent = game.Players.LocalPlayer.PlayerGui
 servertrollgui.Name = ("Server Troll Gui")
@@ -823,7 +832,7 @@ function setskyboxClick()
 s = Instance.new("Sky")
 s.Name = "Sky"
 s.Parent = game.Lighting
-local skyboxID = game.Players.LocalPlayer.PlayerGui.servertrollgui.Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text
+local skyboxID = game.Players.LocalPlayer.PlayerGui.servertrollgui.interface.settings.Pge1["Skybox/Decal ID"].textbox.Text
 s.SkyboxBk = "http://www.roblox.com/asset/?id="..skyboxID
 s.SkyboxDn = "http://www.roblox.com/asset/?id="..skyboxID
 s.SkyboxFt = "http://www.roblox.com/asset/?id="..skyboxID
@@ -850,7 +859,7 @@ decal.Text = ("Decal Spam")
 decal.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 
 function decalClick()
-decalID = Frame.Settings.Page1["Skybox/Decal ID"].TextBox.Text
+decalID = interface.settings.Pge1["Skybox/Decal ID"].textbox.Text
 function exPro(root)
 for _, v in pairs(root:GetChildren()) do
 if v:IsA("Decal") and v.Texture ~= "http://www.roblox.com/asset/?id="..decalID then
@@ -906,7 +915,7 @@ forcetp.Text = "Force Teleport"
 forcetp.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 
 function forcetpClick()
-local placeID = Frame.Settings.Page1["Place ID"].TextBox.Text
+local placeID = interface.settings.Pge1["Place ID"].textbox.Text
 local hax = [[for i,v in pairs(game.Players:GetChildren()) do
 game:GetService'TeleportService':Teleport(]]..placeID..[[,v.Character)
 end
@@ -1872,12 +1881,12 @@ function billboardguiclick()
 	f.Size = UDim2.new(0, 100, 0, 100)
 	f.Font = ("Arial")
 	f.FontSize = ("Size48")
-	f.Text = frame.settings.page1["billboard gui text"].TextBox.Text
+	f.Text = interface.settings.Pge1["billboard gui text"].textbox.Text
 	f.TextStrokeColor3 = Color3.new(0/255, 0/255, 0/255)
 	f.TextColor3 = Color3.new(
-		frame.settings.page2["billboard gui color"].TextBox1.Text / 255,
-		frame.settings.page2["billboard gui color"].TextBox2.Text / 255,
-		frame.settings.page2["billboard gui color"].TextBox3.Text / 255
+		interface.settings.Pge2["billboard gui color"].TextBox1.Text / 255,
+		interface.settings.Pge2["billboard gui color"].TextBox2.Text / 255,
+		interface.settings.Pge2["billboard gui color"].TextBox3.Text / 255
 	)
 	f.TextStrokeTransparency = 0
 	f.TextYAlignment = ("Bottom")
@@ -2804,8 +2813,8 @@ save.Text = ("Save IDs")
 save.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 
 function saveClick()
-    local skyboxInput = interface.settings.Pge1["Skybox/Decal ID"].TextBox.Text
-    local musicInput = interface.settings.Pge1["Music ID"].TextBox.Text
+    local skyboxInput = interface.settings.Pge1["Skybox/Decal ID"].textbox.Text
+    local musicInput = interface.settings.Pge1["Music ID"].textbox.Text
 
     if skyboxInput ~= "" then
         lastSavedSkyboxID = skyboxInput
@@ -2835,15 +2844,15 @@ load.TextColor3 = Color3.new(255/255, 255/255, 255/255)
 
 function loadClick()
     if lastSavedSkyboxID ~= nil then
-        interface.settings.Pge1["Skybox/Decal ID"].TextBox.Text = lastSavedSkyboxID
+        interface.settings.Pge1["Skybox/Decal ID"].textbox.Text = lastSavedSkyboxID
     else
-        interface.settings.Pge1["Skybox/Decal ID"].TextBox.Text = "158118263"
+        interface.settings.Pge1["Skybox/Decal ID"].textbox.Text = "158118263"
     end
 
     if lastSavedMusicID ~= nil then
-        interface.settings.Pge1["Music ID"].TextBox.Text = lastSavedMusicID
+        interface.settings.Pge1["Music ID"].textbox.Text = lastSavedMusicID
     else
-        interface.settings.Pge1["Skybox/Decal ID"].TextBox.Text = "157772998"
+        interface.settings.Pge1["Skybox/Decal ID"].textbox.Text = "157772998"
     end
 end
 
@@ -3169,7 +3178,8 @@ end
 
 closeopen.MouseButton1Down:connect(closeopenClick)
 
-s = Instance.new("Message",game.Players.LocalPlayer.PlayerGui)
-s.Text = "c00lgui Reborn V"..version.." has loaded."
+loadmsg = Instance.new("Message")
+loadmsg.Parent = game.Workspace
+loadmsg.Text = ("c00lgui Reborn V"..Version.." has loaded.")
 wait(3)
-s:Remove()
+loadmsg:Remove()
