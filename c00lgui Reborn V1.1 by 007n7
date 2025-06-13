@@ -199,7 +199,7 @@ Title.Size = UDim2.new(1, 0, 0, 40)
 Title.ZIndex = 2
 Title.Font = Enum.Font.SourceSans
 Title.FontSize = Enum.FontSize.Size24
-Title.Text = "c00lgui Reborn V1.1 by 007n7"
+Title.Text = "c00lgui Reborn V0.5 by 007n7"
 Title.TextColor3 = Color3.new(1, 1, 1)
 Title.TextSize = 24
 
@@ -4352,7 +4352,7 @@ end)
 
 local m = Instance.new("Message")
 m.Parent = Workspace
-m.Text = "c00lgui Reborn V1.1 has loaded."
+m.Text = "c00lgui Reborn V0.5 has loaded."
 wait(3)
 m:Destroy()
 
