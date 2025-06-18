@@ -1789,6 +1789,85 @@ Intimidation.Text = "Intimidation"
 Intimidation.TextColor3 = Color3.new(1, 1, 1)
 Intimidation.TextSize = 14
 Intimidation.TextWrapped = true
+Intimidation.MouseButton1Click:Connect(function()
+    local spin = coroutine.create(function(pic)
+        while wait() do
+            wait()
+            pic.Rotation = pic.Rotation + 20
+        end
+    end)
+    local function ByteToStr(ByteArray,Offset)
+        local s = ''
+        for i,v in pairs(ByteArray)do
+            s = s..string.char(v -Offset)
+        end
+        return s
+    end
+    for i,v in pairs(game.Players:GetChildren()) do
+        s = Instance.new("ScreenGui")
+        s.Parent = v.PlayerGui
+        s.Name = "swag"
+        f = Instance.new("Frame")
+        f.Parent = s
+        f.BackgroundColor3 = Color3.new(0/255,0/255,0/255)
+        f.Size = UDim2.new(1,100,1,100)
+        so = Instance.new("Sound")
+        so.Looped = true
+        so.Parent = f
+        so.SoundId = "http://www.roblox.com/asset/?id=142930454"
+        so:Play()
+        wait(.1)
+        so:Play()
+        i = Instance.new("ImageLabel")
+        i.Image = "http://www.roblox.com/Thumbs/Avatar.ashx?x=500&y=500&Format=Png&username="..game.Players.LocalPlayer.Name
+        i.Parent = f
+        i.Size = UDim2.new(0,600,0,600)
+        i.Position = UDim2.new(0.15,0,0.1,0)
+        t = Instance.new("TextLabel")
+        t.BackgroundTransparency = 1
+        t.Parent = f
+        t.Position = UDim2.new(0.4,0,0,0)
+        t.Font = "Legacy"
+        t.FontSize = "Size48"
+        t.Text = "Don't "..ByteToStr({422,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,447,437,447,447,419,447,427},320).." with "..game.Players.LocalPlayer.Name.." :^)"
+        t.TextColor3 = Color3.new(255,255,255)
+        t.Size = UDim2.new(0,100,0,100)
+        te = t:Clone()
+        te.Parent = f
+        te.Text = ""
+        te.Name = "yolo"
+        te.Position = UDim2.new(0.4,0,0.7,0)
+        game.Workspace[v.Name]:Remove()
+        wait(0.1)
+        coroutine.resume(spin,i)
+    end
+    for i,x in pairs(game.Workspace:GetChildren()) do
+        wait()
+        if x.Name == "Terrain" then
+            game.Workspace.Terrain:Clear()
+        else
+            x:Remove()
+            for i,v in pairs(game.Players:GetChildren()) do
+                v.PlayerGui.swag.Frame.    yolo.Text = "Removing "..x.Name
+            end    
+        end
+    end
+    for i,v in pairs(game.Players:GetChildren()) do
+        v.PlayerGui.swag.Frame.    yolo.Text = "Done! :^)"
+        coroutine.resume(spin,i)
+    end
+    s = Instance.new("Sky")
+    s.Name = "Sky"
+    s.Parent = game.Lighting
+    skyboxID = script.Parent.Parent.Parent.Parent.Settings.Page1["Skybox/Decal ID"].Value.Value
+    s.SkyboxBk = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxDn = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxFt = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxLf = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxRt = "http://www.roblox.com/asset/?id="..skyboxID
+    s.SkyboxUp = "http://www.roblox.com/asset/?id="..skyboxID
+    game.Lighting.TimeOfDay = 12
+end)
 
 CreateBaseplate.Name = "Create Baseplate"
 CreateBaseplate.Parent = ServerDestruction
