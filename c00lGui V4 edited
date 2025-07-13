@@ -194,6 +194,8 @@ Welcome2.TextColor3 = Color3.fromRGB(0, 0, 0)
 Welcome2.TextSize = 23.000
 Welcome2.TextWrapped = true
 
+wait(1)
+
 local messages = {
 	"Welcome to the new UTG! Have fun.",
 	"Gonna Add more stuff soon.",
@@ -204,18 +206,26 @@ local messages = {
 	"Follow my roblox profile, YepImSirPwnsAlot",
 	"Follow the devs for updates!",
 	"More commands coming soon",
-	"Did you pray today?"
+	"Did you pray today?",
+	"Fun fact: i like hot goth babes",
+	"Waterloo is straight up underrated",
+	"Whatevs lel", 
+	"I got the idea to make this from Mr.Flamgo :D",
+	"Mommy tells me im special",
+	"Old acc is SirPwnsALot, follow my old account NOW pheasent!",
+	"xRajin_Reap3r was just added to the command list, have fun",
+	"I want a cute gothic babe to sit on me"
 }
 
 local function cycleInOrder()
 	local index = 1
 	while true do
 		Welcome2.Text = messages[index]
-		index += 1
+		index = index + 1
 		if index > #messages then
 			index = 1
 		end
-		wait(600)
+		wait(30)
 	end
 end
 
