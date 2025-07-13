@@ -176,9 +176,11 @@ Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 Title.BackgroundTransparency = 1.000
 Title.Position = UDim2.new(0.0600659028, 0, -0.00186577276, 0)
 Title.Size = UDim2.new(0, 395, 0, 51)
-Title.Font = Enum.Font.SourceSansBold
+Title.Font = Enum.Font.SourceSans
 Title.Text = "ULTIMATE TROLLING GUI"
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+Title.TextStrokeTransparency = 0
 Title.TextScaled = true
 Title.TextSize = 14.000
 Title.TextWrapped = true
@@ -190,7 +192,7 @@ Welcome2.BorderSizePixel = 0
 Welcome2.Position = UDim2.new(0.0245891828, 0, 0.114000015, 0)
 Welcome2.Size = UDim2.new(0, 428, 0, 36)
 Welcome2.Font = Enum.Font.SourceSans
-Welcome2.Text = "Welcome to the brand new UTG! Have fun."
+Welcome2.Text = "Gonna add more stuff soon i guess."
 Welcome2.TextColor3 = Color3.fromRGB(0, 0, 0)
 Welcome2.TextSize = 23.000
 Welcome2.TextWrapped = true
@@ -768,7 +770,7 @@ local minimized = false
 
 toggleButton.MouseButton1Click:Connect(function()
 	if minimized == false then
-		mainFrame.Size = minimizedSize
+		mainFrame.Visible = false
 		label1.Visible = false
 		label2.Visible = false
 		label3.Visible = false
@@ -4175,7 +4177,7 @@ Credits.BorderSizePixel = 0
 Credits.Position = UDim2.new(0.0223718882, 0, 0.834973812, 0)
 Credits.Size = UDim2.new(0, 428, 0, 36)
 Credits.Font = Enum.Font.SourceSans
-Credits.Text = "Created by YepImSirPwnsAlot & Fartman42121cool"
+Credits.Text = "Created by YepImSirPwnsAlot"
 Credits.TextColor3 = Color3.fromRGB(255, 255, 255)
 Credits.TextSize = 23.000
 Credits.TextWrapped = true
@@ -4367,7 +4369,6 @@ local function MakeDraggable()
 		end
 	end)
 end
-
 MakeDraggable()
 
 Main:TweenPosition(UDim2.new(0.382, 0, 0.181, 0), "Out", "Quad", 0.5, true)
